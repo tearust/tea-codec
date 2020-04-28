@@ -1,0 +1,24 @@
+[package]
+name = "tea-codec"
+version = "0.1.0"
+authors = ["Kevin Zhang <kevin.zhang.canada@gmail.com>"]
+edition = "2018"
+description = "Encoding and decoding primitives for TeaRust Project"
+license = "GPL 3.0"
+
+[badges]
+maintenance = { status = "actively-developed"}
+
+
+[dependencies]
+serde = "1.0.105"
+serde_json = "1.0.50"
+serde_derive = "1.0.105"
+serde_bytes = "0.11.3"
+rmp-serde = "0.14.3"
+log = { version="0.4.8", features =["std","serde"]}
+
+[dev-dependencies]
+structopt = "0.3.12"
+serde_json = "1.0.50"
+base64 = "0.12.0"
