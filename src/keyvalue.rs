@@ -30,7 +30,7 @@ pub struct GetRequest {
 #[serde(rename_all = "camelCase")]
 pub struct GetResponse {
     /// The value returned from the data store
-    pub value: String,
+    pub value: Vec<u8>,
     /// Indicates whether the key existed
     pub exists: bool,
 }
@@ -42,7 +42,7 @@ pub struct SetRequest {
     /// Key of the item to set
     pub key: String,
     /// Value of the item to set
-    pub value: String,
+    pub value: Vec<u8>,
     /// Seconds after which the key will expire, 0 - no expiration
     #[serde(rename = "expires")]
     pub expires_s: i32,
@@ -65,7 +65,7 @@ pub struct DelResponse {
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SetResponse {
-    pub value: String,
+    pub value: Vec<u8>,
 }
 
 /// A request to perform an atomic add operation
@@ -88,7 +88,7 @@ pub struct AddResponse {
 #[serde(rename_all = "camelCase")]
 pub struct ListPushRequest {
     pub key: String,
-    pub value: String,
+    pub value: Vec<u8>,
 }
 
 /// A request to delete all occurences of an item from a list
@@ -96,7 +96,7 @@ pub struct ListPushRequest {
 #[serde(rename_all = "camelCase")]
 pub struct ListDelItemRequest {
     pub key: String,
-    pub value: String,
+    pub value: Vec<u8>,
 }
 
 /// A request to clear a list at a given key
@@ -120,7 +120,7 @@ pub struct ListRangeRequest {
 #[serde(rename_all = "camelCase")]
 pub struct ListRangeResponse {
     #[serde(default)]
-    pub values: Vec<String>,
+    pub values: Vec<Vec<u8>>,
 }
 
 /// Return response from non-range list requests like push and clear
@@ -135,7 +135,7 @@ pub struct ListResponse {
 #[serde(rename_all = "camelCase")]
 pub struct SetAddRequest {
     pub key: String,
-    pub value: String,
+    pub value: Vec<u8>,
 }
 
 /// Request to remove a specific value from a set
@@ -143,7 +143,7 @@ pub struct SetAddRequest {
 #[serde(rename_all = "camelCase")]
 pub struct SetRemoveRequest {
     pub key: String,
-    pub value: String,
+    pub value: Vec<u8>,
 }
 
 /// Request to query the contents of a set
@@ -158,7 +158,7 @@ pub struct SetQueryRequest {
 #[serde(rename_all = "camelCase")]
 pub struct SetQueryResponse {
     #[serde(default)]
-    pub values: Vec<String>,
+    pub values: Vec<Vec<u8>>,
 }
 
 /// Request for the intersection of multiple sets
