@@ -38,7 +38,7 @@ pub struct GetResponse {
 /// A request to set a value
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SetRequest {
+pub struct SetRequest{
     /// Key of the item to set
     pub key: String,
     /// Value of the item to set
