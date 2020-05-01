@@ -10,7 +10,9 @@ pub const OP_CLEAR: &str = "Clear";
 pub const OP_RANGE: &str = "Range";
 pub const OP_PUSH: &str = "Push";
 pub const OP_LIST_DEL: &str = "ListItemDelete";
-
+pub const OP_KEYVEC_INSERT: &str = "KeyVecInsert";
+pub const OP_KEYVEC_TAILOFF: &str = "KeyVecTailOff";
+pub const OP_KEYVEC_GET: &str = "KeyVecGet";
 pub const OP_SET_ADD: &str = "SetAdd";
 pub const OP_SET_REMOVE: &str = "SetRemove";
 pub const OP_SET_UNION: &str = "SetUnion";
@@ -189,4 +191,46 @@ pub struct SetOperationResponse {
 #[serde(rename_all = "camelCase")]
 pub struct KeyExistsQuery {
     pub key: String,
+}
+
+/// Insert a Tuple into Sorted Vec. using sorted key
+/// 
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecInsertQuery {
+    pub key: String,
+    pub value:(i32, Vec<u8>),
+}
+/// Response to a set query, add, or delete
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecInsertResponse {
+    pub len: usize,
+}
+/// Cut the Softed Vec to remain size. Drop off the tail if the vec is longer than remaining length
+/// 
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecTailOffQuery {
+    pub key: String,
+    pub remain: usize,
+}
+/// Response to a set query, add, or delete
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecTailOffResponse {
+    pub len: usize,
+}
+/// Query KeyVec to get return Vec from Sorted Vec
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecGetQuery {
+    pub key: String,
+}
+/// Response of KeyVecGetQuery
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecGetResponse {
+    #[serde(default)]
+    pub values: Vec<(i32, Vec<u8>)>,
 }
