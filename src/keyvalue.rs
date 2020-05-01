@@ -200,12 +200,13 @@ pub struct KeyExistsQuery {
 pub struct KeyVecInsertQuery {
     pub key: String,
     pub value:(i32, Vec<u8>),
+    pub overwrite: bool,
 }
 /// Response to a set query, add, or delete
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct KeyVecInsertResponse {
-    pub len: usize,
+    pub success: bool,
 }
 /// Cut the Softed Vec to remain size. Drop off the tail if the vec is longer than remaining length
 /// 
