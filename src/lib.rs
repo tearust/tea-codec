@@ -1,22 +1,19 @@
-#![doc(html_logo_url = "https://avatars2.githubusercontent.com/u/52050279?s=200&v=4")]
-// Copyright 2015-2020 Capital One Services, LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
-//! # wascc-codec
+//! tea-codec
 //!
-//! This library provides the core set of types and associated functions used to facilitate actor
-//! and host runtime communication for waSCC.
+//! This codec library is an enhanced version of Kevin Hoffman's original [waSCC Codec](https://github.com/wascc/wascc-codec) 
+//! with the support of [tea-kvp-provider](https://github.com/tearust/tea-kvp-provider).
+//! 
+//! About the Tea Project
+//! 
+//! Tea Project (Trusted Execution & Attestation) is a Wasm runtime build on top of RoT(Root of Trust)
+//! from both trusted hardware environment and blockchain technologies. Developer, Host and Consumer 
+//! do not have to trust any others to not only protecting privacy but also preventing cyber attacks. 
+//! The execution environment under remoted attestation can be verified by blockchain consensys. 
+//! Crypto economy is used as motivation that hosts are willing run trusted computing nodes. This 
+//! platform can be used by CDN providers, IPFS Nodes or existing cloud providers to enhance existing 
+//! infrastructure to be more secure and trustless. 
+ 
 
 /// The version of the codec as seen on crates.io
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

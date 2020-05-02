@@ -3,7 +3,7 @@ This codec library is an enhanced version of Kevin Hoffman's original [waSCC Cod
 
 Both teda-kvp-provider and tea-actor-utility depend on this library. This library keeps the actor and provider sharing the exactly same data structure. 
 
-## The Tea Project
+## The Tea Project (also called T-Rust, or TeaRust)
 Tea Project (Trusted Execution & Attestation) is a Wasm runtime build on top of RoT(Root of Trust) from both trusted hardware environment and blockchain technologies. Developer, Host and Consumer do not have to trust any others to not only protecting privacy but also preventing cyber attacks. The execution environment under remoted attestation can be verified by blockchain consensys. Crypto economy is used as motivation that hosts are willing run trusted computing nodes. This platform can be used by CDN providers, IPFS Nodes or existing cloud providers to enhance existing infrastructure to be more secure and trustless. 
 
 Introduction [blog post](https://medium.com/@pushbar/0-of-n-cover-letter-of-the-trusted-webassembly-runtime-on-ipfs-12a4fd8c4338)

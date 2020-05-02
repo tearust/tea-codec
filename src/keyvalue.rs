@@ -1,6 +1,6 @@
 //! # Key-Value Store Data Types
 //!
-//! This module contains data types for the `wascc:keyvalue` capability provider
+//! This module contains data types for the `tea:keyvalue` capability provider
 
 pub const OP_ADD: &str = "Add";
 pub const OP_GET: &str = "Get";
