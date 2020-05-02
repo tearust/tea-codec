@@ -1,6 +1,6 @@
 [package]
 name = "tea-codec"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Kevin Zhang <kevin.zhang.canada@gmail.com>"]
 edition = "2018"
 description = "Encoding and decoding primitives for TeaRust Project"
