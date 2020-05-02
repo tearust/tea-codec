@@ -4,8 +4,10 @@ version = "0.1.0"
 authors = ["Kevin Zhang <kevin.zhang.canada@gmail.com>"]
 edition = "2018"
 description = "Encoding and decoding primitives for TeaRust Project"
-license = "GPL 3.0"
-
+license = "Apache-2.0"
+readme = "README.md"
+keywords = ["webassembly", "wasm", "codec", "tea", "wascc"]
+categories = ["wasm", "data-structures","encoding"]
 [badges]
 maintenance = { status = "actively-developed"}
 
