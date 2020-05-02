@@ -1,4 +1,4 @@
-# Tea Project Codec Library Supporting Binary and Sorted Vector
+# Tea Project WaSCC Actor Utility Supporting Binary and Sorted Vector Key-Value Pair and Macros to Build Nats Message Actor Handler
 This codec library is an enhanced version of Kevin Hoffman's original [waSCC Codec](https://github.com/wascc/wascc-codec) with the support of [tea-kvp-provider](https://github.com/tearust/tea-kvp-provider).
 
 Both teda-kvp-provider and tea-actor-utility depend on this library. This library keeps the actor and provider sharing the exactly same data structure. 
