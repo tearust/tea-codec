@@ -12,6 +12,7 @@ pub const OP_PUSH: &str = "Push";
 pub const OP_LIST_DEL: &str = "ListItemDelete";
 pub const OP_KEYVEC_INSERT: &str = "KeyVecInsert";
 pub const OP_KEYVEC_TAILOFF: &str = "KeyVecTailOff";
+pub const OP_KEYVEC_REMOVE_ITEM: &str = "KeyVecRemoveItem";
 pub const OP_KEYVEC_GET: &str = "KeyVecGet";
 pub const OP_SET_ADD: &str = "SetAdd";
 pub const OP_SET_REMOVE: &str = "SetRemove";
@@ -228,10 +229,24 @@ pub struct KeyVecTailOffResponse {
 pub struct KeyVecGetQuery {
     pub key: String,
 }
-/// Response of KeyVecGetQuery
+/// Response of KeyVecGetQueryu
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct KeyVecGetResponse {
     #[serde(default)]
     pub values: Vec<(i32, Vec<u8>)>,
+}
+/// Query KeyVec to remove an item
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecRemoveItemQuery {
+    pub key: String,
+    pub value:(i32, Vec<u8>),
+}
+/// Response of KeyVecRemoveQuery
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct KeyVecRemoveItemResponse {
+    #[serde(default)]
+    pub success: bool,
 }
