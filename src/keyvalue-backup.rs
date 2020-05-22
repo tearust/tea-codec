@@ -241,7 +241,7 @@ pub struct KeyVecGetResponse {
 #[serde(rename_all = "camelCase")]
 pub struct KeyVecRemoveItemQuery {
     pub key: String,
-    pub value:(i32, Vec<u8>),
+    pub value_idx:i32,
 }
 /// Response of KeyVecRemoveQuery
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
