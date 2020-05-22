@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package libp2p_ra;
+
+message LibP2PInitInfo {
+  required bytes encodedBytes = 1;
+  required bytes tpmSignature = 2;//sign based on public key of keypair not the encoded bytes
+  required bytes teaId = 3;
+  required uint32 blockHeightAtSign = 4;
+  required bytes blockHashAtSign = 5;
+
+}
