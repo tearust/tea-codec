@@ -10,3 +10,20 @@ message LibP2PInitInfo {
   required bytes blockHashAtSign = 5;
 
 }
+
+message VerifyIdRequest{
+  required uint32 nonce = 1;
+  required bytes tpmSignature = 2;//sign based on public key of keypair not the encoded bytes
+  required bytes teaId = 3;
+  required uint32 blockHeightAtSign = 4;
+  required bytes blockHashAtSign = 5;
+  required bytes publicKey = 7;
+  required string replyTo = 6;
+}
+
+message VerifyIdResponse{
+  required uint32 nonce = 1;
+  required bytes publicKey = 2;
+  required bool result = 3;
+  optional string error = 4;
+}
