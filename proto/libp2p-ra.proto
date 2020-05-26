@@ -25,5 +25,6 @@ message VerifyIdResponse{
   required uint32 nonce = 1;
   required bytes publicKey = 2;
   required bool result = 3;
-  optional string error = 4;
+  required uint32 blockHeightAtSign = 4;
+  optional string error = 5;
 }
