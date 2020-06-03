@@ -28,3 +28,7 @@ message VerifyIdResponse{
   required uint32 blockHeightAtSign = 4;
   optional string error = 5;
 }
+
+message PutPeerUrlResponse{
+  repeated string list = 1;
+}
