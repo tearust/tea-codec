@@ -28,7 +28,6 @@
 /// The version of the codec as seen on crates.io
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-#[macro_use]
 extern crate serde_derive;
 extern crate log;
 
