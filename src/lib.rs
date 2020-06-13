@@ -27,7 +27,7 @@
 
 /// The version of the codec as seen on crates.io
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-
+#[macro_use]
 extern crate serde_derive;
 extern crate log;
 
@@ -61,5 +61,4 @@ pub fn deserialize<'de, T: Deserialize<'de>>(
     }
 }
 
-//pub mod keyvalue;
-//pub mod env;
+pub mod task_in_block;
