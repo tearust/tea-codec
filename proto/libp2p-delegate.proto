@@ -15,7 +15,7 @@ message TaskRegisterRequest{
 }
 
 message TaskRegisterResponse{
-  optional uint32 RefNum = 1;
+  optional bytes RefNum = 1;
   optional string Error = 2;
 }
 
