@@ -1,8 +1,8 @@
 pub const OP_DELIVER_SUB_MESSAGE: &'static str = "deliver_sub_message";
 pub const OP_PUBSUB_SUB: &'static str = "pubsub_sub";
+pub const OP_PUBSUB_PUB: &'static str = "pubsub_pub";
 pub const OP_PUBSUB_RANDOM_SUB: &'static str = "pubsub_random_sub";
 
-pub const OP_PUBSUB_KILLSUB: &'static str = "pubsub_killsub";
 pub const OP_BLOCK_GET: &'static str = "block_get";
 pub const OP_BLOCK_PUT: &'static str = "block_put";
 
@@ -63,17 +63,4 @@ pub struct PubsubPubRequest{
 pub struct BlockPutResponse{
   pub key: String,
   pub size: u64,
-}
-
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct PubsubKillSubRequest{
-  pub topic: String,
-  pub curse: String,
-}
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct PubsubKillSubResponse{
-  pub curse: String,
-  pub err: Option<String>,
 }
