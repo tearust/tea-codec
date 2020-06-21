@@ -1,0 +1,22 @@
+syntax = "proto2";
+package ipfs_proto;
+message IpfsTestRequest{
+  required string key = 1;
+}
+
+message PubsubLsRequest{
+
+}
+
+message PubsubLsResponse{
+  repeated string topics = 1;
+}
+
+message PubsubPeersRequest{
+  optional string topic = 1;
+}
+
+message PubsubPeersResponse{
+  repeated string peers = 1;
+}
+
