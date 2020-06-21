@@ -19,3 +19,12 @@ message TaskRegisterResponse{
   optional string Error = 2;
 }
 
+message AddNewTask{
+  required bytes teaId = 1;
+  required bytes refNum = 2;
+  required bytes rsaPub = 3;
+  required string capCid = 4;
+  required string modelCid = 5;
+  required string dataCid = 6;
+  required uint32 payment = 7;
+}
