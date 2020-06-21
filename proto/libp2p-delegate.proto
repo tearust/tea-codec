@@ -15,7 +15,8 @@ message TaskRegisterRequest{
 }
 
 message TaskRegisterResponse{
-  optional bytes RefNum = 1;
+  optional string RefNum = 1;
+  optional string RsaPubKey = 3;
   optional string Error = 2;
 }
 
