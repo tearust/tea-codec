@@ -29,3 +29,15 @@ message AddNewTask{
   required string dataCid = 6;
   required uint32 payment = 7;
 }
+message GeneralTaskMessage{
+  enum MessageType{
+    ApplyToExecuteTaskRequest = 0;
+    ApplyToExecuteTaskResponse = 1;
+  }
+  required bytes payload = 1;
+}
+message ApplyToExecuteTaskRequest{
+  required bytes TpmSignature = 1;
+  required bytes TeaId = 2;
+
+}
