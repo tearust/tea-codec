@@ -37,7 +37,8 @@ message GeneralTaskMessage{
     ApplyToExecuteTaskRequest = 0;
     ApplyToExecuteTaskResponse = 1;
   }
-  required bytes payload = 1;
+  required MessageType messageType = 1;
+  required bytes payload = 2;
 }
 message ApplyToExecuteTaskRequest{
   required bytes TpmSignature = 1;
