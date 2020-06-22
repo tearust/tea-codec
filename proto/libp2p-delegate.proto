@@ -11,7 +11,10 @@ message TaskRegisterRequest{
   repeated CidHash cidHash = 1;
   required bytes ekey1 = 2;
   required bytes blockChainAccount = 3;
-
+  required CidHash wasm = 4;   // wasm 
+  required CidHash wasmManifest = 5;  // wasm manifest
+  required CidHash wasmChecker = 6;  // wasm checker
+  required uint32 payment = 7;  // gas
 }
 
 message TaskRegisterResponse{
