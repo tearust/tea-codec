@@ -23,15 +23,6 @@ message TaskRegisterResponse{
   optional string Error = 2;
 }
 
-message AddNewTask{
-  required bytes teaId = 1;
-  required bytes refNum = 2;
-  required bytes rsaPub = 3;
-  required string capCid = 4;
-  required string modelCid = 5;
-  required string dataCid = 6;
-  required uint32 payment = 7;
-}
 message GeneralTaskMessage{
   enum MessageType{
     ApplyToExecuteTaskRequest = 0;
@@ -40,8 +31,37 @@ message GeneralTaskMessage{
   required MessageType messageType = 1;
   required bytes payload = 2;
 }
+
 message ApplyToExecuteTaskRequest{
   required bytes TpmSignature = 1;
   required bytes TeaId = 2;
 
+}
+
+// The following message is used between delegate and facade.
+message Task {
+  required bytes teaId = 1;
+  required bytes refNum = 2;
+  required bytes rsaPub = 3;
+  required string capCid = 4;
+  required string manifestCid = 5;
+  required string wasmCid = 6;
+  required string modelCid = 7;
+  required string dataCid = 8;
+  required uint32 payment = 9;
+}
+
+message Node {
+  required bytes teaId = 1;
+  repeated bytes peers = 2;
+}
+
+message AddNewTaskRequest {
+  required Task task = 1;
+}
+
+message AddNewTaskResponse {
+  required bytes accountId = 1;
+  required Node delegateNode = 2;
+  required Task task = 3;
 }
