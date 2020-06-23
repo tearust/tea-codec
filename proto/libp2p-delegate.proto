@@ -9,7 +9,7 @@ message CidHash{
  
 message TaskRegisterRequest{
   repeated CidHash cidHash = 1;
-  required bytes ekey1 = 2;
+  //required bytes ekey1 = 2;
   required bytes blockChainAccount = 3;
   required CidHash wasm = 4;   // wasm 
   required CidHash wasmManifest = 5;  // wasm manifest
@@ -61,6 +61,7 @@ message Task {
   required string modelCid = 7;
   required string dataCid = 8;
   required uint32 payment = 9;
+  required bytes ekey1 = 10;
 }
 
 message Node {
