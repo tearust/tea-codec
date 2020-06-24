@@ -43,10 +43,12 @@ message GeneralTaskMessage{
   required MessageType messageType = 1;
   required bytes payload = 2;
   optional bytes TeaId = 3;
-  optional bytes Signature = 4;
+  optional bytes Signature = 4;//Sign sha256(payload) by TeaId
 }
 
 message ApplyToExecuteTaskRequest{
+  required string refNum = 1;
+
   required bytes RsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor
   //required bytes HashDownloadFile = 4;//this is used to verify if the executor actually downloaded the file from IPFS
   repeated bytes CapCheckers= 5;
