@@ -1,7 +1,6 @@
 
 type TeaId = Vec<u8>;
-type PeerId = Vec<u8>;
-type TaskIndex = u32;
+
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Task {
