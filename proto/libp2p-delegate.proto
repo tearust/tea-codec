@@ -50,18 +50,22 @@ message ApplyToExecuteTaskRequest{
 
 }
 
+message TaskBody {
+  required bytes refNum = 1;
+  required bytes rsaPub = 2;
+  required string capCid = 3;
+  required string manifestCid = 4;
+  required string wasmCid = 5;
+  required string dataCid =6;
+  required bytes ekey1 = 7;
+}
+
 // The following message is used between delegate and facade.
 message Task {
-  required bytes teaId = 1;
-  required bytes refNum = 2;
-  required bytes rsaPub = 3;
-  required string capCid = 4;
-  required string manifestCid = 5;
-  required string wasmCid = 6;
-  required string modelCid = 7;
-  required string dataCid = 8;
-  required uint32 payment = 9;
-  required bytes ekey1 = 10;
+  required bytes delegateId = 1;
+  required string modelCid = 2;
+  required uint32 payment = 3;
+  required string bodyCid = 4;
 }
 
 message Node {
