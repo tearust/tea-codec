@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package libp2p_delegate;
+package actor_delegate;
 
 message CidHash{
   required string cid = 1;
@@ -42,12 +42,14 @@ message GeneralTaskMessage{
   };
   required MessageType messageType = 1;
   required bytes payload = 2;
+  optional bytes TeaId = 3;
+  optional bytes Signature = 4;
 }
 
 message ApplyToExecuteTaskRequest{
-  required bytes TpmSignature = 1;
-  required bytes TeaId = 2;
-
+  required bytes RsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor
+  //required bytes HashDownloadFile = 4;//this is used to verify if the executor actually downloaded the file from IPFS
+  repeated bytes CapCheckers= 5;
 }
 
 // The following message is used between delegate and facade.
