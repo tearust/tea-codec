@@ -37,8 +37,8 @@ message AddNewTask{
 
 message GeneralTaskMessage{
   enum MessageType{
-    ApplyToExecuteTaskRequest = 0;
-    ApplyToExecuteTaskResponse = 1;
+    ApplyToExecuteTaskRequest = 0;//body is bytes of ApplyToExecuteTaskRequest
+    WinnerExecutorCert = 1;//body is bytes of WinnerExecutorCert
   };
   required MessageType messageType = 1;
   required bytes payload = 2;
@@ -86,3 +86,11 @@ message AddNewTaskResponse {
   required Node delegateNode = 2;
   required Task task = 3;
 }
+
+message WinnerExecutorCert{
+  required string refNum = 1;
+  required bytes winnerTeaId = 2;
+  required bytes executorRsaPubKey = 3;
+}
+
+
