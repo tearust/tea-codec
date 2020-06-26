@@ -55,7 +55,7 @@ message ApplyToExecuteTaskRequest{
 }
 
 message TaskBody {
-  required bytes refNum = 1;
+  //required bytes refNum = 1;
   required bytes rsaPub = 2;
   required string capCid = 3;
   required string manifestCid = 4;
@@ -92,7 +92,6 @@ message WinnerExecutorCert{
   required string refNum = 1;
   required bytes winnerTeaId = 2;
   required bytes executorRsaPubKey = 3;
-  required bytes taskId = 4;
 }
 
 
