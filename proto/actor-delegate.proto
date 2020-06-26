@@ -91,6 +91,7 @@ message WinnerExecutorCert{
   required string refNum = 1;
   required bytes winnerTeaId = 2;
   required bytes executorRsaPubKey = 3;
+  required bytes taskId = 4;
 }
 
 
