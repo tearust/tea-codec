@@ -70,6 +70,7 @@ message Task {
   required string modelCid = 2;
   required uint32 payment = 3;
   required string bodyCid = 4;
+  required string refNum = 5;
 }
 
 message Node {
