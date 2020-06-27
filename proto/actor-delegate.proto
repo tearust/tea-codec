@@ -35,6 +35,7 @@ message AddNewTask{
 
 
 
+/////////  Communication between delegate and executor
 message GeneralTaskMessage{
   enum MessageType{
     ApplyToExecuteTaskRequest = 0;//body is bytes of ApplyToExecuteTaskRequest
@@ -45,6 +46,18 @@ message GeneralTaskMessage{
   optional bytes TeaId = 3;
   optional bytes Signature = 4;//Sign sha256(payload) by TeaId
 }
+
+message WinnerExecutorCert{
+  required string refNum = 1;
+  required bytes winnerTeaId = 2;
+  required bytes executorRsaPubKey = 3;
+}
+
+message WinnerExecutorCertPayload{
+  required WinnerExecutorCert cert = 1;
+  optional bytes secKeysRsaBytes = 2;
+}
+
 
 message ApplyToExecuteTaskRequest{
   required string refNum = 1;
@@ -102,18 +115,4 @@ message CompleteTaskResponse {
   required bytes accountId = 2;
   required bytes result = 3;
 }
-
-
-/////////  Communication between delegate and executor
-message WinnerExecutorCert{
-  required string refNum = 1;
-  required bytes winnerTeaId = 2;
-  required bytes executorRsaPubKey = 3;
-}
-
-message WinnerExecutorCertPayload{
-  required WinnerExecutorCert cert = 1;
-  optional bytes secKeysRsaBytes = 2;
-}
-
 

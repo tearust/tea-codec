@@ -43,7 +43,7 @@ pub struct PubsubSubRequest{
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubRandomSubRequest{
-  pub random: u32,
+  pub random: String,
   pub discover: bool,
 }
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
