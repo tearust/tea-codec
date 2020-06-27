@@ -70,8 +70,8 @@ message Task {
   required bytes refNum = 1;
   required bytes delegateId = 2;
   required string modelCid = 3;
-  required uint32 payment = 4;
-  required string bodyCid = 5;
+  required string bodyCid = 4;
+  required uint32 payment = 5;
 }
 
 message Node {
@@ -85,8 +85,8 @@ message AddNewTaskRequest {
 
 message AddNewTaskResponse {
   required bytes accountId = 1;
-  required Node delegateNode = 2;
-  required Task task = 3;
+  required bytes refNum = 2;
+  required Node delegateNode = 3;
 }
 
 message CompleteTaskRequest {
