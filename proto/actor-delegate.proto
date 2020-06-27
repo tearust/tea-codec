@@ -87,11 +87,16 @@ message AddNewTaskResponse {
   required Node delegateNode = 2;
   required Task task = 3;
 }
-
+/////////  Communication between delegate and executor
 message WinnerExecutorCert{
   required string refNum = 1;
   required bytes winnerTeaId = 2;
   required bytes executorRsaPubKey = 3;
+}
+
+message WinnerExecutorCertPayload{
+  required WinnerExecutorCert cert = 1;
+  optional bytes secKeysRsaBytes = 2;
 }
 
 
