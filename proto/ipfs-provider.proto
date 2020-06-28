@@ -20,3 +20,20 @@ message PubsubPeersResponse{
   repeated string peers = 1;
 }
 
+message BlockGetRequest{	
+  required string hash = 1;	
+}	
+
+// message BlockGetResponse{	
+//   required bytes result = 1;	
+// }	
+
+message BlockPutRequest{	
+  required bytes data = 1;	
+}	
+
+message BlockPutResponse{	
+  required string key = 1;	
+  required uint64 size = 2;	
+}	
+

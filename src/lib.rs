@@ -63,3 +63,4 @@ pub fn deserialize<'de, T: Deserialize<'de>>(
 
 pub mod task_in_block;
 pub mod ipfs_codec;
+pub mod task;
