@@ -43,28 +43,24 @@ message GeneralTaskMessage{
   };
   required MessageType messageType = 1;
   required bytes payload = 2;
-  optional bytes TeaId = 3;
-  optional bytes Signature = 4;//Sign sha256(payload) by TeaId
-}
-
-message WinnerExecutorCert{
-  required string refNum = 1;
-  required bytes winnerTeaId = 2;
-  required bytes executorRsaPubKey = 3;
 }
 
 message WinnerExecutorCertPayload{
-  required WinnerExecutorCert cert = 1;
-  optional bytes secKeysRsaBytes = 2;
+  required bytes refNum = 1;
+  required bytes winnerTeaId = 2;
+  required bytes signature = 3;
+  optional bytes secKeysRsaBytes = 4;
 }
 
 
 message ApplyToExecuteTaskRequest{
-  required string refNum = 1;
-
-  required bytes RsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor
+  required bytes refNum = 1;//if encoded using base64, it will become the pubsub topic. 
+  required string taskBodyCid = 2;//Using IPFS to get the BaskBody using this Cid
+  required bytes rsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor
   //required bytes HashDownloadFile = 4;//this is used to verify if the executor actually downloaded the file from IPFS
-  repeated bytes CapCheckers= 5;
+  repeated bytes capCheckers= 5;
+  required bytes executorTeaId = 6;//The Tea Id of the executor who apply for this task
+  required bytes signature = 7;//The Ed25519 sig for concat bytes: executorTeaId + capcheckers[0] + ..+ capcheckers[n]
 }
 
 message TaskBody {
