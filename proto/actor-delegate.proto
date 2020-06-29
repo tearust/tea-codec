@@ -48,7 +48,7 @@ message GeneralTaskMessage{
 message WinnerExecutorCertPayload{
   required bytes refNum = 1;
   required bytes winnerTeaId = 2;
-  required bytes signature = 3;
+  required bytes signature = 3;//signer is delegate, msg is tea_id(33bytes) + ref_num(32bytes)
   optional bytes secKeysRsaBytes = 4;
 }
 
