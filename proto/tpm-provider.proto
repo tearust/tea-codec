@@ -21,5 +21,16 @@ message VerifyEd25519KeyPairSignatureRequest{
 
 message VerifyEd25519KeyPairSignatureResponse{
   required bool success = 1;
-  required bytes signature = 2;//the sig sent in request
+  required bytes signature = 2;//the sig sent in request:w
+
+}
+
+message VerifySignatureRequest{
+  required bytes signature = 1;
+  required bytes publicKey = 2;
+  required bytes msg = 3;
+}
+
+message VerifySignatureResponse{
+  required bool result = 1;
 }
