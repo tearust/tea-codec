@@ -34,3 +34,13 @@ message VerifySignatureRequest{
 message VerifySignatureResponse{
   required bool result = 1;
 }
+
+message SignMessageRequest{
+  required bytes publicKey = 1;
+  required bytes privateKey = 2;
+  required bytes message = 3;
+}
+
+message SignMessageResponse{
+  required bytes signature = 1;
+}
