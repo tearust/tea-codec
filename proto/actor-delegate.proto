@@ -64,12 +64,17 @@ message ApplyToExecuteTaskRequest{
 }
 
 message TaskBody {
-  //required bytes refNum = 1;
-  required bytes rsaPub = 2;
-  required string capCid = 3;
+ //this rsa pub key is from delegate node. Other executor wants to send crypted message
+ // to delegate should use this rsa pub key required bytes rsaPub = 2;
   required string manifestCid = 4;
+ // the wasm/yaml file that used to check capabilities. Executor needs to run this 
+ // wasm/yaml against its own runtime to know if itself is capable to run this task required string capCid = 3;
   required string wasmCid = 5;
+  //Use IPFS block_get(dataCid) to download the data. This data is the parameter of the task wasm
+  //By default, this data (after downloaded from IPFS) is encrypted. The decrypt key is ekey1 (after decrypted by rsa_pub though)
   required string dataCid =6;
+  //This eKey1 can be decrypted by delegate (who issue the rsa key pair). After decrypted, it can be
+  //used to decrypt data so that the task wasm can run against
   required bytes ekey1 = 7;
 }
 
