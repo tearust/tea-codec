@@ -102,13 +102,13 @@ message CompleteTaskRequest {
   required bytes refNum = 1;
   required bytes teaId = 2;
   required bytes delegateSig = 3;
-  required string resultCid = 4;
+  required bytes result = 4;
   required bytes resultSig = 5;
 }
 
 message CompleteTaskResponse {
   required bytes refNum = 1;
   required bytes accountId = 2;
-  required string resultCid = 3;
+  required bytes result = 3;
 }
 
