@@ -98,8 +98,7 @@ message AddNewTaskRequest {
 
 message AddNewTaskResponse {
   required bytes accountId = 1;
-  required bytes refNum = 2;
-  required Node delegateNode = 3;
+  required Task task = 2;
 }
 
 message CompleteTaskRequest {
