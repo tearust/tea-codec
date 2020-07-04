@@ -80,7 +80,7 @@ message TaskBody {
 
 /////////  Communication between delegate and facade.
 message Task {
-  required bytes refNum = 1;
+  required bytes refNum = 1;//this is [u8] not base64 nor hex
   required bytes delegateId = 2;
   required string modelCid = 3;
   required string bodyCid = 4;
