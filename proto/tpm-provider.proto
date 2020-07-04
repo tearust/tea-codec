@@ -44,3 +44,23 @@ message SignMessageRequest{
 message SignMessageResponse{
   required bytes signature = 1;
 }
+
+message RsaDecryptRequest{
+  required bytes private_key_pkcs1 = 1;
+  required bytes msg = 2;
+
+}
+
+message RsaDecryptResponse{
+  required bytes result = 1;
+}
+
+message RsaEncryptRequest{
+  required bytes public_key_pkcs8 = 1;
+  required bytes msg = 2;
+
+}
+
+message RsaEncryptResponse{
+  required bytes result = 1;
+}
