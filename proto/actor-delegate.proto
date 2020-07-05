@@ -57,7 +57,6 @@ message ApplyToExecuteTaskRequest{
   required bytes refNum = 1;//if encoded using base64, it will become the pubsub topic. 
   required bytes ekey1 = 2;//Send to delegate, asking him to decrypt and send back
   required bytes rsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor
-  repeated bytes capCheckers= 5;
   required bytes executorTeaId = 6;//The Tea Id of the executor who apply for this task
   required bytes signature = 7;//The Ed25519 sig for concat bytes: executorTeaId + capcheckers[0] + ..+ capcheckers[n]
 }
