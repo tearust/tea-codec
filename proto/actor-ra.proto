@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package libp2p_ra;
+package actor_ra;
 
 message LibP2PInitInfo {
   required bytes encodedBytes = 1;
