@@ -36,8 +36,6 @@ message VerifySignatureResponse{
 }
 
 message SignMessageRequest{
-  required bytes publicKey = 1;
-  required bytes privateKey = 2;
   required bytes message = 3;
 }
 
