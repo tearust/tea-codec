@@ -62,3 +62,7 @@ message RsaEncryptRequest{
 message RsaEncryptResponse{
   required bytes result = 1;
 }
+
+message GetPcrResponse{
+  repeated bytes pcrs = 1;
+}
