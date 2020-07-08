@@ -33,3 +33,19 @@ message VerifyIdResponse{
 message PutPeerUrlResponse{
   repeated string list = 1;
 }
+
+message TeaNodeProfile{
+  required uint32 profileVersion = 1;
+  required bytes body = 2;
+}
+
+message TeaNodeProfileV1{
+  repeated bytes pcrValues = 1;
+}
+
+message TeaNodeUpdateProfileRequest{
+  required bytes ephemeralPublicKey = 1;
+  repeated string publicUrls = 2;
+  required string profileCid = 3;
+
+}
