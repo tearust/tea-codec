@@ -66,3 +66,8 @@ message RsaEncryptResponse{
 message GetPcrResponse{
   repeated bytes pcrs = 1;
 }
+
+message KeyPair{
+  required bytes PublicKey = 1;
+  required bytes PrivateKey = 2;
+}
