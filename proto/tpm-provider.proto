@@ -66,3 +66,12 @@ message RsaEncryptResponse{
 message GetPcrResponse{
   repeated bytes pcrs = 1;
 }
+
+message VerifyTeaNodeProfileIntegrityRequest{
+  required string profile_cid = 1;
+}
+
+
+message VerifyTeaNodeProfileIntegrityResponse{
+  required bool success = 1;
+}
