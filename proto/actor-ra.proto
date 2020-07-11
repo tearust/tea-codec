@@ -59,3 +59,7 @@ message TeaNodeUpdateProfileRequest{
 message TeaNodeResponse{
   required NodeProfile nodeProfile = 1;
 }
+
+message VerifyTeaNodeProfileIntegrityResponse{
+  required bool success = 1;
+}
