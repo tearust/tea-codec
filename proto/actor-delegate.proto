@@ -113,3 +113,8 @@ message CompleteTaskResponse {
   required bytes result = 3;
 }
 
+
+message NotifyDelegateTaskComplete{
+  required bytes refNum = 1;
+  
+}
