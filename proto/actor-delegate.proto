@@ -40,6 +40,7 @@ message GeneralTaskMessage{
   enum MessageType{
     ApplyToExecuteTaskRequest = 0;//body is bytes of ApplyToExecuteTaskRequest
     WinnerExecutorCert = 1;//body is bytes of WinnerExecutorCert
+    ExecutorCompleteTask = 3;
   };
   required MessageType messageType = 1;
   required bytes payload = 2;
