@@ -40,7 +40,7 @@ message TeaNodeProfile{
 }
 
 message TeaNodeProfileV1{
-  repeated bytes pcrValues = 1;
+  required bytes pcrValues = 1;
 }
 
 message NodeProfile{

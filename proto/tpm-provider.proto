@@ -35,14 +35,6 @@ message VerifySignatureResponse{
   required bool result = 1;
 }
 
-message SignMessageRequest{
-  required bytes message = 3;
-}
-
-message SignMessageResponse{
-  required bytes signature = 1;
-}
-
 message RsaDecryptRequest{
   required bytes private_key_pkcs1 = 1;
   required bytes msg = 2;
@@ -65,4 +57,9 @@ message RsaEncryptResponse{
 
 message GetPcrResponse{
   repeated bytes pcrs = 1;
+}
+
+message RsaKeyPairPemPcsk1{
+  required string publicKey = 1;
+  required string privateKey = 2;
 }

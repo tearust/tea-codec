@@ -55,7 +55,7 @@ message WinnerExecutorCertPayload{
 
 
 message ApplyToExecuteTaskRequest{
-  required bytes refNum = 1;//if encoded using base64, it will become the pubsub topic. 
+  required bytes refNum = 1;//[u8] NOT a base 64 string slices. but if encoded using base64, it will become the pubsub topic. 
   required bytes ekey1 = 2;//Send to delegate, asking him to decrypt and send back
   required bytes rsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor
   required bytes executorTeaId = 6;//The Tea Id of the executor who apply for this task
