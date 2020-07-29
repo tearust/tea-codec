@@ -46,7 +46,7 @@ message RsaDecryptResponse{
 }
 
 message RsaEncryptRequest{
-  required bytes public_key_pkcs8 = 1;
+  required bytes public_key_pkcs1 = 1;
   required bytes msg = 2;
 
 }

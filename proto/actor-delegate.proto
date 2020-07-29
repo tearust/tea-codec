@@ -57,7 +57,7 @@ message WinnerExecutorCertPayload{
 message ApplyToExecuteTaskRequest{
   required bytes refNum = 1;//[u8] NOT a base 64 string slices. but if encoded using base64, it will become the pubsub topic. 
   required bytes ekey1 = 2;//Send to delegate, asking him to decrypt and send back
-  required bytes rsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor
+  required bytes rsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
   required bytes executorTeaId = 6;//The Tea Id of the executor who apply for this task
   required bytes signature = 7;//The Ed25519 sig for concat bytes: executorTeaId + capcheckers[0] + ..+ capcheckers[n]
 }
@@ -73,7 +73,7 @@ message TaskBody {
   required string dataCid =6;
   //This eKey1 can be decrypted by delegate (who issue the rsa key pair). After decrypted, it can be
   //used to decrypt data so that the task wasm can run against
-  required bytes ekey1 = 7;
+  required bytes ekey1 = 7;//this is base64 encoded bytes.
 }
 
 
