@@ -23,6 +23,18 @@ message TaskRegisterResponse{
   optional string Error = 2;
 }
 
+message DataRegisterRequest{
+  required bytes depositTxId = 1;
+  required bytes blockChainAccount = 3;
+}
+
+message DataRegisterResponse{
+  oneof res{
+    string Error = 1;
+    string RsaPubKey = 2;
+  }
+}
+
 message AddNewTask{
   required bytes teaId = 1;
   required bytes refNum = 2;
