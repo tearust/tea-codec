@@ -1,0 +1,25 @@
+syntax = "proto3";
+package p2p; 
+message GeneralMsg{
+  enum ResponseType{
+    response_error = 0;
+    response_type_one = 2;
+    response_type_two = 3;
+  }
+  message ResponseError{
+    string error = 1;
+  }
+  message ResponseTypeOne{
+    string omething = 1;
+    uint32 somethingElse = 2;
+  }
+  message ResponseTypeTwo{
+    uint32 count = 1;
+    string args = 2;
+  }
+  oneof res{
+    ResponseTypeOne typeOne = 3;
+    ResponseTypeTwo typeTwo = 2;
+    ResponseError error = 1;
+  }
+}
