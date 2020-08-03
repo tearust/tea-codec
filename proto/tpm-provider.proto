@@ -1,16 +1,5 @@
 syntax = "proto2";
 package tpm;
-message GenerateEd25519KeyPairRequest{
-
-}
-message GenerateEd25519KeyPairResponse{
-  required bytes encodedBytes = 1;
-  required bytes tpmSignature = 2;//sign based on public key of keypair not the encoded bytes
-  required bytes teaId = 3;
-  required uint32 blockHeightAtSign = 4;
-  required bytes blockHashAtSign = 5;
-  required bytes publicKeyToSign = 6;
-}
 
 message VerifyEd25519KeyPairSignatureRequest{
   required bytes signature = 1;

@@ -35,6 +35,12 @@ message DataRegisterResponse{
   }
 }
 
+message DataUploadCompletedNotify{
+  required string CidData = 1;
+  required string CidDescription = 2;
+  required string RsaPubKey = 3;
+}
+
 message AddNewTask{
   required bytes teaId = 1;
   required bytes refNum = 2;
