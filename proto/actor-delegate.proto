@@ -137,3 +137,14 @@ message NotifyDelegateTaskComplete{
   required bytes refNum = 1;
   
 }
+
+message P2P{
+  oneof m{
+    string Error = 1;
+    P2pPingMessage ping = 2;
+  }
+}
+
+message P2pPingMessage{
+  required string hi = 1;
+}
