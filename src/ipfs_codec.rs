@@ -44,6 +44,13 @@ pub struct PubsubSubRequest{
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct ActorCallBackRequest{
+  pub operation: String,
+  pub payload: Vec<u8>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PubsubRandomSubRequest{
   pub random: String,
   pub discover: bool,
@@ -73,7 +80,6 @@ pub struct BlockPutResponse{
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersRequest{
   pub deployment_id: String,
-  pub callback_func: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
