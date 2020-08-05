@@ -7,6 +7,7 @@ pub const OP_BLOCK_GET: &'static str = "block_get";
 pub const OP_BLOCK_PUT: &'static str = "block_put";
 pub const OP_DAG_GET_DATA: &'static str = "dag_get_data";
 pub const OP_DHT_PROV: &'static str = "dht_provide"; 
+pub const OP_DHT_FINDPROVS: &'static str = "dht_find_providers"; 
 
 
 pub const RSA_PUBKEY: &'static str = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ed3dEUVlKS29aSWh2Y05\
@@ -66,4 +67,11 @@ pub struct PubsubPubRequest{
 pub struct BlockPutResponse{
   pub key: String,
   pub size: u64,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FindProvidersRequest{
+  pub deployment_id: String,
+  pub callback_func: String,
 }
