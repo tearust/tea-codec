@@ -8,7 +8,7 @@ pub const OP_BLOCK_PUT: &'static str = "block_put";
 pub const OP_DAG_GET_DATA: &'static str = "dag_get_data";
 pub const OP_DHT_PROV: &'static str = "dht_provide"; 
 pub const OP_DHT_FINDPROVS: &'static str = "dht_find_providers"; 
-
+pub const OP_DELIVER_FOUND_PROV: &'static str = "dht_deliver_found_provider";
 
 pub const RSA_PUBKEY: &'static str = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ed3dEUVlKS29aSWh2Y05\
 BUUVCQlFBREt3QXdLQUloQU1KYUlLVkZHbWZMMzNNa3Rvb2ZxclBKUXBic09WT3UNCkQ5Q0lFRnEvcURMRkFnTUJBQUU9\
@@ -74,4 +74,17 @@ pub struct BlockPutResponse{
 pub struct FindProvidersRequest{
   pub deployment_id: String,
   pub callback_func: String,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FindProvidersResponseItem{
+  pub id: String,
+  pub addrs: Vec<String>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FindProvidersResponse{
+  pub items: Vec<FindProvidersResponseItem>,
 }
