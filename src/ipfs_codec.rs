@@ -28,69 +28,69 @@ pub const ED_PRIKEY: &'static str = "5579a3c220146f0caaab49b884de505098b89326970
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubSubResponse {
-  pub from: Option<String>,
-  pub data: Option<String>,
-  pub seqno: Option<String>,
-  pub topics: Option<Vec<String>>, 
-  pub unrecognized: Option<Vec<u8>>,
+	pub from: Option<String>,
+	pub data: Option<String>,
+	pub seqno: Option<String>,
+	pub topics: Option<Vec<String>>, 
+	pub unrecognized: Option<Vec<u8>>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubSubRequest{
-  pub topic: String,
-  pub discover: bool,
+	pub topic: String,
+	pub discover: bool,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActorCallBackRequest{
-  pub operation: String,
-  pub payload: Vec<u8>,
+	pub operation: String,
+	pub payload: Vec<u8>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubRandomSubRequest{
-  pub random: String,
-  pub discover: bool,
+	pub random: String,
+	pub discover: bool,
 }
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubRandomSubResponse{
-  pub topic: String,
-  pub curse: String,
+	pub topic: String,
+	pub curse: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubPubRequest{
-  pub topic: String,//base64 string of ref_num
-  pub payload: String,//base64 encoded message payload
+	pub topic: String,//base64 string of ref_num
+	pub payload: String,//base64 encoded message payload
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BlockPutResponse{
-  pub key: String,
-  pub size: u64,
+	pub key: String,
+	pub size: u64,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersRequest{
-  pub deployment_id: String,
+	pub deployment_id: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersResponseItem{
-  pub id: String,
-  pub addrs: Vec<String>,
+	pub id: String,
+	pub addrs: Vec<String>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersResponse{
-  pub items: Vec<FindProvidersResponseItem>,
+	pub items: Vec<FindProvidersResponseItem>,
 }
