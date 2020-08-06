@@ -93,4 +93,6 @@ pub struct FindProvidersResponseItem{
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersResponse{
 	pub items: Vec<FindProvidersResponseItem>,
+	pub deployment_id: String, 
+	pub attachment: Option<Vec<u8>>,
 }
