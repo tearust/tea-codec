@@ -36,8 +36,10 @@ message DataRegisterResponse{
 }
 
 message DataUploadCompletedNotify{
-  required string CidData = 1;
-  required string CidDescription = 2;
+  oneof Cid{
+    string CidData = 1;
+    string CidDescription = 2;
+  }
   required string RsaPubKey = 3;
 }
 
