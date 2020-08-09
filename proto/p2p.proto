@@ -1,20 +1,24 @@
 syntax = "proto3";
-package p2p; 
+package p2p;
+
 message ResponseError{
   string error = 1;
 }
-message ResponseTypeOne{
-  string onething = 1;
-  uint32 somethingElse = 2;
+
+message PeerApprovePinnerRequest {
+  string deploymentId = 1;//this is cid of pinner_key's pub key
+  uint32 nonce = 2; // this is an random number for verify
 }
-message ResponseTypeTwo{
-  uint32 count = 1;
-  string args = 2;
+
+message PeerApprovePinnerResponse {
+  string deploymentId = 1;//this is cid of pinner_key's pub key
+  bytes signature = 2;//The Ed25519 sig for nonce
 }
+
 message GeneralMsg{
-  oneof res{
-    ResponseTypeOne typeOne = 3;
-    ResponseTypeTwo typeTwo = 2;
+  oneof res {
+    PeerApprovePinnerRequest PeerApproveRequest = 2;
+    PeerApprovePinnerResponse PeerApproveResponse = 3;
     ResponseError error = 1;
   }
 }

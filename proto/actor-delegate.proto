@@ -84,13 +84,13 @@ message ApplyToExecuteTaskRequest{
 
 message TaskBody {
   required string manifestCid = 4;
- // the wasm/yaml file that used to check capabilities. Executor needs to run this
- // wasm/yaml against its own runtime to know if itself is capable to run this task
+  // the wasm/yaml file that used to check capabilities. Executor needs to run this
+  // wasm/yaml against its own runtime to know if itself is capable to run this task
   required string capCid = 3;
   required string wasmCid = 5;
   //Use IPFS block_get(dataCid) to download the data. This data is the parameter of the task wasm
   //By default, this data (after downloaded from IPFS) is encrypted. The decrypt key is ekey1 (after decrypted by rsa_pub though)
-  required string dataCid =6;
+  required string dataCid = 6;
   //This eKey1 can be decrypted by delegate (who issue the rsa key pair). After decrypted, it can be
   //used to decrypt data so that the task wasm can run against
   required bytes ekey1 = 7;//this is base64 encoded bytes.
@@ -159,23 +159,6 @@ message ApplyToBePinnerRequest{
 }
 
 message ApplyToBePinnerResponse{
-  required bytes pinnerKeyEncrypted =1; //The full pinner key encoded by rsa_pubkey from wannabe pinner.
+  required bytes pinnerKeyEncrypted = 1; //The full pinner key encoded by rsa_pubkey from wannabe pinner.
   required bytes signature = 4;//The Ed25519 sig for concat bytes: pinner's ephemeral key + pinner_key_enc
-}
-
-message PeerApprovePinnerMessage {
-  oneof Message {
-      PeerApprovePinnerRequest Request = 1;
-      PeerApprovePinnerResponse Response = 2;
-  }
-}
-
-message PeerApprovePinnerRequest {
-  required string deploymentId = 1;//this is cid of pinner_key's pub key
-  required uint32 nonce = 2; // this is an random number for verify
-}
-
-message PeerApprovePinnerResponse {
-  required string deploymentId = 1;//this is cid of pinner_key's pub key
-  required bytes signature = 2;//The Ed25519 sig for nonce
 }
