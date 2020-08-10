@@ -15,14 +15,20 @@ message PeerApprovePinnerResponse {
   bytes signature = 2;//The Ed25519 sig for nonce
 }
 
-message CommonMsg {
-  string key = 1;
-  string data_b64 = 2;
+
+message RsaKeyRequest {
+  string data = 1;
+}
+message RsaKeyResponse {
+  string data = 1;
 }
 
 message GeneralMsg{
   oneof res {
-    CommonMsg CommonMsgWithBase64 = 4;
+
+    RsaKeyResponse RsaKeyResp = 5;
+    RsaKeyRequest RsaKeyReq = 4;
+
     PeerApprovePinnerRequest PeerApproveRequest = 2;
     PeerApprovePinnerResponse PeerApproveResponse = 3;
     ResponseError error = 1;
