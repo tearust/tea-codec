@@ -15,10 +15,24 @@ message PeerApprovePinnerResponse {
   bytes signature = 2;//The Ed25519 sig for nonce
 }
 
+message ApplyToBePinnerRequest{
+  string deploymentId = 1;//this is cid of pinner_key's pub key
+  bytes rsaPubKey = 2;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
+  bytes wannabePinnerId = 3;//The ephemeral Id of the wannabe pinner
+  bytes signature = 4;//The Ed25519 sig for concat bytes: wannabe_ephemeral_id + rsa_key_pub
+}
+
+message ApplyToBePinnerResponse{
+  bytes pinnerKeyEncrypted = 1; //The full pinner key encoded by rsa_pubkey from wannabe pinner.
+  bytes signature = 4;//The Ed25519 sig for concat bytes: pinner's ephemeral key + pinner_key_enc
+}
+
 message GeneralMsg{
   oneof res {
     PeerApprovePinnerRequest PeerApproveRequest = 2;
     PeerApprovePinnerResponse PeerApproveResponse = 3;
+    ApplyToBePinnerRequest ApplyPinnerRequest = 4;
+    ApplyToBePinnerResponse ApplyPinnerResponse = 5;
     ResponseError error = 1;
   }
 }
