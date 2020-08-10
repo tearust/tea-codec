@@ -18,7 +18,6 @@ message PeerApprovePinnerResponse {
 message CommonMsg {
   string key = 1;
   string data_b64 = 2;
-  bytes data = 3;
 }
 
 message GeneralMsg{
