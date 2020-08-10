@@ -17,10 +17,10 @@ message PeerApprovePinnerResponse {
 
 
 message RsaKeyRequest {
-  string data = 1;
+  bytes data = 1;
 }
 message RsaKeyResponse {
-  string data = 1;
+  bytes data = 1;
 }
 
 message GeneralMsg{
