@@ -9,6 +9,7 @@ pub const OP_DAG_GET_DATA: &'static str = "dag_get_data";
 pub const OP_DHT_PROV: &'static str = "dht_provide"; 
 pub const OP_DHT_FINDPROVS: &'static str = "dht_find_providers"; 
 pub const OP_DELIVER_FOUND_PROV: &'static str = "dht_deliver_found_provider";
+pub const OP_ID: &'static str = "id";
 
 pub const RSA_PUBKEY: &'static str = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ed3dEUVlKS29aSWh2Y05\
 BUUVCQlFBREt3QXdLQUloQU1KYUlLVkZHbWZMMzNNa3Rvb2ZxclBKUXBic09WT3UNCkQ5Q0lFRnEvcURMRkFnTUJBQUU9\
