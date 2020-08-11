@@ -1,19 +1,6 @@
 syntax = "proto2";
 package tpm;
 
-message VerifyEd25519KeyPairSignatureRequest{
-  required bytes signature = 1;
-  required bytes publicKey = 2;//need to verify if this public key is used when sign
-  required bytes teaId = 3;
-  required uint32 blockHeightAtSign = 4;
-}
-
-message VerifyEd25519KeyPairSignatureResponse{
-  required bool success = 1;
-  required bytes signature = 2;//the sig sent in request:w
-
-}
-
 message VerifySignatureRequest{
   required bytes signature = 1;
   required bytes publicKey = 2;
