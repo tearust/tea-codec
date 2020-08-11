@@ -38,22 +38,37 @@ message ApplyToBePinnerResponse{
 message RsaKeyRequest {
   bytes data = 1;
 }
+
 message RsaKeyResponse {
   bytes data = 1;
 }
 
+message WinnerExecutorCert{
+  bytes refNum = 1;
+  bytes winnerTeaId = 2;//the winner who send the application and lucky get approved by delegator
+  bytes signature = 3;//signer is delegate, msg is tea_id(32bytes) + ref_num(32bytes)
+  optional bytes secKeysRsaBytes = 4;//Delegate decrypt eKey1, then encrypt using Executor's rsa pub key
+}
+
+
+message ApplyToExecuteTaskRequest{
+  bytes refNum = 1;//[u8] NOT a base 64 string slices. but if encoded using base64, it will become the pubsub topic. 
+  bytes ekey1 = 2;//Send to delegate, asking him to decrypt and send back
+  bytes rsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
+  bytes executorTeaId = 6;//The Tea Id of the executor who apply for this task
+  bytes signature = 7;//The Ed25519 sig for concat bytes: executorTeaId + capcheckers[0] + ..+ capcheckers[n]
+}
+
 message GeneralMsg{
-  oneof res {
-
-    RsaKeyResponse RsaKeyResp = 5;
-    RsaKeyRequest RsaKeyReq = 4;
-
+  oneof msg {
+    ResponseError error = 1;
     PeerApprovePinnerRequest PeerApproveRequest = 2;
     PeerApprovePinnerResponse PeerApproveResponse = 3;
-
+    RsaKeyRequest RsaKeyReq = 4;
+    RsaKeyResponse RsaKeyResp = 5;
     ApplyToBePinnerRequest ApplyPinnerRequest = 6;
     ApplyToBePinnerResponse ApplyPinnerResponse = 7;
-
-    ResponseError error = 1;
+    ApplyToExecuteTaskRequest ApplyToExecuteTaskRequest = 8;
+    WinnerExecutorCert WinnerExecutorCert = 9;
   }
 }
