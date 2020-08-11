@@ -49,6 +49,7 @@ message NodeProfile{
   required string profileCid = 2;//IPFS Cid to store profile object->TeaNodeProfile
   required bytes teaId = 3;//The node's TPM ID which generates ephemeralPublicKey and sign 
   repeated string publicUrls = 4;//Public URLs if this node is a bootstrap node. If would be [] if this node does not provide public service
+  // required string peer_id = 5;//ipfs peer id used for peer 2 peer communication
 }
 
 message TeaNodeUpdateProfileRequest{
