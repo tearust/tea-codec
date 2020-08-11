@@ -140,21 +140,10 @@ message NotifyDelegateTaskComplete{
 
 }
 
-message P2P{
-  oneof m{
-    string Error = 1;
-    P2pPingMessage ping = 2;
-  }
-}
-
-message P2pPingMessage{
-  required string hi = 1;
-}
-
-message ApplyToBePinnerRequest{
-  required string deploymentId = 1;//this is cid of pinner_key's pub key
-  required bytes rsaPubKey = 2;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
-  required bytes wannabePinnerId = 3;//The ephemeral Id of the wannabe pinner
-  required bytes signature = 4;//The Ed25519 sig for concat bytes: wannabe_ephemeral_id + rsa_key_pub
-}
+// message ApplyToBePinnerRequest{
+//   required string deploymentId = 1;//this is cid of pinner_key's pub key
+//   required bytes rsaPubKey = 2;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
+//   required bytes wannabePinnerId = 3;//The ephemeral Id of the wannabe pinner
+//   required bytes signature = 4;//The Ed25519 sig for concat bytes: wannabe_ephemeral_id + rsa_key_pub
+// }
 
