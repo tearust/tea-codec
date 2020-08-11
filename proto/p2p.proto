@@ -47,7 +47,7 @@ message WinnerExecutorCert{
   bytes refNum = 1;
   bytes winnerTeaId = 2;//the winner who send the application and lucky get approved by delegator
   bytes signature = 3;//signer is delegate, msg is tea_id(32bytes) + ref_num(32bytes)
-  optional bytes secKeysRsaBytes = 4;//Delegate decrypt eKey1, then encrypt using Executor's rsa pub key
+  bytes secKeysRsaBytes = 4;//Delegate decrypt eKey1, then encrypt using Executor's rsa pub key
 }
 
 
