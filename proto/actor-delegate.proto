@@ -53,35 +53,6 @@ message AddNewTask{
   required uint32 payment = 7;
 }
 
-
-
-// /////////  Communication between delegate and executor
-// message GeneralTaskMessage{
-//   enum MessageType{
-//     ApplyToExecuteTaskRequest = 0;//body is bytes of ApplyToExecuteTaskRequest
-//     WinnerExecutorCert = 1;//body is bytes of WinnerExecutorCert
-//     ExecutorCompleteTask = 3;
-//   };
-//   required MessageType messageType = 1;
-//   required bytes payload = 2;
-// }
-
-// message WinnerExecutorCertPayload{
-//   required bytes refNum = 1;
-//   required bytes winnerTeaId = 2;//the winner who send the application and lucky get approved by delegator
-//   required bytes signature = 3;//signer is delegate, msg is tea_id(32bytes) + ref_num(32bytes)
-//   optional bytes secKeysRsaBytes = 4;//Delegate decrypt eKey1, then encrypt using Executor's rsa pub key
-// }
-
-
-// message ApplyToExecuteTaskRequest{
-//   required bytes refNum = 1;//[u8] NOT a base 64 string slices. but if encoded using base64, it will become the pubsub topic. 
-//   required bytes ekey1 = 2;//Send to delegate, asking him to decrypt and send back
-//   required bytes rsaPubKey = 3;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
-//   required bytes executorTeaId = 6;//The Tea Id of the executor who apply for this task
-//   required bytes signature = 7;//The Ed25519 sig for concat bytes: executorTeaId + capcheckers[0] + ..+ capcheckers[n]
-// }
-
 message TaskBody {
   required string manifestCid = 4;
   // the wasm/yaml file that used to check capabilities. Executor needs to run this
@@ -96,8 +67,6 @@ message TaskBody {
   required bytes ekey1 = 7;//this is base64 encoded bytes.
 }
 
-
-/////////  Communication between delegate and facade.
 message Task {
   required bytes refNum = 1;//this is [u8] not base64 nor hex
   required bytes delegateId = 2;
@@ -128,22 +97,7 @@ message CompleteTaskRequest {
   required bytes resultSig = 5;
 }
 
-message CompleteTaskResponse {
-  required bytes refNum = 1;
-  required bytes accountId = 2;
-  required bytes result = 3;
-}
-
-
 message NotifyDelegateTaskComplete{
   required bytes refNum = 1;
 
 }
-
-// message ApplyToBePinnerRequest{
-//   required string deploymentId = 1;//this is cid of pinner_key's pub key
-//   required bytes rsaPubKey = 2;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
-//   required bytes wannabePinnerId = 3;//The ephemeral Id of the wannabe pinner
-//   required bytes signature = 4;//The Ed25519 sig for concat bytes: wannabe_ephemeral_id + rsa_key_pub
-// }
-
