@@ -52,19 +52,6 @@ pub struct ActorCallBackRequest{
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct PubsubRandomSubRequest{
-	pub random: String,
-	pub discover: bool,
-}
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct PubsubRandomSubResponse{
-	pub topic: String,
-	pub curse: String,
-}
-
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct PubsubPubRequest{
 	pub topic: String,//base64 string of ref_num
 	pub payload: String,//base64 encoded message payload
