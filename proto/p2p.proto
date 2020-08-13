@@ -35,6 +35,26 @@ message ApplyToBePinnerResponse{
   bytes signature = 5;//The Ed25519 sig for concat bytes: pinner's ephemeral key + pinner_key_enc
 }
 
+message ApplyToBeServerRequest{
+  string deploymentId = 1;//this is cid of pinner_key's pub key
+  bytes rsaPubKey = 2;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
+  bytes wannabePinnerId = 3;//The ephemeral Id of the wannabe pinner
+  bytes signature = 4;//The Ed25519 sig for concat bytes: wannabe_ephemeral_id + rsa_key_pub
+}
+
+message ApplyToBeServerResponse{
+  string deploymentId = 1;//this is cid of pinner_key's pub key
+  bytes pinnerKeyEncrypted = 2; //The full pinner key encoded by rsa_pubkey from wannabe pinner.
+  bytes key2Encrypted = 3; //The key2 encoded by rsa_pubkey from upstream pinner.
+  bytes upstreamPinnerTeaId = 4;//use the upstream tea_id to make a broacasting chain so that we can trace back when make payment or verify
+  //we use tea_id instead of ephemeral_id because this chain would be a long life time use. ephemeral key changes
+  // every time the tea node reboot.
+  // Base on today's idea, the first revenue comes from hosting as pinner will 100% go to upstream pinner. after that
+  // the revenue doens't need to share to upstream
+  // problem: what if the data is only for one time use?
+  bytes signature = 5;//The Ed25519 sig for concat bytes: pinner's ephemeral key + pinner_key_enc
+}
+
 message WinnerExecutorCert{
   bytes refNum = 1;
   bytes winnerTeaId = 2;//the winner who send the application and lucky get approved by delegator

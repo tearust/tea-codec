@@ -118,6 +118,20 @@ message Task {
   required uint32 payment = 5;
 }
 
+message Data {
+  required bytes delegateTeaId = 2;//This is TeaId not Ephemeral Id because this is long term ID. Others can lookup layer1 to find what is the current peer_id of this delegator
+  required string modelCid = 3;
+  required string bodyCid = 4;
+  required uint32 payment = 5;
+}
+
+message Service {
+  required bytes delegateId = 2;
+  required string modelCid = 3;
+  required string bodyCid = 4;
+  required uint32 payment = 5;
+}
+
 message Node {
   required bytes teaId = 1;
   repeated bytes peers = 2;
@@ -130,6 +144,21 @@ message AddNewTaskRequest {
 message AddNewTaskResponse {
   required bytes accountId = 1;
   required Task task = 2;
+}
+
+message AddNewDataResponse {
+  required bytes delegatorEphemeralId = 1;
+  required string deploymentId = 2;
+  required string DataCid = 3;
+  required string DescriptionCid = 4;
+}
+
+message AddNewServiceResponse {
+  required bytes delegatorEphemeralId = 1;
+  required string deploymentId = 2;
+  required string CodeCid = 3;
+  required string DescriptionCid = 4;
+  required string CapCid = 5;
 }
 
 message CompleteTaskRequest {
