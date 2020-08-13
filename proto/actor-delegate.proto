@@ -35,7 +35,27 @@ message DataRegisterResponse{
   }
 }
 
+message ServiceRegisterRequest{
+  required bytes depositTxId = 1;
+  required bytes blockChainAccount = 3;
+}
+
+message ServiceRegisterResponse{
+  oneof res{
+    string Error = 1;
+    string RsaPubKey = 2;
+  }
+}
+
 message DataUploadCompletedNotify{
+  oneof Cid{
+    string CidData = 1;
+    string CidDescription = 2;
+  }
+  required string RsaPubKey = 3;
+}
+
+message ServiceUploadCompletedNotify{
   oneof Cid{
     string CidData = 1;
     string CidDescription = 2;
