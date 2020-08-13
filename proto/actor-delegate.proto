@@ -48,19 +48,36 @@ message ServiceRegisterResponse{
 }
 
 message DataUploadCompletedNotify{
-  oneof Cid{
+  oneof Cid{//user need to specity to Adapter what type of data he uploads to IPFS. We can use query string type=Data or type=Description in URL
+            //Adapter use this query string to set this value
     string CidData = 1;
     string CidDescription = 2;
   }
-  required string RsaPubKey = 3;
+  required string RsaPubKey = 3;//RsaPubKey = somekey in query string. Adapter need to parse this query param and send the RsaPubKey to Delegator to verify
+
+  repeated KeyValuePair kvp = 4;//This can be empty [] if user did not specify in the upload URL query string except RsaPubKey is a must.
+                                //Adapter do not parse (except for RsaPubKey), just pass through to this Vec<KeyValuePair> to Delegator. 
+                                //Delegator handles the logic
 }
 
 message ServiceUploadCompletedNotify{
   oneof Cid{
-    string CidData = 1;
-    string CidDescription = 2;
+    string CidCode = 1;//Cid of uploaded wasm file
+    string CidDescription = 2;//This is any format of description. Most likely a toml file. We do not parse or process.
+    string CidCapCheckerWasm = 3;// Developer can choose one of two CapCheck format: Wasm or Json
+                                // Only one of the two needs to be exist. We do not allow both of them exist. If it happens, use wasm and ignore json
+                                // 
+    string CidCapCheckerJson = 4;//Either json or wasm
   }
   required string RsaPubKey = 3;
+  repeated KeyValuePair kvp = 4;//This can be empty [] if user did not specify in the upload URL query string except RsaPubKey is a must.
+                                //Adapter do not parse (except for RsaPubKey), just pass through to this Vec<KeyValuePair> to Delegator. 
+                                //Delegator handles the logic
+}
+
+message KeyValuePair{
+  required string key = 1;
+  required string value = 2;
 }
 
 message AddNewTask{
