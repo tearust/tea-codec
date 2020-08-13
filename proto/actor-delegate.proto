@@ -54,10 +54,14 @@ message DataUploadCompletedNotify{
     string CidDescription = 2;
   }
   required string RsaPubKey = 3;//RsaPubKey = somekey in query string. Adapter need to parse this query param and send the RsaPubKey to Delegator to verify
+  optional string KeyUrlEncoded = 4; //If the uploaded data is encrypted. this key_url_encoded must be in the query params. Otherwise no one can decrypt this data.
+                                      // if the data is not encrypted, such as description is not encrypted. The key_url_encoded is None.
+                                      // In order to be used in url, this key is Url_encoded. Please url_decode before use.
 
-  repeated KeyValuePair kvp = 4;//This can be empty [] if user did not specify in the upload URL query string except RsaPubKey is a must.
+  repeated KeyValuePair kvp = 5;//This can be empty [] if user did not specify in the upload URL query string except RsaPubKey is a must.
                                 //Adapter do not parse (except for RsaPubKey), just pass through to this Vec<KeyValuePair> to Delegator. 
                                 //Delegator handles the logic
+
 }
 
 message ServiceUploadCompletedNotify{
@@ -70,7 +74,11 @@ message ServiceUploadCompletedNotify{
     string CidCapCheckerJson = 4;//Either json or wasm
   }
   required string RsaPubKey = 3;
-  repeated KeyValuePair kvp = 4;//This can be empty [] if user did not specify in the upload URL query string except RsaPubKey is a must.
+  optional string KeyUrlEncoded = 4; //If the uploaded data is encrypted. this key_url_encoded must be in the query params. Otherwise no one can decrypt this data.
+                                      // if the data is not encrypted, such as description is not encrypted. The key_url_encoded is None.
+                                      // In order to be used in url, this key is Url_encoded. Please url_decode before use.
+
+  repeated KeyValuePair kvp = 5;//This can be empty [] if user did not specify in the upload URL query string except RsaPubKey is a must.
                                 //Adapter do not parse (except for RsaPubKey), just pass through to this Vec<KeyValuePair> to Delegator. 
                                 //Delegator handles the logic
 }
