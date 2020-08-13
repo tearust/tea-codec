@@ -48,7 +48,7 @@ message ServiceRegisterResponse{
 }
 
 message DataUploadCompletedNotify{
-  oneof Cid{//user need to specity to Adapter what type of data he uploads to IPFS. We can use query string type=Data or type=Description in URL
+  oneof Cid {//user need to specity to Adapter what type of data he uploads to IPFS. We can use query string type=Data or type=Description in URL
             //Adapter use this query string to set this value
     string CidData = 1;
     string CidDescription = 2;
@@ -73,14 +73,12 @@ message ServiceUploadCompletedNotify{
                                 // 
     string CidCapCheckerJson = 4;//Either json or wasm
   }
-  required string RsaPubKey = 3;
-  optional string KeyUrlEncoded = 4; //If the uploaded data is encrypted. this key_url_encoded must be in the query params. Otherwise no one can decrypt this data.
+  required string RsaPubKey = 5; //Note: a full upload workflow contains only one rsa_pub_key but may have multiple http post requests. All of these http post request
+                                //will share the same rsa_pub_key. 
+                                //Among these http post requests, only one of them can contain kvp
+  optional string KeyUrlEncoded = 6; //If the uploaded data is encrypted. this key_url_encoded must be in the query params. Otherwise no one can decrypt this data.
                                       // if the data is not encrypted, such as description is not encrypted. The key_url_encoded is None.
                                       // In order to be used in url, this key is Url_encoded. Please url_decode before use.
-
-  repeated KeyValuePair kvp = 5;//This can be empty [] if user did not specify in the upload URL query string except RsaPubKey is a must.
-                                //Adapter do not parse (except for RsaPubKey), just pass through to this Vec<KeyValuePair> to Delegator. 
-                                //Delegator handles the logic
 }
 
 message KeyValuePair{
