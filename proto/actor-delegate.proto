@@ -54,8 +54,8 @@ message DataUploadCompletedNotify{
     string CidDescription = 2;
     string CidCapchecker = 3; //If uploaded is code, CidCapchecker is valid capchecker cid. If uploaded is data, this is empty string ""
   }
-  required string RsaPubKey = 3;//RsaPubKey = somekey in query string. Adapter need to parse this query param and send the RsaPubKey to Delegator to verify
-  optional string KeyUrlEncoded = 4; //If the uploaded data is encrypted. this key_url_encoded must be in the query params. Otherwise no one can decrypt this data.
+  required string RsaPubKey = 10;//RsaPubKey = somekey in query string. Adapter need to parse this query param and send the RsaPubKey to Delegator to verify
+  optional string KeyUrlEncoded = 11; //If the uploaded data is encrypted. this key_url_encoded must be in the query params. Otherwise no one can decrypt this data.
                                       // if the data is not encrypted, such as description is not encrypted. The key_url_encoded is None.
                                       // In order to be used in url, this key is Url_encoded. Please url_decode before use.
 }
