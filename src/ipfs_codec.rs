@@ -68,6 +68,7 @@ pub struct BlockPutResponse{
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersRequest{
 	pub deployment_id: String,
+	pub uuid: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -83,4 +84,5 @@ pub struct FindProvidersResponse{
 	pub items: Vec<FindProvidersResponseItem>,
 	pub deployment_id: String, 
 	pub attachment: Option<Vec<u8>>,
+	pub uuid: String,
 }
