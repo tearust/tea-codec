@@ -93,10 +93,15 @@ message Task {
 }
 
 message Data {
-  required bytes delegateTeaId = 2;//This is TeaId not Ephemeral Id because this is long term ID. Others can lookup layer1 to find what is the current peer_id of this delegator
-  required string modelCid = 3;
-  required string bodyCid = 4;
-  required uint32 payment = 5;
+  required bytes delegatorEphemeralId = 1;
+  required string deploymentId = 2;
+  required string dataCid = 3;//The cid of encrypted data or code. We consider code is also data in this case
+  required string descriptionCid = 4;//the cid of description object(or DAG). This description can be any format. We can define the format somewhere else.
+  optional string capCid = 5;//When this is a data or a service without any requirment to check capability, we can set this property to None.
+                              //The wannabepinner will not check capability if this is none
+                              //It make sense for most data type pinner because we only check if it is a valid Tea Node.
+                              //For service pinner, in most case we may need to run a capchecker to make sure the service pinner has the 
+                              //capabilities required.
 }
 
 message Service {
@@ -120,16 +125,13 @@ message AddNewTaskResponse {
   required Task task = 2;
 }
 
+message AddNewDataRequest {
+  required Data data = 1;
+}
+
 message AddNewDataResponse {
-  required bytes delegatorEphemeralId = 1;
-  required string deploymentId = 2;
-  required string DataCid = 3;//The cid of encrypted data or code. We consider code is also data in this case
-  required string DescriptionCid = 4;//the cid of description object(or DAG). This description can be any format. We can define the format somewhere else.
-  optional string CapCid = 5;//When this is a data or a service without any requirment to check capability, we can set this property to None.
-                              //The wannabepinner will not check capability if this is none
-                              //It make sense for most data type pinner because we only check if it is a valid Tea Node.
-                              //For service pinner, in most case we may need to run a capchecker to make sure the service pinner has the 
-                              //capabilities required.
+  required bytes accountId = 1;
+  required Data data = 2;
 }
 
 message CompleteTaskRequest {
@@ -138,6 +140,12 @@ message CompleteTaskRequest {
   required bytes delegateSig = 3;
   required bytes result = 4;
   required bytes resultSig = 5;
+}
+
+message CompleteTaskResponse {	
+  required bytes refNum = 1;	
+  required bytes accountId = 2;	
+  required bytes result = 3;	
 }
 
 message NotifyDelegateTaskComplete{
