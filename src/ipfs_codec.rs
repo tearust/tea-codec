@@ -24,10 +24,6 @@ hWTWNXMnh6NGFqK25sU05CbQ0KLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0NCg==";
 pub const ED_PUBKEY: &'static str = "df38cb4f12479041c8e8d238109ef2a150b017f382206e24fee932e637c2db7b";
 pub const ED_PRIKEY: &'static str = "5579a3c220146f0caaab49b884de505098b89326970b929d781cf4a65445a917df38cb4f12479041c8e8d238109ef2a150b017f382206e24fee932e637c2db7b";
 
-pub const PINNER_APPLY_TO_BE_PINNER : &'static str = "pinner_apply_to_be_pinner";
-pub const PINNER_APPLY_TO_BE_SERVER : &'static str = "pinner_apply_to_be_server";
-pub const PINNER_FIND_DEPLOYED_DATA: &'static str = "pinner_find_deployed_data";
-pub const PINNER_FIND_DEPLOYED_CODE: &'static str = "pinner_find_deployed_code";
 
 /// Describes an HTTP request
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -72,7 +68,6 @@ pub struct BlockPutResponse{
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersRequest{
 	pub deployment_id: String,
-	pub find_operation: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -86,7 +81,6 @@ pub struct FindProvidersResponseItem{
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersResponse{
 	pub items: Vec<FindProvidersResponseItem>,
-	pub deployment_id: String,
-	pub find_operation: String,
+	pub deployment_id: String, 
 	pub attachment: Option<Vec<u8>>,
 }
