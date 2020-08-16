@@ -44,3 +44,8 @@ message RsaKeyPairPemPcsk1{
   required string publicKey = 1;
   required string privateKey = 2;
 }
+
+message SignedPcrs{
+  required bytes pcrs = 1;
+  required bytes sig = 2;
+}
