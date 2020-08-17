@@ -45,11 +45,25 @@ message RsaKeyPairPemPcsk1{
   required string privateKey = 2;
 }
 
-message SignedPcrs{
-  required bytes pcrs = 1;
+message SignedPcrsBytes{
+  required Pcrs pcrs = 1;
   required bytes sig = 2;
 }
 
-message ClaimConfigStackHash{
-  repeated string hash_of_config = 1;
+message BootStackConfig{
+  repeated string HashOfLayers = 1;
+}
+
+message TeaNodeProfileV1{
+  required SignedPcrsBytes pcrValues = 1;
+  required BootStackConfig configStackHash = 2;
+}
+
+message Pcrs{
+  repeated bytes pcrs = 1;
+}
+
+message RebuildOtherPeerPcrBytesRequest{
+  required bytes ephemeralId = 1;
+  required BootStackConfig bootStackConfig = 2;
 }
