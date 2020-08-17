@@ -41,6 +41,7 @@ message TeaNodeProfile{
 
 message TeaNodeProfileV1{
   required bytes pcrValues = 1;
+  required bytes configStackHash = 2;
 }
 
 message NodeProfile{

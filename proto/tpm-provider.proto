@@ -49,3 +49,7 @@ message SignedPcrs{
   required bytes pcrs = 1;
   required bytes sig = 2;
 }
+
+message ClaimConfigStackHash{
+  repeated string hash_of_config = 1;
+}
