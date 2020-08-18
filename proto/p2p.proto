@@ -53,6 +53,39 @@ message ApplyToExecuteTaskRequest{
   bytes signature = 7;//The Ed25519 sig for concat bytes: executorTeaId + capcheckers[0] + ..+ capcheckers[n]
 }
 
+message ErrandExecutionRequest{
+  bytes delegatorTeaId = 1;//The Tea Id of the delegator about the errand
+  string hash = 2; // this is hash of the errand
+  oneof code {
+    ErrandDeploymentCode DeploymentCode = 3; // this is deployment code for the errand
+    ErrandAdhocCode AdhocCode = 4; // this is adhoc code for the errand
+  }
+  oneof data {
+    ErrandDeploymentData DeploymentData = 5; // this is deployment data for the errand
+    string AdhocData = 6; // this is adhoc data for the errand
+  }
+  oneof signature {
+    bytes Code = 7; // this is signature about adhoc code
+    bytes Data = 8; // this is signature about adhoc data
+    bool None = 9; // fill this item if there is no signature
+  }
+}
+
+message ErrandDeploymentData{
+  string deploymentId = 1; //this is deployment is of deployed data
+  string cid = 2; //this is cid of deployed data
+}
+
+message ErrandDeploymentCode{
+  string deploymentId = 1; //this is deployment is of deployed code
+  string cid = 2; //this is cid of deployed code
+}
+
+message ErrandAdhocCode{
+  string code = 1; // this is base64 encoded wasm bin without encryption
+  string capChecker = 2; // this is base64 encoded capabilities checker wasm with encryption
+}
+
 message GeneralMsg{
   oneof msg {
     ResponseError error = 1;
@@ -62,5 +95,6 @@ message GeneralMsg{
     ApplyToBePinnerResponse ApplyPinnerResponse = 5;
     ApplyToExecuteTaskRequest ApplyToExecuteTaskRequest = 6;
     WinnerExecutorCert WinnerExecutorCert = 7;
+    ErrandExecutionRequest ErrandExecutionRequest = 8;
   }
 }
