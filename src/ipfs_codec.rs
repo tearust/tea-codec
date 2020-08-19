@@ -86,3 +86,10 @@ pub struct FindProvidersResponse{
 	pub attachment: Option<Vec<u8>>,
 	pub uuid: String,
 }
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum DhtProvideRequest {
+	DeploymnetId(String),
+	PinnerPubKey(Vec<u8>),
+}
