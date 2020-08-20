@@ -10,6 +10,7 @@ pub const OP_DHT_PROV: &'static str = "dht_provide";
 pub const OP_DHT_FINDPROVS: &'static str = "dht_find_providers"; 
 pub const OP_DELIVER_FOUND_PROV: &'static str = "dht_deliver_found_provider";
 pub const OP_ID: &'static str = "id";
+pub const OP_DELAY_INVOKE: &'static str = "delay_invoke";
 
 pub const RSA_PUBKEY: &'static str = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ed3dEUVlKS29aSWh2Y05\
 BUUVCQlFBREt3QXdLQUloQU1KYUlLVkZHbWZMMzNNa3Rvb2ZxclBKUXBic09WT3UNCkQ5Q0lFRnEvcURMRkFnTUJBQUU9\
@@ -46,6 +47,14 @@ pub struct PubsubSubRequest{
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActorCallBackRequest{
+	pub operation: String,
+	pub payload: Vec<u8>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DelayInvokeRequest{
+	pub delay_seconds: u64,
 	pub operation: String,
 	pub payload: Vec<u8>,
 }
