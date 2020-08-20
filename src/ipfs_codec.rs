@@ -64,7 +64,7 @@ pub struct BlockPutResponse{
 	pub size: u64,
 }
 
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FindProvidersRequest{
 	pub deployment_id: String,
