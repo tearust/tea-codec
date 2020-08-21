@@ -61,6 +61,22 @@ pub fn deserialize<'de, T: Deserialize<'de>>(
 	}
 }
 
+pub const OP_DELAY_PUBLISH: &'static str = "DelayPublish";
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DelayMessage{
+	pub delay_seconds: u64,
+	/// The message subject or topic
+    pub subject: String,
+    /// The reply-to field of the subject. This will be empty if there is no reply subject
+    pub reply_to: String,
+    /// The raw bytes of the message. Encoding/contents is determined by applications out of band
+    #[serde(with = "serde_bytes")]
+    #[serde(default)]
+    pub body: Vec<u8>,
+}
+
 pub mod task_in_block;
 pub mod ipfs_codec;
 pub mod task;

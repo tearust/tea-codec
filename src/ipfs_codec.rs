@@ -51,13 +51,6 @@ pub struct ActorCallBackRequest{
 	pub payload: Vec<u8>,
 }
 
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct DelayInvokeRequest{
-	pub delay_seconds: u64,
-	pub operation: String,
-	pub payload: Vec<u8>,
-}
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
