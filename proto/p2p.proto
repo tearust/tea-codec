@@ -71,6 +71,12 @@ message ErrandExecutionRequest{
   }
 }
 
+message ErrandExecutionResponse {
+  string hash = 1; // this is hash of the errand
+  bool result = 2; // this is result of exection
+  bytes payload = 3; // this is return data of exection
+}
+
 message ErrandDeploymentData{
   string deploymentId = 1; //this is deployment is of deployed data
   string cid = 2; //this is cid of deployed data
@@ -83,7 +89,19 @@ message ErrandDeploymentCode{
 
 message ErrandAdhocCode{
   string code = 1; // this is base64 encoded wasm bin without encryption
+  string capCid = 2; // this is cid of cap checker wasm
+}
+
+message ErrandAdhocCodeCapCheckerRequest{
+  string hash = 1; // this is hash of the errand
   string capChecker = 2; // this is base64 encoded capabilities checker wasm with encryption
+}
+
+message ErrandAdhocCodeCapCheckerResponse{
+  string hash = 1; // this is hash of the errand
+  bool result = 2; // this is cap check result
+  string capCid = 3; // this is cid of cap checker wasm
+  bytes signature = 4; // The Ed25519 sig for concat bytes: hash + result
 }
 
 message GeneralMsg{
@@ -96,5 +114,8 @@ message GeneralMsg{
     ApplyToExecuteTaskRequest ApplyToExecuteTaskRequest = 6;
     WinnerExecutorCert WinnerExecutorCert = 7;
     ErrandExecutionRequest ErrandExecutionRequest = 8;
+    ErrandExecutionResponse ErrandExecutionResponse = 9;
+    ErrandAdhocCodeCapCheckerRequest ErrandAdhocCodeCapCheckerRequest = 10;
+    ErrandAdhocCodeCapCheckerResponse ErrandAdhocCodeCapCheckerResponse = 11;
   }
 }
