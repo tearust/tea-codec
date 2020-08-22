@@ -11,6 +11,7 @@ pub const OP_DHT_FINDPROVS: &'static str = "dht_find_providers";
 pub const OP_DELIVER_FOUND_PROV: &'static str = "dht_deliver_found_provider";
 pub const OP_ID: &'static str = "id";
 pub const OP_DELAY_INVOKE: &'static str = "delay_invoke";
+pub const OP_FIND_PROV_ERR: &'static str = "find_provider_error";
 
 pub const RSA_PUBKEY: &'static str = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ed3dEUVlKS29aSWh2Y05\
 BUUVCQlFBREt3QXdLQUloQU1KYUlLVkZHbWZMMzNNa3Rvb2ZxclBKUXBic09WT3UNCkQ5Q0lFRnEvcURMRkFnTUJBQUU9\
@@ -94,4 +95,11 @@ pub struct FindProvidersResponse{
 pub enum DhtProvideRequest {
 	DeploymnetId(String),
 	PinnerPubKey(Vec<u8>),
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum FindProviderInvokeError {
+	ResponseCountLimitHit(u32),
+	Others(String),
 }
