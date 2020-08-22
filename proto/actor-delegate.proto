@@ -152,3 +152,15 @@ message NotifyDelegateTaskComplete{
   required bytes refNum = 1;
 
 }
+
+message BeMyDelegateRequest {
+  required bytes layer1Account = 1;
+  required bytes nonce = 2;
+}
+
+// Return as JSON formatter.
+// message BeMyDelegateResponse {    
+//   required bytes teaId = 1;
+//   required bytes ephemeralId = 2;
+//   required bytes sig = 3;
+// }
