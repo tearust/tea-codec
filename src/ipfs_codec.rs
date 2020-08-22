@@ -72,6 +72,15 @@ pub struct BlockPutResponse{
 pub struct FindProvidersRequest{
 	pub deployment_id: String,
 	pub uuid: String,
+	pub context: FindProvidersContext,
+}
+
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FindProvidersContext{
+	pub nats_subject: String,
+	pub retry_remain_times: u32,
+	pub delay_secs: u64,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -97,9 +106,18 @@ pub enum DhtProvideRequest {
 	PinnerPubKey(Vec<u8>),
 }
 
+// #[derive(Debug, PartialEq, Deserialize, Serialize)]
+// #[serde(rename_all = "camelCase")]
+// pub struct RetryFindProviderRequest {
+// 	pub subject: String,
+// 	pub delay_req: FindProvidersRequest, 
+// 	pub delay_secs: u64,
+// }
+
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum FindProviderInvokeError {
 	ResponseCountLimitHit(u32),
+	ResponseCountLimitHitAndRetry(FindProvidersRequest),
 	Others(String),
 }
