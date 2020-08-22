@@ -64,11 +64,13 @@ message ErrandExecutionRequest{
     ErrandDeploymentData DeploymentData = 5; // this is deployment data for the errand
     string AdhocData = 6; // this is adhoc data for the errand
   }
-  oneof signature {
-    bytes Code = 7; // this is signature about adhoc code
-    bytes Data = 8; // this is signature about adhoc data
-    bool None = 9; // fill this item if there is no signature
+  bytes signature = 7; // The Ed25519 sig for concat bytes: uuid + delegatorEphemeralId + expiryTime
+  oneof dataSignature {
+    bytes Code = 8; // this is signature about adhoc code
+    bytes Data = 9; // this is signature about adhoc data
+    bool None = 10; // fill this item if there is no signature
   }
+  uint64 expiryTime = 11; // this is expiration layer1 height about this request
 }
 
 message ErrandExecutionFailedResponse {
