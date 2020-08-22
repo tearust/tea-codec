@@ -55,7 +55,7 @@ message ApplyToExecuteTaskRequest{
 
 message ErrandExecutionRequest{
   bytes delegatorEphemeralId = 1;//The Ehpemeral Id of the delegator
-  string hash = 2; // this is hash of the errand
+  string uuid = 2; // this is uuid of the errand
   oneof code {
     ErrandDeploymentCode DeploymentCode = 3; // this is deployment code for the errand
     ErrandAdhocCode AdhocCode = 4; // this is adhoc code for the errand
@@ -73,7 +73,7 @@ message ErrandExecutionRequest{
 
 message ErrandExecutionFailedResponse {
   bytes executorEphemeralId = 1;//The Ephemeral Id of the executor
-  string hash = 2; // this is hash of the errand
+  string uuid = 2; // this is uuid of the errand
   bytes signature = 3; // The Ed25519 sig for concat bytes: executorEphemeralId + uuid
 }
 
@@ -93,13 +93,13 @@ message ErrandAdhocCode{
 }
 
 message ErrandAdhocCodeCapCheckerRequest{
-  string hash = 1; // this is hash of the errand
+  string uuid = 1; // this is uuid of the errand
   string capChecker = 2; // this is base64 encoded capabilities checker wasm with encryption
 }
 
 message ErrandAdhocCodeCapCheckerResponse{
   bytes candidateEphemeralId = 1;//The Ephemeral Id of the candidate
-  string hash = 2; // this is hash of the errand
+  string uuid = 2; // this is uuid of the errand
   string capCid = 3; // this is cid of cap checker wasm
   bool result = 4; // this is cap check result
   bytes signature = 5; // The Ed25519 sig for concat bytes: candidateEphemeralId + uuid + capCid + result
