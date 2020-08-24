@@ -136,3 +136,11 @@ message KeyVecRemoveItemQuery{
 message KeyVecRemoveItemResponse{
   required bool success = 1;
 }
+
+message PersistentStorage{
+  map<string, bytes> kvp = 1;
+}
+
+message PersistentStoreRequest{
+  repeated string prefixList = 1;
+}
