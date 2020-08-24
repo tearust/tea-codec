@@ -15,6 +15,7 @@ message PeerApprovePinnerResponse {
   string deploymentId = 1;//this is cid of pinner_key's pub key
   bytes signature = 2;//The Ed25519 sig for nonce
   string uuid = 3; // this is the uuid of pinner store item
+  bytes pinnerEphemeralId = 4;//The Ehpemeral Id of the pinner
 }
 
 message ApplyToBePinnerRequest{
@@ -55,7 +56,7 @@ message ApplyToExecuteTaskRequest{
 
 message ErrandExecutionRequest{
   bytes delegatorEphemeralId = 1;//The Ehpemeral Id of the delegator
-  string uuid = 2; // this is uuid of the errand
+  bytes errandId = 2; // this is id of the errand
   oneof code {
     ErrandDeploymentCode DeploymentCode = 3; // this is deployment code for the errand
     ErrandAdhocCode AdhocCode = 4; // this is adhoc code for the errand
@@ -64,19 +65,20 @@ message ErrandExecutionRequest{
     ErrandDeploymentData DeploymentData = 5; // this is deployment data for the errand
     string AdhocData = 6; // this is adhoc data for the errand
   }
-  bytes signature = 7; // The Ed25519 sig for concat bytes: uuid + delegatorEphemeralId + expiryTime
+  bytes signature = 7; // The Ed25519 sig for concat bytes: executorEphemeralId + expiryTime + errandId + proofOfDelegation
   oneof dataSignature {
     bytes Code = 8; // this is signature about adhoc code
     bytes Data = 9; // this is signature about adhoc data
     bool None = 10; // fill this item if there is no signature
   }
   uint64 expiryTime = 11; // this is expiration layer1 height about this request
+  bytes proofOfDelegation = 12; // this is proof of delegation
 }
 
 message ErrandExecutionFailedResponse {
   bytes executorEphemeralId = 1;//The Ephemeral Id of the executor
-  string uuid = 2; // this is uuid of the errand
-  bytes signature = 3; // The Ed25519 sig for concat bytes: executorEphemeralId + uuid
+  bytes errandId = 2; // this is id of the errand
+  bytes signature = 3; // The Ed25519 sig for concat bytes: executorEphemeralId + errandId
 }
 
 message ErrandDeploymentData{
@@ -95,16 +97,16 @@ message ErrandAdhocCode{
 }
 
 message ErrandAdhocCodeCapCheckerRequest{
-  string uuid = 1; // this is uuid of the errand
+  bytes errandId = 1; // this is id of the errand
   string capChecker = 2; // this is base64 encoded capabilities checker wasm with encryption
 }
 
 message ErrandAdhocCodeCapCheckerResponse{
   bytes candidateEphemeralId = 1;//The Ephemeral Id of the candidate
-  string uuid = 2; // this is uuid of the errand
+  bytes errandId = 2; // this is id of the errand
   string capCid = 3; // this is cid of cap checker wasm
   bool result = 4; // this is cap check result
-  bytes signature = 5; // The Ed25519 sig for concat bytes: candidateEphemeralId + uuid + capCid + result
+  bytes signature = 5; // The Ed25519 sig for concat bytes: candidateEphemeralId + errandId + capCid + result
 }
 
 message GeneralMsg{
