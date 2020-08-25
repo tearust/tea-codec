@@ -144,3 +144,7 @@ message PersistentStorage{
 message PersistentStoreRequest{
   repeated string prefixList = 1;
 }
+
+message RestoreFromFileRequest{
+  required string fileName = 1;
+}
