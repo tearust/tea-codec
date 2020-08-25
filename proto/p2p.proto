@@ -73,6 +73,9 @@ message ErrandExecutionRequest{
   }
   uint64 expiryTime = 11; // this is expiration layer1 height about this request
   bytes proofOfDelegation = 12; // this is proof of delegation
+  string clientAccountId = 13; // this is account id of the client
+  uint32 payment = 14; // this is payment amount for this errand
+  uint32 paymentType = 15; // this is payment type for this errand
 }
 
 message ErrandExecutionFailedResponse {
