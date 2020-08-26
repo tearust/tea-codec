@@ -148,3 +148,7 @@ message PersistentStoreRequest{
 message RestoreFromFileRequest{
   required string fileName = 1;
 }
+
+message RestoreFromFileResponse{
+  repeated string keys = 1;
+}
