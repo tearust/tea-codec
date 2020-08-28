@@ -84,6 +84,11 @@ message ErrandExecutionFailedResponse {
   bytes signature = 3; // The Ed25519 sig for concat bytes: executorEphemeralId + errandId
 }
 
+message ErrandExecutionSucceededResponse {
+  bytes errandId = 1;// this is id of the errand
+  bytes result = 2; // this is result of the errand execution
+}
+
 message ErrandDeploymentData{
   string deploymentId = 1; //this is deployment is of deployed data
   string cid = 2; //this is cid of deployed data
@@ -125,5 +130,6 @@ message GeneralMsg{
     ErrandExecutionFailedResponse ErrandExecutionFailedResponse = 9;
     ErrandAdhocCodeCapCheckerRequest ErrandAdhocCodeCapCheckerRequest = 10;
     ErrandAdhocCodeCapCheckerResponse ErrandAdhocCodeCapCheckerResponse = 11;
+    ErrandExecutionSucceededResponse ErrandExecutionSucceededResponse = 12;
   }
 }
