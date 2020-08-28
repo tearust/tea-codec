@@ -148,6 +148,20 @@ message CompleteTaskResponse {
   required bytes result = 3;	
 }
 
+message DepositInfoRequest {
+  required bytes accountId = 1;
+  required bytes delegatorEphemeralId = 2;
+}
+
+message DepositInfoResponse {
+  required bytes accountId = 1;
+  required bytes delegatorEphemeralId = 2;
+  required bytes depositPubKey = 3;
+  required bytes delegatorSignature = 4;
+  required uint32 amount = 5;
+  required uint64 expiredTime = 6;
+}
+
 message SettleAccountsRequest {
   required string employer = 1;
   required bytes delegatorEphemeralId = 2;
@@ -156,7 +170,7 @@ message SettleAccountsRequest {
   required uint32 paymentType = 5;
   required bytes employerSignature = 6;
   required bytes executorEphemeralId = 7;
-  required uint32 expiarTime = 8;
+  required uint64 expiredTime = 8;
   required bytes delegateSignature = 9;
   required string resultCid = 10;
   required bytes executorSingature = 11;
@@ -170,7 +184,7 @@ message SettleAccountsResponse {
   required uint32 payment = 5;
   required uint32 paymentType = 6;
   required bytes executorEphemeralId = 7;
-  required uint32 expiarTime = 8;
+  required uint64 expiredTime = 8;
   required string resultCid = 9;
 }
 
