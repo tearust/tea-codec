@@ -198,6 +198,15 @@ message BeMyDelegateRequest {
   required bytes nonce = 2;
 }
 
+message QueryBalanceRequest {
+  required bytes accountId = 1;
+}
+
+message QueryBalanceResponse {
+  required uint32 amount = 1;
+  required uint32 locked = 2;
+}
+
 // Return as JSON formatter.
 // message BeMyDelegateResponse {    
 //   required bytes teaId = 1;
