@@ -102,6 +102,7 @@ message ErrandDeploymentCode{
 message ErrandAdhocCode{
   string code = 1; // this is base64 encoded wasm bin without encryption
   string capCid = 2; // this is cid of cap checker wasm
+  string description = 3; // this is description of code that including execution manifest
 }
 
 message ErrandAdhocCodeCapCheckerRequest{
