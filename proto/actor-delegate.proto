@@ -206,11 +206,6 @@ message QueryErrandExecutionResult {
   required bytes errandId = 1;
 }
 
-message QueryBalanceResponse {
-  required uint32 amount = 1;
-  required uint32 locked = 2;
-}
-
 // Return as JSON formatter.
 // message BeMyDelegateResponse {    
 //   required bytes teaId = 1;
