@@ -196,10 +196,12 @@ message NotifyDelegateTaskComplete{
 message BeMyDelegateRequest {
   required bytes layer1Account = 1;
   required bytes nonce = 2;
+  required bytes depositPubkey = 3;
 }
 
 message QueryBalanceRequest {
   required bytes accountId = 1;
+  required bytes depositPubkey = 2;
 }
 
 message QueryErrandExecutionResult {
