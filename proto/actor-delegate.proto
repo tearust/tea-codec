@@ -150,7 +150,7 @@ message CompleteTaskResponse {
 
 message DepositInfoRequest {
   required bytes accountId = 1;
-  required bytes delegatorEphemeralId = 2;
+  required bytes depositPubkey = 2;
 }
 
 message DepositInfoResponse {
