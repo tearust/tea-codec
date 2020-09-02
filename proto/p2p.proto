@@ -80,6 +80,7 @@ message ErrandExecutionRequest{
     bytes Key3Buf = 16; // this is bytes of key3
     bool HasKey3 = 17; // set to false if there is no key3
   }
+  bytes delegatorTeaId = 18; // tea id of the delegator
 }
 
 message ErrandExecutionFailedResponse {
