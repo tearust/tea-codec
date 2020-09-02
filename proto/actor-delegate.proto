@@ -149,14 +149,14 @@ message CompleteTaskResponse {
 }
 
 message DepositInfoRequest {
-  required bytes accountId = 1;
-  required bytes depositPubkey = 2;
+  required string accountId = 1;
+  required bytes delegatorTeaId = 2;
 }
 
 message DepositInfoResponse {
-  required bytes accountId = 1;
-  required bytes delegatorEphemeralId = 2;
-  required bytes depositPubKey = 3;
+  required string accountId = 1;
+  required bytes delegatorTeaId = 2;
+  required bytes delegatorEphemeralId = 3;
   required bytes delegatorSignature = 4;
   required uint32 amount = 5;
   required uint64 expiredTime = 6;
@@ -164,28 +164,30 @@ message DepositInfoResponse {
 
 message SettleAccountsRequest {
   required string employer = 1;
-  required bytes delegatorEphemeralId = 2;
-  required string errandUuid = 3;
-  required uint32 payment = 4;
-  required uint32 paymentType = 5;
-  required bytes employerSignature = 6;
-  required bytes executorEphemeralId = 7;
-  required uint64 expiredTime = 8;
-  required bytes delegateSignature = 9;
-  required string resultCid = 10;
-  required bytes executorSingature = 11;
-}
-
-message SettleAccountsResponse {
-  required bytes accountId = 1;
-  required string employer = 2;
+  required bytes delegatorTeaId = 2;
   required bytes delegatorEphemeralId = 3;
   required string errandUuid = 4;
   required uint32 payment = 5;
   required uint32 paymentType = 6;
-  required bytes executorEphemeralId = 7;
-  required uint64 expiredTime = 8;
-  required string resultCid = 9;
+  required bytes employerSignature = 7;
+  required bytes executorEphemeralId = 8;
+  required uint64 expiredTime = 9;
+  required bytes delegateSignature = 10;
+  required string resultCid = 11;
+  required bytes executorSingature = 12;
+}
+
+message SettleAccountsResponse {
+  required string accountId = 1;
+  required bytes delegatorTeaId = 2;
+  required string employer = 3;
+  required bytes delegatorEphemeralId = 4;
+  required string errandUuid = 5;
+  required uint32 payment = 6;
+  required uint32 paymentType = 7;
+  required bytes executorEphemeralId = 8;
+  required uint64 expiredTime = 9;
+  required string resultCid = 10;
 }
 
 message NotifyDelegateTaskComplete{
@@ -196,12 +198,12 @@ message NotifyDelegateTaskComplete{
 message BeMyDelegateRequest {
   required bytes layer1Account = 1;
   required bytes nonce = 2;
-  required bytes depositPubkey = 3;
+  required bytes delegatorTeaId = 3;
 }
 
 message QueryBalanceRequest {
   required bytes accountId = 1;
-  required bytes depositPubkey = 2;
+  required bytes delegatorTeaId = 2;
 }
 
 message QueryErrandExecutionResult {
