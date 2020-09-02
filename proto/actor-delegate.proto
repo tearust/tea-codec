@@ -196,13 +196,13 @@ message NotifyDelegateTaskComplete{
 }
 
 message BeMyDelegateRequest {
-  required bytes layer1Account = 1;
+  required string layer1Account = 1;
   required bytes nonce = 2;
   required bytes delegatorTeaId = 3;
 }
 
 message QueryBalanceRequest {
-  required bytes accountId = 1;
+  required string accountId = 1;
   required bytes delegatorTeaId = 2;
 }
 
