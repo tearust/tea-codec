@@ -162,13 +162,17 @@ message DepositInfoResponse {
   required uint64 expiredTime = 6;
 }
 
+message Bill {
+  required string accountId = 1;
+  required uint32 payment = 2;
+}
+
 message SettleAccountsRequest {
   required string employer = 1;
   required bytes delegatorTeaId = 2;
   required bytes delegatorEphemeralId = 3;
   required string errandUuid = 4;
-  required uint32 payment = 5;
-  required uint32 paymentType = 6;
+  repeated Bill bills = 6;
   required bytes employerSignature = 7;
   required bytes executorEphemeralId = 8;
   required uint64 expiredTime = 9;
@@ -183,8 +187,7 @@ message SettleAccountsResponse {
   required string employer = 3;
   required bytes delegatorEphemeralId = 4;
   required string errandUuid = 5;
-  required uint32 payment = 6;
-  required uint32 paymentType = 7;
+  repeated Bill bills = 6;
   required bytes executorEphemeralId = 8;
   required uint64 expiredTime = 9;
   required string resultCid = 10;
