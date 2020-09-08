@@ -12,6 +12,11 @@ message Ed25519SignRequest{
   optional bytes key = 2;
 }
 
+message Sr25519SignRequest{
+  required bytes msg = 1;
+  required bytes key = 2;
+}
+
 message VerifySignatureResponse{
   required bool result = 1;
 }
