@@ -73,4 +73,6 @@ message Pcrs{
 message RebuildOtherPeerPcrBytesRequest{
   required bytes ephemeralId = 1;
   required BootStackConfig bootStackConfig = 2;
+  required string manifest = 3;
+  required string actorsProvidersHashList = 4; 
 }
