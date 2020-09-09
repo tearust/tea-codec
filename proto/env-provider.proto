@@ -15,3 +15,8 @@ message GetSystemTimeRequest{
 message GetSystemTimeResponse{
   required bytes systemTimeInBytes = 1;
 }
+
+message GetClaimStackHashResponse{
+  required string manifest = 1;
+  required string actorsProvidersHashList = 2;
+}

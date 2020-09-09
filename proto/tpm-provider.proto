@@ -62,6 +62,8 @@ message BootStackConfig{
 message TeaNodeProfileV1{
   required SignedPcrsBytes pcrValues = 1;
   required BootStackConfig configStackHash = 2;
+  required string manifest = 3;
+  required string actorsProvidersHashList = 4;
 }
 
 message Pcrs{
