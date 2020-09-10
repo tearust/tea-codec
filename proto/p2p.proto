@@ -10,6 +10,7 @@ message PeerApprovePinnerRequest {
   uint32 nonce = 2; // this is an random number for verify
   string uuid = 3; // this is the uuid of pinner store item
   bytes properties = 4; // this is the properties passing to pinner
+  bytes ephemeralId = 5;// this is used in remote attestation
 }
 
 message PeerApprovePinnerResponse {
