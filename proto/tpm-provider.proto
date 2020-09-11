@@ -55,13 +55,9 @@ message SignedPcrsBytes{
   required bytes sig = 2;
 }
 
-message BootStackConfig{
-  repeated string HashOfLayers = 1;
-}
-
 message TeaNodeProfileV1{
   required SignedPcrsBytes pcrValues = 1;
-  required BootStackConfig configStackHash = 2;
+  required string bootStackClaim = 2;
   required string manifest = 3;
   required string actorsProvidersHashList = 4;
 }
@@ -72,7 +68,7 @@ message Pcrs{
 
 message RebuildOtherPeerPcrBytesRequest{
   required bytes ephemeralId = 1;
-  required BootStackConfig bootStackConfig = 2;
+  required string bootStackClaim = 2;
   required string manifest = 3;
   required string actorsProvidersHashList = 4; 
 }
