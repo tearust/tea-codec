@@ -100,14 +100,12 @@ message ErrandExecutionSucceededResponse {
 
 message ErrandDeploymentData{
   string deploymentId = 1; //this is deployment is of deployed data
-  string cid = 2; //this is cid of deployed data
-  uint32 payPerUse = 3; //this is payment for everytime to use this data
+  uint32 payPerUse = 2; //this is payment for everytime to use this data
 }
 
 message ErrandDeploymentCode{
   string deploymentId = 1; //this is deployment is of deployed code
-  string cid = 2; //this is cid of deployed code
-  uint32 payPerUse = 3; //this is payment for everytime to use this data
+  uint32 payPerUse = 2; //this is payment for everytime to use this data
 }
 
 message ErrandAdhocCode{
