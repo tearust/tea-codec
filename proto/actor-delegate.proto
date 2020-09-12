@@ -179,7 +179,7 @@ message SettleAccountsRequest {
   required uint64 expiredTime = 9;
   required bytes delegateSignature = 10;
   required string resultCid = 11;
-  required bytes executorSingature = 12;
+  required bytes executorSingature = 12; // The Ed25519 sig for concat bytes: errandUuid + resultCid + delegateSignature
 }
 
 message SettleAccountsResponse {
