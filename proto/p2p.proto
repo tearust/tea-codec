@@ -5,7 +5,8 @@ message ResponseError{
   string error = 1;
 }
 
-message PeerApprovePinnerRequest {
+message PeerApprovePinnerRequest {//this message is used when Find Provider found another 
+    //peer claimed a provider, we need to ask him and verify if he actually is
   string deploymentId = 1;//this is cid of pinner_key's pub key
   uint32 nonce = 2; // this is an random number for verify
   string uuid = 3; // this is the uuid of pinner store item
@@ -25,6 +26,8 @@ message ApplyToBePinnerRequest{
   bytes rsaPubKey = 2;//Delegate will use this RSA Pub Key to encrypt the key1 when sending to Executor. Format is tpm_protp::RsaKeyPairPemPcsk1.publicKey string.as_bytes()
   bytes wannabePinnerId = 3;//The ephemeral Id of the wannabe pinner
   bytes signature = 4;//The Ed25519 sig for concat bytes: wannabe_ephemeral_id + rsa_key_pub
+  string uuid = 5;//This uuid has no use for delegator (upstream pinner). The wannabe pinner will need this uuid to retrieve PinnerStoreItem
+    //when ApplyToBePinnerResponse received. Upstream pinner only need to return the same uuid back to the wannabe pinner without any process
 }
 
 message ApplyToBePinnerResponse{
@@ -38,6 +41,8 @@ message ApplyToBePinnerResponse{
   // the revenue doens't need to share to upstream
   // problem: what if the data is only for one time use?
   bytes signature = 5;//The Ed25519 sig for concat bytes: pinner's ephemeral key + pinner_key_enc
+  string uuid = 6;//This uuid has no use for delegator (upstream pinner). The wannabe pinner will need this uuid to retrieve PinnerStoreItem
+    //when ApplyToBePinnerResponse received. Upstream pinner only need to return the same uuid back to the wannabe pinner without any process
 }
 
 message WinnerExecutorCert{
