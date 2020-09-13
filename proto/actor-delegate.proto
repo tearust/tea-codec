@@ -92,7 +92,7 @@ message Task {
   required uint32 payment = 5;
 }
 
-message Data {
+message Data {//this could be data or code(service).
   required bytes delegatorEphemeralId = 1;
   required string deploymentId = 2;
   required string dataCid = 3;//The cid of encrypted data or code. We consider code is also data in this case
