@@ -73,6 +73,15 @@ pub struct FindProvidersRequest{
 	pub deployment_id: String,
 	pub uuid: String,
 	pub context: FindProvidersContext,
+	pub finding_mode: FindingMode,
+}
+
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum FindingMode{
+	AsMuchAsPossible,
+	FirstComeThenDone,
+
 }
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
