@@ -7,9 +7,17 @@ message VerifySignatureRequest{
   required bytes msg = 3;
 }
 
+message VerifySignatureResponse{
+  required bool result = 1;
+}
+
 message Ed25519SignRequest{
   required bytes msg = 1;
   optional bytes key = 2;
+}
+
+message Ed25519SignResponse{
+  required bytes sig = 1;
 }
 
 message Sr25519SignRequest{
@@ -17,8 +25,8 @@ message Sr25519SignRequest{
   required bytes key = 2;
 }
 
-message VerifySignatureResponse{
-  required bool result = 1;
+message Sr25519SignResponse{
+  required bytes sig = 1;
 }
 
 message RsaDecryptRequest{
@@ -41,8 +49,12 @@ message RsaEncryptResponse{
   required bytes result = 1;
 }
 
+message GetPcrRequest{
+
+}
+
 message GetPcrResponse{
-  repeated bytes pcrs = 1;
+  required Pcrs pcrs = 1;
 }
 
 message RsaKeyPairPemPcsk1{
@@ -73,4 +85,27 @@ message RebuildOtherPeerPcrBytesRequest{
   required string runtimeExecutableHashStr = 5;
   required string manifest = 3;
   required string actorsProvidersHashList = 4; 
+}
+
+message ResponseError{
+  required string error = 1;
+}
+
+message TpmMessage{
+  oneof msg{
+    ResponseError ResponseError = 1;
+    RsaEncryptRequest RasEncryptRequest = 2;
+    RsaEncryptResponse RsaEncryptResponse = 3;
+    GetPcrRequest GetPcrRequest = 4;
+    GetPcrResponse GetPcrResponse = 5;
+    VerifySignatureRequest VerifySignatureRequest = 6;
+    VerifySignatureResponse VerifySignatureResponse = 7;
+    Ed25519SignRequest Ed25519SignRequest = 8;
+    Ed25519SignResponse Ed25519SignResponse = 9;
+    Sr25519SignRequest Sr25519SignRequest = 10;
+    Sr25519SignResponse Sr25519SignResponse = 11;
+    RsaDecryptRequest RsaDecryptRequest = 12;
+    RsaDecryptResponse RsaDecryptResponse = 13;
+    
+  }
 }
