@@ -91,6 +91,32 @@ message ResponseError{
   required string error = 1;
 }
 
+message GetEd25519KeyPairRequest{
+
+}
+
+message GetEd25519KeyPairResponse{
+  required bytes keypair = 1;
+}
+
+message GetEphemeralIdKeyPairSigRequest{
+  
+}
+
+message GetEphemeralIdKeyPairSigResponse{
+  required bytes pubkey = 1;
+  required bytes prikey = 2;
+  required bytes sig = 3;
+}
+
+message GetTeaIdRequest{
+
+}
+
+message GetTeaIdResponse{
+  required bytes teaId = 1;
+}
+
 message TpmMessage{
   oneof msg{
     ResponseError ResponseError = 1;
@@ -106,6 +132,11 @@ message TpmMessage{
     Sr25519SignResponse Sr25519SignResponse = 11;
     RsaDecryptRequest RsaDecryptRequest = 12;
     RsaDecryptResponse RsaDecryptResponse = 13;
-    
+    GetEd25519KeyPairRequest GetEd25519KeyPairRequest = 14;
+    GetEd25519KeyPairResponse GetEd25519KeyPairResponse = 15;
+    GetEphemeralIdKeyPairSigRequest GetEphemeralIdKeyPairSigRequest = 16; 
+    GetEphemeralIdKeyPairSigResponse GetEphemeralIdKeyPairSigResponse = 17; 
+    GetTeaIdRequest GetTeaIdRequest = 18;
+    GetTeaIdResponse GetTeaIdResponse = 19;
   }
 }
