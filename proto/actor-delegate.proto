@@ -111,11 +111,6 @@ message Service {
   required uint32 payment = 5;
 }
 
-message Node {
-  required bytes teaId = 1;
-  repeated bytes peers = 2;
-}
-
 message AddNewTaskRequest {
   required Task task = 1;
 }
@@ -193,6 +188,25 @@ message SettleAccountsResponse {
   required bytes executorEphemeralId = 8;
   required uint64 expiredTime = 9;
   required string resultCid = 10;
+}
+
+message AddNewNodeRequest {
+  required bytes teaId = 1;
+  required string peerId = 2;
+}
+
+message RANode {
+  required bytes teaId = 1;
+  required bool isPass = 2;
+}
+
+message AddNewNodeResponse {
+  required string accountId = 1;
+  required bytes teaId = 2;
+  required string peerId = 3;
+  required uint64 createTime = 4;
+  repeated RANode raNodes = 5;
+  required string status = 6;
 }
 
 message NotifyDelegateTaskComplete{

@@ -60,3 +60,17 @@ message TeaNodeResponse{
 message VerifyTeaNodeProfileIntegrityResponse{
   required bool success = 1;
 }
+
+message CommitRaResultRequest {
+  required bytes teaId = 1;
+  required bytes targetTeaId = 2;
+  required bool isPass = 3;
+  required bytes signature = 4;
+}
+
+message CommitRaResultResponse {
+  required string accountId = 1;
+  required bytes teaId = 2;
+  required bytes targetTeaId = 3;
+  required bool isPass = 4;
+}
