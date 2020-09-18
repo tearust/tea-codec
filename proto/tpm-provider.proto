@@ -69,8 +69,6 @@ message SignedPcrsBytes{
 
 message TeaNodeProfileV1{
   required SignedPcrsBytes pcrValues = 1;
-  required string bootStackClaim = 2;
-  required string runtimeExecutableHashStr = 5;
   required string manifest = 3;
   // required string actorsProvidersHashList = 4;
 }
@@ -81,8 +79,6 @@ message Pcrs{
 
 message RebuildOtherPeerPcrBytesRequest{
   required bytes ephemeralId = 1;
-  required string bootStackClaim = 2;
-  required string runtimeExecutableHashStr = 5;
   required string manifest = 3;
 }
 
