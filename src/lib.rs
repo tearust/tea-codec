@@ -80,3 +80,5 @@ pub struct DelayMessage{
 pub mod task_in_block;
 pub mod ipfs_codec;
 pub mod task;
+/// The operation for Runtime to call RA actor to pass manifest and other init values
+pub const OP_INIT: &'static str = "RuntimeInit";//only call Actor_ra
