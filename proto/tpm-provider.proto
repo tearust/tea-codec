@@ -117,13 +117,30 @@ message GetTeaIdResponse{
   required bytes teaId = 1;
 }
 
+message GetSignedPcrRequest{
+
+}
+
+message GetSignedPcrResponse{
+  required Pcrs pcrs = 1;
+  required bytes sig = 2; 
+}
+
+message ExtendPcrRequest{
+  required bytes newPcr = 1;
+}
+
+message ExtendPcrResponse{
+  required bool result = 1;
+}
+
 message TpmMessage{
   oneof msg{
     ResponseError ResponseError = 1;
     RsaEncryptRequest RasEncryptRequest = 2;
     RsaEncryptResponse RsaEncryptResponse = 3;
-    GetPcrRequest GetPcrRequest = 4;
-    GetPcrResponse GetPcrResponse = 5;
+    ExtendPcrRequest ExtendPcrRequest = 4;
+    ExtendPcrResponse ExtendPcrResponse = 5;
     VerifySignatureRequest VerifySignatureRequest = 6;
     VerifySignatureResponse VerifySignatureResponse = 7;
     Ed25519SignRequest Ed25519SignRequest = 8;
@@ -138,5 +155,7 @@ message TpmMessage{
     GetEphemeralIdKeyPairSigResponse GetEphemeralIdKeyPairSigResponse = 17; 
     GetTeaIdRequest GetTeaIdRequest = 18;
     GetTeaIdResponse GetTeaIdResponse = 19;
+    GetSignedPcrRequest GetSignedPcrRequest = 20;
+    GetSignedPcrResponse GetSignedPcrResponse = 21;
   }
 }
