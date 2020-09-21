@@ -84,4 +84,5 @@ message CommitRaResultResponse {
   required bytes teaId = 2;
   required bytes targetTeaId = 3;
   required bool isPass = 4;
+  required string targetStatus = 5;
 }
