@@ -190,6 +190,21 @@ message SettleAccountsResponse {
   required string resultCid = 10;
 }
 
+message UpdateRuntimeSettings {
+  required string teaId = 1;
+  required string cid = 2;    // This is the setting cid from IPFS
+  required string signature = 3; // The Ed25519 sig for concat bytes: teaId + cid
+}
+
+message RuntimeSettingsRequest {
+  required string teaId = 1;
+}
+
+message RuntimeSettingsResponse {
+  required string cid = 1;
+  required int64 update_height = 2;
+}
+
 message AddNewNodeRequest {
   required bytes teaId = 1;
 }
