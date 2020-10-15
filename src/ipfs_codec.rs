@@ -4,6 +4,7 @@ pub const OP_PUBSUB_PUB: &'static str = "pubsub_pub";
 pub const OP_PUBSUB_RANDOM_SUB: &'static str = "pubsub_random_sub";
 
 pub const OP_BLOCK_GET: &'static str = "block_get";
+pub const OP_BLOCK_GET_ASYNC: &'static str = "block_get_async";
 pub const OP_BLOCK_PUT: &'static str = "block_put";
 pub const OP_DAG_GET_DATA: &'static str = "dag_get_data";
 pub const OP_DHT_PROV: &'static str = "dht_provide"; 
