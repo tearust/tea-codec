@@ -86,3 +86,18 @@ message CommitRaResultResponse {
   required bool isPass = 4;
   required string targetStatus = 5;
 }
+
+message AsyncPullCidDataRequest {
+  required string cid = 1;
+  required bytes payload = 2;
+}
+
+message AsyncPullCidDataResponse {
+  required bytes data = 1;
+  required bytes payload = 2;
+}
+
+message AsyncPullCidDataResponseForNats {
+  required string cid = 1;
+  required bytes payload = 2;
+}
