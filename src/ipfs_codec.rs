@@ -6,7 +6,7 @@ pub const OP_PUBSUB_RANDOM_SUB: &'static str = "pubsub_random_sub";
 pub const OP_BLOCK_GET: &'static str = "block_get";
 pub const OP_BLOCK_GET_ASYNC: &'static str = "block_get_async";
 pub const OP_BLOCK_PUT: &'static str = "block_put";
-pub const OP_DAG_GET_DATA: &'static str = "dag_get_data";
+// pub const OP_DAG_GET_DATA: &'static str = "dag_get_data";
 pub const OP_DHT_PROV: &'static str = "dht_provide"; 
 pub const OP_DHT_FINDPROVS: &'static str = "dht_find_providers"; 
 pub const OP_DELIVER_FOUND_PROV: &'static str = "dht_deliver_found_provider";
@@ -14,6 +14,14 @@ pub const OP_ID: &'static str = "id";
 pub const OP_DELAY_INVOKE: &'static str = "delay_invoke";
 pub const OP_FIND_PROV_ERR: &'static str = "find_provider_error";
 pub const OP_IS_BLOCK_LOCAL: &'static str = "is_block_local";
+pub const OP_OBJ_STAT: &'static str = "block_stat";
+pub const OP_PIN_ADD_RECURSIVE: &'static str = "pin_add_recursive";
+pub const OP_PIN_ADD_NONRECURSIVE: &'static str = "pin_add_nonrecursive";
+pub const OP_IS_PIN: &'static str = "pin_ls_exists";
+pub const OP_OBJ_GET: &'static str = "object_get";
+pub const OP_OBJ_DATA: &'static str = "object_data";
+pub const OP_OBJ_LINKS: &'static str = "object_links";
+pub const OP_OBJ_NEW: &'static str = "object_new";
 
 pub const RSA_PUBKEY: &'static str = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ed3dEUVlKS29aSWh2Y05\
 BUUVCQlFBREt3QXdLQUloQU1KYUlLVkZHbWZMMzNNa3Rvb2ZxclBKUXBic09WT3UNCkQ5Q0lFRnEvcURMRkFnTUJBQUU9\
