@@ -4,6 +4,7 @@ pub const OP_PUBSUB_PUB: &'static str = "pubsub_pub";
 pub const OP_PUBSUB_RANDOM_SUB: &'static str = "pubsub_random_sub";
 
 pub const OP_BLOCK_GET: &'static str = "block_get";
+pub const OP_GET: &'static str = "ipfs_get";
 pub const OP_BLOCK_GET_ASYNC: &'static str = "block_get_async";
 pub const OP_BLOCK_PUT: &'static str = "block_put";
 // pub const OP_DAG_GET_DATA: &'static str = "dag_get_data";
@@ -146,4 +147,21 @@ pub enum FindProviderInvokeError {
 pub struct IsBlockLocalResponse{
 	pub result: bool,
 	pub error: String,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ObjectGetResponse{
+	pub data: String,
+	pub links: Vec<IpfsHeader>,
+}
+
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct IpfsHeader{
+	pub name: String,
+	pub hash: String,
+	pub size: u64,
+	pub typ: Option<String>,
 }
