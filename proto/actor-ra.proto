@@ -90,11 +90,13 @@ message CommitRaResultResponse {
 message AsyncPullCidDataRequest {
   required string cid = 1;
   required bytes payload = 2;
+  required bool pin = 3;
 }
 
 message AsyncPullCidDataResponse {
   required bytes data = 1;
   required bytes payload = 2;
+  required bool pin = 3;
 }
 
 message AsyncPullCidDataResponseForNats {

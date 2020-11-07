@@ -73,6 +73,13 @@ pub struct PubsubPubRequest{
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct BlockPutRequest {
+	pub data: Vec<u8>,
+	pub pin: bool,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct BlockPutResponse{
 	pub key: String,
 	pub size: u64,
