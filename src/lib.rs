@@ -81,3 +81,4 @@ pub mod task_in_block;
 pub mod ipfs_codec;
 pub mod task;
 pub mod ra;
+pub mod error;
