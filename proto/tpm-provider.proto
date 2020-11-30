@@ -72,6 +72,12 @@ message TeaNodeProfileV1{
   required string manifest = 3;
   // required string actorsProvidersHashList = 4;
 }
+message TeaNodeProfileV2{
+  required SignedPcrsBytes pcrValues = 1;
+  required string manifest = 3;
+  // required string actorsProvidersHashList = 4;
+  required string mode = 4;
+}
 
 message Pcrs{
   repeated bytes pcrs = 1;
