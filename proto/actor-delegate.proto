@@ -234,6 +234,17 @@ message QueryErrandExecutionResult {
   required bytes errandId = 1;
 }
 
+message RepinDeploymentRequest {//this could be data or code(service).
+  required string deploymentId = 1;
+  required string dataCid = 2;//The cid of encrypted data or code. We consider code is also data in this case
+  required string descriptionCid = 3;//the cid of description object(or DAG). This description can be any format. We can define the format somewhere else.
+  optional string capCid = 4;//When this is a data or a service without any requirment to check capability, we can set this property to None.
+                              //The wannabepinner will not check capability if this is none
+                              //It make sense for most data type pinner because we only check if it is a valid Tea Node.
+                              //For service pinner, in most case we may need to run a capchecker to make sure the service pinner has the 
+                              //capabilities required.
+}
+
 // Return as JSON formatter.
 // message BeMyDelegateResponse {    
 //   required bytes teaId = 1;
