@@ -143,6 +143,10 @@ message CapabilityDescription {
   // todo add detailed capability description
 }
 
+message TaskExecutionResult {
+
+}
+
 message GeneralMsg{
   oneof msg {
     ResponseError error = 1;
@@ -158,5 +162,6 @@ message GeneralMsg{
     ErrandAdhocCodeCapCheckerResponse ErrandAdhocCodeCapCheckerResponse = 11;
     ErrandExecutionSucceededResponse ErrandExecutionSucceededResponse = 12;
     TaskKeyGenerationApplyRequst TaskKeyGenerationApplyRequst = 13;
+    TaskExecutionResult TaskExecutionResult = 14;
   }
 }
