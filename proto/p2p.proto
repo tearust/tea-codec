@@ -132,6 +132,17 @@ message ErrandAdhocCodeCapCheckerResponse{
   bytes signature = 5; // The Ed25519 sig for concat bytes: candidateEphemeralId + errandId + capCid + result
 }
 
+message TaskKeyGenerationApplyRequst {
+  string taskId = 1;
+  bytes rsaPubKey = 2;
+  CapabilityDescription cap_desc = 3; 
+  bool applyExecutor = 4;  // decide whether to apply executor or not, if true apply executor otherwise apply initial pinner
+}
+
+message CapabilityDescription {
+  // todo add detailed capability description
+}
+
 message GeneralMsg{
   oneof msg {
     ResponseError error = 1;
@@ -146,5 +157,6 @@ message GeneralMsg{
     ErrandAdhocCodeCapCheckerRequest ErrandAdhocCodeCapCheckerRequest = 10;
     ErrandAdhocCodeCapCheckerResponse ErrandAdhocCodeCapCheckerResponse = 11;
     ErrandExecutionSucceededResponse ErrandExecutionSucceededResponse = 12;
+    TaskKeyGenerationApplyRequst TaskKeyGenerationApplyRequst = 13;
   }
 }

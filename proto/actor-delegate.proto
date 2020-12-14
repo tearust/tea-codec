@@ -245,6 +245,23 @@ message RepinDeploymentRequest {//this could be data or code(service).
                               //capabilities required.
 }
 
+message TaskPaymentDescription {
+  // todo add detailed payment description
+}
+
+message KeyGenerationData {
+  required uint32 n = 1;  // splite the secret to `n` pieces
+  required uint32 k = 2;  // if have k (k < n) pieces the secret can be recovered
+  required bytes delegatorTeaId = 3;  // teaId of delegator
+}
+
+message KeyGenerationResponse {
+  required string taskId = 1;
+  required string codeCid = 2;
+  required KeyGenerationData dataAdhoc = 3;
+  required TaskPaymentDescription payment = 4;
+}
+
 // Return as JSON formatter.
 // message BeMyDelegateResponse {    
 //   required bytes teaId = 1;
