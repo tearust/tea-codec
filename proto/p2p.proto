@@ -14,6 +14,12 @@ message PeerApprovePinnerRequest {//this message is used when Find Provider foun
   bytes ephemeralId = 5;// this is used in remote attestation
 }
 
+message PeerApproveRaRequest {
+  string uuid = 1; // this is the uuid of pinner store item
+  bytes properties = 2; // this is the properties passing to pinner
+  bytes ephemeralId = 3;// this is used in remote attestation
+}
+
 message PeerApprovePinnerResponse {
   string deploymentId = 1;//this is cid of pinner_key's pub key
   bytes signature = 2;//The Ed25519 sig for nonce
@@ -137,6 +143,7 @@ message TaskKeyGenerationApplyRequst {
   bytes rsaPubKey = 2;
   CapabilityDescription cap_desc = 3; 
   bool applyExecutor = 4;  // decide whether to apply executor or not, if true apply executor otherwise apply initial pinner
+  bytes ephemeralId = 5;
 }
 
 message CapabilityDescription {
@@ -196,5 +203,6 @@ message GeneralMsg{
     TaskExecutionResponse TaskExecutionResponse = 15;
     TaskPinnerKeySliceRequest TaskPinnerKeySliceRequest = 16;
     TaskPinnerKeySliceResponse TaskPinnerKeySliceResponse = 17;
+    PeerApproveRaRequest PeerApproveRaRequest = 18;
   }
 }
