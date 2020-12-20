@@ -149,7 +149,32 @@ message TaskExecutionInitialPinnerData {
 }
 
 message TaskExecutionRequest {
-  repeated TaskExecutionInitialPinnerData initialPinners = 1;
+  string taskId = 1;
+  repeated TaskExecutionInitialPinnerData initialPinners = 2;
+  uint32 minimumRecoveryNumber = 3;
+  string keyType = 4;
+}
+
+message TaskResultInitialPinnerData {
+  string peerId = 1;
+  bytes encryptedKeySlice = 2;
+}
+
+message TaskExecutionResponse {
+  string taskId = 1;
+  repeated TaskResultInitialPinnerData initialPinners = 2;
+  bytes publicKey = 3;
+}
+
+message TaskPinnerKeySliceRequest {
+  string taskId = 1;
+  bytes publicKey = 2;
+  bytes encryptedKeySlice = 3;
+}
+
+message TaskPinnerKeySliceResponse {
+  string taskId = 1;
+  string deploymentId = 2;
 }
 
 message GeneralMsg{
@@ -168,5 +193,8 @@ message GeneralMsg{
     ErrandExecutionSucceededResponse ErrandExecutionSucceededResponse = 12;
     TaskKeyGenerationApplyRequst TaskKeyGenerationApplyRequst = 13;
     TaskExecutionRequest TaskExecutionRequest = 14;
+    TaskExecutionResponse TaskExecutionResponse = 15;
+    TaskPinnerKeySliceRequest TaskPinnerKeySliceRequest = 16;
+    TaskPinnerKeySliceResponse TaskPinnerKeySliceResponse = 17;
   }
 }
