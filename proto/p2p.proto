@@ -143,8 +143,13 @@ message CapabilityDescription {
   // todo add detailed capability description
 }
 
-message TaskExecutionResult {
+message TaskExecutionInitialPinnerData {
+  string peerId = 1;
+  bytes rsaPubKey = 2;
+}
 
+message TaskExecutionRequest {
+  repeated TaskExecutionInitialPinnerData initialPinners = 1;
 }
 
 message GeneralMsg{
@@ -162,6 +167,6 @@ message GeneralMsg{
     ErrandAdhocCodeCapCheckerResponse ErrandAdhocCodeCapCheckerResponse = 11;
     ErrandExecutionSucceededResponse ErrandExecutionSucceededResponse = 12;
     TaskKeyGenerationApplyRequst TaskKeyGenerationApplyRequst = 13;
-    TaskExecutionResult TaskExecutionResult = 14;
+    TaskExecutionRequest TaskExecutionRequest = 14;
   }
 }
