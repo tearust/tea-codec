@@ -20,6 +20,11 @@ message PeerApproveRaRequest {
   bytes ephemeralId = 3;// this is used in remote attestation
 }
 
+message PeerApproveRaResponse {
+  string uuid = 1; // this is the uuid of pinner store item
+  bytes ephemeralId = 2;// this is used in remote attestation
+}
+
 message PeerApprovePinnerResponse {
   string deploymentId = 1;//this is cid of pinner_key's pub key
   bytes signature = 2;//The Ed25519 sig for nonce
@@ -204,5 +209,6 @@ message GeneralMsg{
     TaskPinnerKeySliceRequest TaskPinnerKeySliceRequest = 16;
     TaskPinnerKeySliceResponse TaskPinnerKeySliceResponse = 17;
     PeerApproveRaRequest PeerApproveRaRequest = 18;
+    PeerApproveRaResponse PeerApproveRaResponse = 19;
   }
 }
