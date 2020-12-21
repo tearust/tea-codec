@@ -258,9 +258,16 @@ message KeyGenerationData {
 
 message KeyGenerationResponse {
   required string taskId = 1;
-  required string codeCid = 2;
-  required KeyGenerationData dataAdhoc = 3;
+  required KeyGenerationData dataAdhoc = 2;
+  required TaskPaymentDescription payment = 3;
+}
+
+message SignWithKeySlicesRequest {
+  required string taskId = 1;
+  required bytes adhoc_data = 2;
+  required bytes publicKey = 3;
   required TaskPaymentDescription payment = 4;
+  required bytes delegatorTeaId = 5;  // teaId of delegator
 }
 
 // Return as JSON formatter.

@@ -148,7 +148,6 @@ message TaskKeyGenerationApplyRequst {
   bytes rsaPubKey = 2;
   CapabilityDescription cap_desc = 3; 
   bool applyExecutor = 4;  // decide whether to apply executor or not, if true apply executor otherwise apply initial pinner
-  bytes ephemeralId = 5;
 }
 
 message CapabilityDescription {
