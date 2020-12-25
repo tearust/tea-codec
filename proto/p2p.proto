@@ -174,7 +174,8 @@ message TaskResultInitialPinnerData {
 message TaskExecutionResponse {
   string taskId = 1;
   repeated TaskResultInitialPinnerData initialPinners = 2;
-  bytes publicKey = 3;
+  bytes p2PublicKey = 3;
+  bytes multiSigAccount = 4;
 }
 
 message TaskPinnerKeySliceRequest {
