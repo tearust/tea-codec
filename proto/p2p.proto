@@ -198,7 +198,9 @@ message TaskSignWithKeySlicesRequst {
 message TaskSignWithKeySlicesResponse {
   string taskId = 1;
   bytes adhocData = 2;
-  repeated bytes encryptedKeySlices = 3;
+  bytes p1Signature = 3;
+  repeated bytes encryptedKeySlices = 4;
+  string keyType = 5;
 }
 
 message TaskSignGetPinnerKeySliceRequest {
