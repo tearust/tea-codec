@@ -188,6 +188,35 @@ message TaskPinnerKeySliceResponse {
   string deploymentId = 2;
 }
 
+message TaskSignWithKeySlicesRequst {
+  string taskId = 1;
+  bytes rsaPubKey = 2;
+  CapabilityDescription cap_desc = 3; 
+}
+
+message TaskSignWithKeySlicesResponse {
+  string taskId = 1;
+  bytes adhocData = 2;
+  repeated bytes encryptedKeySlices = 3;
+}
+
+message TaskSignGetPinnerKeySliceRequest {
+  string taskId = 1;
+  bytes rsaPubKey = 2; // this the pub key for executor, used to encryt key slice
+  string deploymentId = 3;
+}
+
+message TaskSignGetPinnerKeySliceResponse {
+  string taskId = 1;
+  bytes encryptedKeySlice = 2;
+  string deploymentId = 3;
+}
+
+message TaskCommitSignResultRequest {
+  string taskId = 1;
+  bytes signature = 2;
+}
+
 message GeneralMsg{
   oneof msg {
     ResponseError error = 1;
@@ -209,5 +238,10 @@ message GeneralMsg{
     TaskPinnerKeySliceResponse TaskPinnerKeySliceResponse = 17;
     PeerApproveRaRequest PeerApproveRaRequest = 18;
     PeerApproveRaResponse PeerApproveRaResponse = 19;
+    TaskSignWithKeySlicesRequst TaskSignWithKeySlicesRequst = 20;
+    TaskSignWithKeySlicesResponse TaskSignWithKeySlicesResponse = 21;
+    TaskSignGetPinnerKeySliceRequest TaskSignGetPinnerKeySliceRequest = 22;
+    TaskSignGetPinnerKeySliceResponse TaskSignGetPinnerKeySliceResponse = 23;
+    TaskCommitSignResultRequest TaskCommitSignResultRequest = 24;
   }
 }
