@@ -164,6 +164,7 @@ message TaskExecutionRequest {
   repeated TaskExecutionInitialPinnerData initialPinners = 2;
   uint32 minimumRecoveryNumber = 3;
   string keyType = 4;
+  bytes p1PublicKey = 5;
 }
 
 message TaskResultInitialPinnerData {
