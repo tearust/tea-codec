@@ -260,6 +260,7 @@ message KeyGenerationResponse {
   required string taskId = 1;
   required KeyGenerationData dataAdhoc = 2;
   required TaskPaymentDescription payment = 3;
+  required string p1PublicKey = 4;
 }
 
 message SignWithKeySlicesRequest {
