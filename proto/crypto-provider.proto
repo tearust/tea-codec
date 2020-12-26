@@ -9,3 +9,24 @@ message KeyGenerationResponse {
     bytes publicKey = 1;
     bytes privateKey = 2;
 }
+
+message SignRequest {
+    string keyType = 1;
+    bytes privateKey = 2;
+    bytes data = 3;
+}
+
+message SignResponse {
+    bytes signature = 1;
+}
+
+message VerifyRequest {
+    string keyType = 1;
+    bytes data = 2;
+    bytes publicKey = 3;
+    bytes signature = 4;
+}
+
+message VerifyResponse {
+    bool result = 1;
+}
