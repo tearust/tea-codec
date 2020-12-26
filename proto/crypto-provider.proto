@@ -1,0 +1,11 @@
+syntax = "proto3";
+package crypto;
+
+message KeyGenerationRequest {
+    string keyType = 1;
+}
+
+message KeyGenerationResponse {
+    bytes publicKey = 1;
+    bytes privateKey = 2;
+}
