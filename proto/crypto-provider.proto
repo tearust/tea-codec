@@ -30,3 +30,22 @@ message VerifyRequest {
 message VerifyResponse {
     bool result = 1;
 }
+
+message ShamirShareRequest {
+    uint32 n = 1;
+    uint32 k = 2;
+    bytes data = 3;
+}
+
+message ShamirShareResponse {
+    repeated bytes slices = 1;
+}
+
+message ShamirRecoveryRequest {
+    uint32 k = 1;
+    repeated bytes slices = 2;
+}
+
+message ShamirRecoveryResponse {
+    bytes data = 1;
+}
