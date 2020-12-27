@@ -162,7 +162,7 @@ message TaskExecutionInitialPinnerData {
 message TaskExecutionRequest {
   string taskId = 1;
   repeated TaskExecutionInitialPinnerData initialPinners = 2;
-  uint32 minimumRecoveryNumber = 3;
+  uint32 minimumRecoveryNumber = 3; // support range of u8 (0~127)
   string keyType = 4;
   bytes p1PublicKey = 5;
 }

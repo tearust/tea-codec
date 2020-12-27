@@ -250,8 +250,8 @@ message TaskPaymentDescription {
 }
 
 message KeyGenerationData {
-  required uint32 n = 1;  // splite the secret to `n` pieces
-  required uint32 k = 2;  // if have k (k < n) pieces the secret can be recovered
+  required uint32 n = 1;  // splite the secret to `n` pieces, note we support range of u8 (0~127)
+  required uint32 k = 2;  // if have k (k < n) pieces the secret can be recovered, note we support range of u8 (0~127)
   required bytes delegatorTeaId = 3;  // teaId of delegator
   required string keyType = 4; // identify key generation algorithm(such as ECC) and paramter (such as secp256k1)
 }

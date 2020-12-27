@@ -32,8 +32,8 @@ message VerifyResponse {
 }
 
 message ShamirShareRequest {
-    uint32 n = 1;
-    uint32 k = 2;
+    uint32 n = 1; // support range of u8 (0~127)
+    uint32 k = 2; // support range of u8 (0~127)
     bytes data = 3;
 }
 
@@ -42,7 +42,7 @@ message ShamirShareResponse {
 }
 
 message ShamirRecoveryRequest {
-    uint32 k = 1;
+    uint32 k = 1; // support range of u8 (0~127)
     repeated bytes slices = 2;
 }
 
