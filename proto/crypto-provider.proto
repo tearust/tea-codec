@@ -49,3 +49,24 @@ message ShamirRecoveryRequest {
 message ShamirRecoveryResponse {
     bytes data = 1;
 }
+
+message GenerateMultiSigAssetRequest {
+    string keyType = 1;
+    repeated bytes publicKeys = 2;
+    uint32 k = 3;
+}
+
+message GenerateMultiSigAssetResponse {
+    string address = 1;
+}
+
+message CombineToWitnessRequest {
+    string keyType = 1;
+    repeated bytes publicKeys = 2;
+    uint32 k = 3;
+    repeated bytes signatures = 4;
+}
+
+message CombineToWitnessResponse {
+    repeated bytes witness = 1;
+}
