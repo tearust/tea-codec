@@ -70,3 +70,28 @@ message CombineToWitnessRequest {
 message CombineToWitnessResponse {
     repeated bytes witness = 1;
 }
+
+message GenerateAesKeyRequest {
+}
+
+message GenerateAesKeyResponse {
+    bytes key = 1;
+}
+
+message AesEncryptRequest {
+    bytes key = 1;
+    bytes data = 2;
+}
+
+message AesEncryptResponse {
+    bytes encryptedData = 1;
+}
+
+message AesDecryptRequest {
+    bytes key = 1;
+    bytes encryptedData = 2;
+}
+
+message AesDecryptResponse {
+    bytes data = 1;
+}
