@@ -218,7 +218,7 @@ message TaskSignGetPinnerKeySliceResponse {
 
 message TaskCommitSignResultRequest {
   string taskId = 1;
-  bytes signature = 2;
+  repeated bytes witness = 2;
 }
 
 message GeneralMsg{
