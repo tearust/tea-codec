@@ -62,6 +62,7 @@ pub fn deserialize<'de, T: Deserialize<'de>>(buf: &[u8]) -> TeaResult<T> {
 
 pub const OP_DELAY_PUBLISH: &'static str = "DelayPublish";
 pub const OP_TEST_RELAY: &'static str = "OP_TEST_RELAY";
+pub const OP_INTERCOM_MESSAGE: &str = "IntercomMessage";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

@@ -265,7 +265,7 @@ message KeyGenerationResponse {
 
 message SignWithKeySlicesRequest {
   required string taskId = 1;
-  required bytes adhoc_data = 2;
+  required bytes adhocData = 2;
   required bytes multiSigAccount = 3;
   required TaskPaymentDescription payment = 4;
   required bytes delegatorTeaId = 5;  // teaId of delegator
