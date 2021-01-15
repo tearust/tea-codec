@@ -95,3 +95,28 @@ message AesDecryptRequest {
 message AesDecryptResponse {
     bytes data = 1;
 }
+
+message ConstructTxRequest {
+    oneof msg {
+        PolkadotConstructExtrinsicRequest PolkadotConstructExtrinsicRequest = 1;
+    }
+}
+
+message ConstructTxResponse {
+    bytes rawTransaction = 1;
+}
+
+message SendTxRequest {
+    string keyType = 1;
+    bytes rawTransaction = 2;
+}
+
+message SendTxResponse {
+    bytes hash = 1;
+}
+
+message PolkadotConstructExtrinsicRequest {
+    bytes toPublicKey = 1;
+    bytes amount = 2;
+    bytes privateKey = 3;
+}
