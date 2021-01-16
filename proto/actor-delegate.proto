@@ -192,9 +192,9 @@ message SettleAccountsResponse {
 
 message UpdateRuntimeActivity {
   required bytes teaId = 1;
-  required string cid = 2;      // This is the setting cid from IPFS
+  optional string cid = 2;      // This is the setting cid from IPFS
   required bytes ephemeralId = 3;
-  required bytes signature = 4; // The Ed25519 sig for concat bytes: teaId + cid
+  required bytes signature = 4; // The Ed25519 sig for concat bytes: teaId
   optional bytes delegatePubKey = 5;
 }
 
