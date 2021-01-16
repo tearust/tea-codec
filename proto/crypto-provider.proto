@@ -120,3 +120,12 @@ message PolkadotConstructExtrinsicRequest {
     bytes amount = 2;
     bytes privateKey = 3;
 }
+
+message ShaRequest {
+    string shaType = 1;
+    bytes content = 2;
+}
+
+message ShaResponse {
+    bytes hash = 1;
+}
