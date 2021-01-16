@@ -143,6 +143,16 @@ message ErrandAdhocCodeCapCheckerResponse{
   bytes signature = 5; // The Ed25519 sig for concat bytes: candidateEphemeralId + errandId + capCid + result
 }
 
+message KeyGenerationCandidateRequest {
+  string taskId = 1;
+  uint32 n = 2;  // splite the secret to `n` pieces, note we support range of u8 (0~127)
+  uint32 k = 3;  // if have k (k < n) pieces the secret can be recovered, note we support range of u8 (0~127)
+  string keyType = 4; // identify key generation type
+  bytes delegatorEphemeralId = 5;
+  bool executor = 6;
+  bytes signature = 7; // The Ed25519 sig for concat bytes: taskId + n + k + keyType + delegatorEphemeralId + executor
+}
+
 message TaskKeyGenerationApplyRequst {
   string taskId = 1;
   bytes rsaPubKey = 2;
@@ -247,5 +257,6 @@ message GeneralMsg{
     TaskSignGetPinnerKeySliceRequest TaskSignGetPinnerKeySliceRequest = 22;
     TaskSignGetPinnerKeySliceResponse TaskSignGetPinnerKeySliceResponse = 23;
     TaskCommitSignResultRequest TaskCommitSignResultRequest = 24;
+    KeyGenerationCandidateRequest KeyGenerationCandidateRequest = 25;
   }
 }
