@@ -195,6 +195,7 @@ message UpdateRuntimeActivity {
   required string cid = 2;      // This is the setting cid from IPFS
   required bytes ephemeralId = 3;
   required bytes signature = 4; // The Ed25519 sig for concat bytes: teaId + cid
+  optional bytes delegatePubKey = 5;
 }
 
 message RuntimeActivityRequest {
@@ -252,8 +253,9 @@ message TaskPaymentDescription {
 message KeyGenerationData {
   required uint32 n = 1;  // splite the secret to `n` pieces, note we support range of u8 (0~127)
   required uint32 k = 2;  // if have k (k < n) pieces the secret can be recovered, note we support range of u8 (0~127)
-  required bytes delegatorTeaId = 3;  // teaId of delegator
-  required string keyType = 4; // identify key generation algorithm(such as ECC) and paramter (such as secp256k1)
+  required string keyType = 3; // identify key generation type
+  required bytes delegatorTeaNonceHash = 4;
+  required bytes delegatorTeaNonceRsaEncryption = 5;
 }
 
 message KeyGenerationResponse {
