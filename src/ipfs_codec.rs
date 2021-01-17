@@ -23,6 +23,7 @@ pub const OP_OBJ_GET: &'static str = "object_get";
 pub const OP_OBJ_DATA: &'static str = "object_data";
 pub const OP_OBJ_LINKS: &'static str = "object_links";
 pub const OP_OBJ_NEW: &'static str = "object_new";
+pub const OP_SWARM_PEERS: &'static str = "swarms_peers";
 
 pub const RSA_PUBKEY: &'static str = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ed3dEUVlKS29aSWh2Y05\
 BUUVCQlFBREt3QXdLQUloQU1KYUlLVkZHbWZMMzNNa3Rvb2ZxclBKUXBic09WT3UNCkQ5Q0lFRnEvcURMRkFnTUJBQUU9\
