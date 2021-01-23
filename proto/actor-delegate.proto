@@ -302,3 +302,12 @@ message UpdateSignTransactionResult {
   required bytes delegatorNonce = 2;
   required bool succeed = 3;
 }
+
+message GetDelegatesRequest {
+  required uint32 start = 1;
+  required uint32 limit = 2;
+}
+
+message GetDelegatesResponse {
+  repeated bytes delegates = 1;
+}
