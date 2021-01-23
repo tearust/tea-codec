@@ -280,3 +280,25 @@ message SignWithKeySlicesRequest {
 //   required bytes ephemeralId = 2;
 //   required bytes sig = 3;
 // }
+
+message UpdateKeyGenerationResult {
+  required string taskId = 1;
+  required bytes delegatorNonce = 2;
+  required bytes publicKey = 3;
+  repeated bytes deploymentIds = 4;
+  required bytes multiSigAccount = 5;
+}
+
+message SignTransactionResponse {
+  required string taskId = 1;
+  required string keyTaskId = 2;
+  required bytes dataAdhoc = 3;
+  required bytes delegatorTeaId = 4;
+  required TaskPaymentDescription payment = 5;
+}
+
+message UpdateSignTransactionResult {
+  required string taskId = 1;
+  required bytes delegatorNonce = 2;
+  required bool succeed = 3;
+}
