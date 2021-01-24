@@ -294,7 +294,8 @@ message SignTransactionResponse {
   required string keyTaskId = 2;
   required bytes dataAdhoc = 3;
   required bytes delegatorTeaId = 4;
-  required TaskPaymentDescription payment = 5;
+  required bytes p1Signature = 5;
+  required TaskPaymentDescription payment = 6;
 }
 
 message UpdateSignTransactionResult {
