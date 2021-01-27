@@ -289,13 +289,18 @@ message UpdateKeyGenerationResult {
   required bytes multiSigAccount = 5;
 }
 
+message SignTransactionData {
+  required bytes transactionData = 1;
+  required bytes delegatorTeaNonceHash = 2;
+  required bytes delegatorTeaNonceRsaEncryption = 3;
+}
+
 message SignTransactionResponse {
   required string taskId = 1;
-  required string keyTaskId = 2;
-  required bytes dataAdhoc = 3;
-  required bytes delegatorTeaId = 4;
-  required bytes p1Signature = 5;
-  required TaskPaymentDescription payment = 6;
+  required SignTransactionData dataAdhoc = 2;
+  required TaskPaymentDescription payment = 3;
+  required bytes p1Signature = 4;
+  required string multiSigAccount = 5;
 }
 
 message UpdateSignTransactionResult {
