@@ -314,6 +314,11 @@ message GetDelegatesRequest {
   required uint32 limit = 2;
 }
 
+message DelegateItem {
+  required bytes teaId = 1;
+  required string peerId = 2;
+}
+
 message GetDelegatesResponse {
-  repeated bytes delegates = 1;
+  repeated DelegateItem delegates = 1;
 }
