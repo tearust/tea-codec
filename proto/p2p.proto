@@ -12,17 +12,20 @@ message PeerApprovePinnerRequest {//this message is used when Find Provider foun
   string uuid = 3; // this is the uuid of pinner store item
   bytes properties = 4; // this is the properties passing to pinner
   bytes ephemeralId = 5;// this is used in remote attestation
+  string sendToActor = 6;
 }
 
 message PeerApproveRaRequest {
   string uuid = 1; // this is the uuid of pinner store item
   bytes properties = 2; // this is the properties passing to pinner
   bytes ephemeralId = 3;// this is used in remote attestation
+  string sendToActor = 4;
 }
 
 message PeerApproveRaResponse {
   string uuid = 1; // this is the uuid of pinner store item
   bytes ephemeralId = 2;// this is used in remote attestation
+  string sendToActor = 3;
 }
 
 message PeerApprovePinnerResponse {
@@ -30,6 +33,7 @@ message PeerApprovePinnerResponse {
   bytes signature = 2;//The Ed25519 sig for nonce
   string uuid = 3; // this is the uuid of pinner store item
   bytes pinnerEphemeralId = 4;//The Ehpemeral Id of the pinner
+  string sendToActor = 5;
 }
 
 message ApplyToBePinnerRequest{

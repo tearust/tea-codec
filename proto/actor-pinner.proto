@@ -9,6 +9,7 @@ message PropertyKeyPair {
 message PeerApproveRaRequest {
   string peerId = 1;
   repeated PropertyKeyPair properties = 2;
+  string sendToActor = 3;
 }
 
 message FindPinnersRequest {
@@ -16,6 +17,7 @@ message FindPinnersRequest {
   repeated PropertyKeyPair properties = 2;
   uint64 delaySeconds = 3;
   bytes findingMode = 4;
+  string sendToActor = 5;
 }
 
 message ClientOperationAfterVerify {
