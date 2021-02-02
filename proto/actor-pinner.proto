@@ -48,6 +48,20 @@ message DataUploadCompletedProcessRequest {
   StringValue keyUrlEncoded = 4;
 }
 
+message CommitDataUploadRequest {
+  string deploymentId = 1;
+  string cidCode = 2;
+  string cidDescription = 3;
+  string cidCapchecker = 4;
+}
+
+message UpdateConflictListRequest {
+  bytes key = 1;
+  repeated string deploymentIds = 2;
+  repeated string currentItems = 3;
+  uint32 maxAllowed = 4;
+}
+
 message GetDeploymentInfoResponse {
   StringValue codeCid = 1;
   StringValue descriptionCid = 2;

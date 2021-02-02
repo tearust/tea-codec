@@ -197,6 +197,7 @@ message TaskPinnerKeySliceRequest {
   string taskId = 1;
   bytes publicKey = 2;
   bytes encryptedKeySlice = 3;
+  bytes multiSigAccount = 4;
 }
 
 message TaskPinnerKeySliceResponse {
