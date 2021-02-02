@@ -300,7 +300,7 @@ message SignTransactionResponse {
   required SignTransactionData dataAdhoc = 2;
   required TaskPaymentDescription payment = 3;
   required bytes p1Signature = 4;
-  required string multiSigAccount = 5;
+  required bytes multiSigAccount = 5;
 }
 
 message UpdateSignTransactionResult {
@@ -326,11 +326,11 @@ message GetDelegatesResponse {
 message AssetInfo {
   required bytes sender = 1;
   required bytes p2 = 2;
-  repeated bytes p2DeploymentIds = 3;
+  repeated string p2DeploymentIds = 3;
 }
 
 message AssetGeneratedResponse {
   required string taskId = 1;
-  required string multiSigAccount = 2;
+  required bytes multiSigAccount = 2;
   required AssetInfo assetInfo = 3;
 }
