@@ -322,3 +322,15 @@ message DelegateItem {
 message GetDelegatesResponse {
   repeated DelegateItem delegates = 1;
 }
+
+message AssetInfo {
+  required bytes sender = 1;
+  required bytes p2 = 2;
+  repeated bytes p2DeploymentIds = 3;
+}
+
+message AssetGeneratedResponse {
+  required string taskId = 1;
+  required string multiSigAccount = 2;
+  required AssetInfo assetInfo = 3;
+}
