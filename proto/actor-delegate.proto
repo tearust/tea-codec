@@ -334,3 +334,11 @@ message AssetGeneratedResponse {
   required bytes multiSigAccount = 2;
   required AssetInfo assetInfo = 3;
 }
+
+message GetDeploymentIds {
+  required bytes multiSigAccount = 1;
+}
+
+message GetDeploymentIdsResponse {
+  required AssetInfo assetInfo = 1;
+}
