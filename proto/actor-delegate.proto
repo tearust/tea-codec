@@ -285,7 +285,7 @@ message UpdateKeyGenerationResult {
   required string taskId = 1;
   required bytes delegatorNonce = 2;
   required bytes publicKey = 3;
-  repeated bytes deploymentIds = 4;
+  repeated string deploymentIds = 4;
   required bytes multiSigAccount = 5;
 }
 
