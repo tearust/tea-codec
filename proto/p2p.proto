@@ -236,6 +236,11 @@ message TaskCommitSignResultRequest {
   repeated bytes witness = 2;
 }
 
+message SignCandidateRequest {
+  string taskId = 1;
+  bytes multiSigAccount = 2;
+}
+
 message GeneralMsg{
   oneof msg {
     ResponseError error = 1;
@@ -263,5 +268,6 @@ message GeneralMsg{
     TaskSignGetPinnerKeySliceResponse TaskSignGetPinnerKeySliceResponse = 23;
     TaskCommitSignResultRequest TaskCommitSignResultRequest = 24;
     KeyGenerationCandidateRequest KeyGenerationCandidateRequest = 25;
+    SignCandidateRequest SignCandidateRequest = 26;
   }
 }
