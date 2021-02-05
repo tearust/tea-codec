@@ -265,15 +265,6 @@ message KeyGenerationResponse {
   required bytes p1PublicKey = 4;
 }
 
-message SignWithKeySlicesRequest {
-  required string taskId = 1;
-  required bytes adhocData = 2;
-  required bytes multiSigAccount = 3;
-  required TaskPaymentDescription payment = 4;
-  required bytes delegatorTeaId = 5;  // teaId of delegator
-  required bytes p1Signature = 6;
-}
-
 // Return as JSON formatter.
 // message BeMyDelegateResponse {    
 //   required bytes teaId = 1;
