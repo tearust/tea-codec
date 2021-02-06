@@ -333,3 +333,25 @@ message GetDeploymentIds {
 message GetDeploymentIdsResponse {
   required AssetInfo assetInfo = 1;
 }
+
+message MultiAssetInfo {
+  required bytes multiSigAccount = 1;
+  required AssetInfo assetInfo = 2;
+}
+message GetAssetsResponse {
+  repeated MultiAssetInfo assets = 1;
+}
+
+
+message KeyGenerationInfo {
+  required bytes p1PublicKey = 1;
+  required uint32 n = 2;  // splite the secret to `n` pieces, note we support range of u8 (0~127)
+  required uint32 k = 3;  // if have k (k < n) pieces the secret can be recovered, note we support range of u8 (0~127)
+  required string keyType = 4; // identify key generation type
+}
+message GetKeyGenerationInfoRequest {
+  required bytes multiSigAccount = 1;
+}
+message GetKeyGenerationInfoResponse {
+  required KeyGenerationInfo keyGenerationInfo = 1;
+}
