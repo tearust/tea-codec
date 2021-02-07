@@ -239,6 +239,9 @@ message TaskCommitSignResultRequest {
 message SignCandidateRequest {
   string taskId = 1;
   bytes multiSigAccount = 2;
+  uint32 n = 3;
+  uint32 k = 4;
+  string taskType = 5;
 }
 
 message GeneralMsg{
