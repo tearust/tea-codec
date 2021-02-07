@@ -345,9 +345,10 @@ message GetAssetsResponse {
 
 message KeyGenerationInfo {
   required bytes p1PublicKey = 1;
-  required uint32 n = 2;  // splite the secret to `n` pieces, note we support range of u8 (0~127)
-  required uint32 k = 3;  // if have k (k < n) pieces the secret can be recovered, note we support range of u8 (0~127)
-  required string keyType = 4; // identify key generation type
+  required bytes p2PublicKey = 2;
+  required uint32 n = 3;  // splite the secret to `n` pieces, note we support range of u8 (0~127)
+  required uint32 k = 4;  // if have k (k < n) pieces the secret can be recovered, note we support range of u8 (0~127)
+  required string keyType = 5; // identify key generation type
 }
 message GetKeyGenerationInfoRequest {
   required bytes multiSigAccount = 1;
