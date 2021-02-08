@@ -37,6 +37,7 @@ message RsaDecryptRequest{
 
 message RsaDecryptResponse{
   required bytes result = 1;
+  optional string error = 2;
 }
 
 message RsaEncryptRequest{
