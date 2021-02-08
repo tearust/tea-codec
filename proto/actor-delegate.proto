@@ -259,7 +259,7 @@ message KeyGenerationData {
 }
 
 message KeyGenerationResponse {
-  required string taskId = 1;
+  required bytes taskId = 1;
   required KeyGenerationData dataAdhoc = 2;
   required TaskPaymentDescription payment = 3;
   required bytes p1PublicKey = 4;
@@ -273,7 +273,7 @@ message KeyGenerationResponse {
 // }
 
 message UpdateKeyGenerationResult {
-  required string taskId = 1;
+  required bytes taskId = 1;
   required bytes delegatorNonce = 2;
   required bytes publicKey = 3;
   repeated string deploymentIds = 4;
@@ -287,7 +287,7 @@ message SignTransactionData {
 }
 
 message SignTransactionResponse {
-  required string taskId = 1;
+  required bytes taskId = 1;
   required SignTransactionData dataAdhoc = 2;
   required TaskPaymentDescription payment = 3;
   required bytes p1Signature = 4;
@@ -295,7 +295,7 @@ message SignTransactionResponse {
 }
 
 message UpdateSignTransactionResult {
-  required string taskId = 1;
+  required bytes taskId = 1;
   required bytes delegatorNonce = 2;
   required bool succeed = 3;
 }
@@ -321,7 +321,7 @@ message AssetInfo {
 }
 
 message AssetGeneratedResponse {
-  required string taskId = 1;
+  required bytes taskId = 1;
   required bytes multiSigAccount = 2;
   required AssetInfo assetInfo = 3;
 }
