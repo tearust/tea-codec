@@ -5,7 +5,9 @@ message GetRequest{
   string key = 1;
 }
 message GetResponse{
-  bytes value = 1;
+  oneof value {
+    bytes v = 1;
+  }
   bool exists = 2;
 }
 
