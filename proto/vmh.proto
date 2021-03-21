@@ -3,16 +3,33 @@ package vmh;
 
 import "kvp-provider.proto";
 
+message OutboundRequest {
+    uint32 RefSeq = 1;
+}
+
 message VmhInbound {
-    uint32 RefReq = 1;
+    uint32 RefSeq = 1;
     uint32 TypeId = 2;
     VmhMessage VmhMessage = 3;
 }
 
 message VmhOutbound {
-    uint32 RefReq = 1;
+    uint32 RefSeq = 1;
     uint32 TypeId = 2;
-    VmhMessage VmhMessage = 3;
+    string Target = 3;
+    VmhMessage VmhMessage = 4;
+}
+
+message RelayInboundRequest {
+    string Key = 1;
+    uint32 TcpServerPort = 2;
+    uint32 VsockClientPort = 3;
+}
+
+message RelayOutboundRequest {
+    string Key = 1;
+    uint32 VsockServerPort = 2;
+    uint32 TcpClientPort = 3;
 }
 
 message VmhMessage {
