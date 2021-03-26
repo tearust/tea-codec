@@ -42,6 +42,11 @@ message RelayVsockEndpointResponse {
     string message = 2;
 }
 
+message RelayChannelMessageResponse {
+    bool success = 1;
+    bytes data = 2;
+}
+
 message VmhMessage {
     oneof msg {
         kvp.GetRequest GetRequest = 1;
