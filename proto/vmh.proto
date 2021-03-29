@@ -31,6 +31,11 @@ message RelayTcpEndpointResponse {
     string message = 2;
 }
 
+message RelayTcpReconfirmResponse {
+    bool success = 1;
+    string message = 2;
+}
+
 message RelayVsockEndpointRequest {
     string Key = 1;
     uint32 ServerPort = 2;
