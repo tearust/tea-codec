@@ -52,6 +52,12 @@ message RelayChannelMessageResponse {
     bytes data = 2;
 }
 
+message ProviderOperationRequest {
+    string actor = 1;
+    string operation = 2;
+    bytes msg = 3;
+}
+
 message VmhMessage {
     oneof msg {
         kvp.GetRequest GetRequest = 1;
