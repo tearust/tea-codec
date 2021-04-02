@@ -2,10 +2,7 @@ syntax = "proto3";
 package vmh;
 
 import "kvp-provider.proto";
-
-message OutboundRequest {
-    uint32 RefSeq = 1;
-}
+import "ipfs-provider.proto";
 
 message VmhInbound {
     uint32 RefSeq = 1;
@@ -58,11 +55,33 @@ message ProviderOperationRequest {
     bytes msg = 3;
 }
 
+message ProviderOperationResponse {
+    string actor = 1;
+    bytes msg = 2;
+}
+
 message VmhMessage {
     oneof msg {
         kvp.GetRequest GetRequest = 1;
         kvp.GetResponse GetResponse = 2;
         kvp.SetRequest SetRequest = 3;
         kvp.SetResponse SetResponse = 4;
+    }
+}
+
+message OutboundRequest {
+    uint32 RefSeq = 1;
+    string provider = 2;
+    oneof msg {
+        ProviderOperationRequest ProviderOperationRequest = 3;
+    }
+}
+
+message OutboundResponse {
+    uint32 RefSeq = 1;
+    oneof msg {
+        ProviderOperationResponse ProviderOperationResponse = 3;
+        ipfs.FindProvidersResponse IpfsFindProvidersResponse = 4;
+        ipfs.FindProviderInvokeError IpfsFindProviderInvokeError = 5;
     }
 }

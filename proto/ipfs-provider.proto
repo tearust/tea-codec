@@ -1,39 +1,75 @@
-syntax = "proto2";
-package ipfs_proto;
+syntax = "proto3";
+
+package ipfs;
+
 message IpfsTestRequest{
-  required string key = 1;
-}
-
-message PubsubLsRequest{
-
-}
-
-message PubsubLsResponse{
-  repeated string topics = 1;
-}
-
-message PubsubPeersRequest{
-  optional string topic = 1;
+  string key = 1;
 }
 
 message PubsubPeersResponse{
-  repeated string peers = 1;
+  string peers = 1;
 }
 
 message BlockGetRequest{	
-  required string hash = 1;	
+  string hash = 1;	
 }	
 
 // message BlockGetResponse{	
-//   required bytes result = 1;	
+//   bytes result = 1;	
 // }	
 
 message BlockPutRequest{	
-  required bytes data = 1;	
+  bytes data = 1;	
 }	
 
 message BlockPutResponse{	
-  required string key = 1;	
-  required uint64 size = 2;	
+  string key = 1;	
+  uint64 size = 2;	
 }	
 
+message FindProvidersResponseItem {
+  string id = 1;
+  repeated string addrs = 2;
+}
+
+message FindProvidersContext {
+  string natsSubject = 1;
+  uint32 retryRemainTimes = 2;
+  uint64 delaySecs = 3;
+}
+
+enum FindingMode {
+  AsMuchAsPossible = 0;
+  FirstComeThenDone = 1;
+}
+
+message FindProvidersRequest {
+  string deploymentId = 1;
+  string uuid = 2;
+  FindProvidersContext context = 3;
+  string sendToActor = 4;
+  FindingMode findingMode = 5;
+}
+
+message FindProvidersResponse {
+  string deploymentId = 1;
+  repeated FindProvidersResponseItem items = 2;
+  string uuid = 3;
+  string sendToActor = 4;
+  AttachmentData attachment = 5;
+}
+
+message FindProviderInvokeError {
+  FindProvidersRequest request = 1;
+}
+
+message AttachmentData {
+  bytes data = 1;
+}
+
+message IpfsOperationRequest {
+  uint32 RefSeq = 1;
+  string actor = 2;
+  string operation = 3;
+  bytes msg = 4;
+}
