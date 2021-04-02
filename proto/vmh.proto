@@ -79,6 +79,7 @@ message OutboundRequest {
 
 message OutboundResponse {
     uint32 RefSeq = 1;
+    string actor = 2;
     oneof msg {
         ProviderOperationResponse ProviderOperationResponse = 3;
         ipfs.FindProvidersResponse IpfsFindProvidersResponse = 4;

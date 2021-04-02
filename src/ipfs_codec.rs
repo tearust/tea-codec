@@ -1,7 +1,4 @@
 pub const OP_DELIVER_SUB_MESSAGE: &'static str = "deliver_sub_message";
-pub const OP_PUBSUB_SUB: &'static str = "pubsub_sub";
-pub const OP_PUBSUB_PUB: &'static str = "pubsub_pub";
-pub const OP_PUBSUB_RANDOM_SUB: &'static str = "pubsub_random_sub";
 
 pub const OP_BLOCK_GET: &'static str = "block_get";
 pub const OP_GET: &'static str = "ipfs_get";
@@ -39,17 +36,6 @@ pub const ED_PUBKEY: &'static str =
     "df38cb4f12479041c8e8d238109ef2a150b017f382206e24fee932e637c2db7b";
 pub const ED_PRIKEY: &'static str = "5579a3c220146f0caaab49b884de505098b89326970b929d781cf4a65445a917df38cb4f12479041c8e8d238109ef2a150b017f382206e24fee932e637c2db7b";
 
-/// Describes an HTTP request
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct PubsubSubResponse {
-    pub from: Option<String>,
-    pub data: Option<String>,
-    pub seqno: Option<String>,
-    pub topics: Option<Vec<String>>,
-    pub unrecognized: Option<Vec<u8>>,
-}
-
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubSubRequest {
@@ -66,13 +52,6 @@ pub struct ActorCallBackRequest {
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct PubsubPubRequest {
-    pub topic: String,   //base64 string of ref_num
-    pub payload: String, //base64 encoded message payload
-}
-
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct BlockPutRequest {
     pub data: Vec<u8>,
     pub pin: bool,
@@ -85,48 +64,6 @@ pub struct BlockPutResponse {
     pub size: u64,
 }
 
-#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct FindProvidersRequest {
-    pub deployment_id: String,
-    pub uuid: String,
-    pub context: FindProvidersContext,
-    pub finding_mode: FindingMode,
-    pub send_to_actor: String,
-}
-
-#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub enum FindingMode {
-    AsMuchAsPossible,
-    FirstComeThenDone,
-}
-
-#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct FindProvidersContext {
-    pub nats_subject: String,
-    pub retry_remain_times: u32,
-    pub delay_secs: u64,
-}
-
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct FindProvidersResponseItem {
-    pub id: String,
-    pub addrs: Vec<String>,
-}
-
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct FindProvidersResponse {
-    pub items: Vec<FindProvidersResponseItem>,
-    pub deployment_id: String,
-    pub attachment: Option<Vec<u8>>,
-    pub uuid: String,
-    pub send_to_actor: String,
-}
-
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum DhtProvideRequest {
@@ -134,19 +71,11 @@ pub enum DhtProvideRequest {
     PinnerPubKey(Vec<u8>),
 }
 
-// #[derive(Debug, PartialEq, Deserialize, Serialize)]
-// #[serde(rename_all = "camelCase")]
-// pub struct RetryFindProviderRequest {
-// 	pub subject: String,
-// 	pub delay_req: FindProvidersRequest,
-// 	pub delay_secs: u64,
-// }
-
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum FindProviderInvokeError {
     ResponseCountLimitHit(u32),
-    ResponseCountLimitHitAndRetry(FindProvidersRequest),
+    ResponseCountLimitHitAndRetry,
     Others(String),
 }
 
