@@ -69,7 +69,7 @@ pub const OP_INTERCOM_MESSAGE: &str = "IntercomMessage";
 pub const ACTOR_NAME_SIMPLE: &'static str = "simple-actor";
 pub const ACTOR_PUBKEY_SIMPLE: &'static str = "MAPIZDLP2GN7QDSS3I74NCZEQOU2YXGZ4UROPRLDJI6ZZFT4TLJTOIGZ";
 pub const ACTOR_NAME_INTERCOM: &'static str = "intercom-actor";
-pub const ACTOR_PUBKEY_INTERCOM: &'static str = "EXXNPMWYXJMBNTGZAURUCLPL7JYDA4L357IICGMSC4ATJUZM";
+pub const ACTOR_PUBKEY_INTERCOM: &'static str = "MAXJLKOWEXXNPMWYXJMBNTGZAURUCLPL7JYDA4L357IICGMSC4ATJUZM";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
