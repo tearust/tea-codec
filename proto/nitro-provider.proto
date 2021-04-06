@@ -1,0 +1,10 @@
+syntax = "proto3";
+package nitro;
+
+message GenRandomRequest {
+    uint32 len = 1;
+}
+
+message GenRandomResponse {
+    bytes data = 1;
+}
