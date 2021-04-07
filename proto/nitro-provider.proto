@@ -8,3 +8,13 @@ message GenRandomRequest {
 message GenRandomResponse {
     bytes data = 1;
 }
+
+message AttestationDocRequest {
+    bytes userData = 1;
+    bytes nonce = 2;
+    bytes pubKey = 3;
+}
+
+message AttestationDocResponse {
+    bytes docBuf = 1;
+}
