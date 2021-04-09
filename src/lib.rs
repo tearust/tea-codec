@@ -96,3 +96,24 @@ pub mod ipfs_codec;
 pub mod ra;
 pub mod task;
 pub mod task_in_block;
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LoadActorMessage {
+    pub manifest: String,
+    #[serde(with = "serde_bytes")]
+    #[serde(default)]
+    pub wasm_bytes: Vec<u8>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RunActorWithParams {
+    pub manifest: String,
+    #[serde(with = "serde_bytes")]
+    #[serde(default)]
+    pub actor_bytes: Vec<u8>,
+    #[serde(with = "serde_bytes")]
+    #[serde(default)]
+    pub params: Vec<u8>,
+}
