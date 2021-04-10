@@ -3,6 +3,7 @@ package crypto;
 
 message KeyGenerationRequest {
     string keyType = 1;
+    bytes seed = 2;
 }
 
 message KeyGenerationResponse {
@@ -72,6 +73,7 @@ message CombineToWitnessResponse {
 }
 
 message GenerateAesKeyRequest {
+    bytes seed = 1;
 }
 
 message GenerateAesKeyResponse {
