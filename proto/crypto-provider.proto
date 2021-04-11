@@ -129,3 +129,30 @@ message ShaRequest {
 message ShaResponse {
     bytes hash = 1;
 }
+
+message RsaDecryptRequest {
+  bytes privateKeyPkcs1 = 1;
+  bytes msg = 2;
+}
+
+message RsaDecryptResponse {
+  bytes result = 1;
+}
+
+message RsaEncryptRequest {
+  bytes publicKeyPkcs1 = 1;
+  bytes msg = 2;
+}
+
+message RsaEncryptResponse {
+  bytes result = 1;
+}
+
+message RsaKeyPairPemPcsk1Request {
+  uint32 bits = 1;
+}
+
+message RsaKeyPairPemPcsk1Response {
+  string publicKey = 1;
+  string privateKey = 2;
+}
