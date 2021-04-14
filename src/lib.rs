@@ -72,6 +72,8 @@ pub const OP_NITRO_GEN_RANDOM: &str = "GenerateRandom";
 pub const ACTOR_NAME_SIMPLE: &'static str = "simple-actor";
 pub const ACTOR_PUBKEY_SIMPLE: &'static str =
     "MAPIZDLP2GN7QDSS3I74NCZEQOU2YXGZ4UROPRLDJI6ZZFT4TLJTOIGZ";
+pub const ACTOR_NAME_RA: &'static str = "ra";
+pub const ACTOR_PUBKEY_RA: &'static str = "MDAELGEJDJPPMBHCVTXRCS6TYMEVOSEYLYHPDVWVBBRHNQ6KNIEBHNHQ";
 pub const ACTOR_NAME_INTERCOM: &'static str = "intercom-actor";
 pub const HOST: &'static str = "host";
 pub const ACTOR_PUBKEY_INTERCOM: &'static str =
