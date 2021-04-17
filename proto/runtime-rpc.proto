@@ -1,0 +1,31 @@
+syntax = "proto3";
+package rpc;
+
+message AdapterHttpRequest {
+    string method = 1;
+    string action = 2;
+    bytes payload = 3;
+}
+
+message AdapterGeneralRequest {
+    oneof msg {
+        IpfsBlockGetRequest IpfsBlockGetRequest = 1;
+    }
+}
+
+message AdapterGeneralResponse {
+    oneof msg {
+        IpfsBlockGetResponse IpfsBlockGetResponse = 1;
+    }
+}
+
+message IpfsBlockGetRequest {
+    string cid =  1;
+    bool waitLocally = 2;
+    bool returnIfNotExist = 3;
+}
+
+message IpfsBlockGetResponse {
+    string cid = 1;
+    bytes payload = 2;
+}
