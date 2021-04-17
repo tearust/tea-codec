@@ -3,6 +3,7 @@ package vmh;
 
 import "kvp-provider.proto";
 import "ipfs-provider.proto";
+import "runtime-rpc.proto";
 
 message VmhInbound {
     uint32 RefSeq = 1;
@@ -71,9 +72,10 @@ message VmhMessage {
 
 message OutboundRequest {
     uint32 RefSeq = 1;
-    string provider = 2;
+    string channel = 2;
     oneof msg {
         ProviderOperationRequest ProviderOperationRequest = 3;
+        rpc.AdapterGeneralRequest AdapterGeneralRequest = 4;
     }
 }
 
