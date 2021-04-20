@@ -27,7 +27,13 @@ message Layer1GeneralRequest {
 
 message Layer1GeneralResponse {
     oneof msg {
-        AddNewNodeResponse AddNewNodeResponse = 2;
+        AddNewNodeResponse AddNewNodeResponse = 1;
+    }
+}
+
+message Layer1GeneralEvent {
+    oneof msg {
+        NewNodeAddedEvent NewNodeAddedEvent = 1;
     }
 }
 
