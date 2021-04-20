@@ -19,6 +19,31 @@ message AdapterGeneralResponse {
     }
 }
 
+message Layer1GeneralRequest {
+    oneof msg {
+        AddNewNodeRequest AddNewNodeRequest = 1;
+    }
+}
+
+message Layer1GeneralResponse {
+    oneof msg {
+        AddNewNodeResponse AddNewNodeResponse = 2;
+    }
+}
+
+message AddNewNodeRequest {
+  bytes teaId = 1;
+}
+
+message AddNewNodeResponse {
+  bytes teaId = 1;
+}
+
+message NewNodeAddedEvent {
+  string accountId = 1;
+  bytes teaId = 2;
+}
+
 message IpfsBlockGetRequest {
     string cid =  1;
     bool waitLocally = 2;
