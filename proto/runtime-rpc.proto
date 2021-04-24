@@ -80,10 +80,13 @@ message IpfsPullCidDataRequest {
     string peerId = 1;
     string reply = 2;
     bytes payload = 3;
+    bool pin = 4;
+    string cid = 5;
 }
 
 message IpfsBlockGetRequest {
     string cid =  1;
-    bool waitLocally = 2;
-    bool returnIfNotExist = 3;
+    string reply = 2;
+    bool waitLocally = 3;
+    bool returnIfNotExist = 4;
 }
