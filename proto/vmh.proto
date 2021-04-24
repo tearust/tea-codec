@@ -75,7 +75,7 @@ message OutboundRequest {
     string channel = 2;
     oneof msg {
         ProviderOperationRequest ProviderOperationRequest = 3;
-        rpc.AdapterGeneralRequest AdapterGeneralRequest = 4;
+        rpc.AdapterClientRequest AdapterClientRequest = 4;
         rpc.Layer1GeneralRequest Layer1GeneralRequest = 5;
     }
 }
