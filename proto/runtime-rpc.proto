@@ -10,12 +10,16 @@ message AdapterHttpRequest {
 message AdapterGeneralRequest {
     oneof msg {
         IpfsBlockGetRequest IpfsBlockGetRequest = 1;
+        IpfsInfoRequest IpfsInfoRequest = 2;
+        IpfsP2pFrowardRequest IpfsP2pFrowardRequest = 3;
+        IpfsP2pCloseRequest IpfsP2pCloseRequest = 4;
+        IpfsPullCidDataRequest IpfsPullCidDataRequest = 5;
     }
 }
 
 message AdapterGeneralResponse {
     oneof msg {
-        IpfsBlockGetResponse IpfsBlockGetResponse = 1;
+        IpfsInfoResponse IpfsInfoResponse = 1;
     }
 }
 
@@ -50,13 +54,36 @@ message NewNodeAddedEvent {
   bytes teaId = 2;
 }
 
+message IpfsInfoRequest {
+    string peerId = 1;
+}
+
+message IpfsInfoResponse {
+    string id = 1;
+    string publicKey = 2;
+    repeated string addresses = 3;
+    string agentVersion = 4;
+    string protocolVersion = 5;
+}
+
+message IpfsP2pFrowardRequest {
+    string peerId = 1;
+    string reply = 2;
+    bytes payload = 3;
+}
+
+message IpfsP2pCloseRequest {
+    string peerId = 1;
+}
+
+message IpfsPullCidDataRequest {
+    string peerId = 1;
+    string reply = 2;
+    bytes payload = 3;
+}
+
 message IpfsBlockGetRequest {
     string cid =  1;
     bool waitLocally = 2;
     bool returnIfNotExist = 3;
-}
-
-message IpfsBlockGetResponse {
-    string cid = 1;
-    bytes payload = 2;
 }
