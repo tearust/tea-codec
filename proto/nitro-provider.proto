@@ -18,3 +18,9 @@ message AttestationDocRequest {
 message AttestationDocResponse {
     bytes docBuf = 1;
 }
+
+message PcrVerifyRequest {
+    map<uint32, bytes> pcrs = 1;
+    AttestationDocRequest attestationDocRequest = 2;
+    AttestationDocResponse attestationDocResponse = 3;
+}

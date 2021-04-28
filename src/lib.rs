@@ -66,6 +66,7 @@ pub const OP_INTERCOM_MESSAGE: &str = "IntercomMessage";
 
 pub const OP_NITRO_ATTESTATION_DOC: &str = "AttestationDocument";
 pub const OP_NITRO_GEN_RANDOM: &str = "GenerateRandom";
+pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";
 
 ///List all actor names vs their actor pubkeys
 ///
