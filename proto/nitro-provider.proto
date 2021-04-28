@@ -20,7 +20,11 @@ message AttestationDocResponse {
 }
 
 message PcrVerifyRequest {
-    map<uint32, bytes> pcrs = 1;
+    PcrVerifySlots pcrVerifySlots = 1;
     AttestationDocRequest attestationDocRequest = 2;
     AttestationDocResponse attestationDocResponse = 3;
+}
+
+message PcrVerifySlots {
+    map<uint32, bytes> pcrs = 1;
 }

@@ -1,6 +1,41 @@
 syntax = "proto3";
 package p2p;
 
+import "nitro-provider.proto";
+
+message GeneralMsg{
+  oneof msg {
+    ResponseError error = 1;
+    PeerApprovePinnerRequest PeerApproveRequest = 2;
+    PeerApprovePinnerResponse PeerApproveResponse = 3;
+    ApplyToBePinnerRequest ApplyPinnerRequest = 4;
+    ApplyToBePinnerResponse ApplyPinnerResponse = 5;
+    ApplyToExecuteTaskRequest ApplyToExecuteTaskRequest = 6;
+    WinnerExecutorCert WinnerExecutorCert = 7;
+    ErrandExecutionRequest ErrandExecutionRequest = 8;
+    ErrandExecutionFailedResponse ErrandExecutionFailedResponse = 9;
+    ErrandAdhocCodeCapCheckerRequest ErrandAdhocCodeCapCheckerRequest = 10;
+    ErrandAdhocCodeCapCheckerResponse ErrandAdhocCodeCapCheckerResponse = 11;
+    ErrandExecutionSucceededResponse ErrandExecutionSucceededResponse = 12;
+    TaskKeyGenerationApplyRequst TaskKeyGenerationApplyRequst = 13;
+    TaskExecutionRequest TaskExecutionRequest = 14;
+    TaskExecutionResponse TaskExecutionResponse = 15;
+    TaskPinnerKeySliceRequest TaskPinnerKeySliceRequest = 16;
+    TaskPinnerKeySliceResponse TaskPinnerKeySliceResponse = 17;
+    PeerApproveRaRequest PeerApproveRaRequest = 18;
+    PeerApproveRaResponse PeerApproveRaResponse = 19;
+    TaskSignWithKeySlicesRequst TaskSignWithKeySlicesRequst = 20;
+    TaskSignWithKeySlicesResponse TaskSignWithKeySlicesResponse = 21;
+    TaskSignGetPinnerKeySliceRequest TaskSignGetPinnerKeySliceRequest = 22;
+    TaskSignGetPinnerKeySliceResponse TaskSignGetPinnerKeySliceResponse = 23;
+    TaskCommitSignResultRequest TaskCommitSignResultRequest = 24;
+    KeyGenerationCandidateRequest KeyGenerationCandidateRequest = 25;
+    SignCandidateRequest SignCandidateRequest = 26;
+    RemoteAttestationRequest RemoteAttestationRequest = 27;
+    RemoteAttestationResponse RemoteAttestationResponse = 28;
+  }
+}
+
 message ResponseError{
   string error = 1;
 }
@@ -244,33 +279,16 @@ message SignCandidateRequest {
   string taskType = 5;
 }
 
-message GeneralMsg{
-  oneof msg {
-    ResponseError error = 1;
-    PeerApprovePinnerRequest PeerApproveRequest = 2;
-    PeerApprovePinnerResponse PeerApproveResponse = 3;
-    ApplyToBePinnerRequest ApplyPinnerRequest = 4;
-    ApplyToBePinnerResponse ApplyPinnerResponse = 5;
-    ApplyToExecuteTaskRequest ApplyToExecuteTaskRequest = 6;
-    WinnerExecutorCert WinnerExecutorCert = 7;
-    ErrandExecutionRequest ErrandExecutionRequest = 8;
-    ErrandExecutionFailedResponse ErrandExecutionFailedResponse = 9;
-    ErrandAdhocCodeCapCheckerRequest ErrandAdhocCodeCapCheckerRequest = 10;
-    ErrandAdhocCodeCapCheckerResponse ErrandAdhocCodeCapCheckerResponse = 11;
-    ErrandExecutionSucceededResponse ErrandExecutionSucceededResponse = 12;
-    TaskKeyGenerationApplyRequst TaskKeyGenerationApplyRequst = 13;
-    TaskExecutionRequest TaskExecutionRequest = 14;
-    TaskExecutionResponse TaskExecutionResponse = 15;
-    TaskPinnerKeySliceRequest TaskPinnerKeySliceRequest = 16;
-    TaskPinnerKeySliceResponse TaskPinnerKeySliceResponse = 17;
-    PeerApproveRaRequest PeerApproveRaRequest = 18;
-    PeerApproveRaResponse PeerApproveRaResponse = 19;
-    TaskSignWithKeySlicesRequst TaskSignWithKeySlicesRequst = 20;
-    TaskSignWithKeySlicesResponse TaskSignWithKeySlicesResponse = 21;
-    TaskSignGetPinnerKeySliceRequest TaskSignGetPinnerKeySliceRequest = 22;
-    TaskSignGetPinnerKeySliceResponse TaskSignGetPinnerKeySliceResponse = 23;
-    TaskCommitSignResultRequest TaskCommitSignResultRequest = 24;
-    KeyGenerationCandidateRequest KeyGenerationCandidateRequest = 25;
-    SignCandidateRequest SignCandidateRequest = 26;
+message RemoteAttestationRequest {
+  string uuid = 1;
+  oneof request {
+    nitro.AttestationDocRequest NitroAttestationDocRequest = 2;
+  }
+}
+
+message RemoteAttestationResponse {
+  string uuid = 1;
+  oneof response {
+    nitro.AttestationDocResponse NitroAttestationDocResponse = 2;
   }
 }
