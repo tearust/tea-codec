@@ -292,3 +292,22 @@ message RemoteAttestationResponse {
     nitro.AttestationDocResponse NitroAttestationDocResponse = 2;
   }
 }
+
+message P2pReplyMessage {
+  string uuid = 1;
+  string peerId = 2;
+  string content = 3;
+  P2pReplyType replyType = 4;
+  P2pReplyError replyError = 5;
+}
+
+message P2pReplyError {
+  string message = 1;
+}
+
+enum P2pReplyType {
+  Success = 0;
+  Cancelled = 1;
+  Rejected = 2;
+  Error = 3;
+}

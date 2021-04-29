@@ -28,3 +28,15 @@ message PcrVerifyRequest {
 message PcrVerifySlots {
     map<uint32, bytes> pcrs = 1;
 }
+
+message RaPeerRequest {
+    string uuid = 1;
+    string peerId = 2;
+    string actor = 3;
+    string replyTo = 4;
+    AttestationDocRequest attestationDocRequest = 5;
+}
+
+message RaPeerResponse {
+    bool success = 1;
+}

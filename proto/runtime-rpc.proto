@@ -1,6 +1,8 @@
 syntax = "proto3";
 package rpc;
 
+import "p2p.proto";
+
 message AdapterServerRequest {
     oneof msg {
         AdapterHttpRequest AdapterHttpRequest = 1;
@@ -81,7 +83,7 @@ message IpfsInfoResponse {
 message IpfsP2pFrowardRequest {
     string peerId = 1;
     string reply = 2;
-    bytes payload = 3;
+    p2p.GeneralMsg p2pGeneralMsg = 3;
 }
 
 message IpfsP2pCloseRequest {
@@ -123,16 +125,15 @@ message DataUploadCompletedRequest {
 
 message IpfsInboundP2pForwardRequest {
     string peerId = 1;
-    bytes payload = 2;
+    p2p.GeneralMsg p2pGeneralMsg = 2;
 }
 
 message IpfsInboundP2pForwardResponse {
-    bytes payload = 1;
+    p2p.P2pReplyMessage P2pReplyMessage = 1;
 }
 
 message IpfsP2pForwardResponse {
-    string reply = 1;
-    bytes payload = 2;
+    p2p.P2pReplyMessage P2pReplyMessage = 1;
 }
 
 message IpfsBlockGetResponse {
