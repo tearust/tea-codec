@@ -81,6 +81,12 @@ pub const HOST: &'static str = "host";
 pub const ACTOR_PUBKEY_INTERCOM: &'static str =
     "MAXJLKOWEXXNPMWYXJMBNTGZAURUCLPL7JYDA4L357IICGMSC4ATJUZM";
 
+///List all providers names vs their capability ids
+///
+pub const VMH_CAPABILITY_ID: &str = "tea:vmh-provider";
+pub const INTERCOM_CAPABILITY_ID: &str = "tea:intercom";
+pub const NITRO_CAPABILITY_ID: &str = "tea:nitro";
+
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelayMessage {
