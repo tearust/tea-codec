@@ -68,6 +68,7 @@ pub const OP_NITRO_ATTESTATION_DOC: &str = "AttestationDocument";
 pub const OP_NITRO_GEN_RANDOM: &str = "GenerateRandom";
 pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";
 pub const OP_NITRO_VERIFICATION_PRCS: &str = "VerificationPcrs";
+pub const OP_NITRO_GET_ATTESTATION_DOC_PARAMS: &str = "GetAttestationDocParams";
 
 ///List all actor names vs their actor pubkeys
 ///
@@ -75,7 +76,8 @@ pub const OP_NITRO_VERIFICATION_PRCS: &str = "VerificationPcrs";
 pub const ACTOR_PUBKEY_SIMPLE: &'static str =
     "MAPIZDLP2GN7QDSS3I74NCZEQOU2YXGZ4UROPRLDJI6ZZFT4TLJTOIGZ";
 // pub const ACTOR_NAME_RA: &'static str = "ra";
-pub const ACTOR_PUBKEY_RA: &'static str = "MDAELGEJDJPPMBHCVTXRCS6TYMEVOSEYLYHPDVWVBBRHNQ6KNIEBHNHQ";
+pub const ACTOR_PUBKEY_RA: &'static str =
+    "MDAELGEJDJPPMBHCVTXRCS6TYMEVOSEYLYHPDVWVBBRHNQ6KNIEBHNHQ";
 // pub const ACTOR_NAME_INTERCOM: &'static str = "intercom-actor";
 pub const HOST: &'static str = "host";
 pub const ACTOR_PUBKEY_INTERCOM: &'static str =
