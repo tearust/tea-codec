@@ -88,6 +88,7 @@ pub const ACTOR_PUBKEY_INTERCOM: &'static str =
 pub const VMH_CAPABILITY_ID: &str = "tea:vmh-provider";
 pub const INTERCOM_CAPABILITY_ID: &str = "tea:intercom";
 pub const NITRO_CAPABILITY_ID: &str = "tea:nitro";
+pub const KVP_CAPABILITY_ID: &str = "tea:keyvalue";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
