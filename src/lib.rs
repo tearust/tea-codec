@@ -130,3 +130,16 @@ pub struct RunActorWithParams {
     #[serde(default)]
     pub params: Vec<u8>,
 }
+
+pub fn get_type_hash<T>() -> u64
+where
+    T: 'static,
+{
+    use std::any::TypeId;
+    use std::collections::hash_map::DefaultHasher;
+    use std::hash::{Hash, Hasher};
+
+    let mut hasher = DefaultHasher::new();
+    TypeId::of::<T>().hash(&mut hasher);
+    hasher.finish()
+}
