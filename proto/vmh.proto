@@ -89,3 +89,7 @@ message OutboundResponse {
         ipfs.FindProviderInvokeError IpfsFindProviderInvokeError = 5;
     }
 }
+
+message RegisterDispatcherRequest {
+    repeated uint64 typeHashes = 1;
+}
