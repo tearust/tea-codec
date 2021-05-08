@@ -91,5 +91,5 @@ message OutboundResponse {
 }
 
 message RegisterDispatcherRequest {
-    repeated uint64 typeHashes = 1;
+    repeated uint32 typeIds = 1;
 }
