@@ -34,6 +34,9 @@ extern crate rmp_serde as rmps;
 use crate::error::{TeaError, TeaResult};
 use rmps::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
+use std::any::{Any, TypeId};
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
 use std::io::Cursor;
 
 /// The standard function for serializing codec structs into a format that can be
@@ -135,11 +138,16 @@ pub fn get_type_hash<T>() -> u64
 where
     T: 'static,
 {
-    use std::any::TypeId;
-    use std::collections::hash_map::DefaultHasher;
-    use std::hash::{Hash, Hasher};
-
     let mut hasher = DefaultHasher::new();
     TypeId::of::<T>().hash(&mut hasher);
+    hasher.finish()
+}
+
+pub fn get_object_type_hash<T>(o: &T) -> u64
+where
+    T: 'static,
+{
+    let mut hasher = DefaultHasher::new();
+    o.type_id().hash(&mut hasher);
     hasher.finish()
 }
