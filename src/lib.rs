@@ -64,6 +64,10 @@ pub const OP_DELAY_PUBLISH: &'static str = "DelayPublish";
 pub const OP_TEST_RELAY: &'static str = "OP_TEST_RELAY";
 pub const OP_INTERCOM_MESSAGE: &str = "IntercomMessage";
 
+pub const OP_GET_TEA_ID: &str = "GetTeaId";
+pub const OP_EPHEMERAL_PUB_KEY: &str = "GetEphemeralPubKey";
+pub const OP_EPHEMERAL_PRI_KEY: &str = "GetEphemeralPriKey";
+
 pub const OP_NITRO_ATTESTATION_DOC: &str = "AttestationDocument";
 pub const OP_NITRO_GEN_RANDOM: &str = "GenerateRandom";
 pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";

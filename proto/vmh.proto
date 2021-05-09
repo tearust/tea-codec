@@ -5,6 +5,16 @@ import "kvp-provider.proto";
 import "ipfs-provider.proto";
 import "runtime-rpc.proto";
 
+message CommandGeneralRequest {
+    oneof msg {
+        InitRuntimeRequest InitRuntimeRequest = 1;
+    }
+}
+
+message InitRuntimeRequest {
+    string teaId = 1;
+}
+
 message VmhInbound {
     uint32 RefSeq = 1;
     uint32 TypeId = 2;
