@@ -356,3 +356,4 @@ message GetKeyGenerationInfoRequest {
 message GetKeyGenerationInfoResponse {
   required KeyGenerationInfo keyGenerationInfo = 1;
 }
+
