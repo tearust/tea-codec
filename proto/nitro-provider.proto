@@ -40,3 +40,7 @@ message RaPeerRequest {
 message RaPeerResponse {
     bool success = 1;
 }
+
+message TeaNodeProfileV3 {
+    AttestationDocResponse attestationDocResponse = 1;
+}

@@ -1,22 +1,18 @@
-syntax = "proto2";
+syntax = "proto3";
 package env;
+
 message GetRequest{
-  required string key = 1;
+  string key = 1;
 }
 message GetResponse{
-  required string value = 1;
-  required bool exists = 2;
+  string value = 1;
+  bool exists = 2;
 }
 
 message GetSystemTimeRequest{
-  required string param = 1;
-}
-
-message GetSystemTimeResponse{
-  required bytes systemTimeInBytes = 1;
 }
 
 message GetClaimStackHashResponse{
-  required string manifest = 1;
-  required string actorsProvidersHashList = 2;
+  string manifest = 1;
+  string actorsProvidersHashList = 2;
 }

@@ -1,83 +1,80 @@
-syntax = "proto2";
+syntax = "proto3";
 package tpm;
 
 message VerifySignatureRequest{
-  required bytes signature = 1;
-  required bytes publicKey = 2;
-  required bytes msg = 3;
+  bytes signature = 1;
+  bytes publicKey = 2;
+  bytes msg = 3;
 }
 
 message VerifySignatureResponse{
-  required bool result = 1;
+  bool result = 1;
 }
 
 message Ed25519SignRequest{
-  required bytes msg = 1;
-  optional bytes key = 2;
+  bytes msg = 1;
+  bytes key = 2;
 }
 
 message Ed25519SignResponse{
-  required bytes sig = 1;
+  bytes sig = 1;
 }
 
 message Sr25519SignRequest{
-  required bytes msg = 1;
-  required bytes key = 2;
+  bytes msg = 1;
+  bytes key = 2;
 }
 
 message Sr25519SignResponse{
-  required bytes sig = 1;
+  bytes sig = 1;
 }
 
 message RsaDecryptRequest{
-  required bytes private_key_pkcs1 = 1;
-  required bytes msg = 2;
-
+  bytes private_key_pkcs1 = 1;
+  bytes msg = 2;
 }
 
 message RsaDecryptResponse{
-  required bytes result = 1;
-  optional string error = 2;
+  bytes result = 1;
+  string error = 2;
 }
 
 message RsaEncryptRequest{
-  required bytes public_key_pkcs1 = 1;
-  required bytes msg = 2;
-
+  bytes public_key_pkcs1 = 1;
+  bytes msg = 2;
 }
 
 message RsaEncryptResponse{
-  required bytes result = 1;
+  bytes result = 1;
 }
 
 message GetPcrRequest{
-
 }
 
 message GetPcrResponse{
-  required Pcrs pcrs = 1;
+  Pcrs pcrs = 1;
 }
 
 message RsaKeyPairPemPcsk1{
-  required string publicKey = 1;
-  required string privateKey = 2;
+  string publicKey = 1;
+  string privateKey = 2;
 }
 
 message SignedPcrsBytes{
-  required Pcrs pcrs = 1;
-  required bytes sig = 2;
+  Pcrs pcrs = 1;
+  bytes sig = 2;
 }
 
 message TeaNodeProfileV1{
-  required SignedPcrsBytes pcrValues = 1;
-  required string manifest = 3;
+  SignedPcrsBytes pcrValues = 1;
+  string manifest = 3;
   // required string actorsProvidersHashList = 4;
 }
 message TeaNodeProfileV2{
-  required SignedPcrsBytes pcrValues = 1;
-  required string manifest = 3;
+  SignedPcrsBytes pcrValues = 1;
+  string manifest = 3;
   // required string actorsProvidersHashList = 4;
-  required string mode = 4;
+  string mode = 4;
 }
 
 message Pcrs{
@@ -85,12 +82,12 @@ message Pcrs{
 }
 
 message RebuildOtherPeerPcrBytesRequest{
-  required bytes ephemeralId = 1;
-  required string manifest = 3;
+  bytes ephemeralId = 1;
+  string manifest = 3;
 }
 
 message ResponseError{
-  required string error = 1;
+  string error = 1;
 }
 
 message GetEd25519KeyPairRequest{
@@ -98,7 +95,7 @@ message GetEd25519KeyPairRequest{
 }
 
 message GetEd25519KeyPairResponse{
-  required bytes keypair = 1;
+  bytes keypair = 1;
 }
 
 message GetEphemeralIdKeyPairSigRequest{
@@ -106,9 +103,9 @@ message GetEphemeralIdKeyPairSigRequest{
 }
 
 message GetEphemeralIdKeyPairSigResponse{
-  required bytes pubkey = 1;
-  required bytes prikey = 2;
-  required bytes sig = 3;
+  bytes pubkey = 1;
+  bytes prikey = 2;
+  bytes sig = 3;
 }
 
 message GetTeaIdRequest{
@@ -116,7 +113,7 @@ message GetTeaIdRequest{
 }
 
 message GetTeaIdResponse{
-  required bytes teaId = 1;
+  bytes teaId = 1;
 }
 
 message GetSignedPcrRequest{
@@ -124,16 +121,16 @@ message GetSignedPcrRequest{
 }
 
 message GetSignedPcrResponse{
-  required Pcrs pcrs = 1;
-  required bytes sig = 2; 
+  Pcrs pcrs = 1;
+  bytes sig = 2; 
 }
 
 message ExtendPcrRequest{
-  required bytes newPcr = 1;
+  bytes newPcr = 1;
 }
 
 message ExtendPcrResponse{
-  required bool result = 1;
+  bool result = 1;
 }
 
 message TpmMessage{
