@@ -26,7 +26,8 @@ message PcrVerifyRequest {
 }
 
 message PcrVerifySlots {
-    map<uint32, bytes> pcrs = 1;
+    map<uint32, bytes> daoPcrs = 1; // pcrs pre-registered by DAO in layer1
+    map<uint32, bytes> customPcrs = 2; // pcrs for personalized usage, including tea-id and others
 }
 
 message RaPeerRequest {
