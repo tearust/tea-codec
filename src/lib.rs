@@ -77,8 +77,6 @@ pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";
 pub const OP_NITRO_VERIFICATION_PRCS: &str = "VerificationPcrs";
 pub const OP_NITRO_GET_ATTESTATION_DOC_PARAMS: &str = "GetAttestationDocParams";
 
-pub const PREFIX_NODE_STATUS: &'static str = "my_node_status";
-
 ///List all actor names vs their actor pubkeys
 ///
 // pub const ACTOR_NAME_SIMPLE: &'static str = "simple-actor";
