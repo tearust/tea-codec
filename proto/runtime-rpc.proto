@@ -41,6 +41,7 @@ message Layer1GeneralRequest {
     oneof msg {
         AddNewNodeRequest AddNewNodeRequest = 1;
         TeaNodeUpdateProfileRequest UpdateNodeProfileRequest = 2;
+        CommitRaResultRequest CommitRaResultRequest = 3;
     }
 }
 
@@ -54,6 +55,7 @@ message Layer1GeneralEvent {
     oneof msg {
         NewNodeAddedEvent NewNodeAddedEvent = 1;
         TeaNodeResponse UpdateNodeProfileEvent = 2;
+        CommitRaResultResponse CommitRaResultEvent = 3;
     }
 }
 
@@ -170,4 +172,19 @@ message TeaNodeResponse{
 message RANode {
   bytes teaId = 1;
   bool isPass = 2;
+}
+
+message CommitRaResultRequest {
+  bytes teaId = 1;
+  bytes targetTeaId = 2;
+  bool isPass = 3;
+  bytes signature = 4;
+}
+
+message CommitRaResultResponse {
+  string accountId = 1;
+  bytes teaId = 2;
+  bytes targetTeaId = 3;
+  bool isPass = 4;
+  string targetStatus = 5;
 }
