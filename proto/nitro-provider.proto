@@ -9,6 +9,13 @@ message GenRandomResponse {
     bytes data = 1;
 }
 
+message GenUuidRequest {
+}
+
+message GenUuidResponse {
+    string id = 1;
+}
+
 message AttestationDocRequest {
     bytes userData = 1;
     bytes nonce = 2;

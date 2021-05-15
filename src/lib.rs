@@ -73,6 +73,7 @@ pub const OP_EPHEMERAL_PRI_KEY: &str = "GetEphemeralPriKey";
 
 pub const OP_NITRO_ATTESTATION_DOC: &str = "AttestationDocument";
 pub const OP_NITRO_GEN_RANDOM: &str = "GenerateRandom";
+pub const OP_NITRO_GEN_UUID: &str = "GenerateUuid";
 pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";
 pub const OP_NITRO_VERIFICATION_PRCS: &str = "VerificationPcrs";
 pub const OP_NITRO_GET_ATTESTATION_DOC_PARAMS: &str = "GetAttestationDocParams";
