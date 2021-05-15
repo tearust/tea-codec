@@ -17,13 +17,13 @@ message InitRuntimeRequest {
 }
 
 message VmhInbound {
-    uint32 RefSeq = 1;
+    string uuid = 1;
     uint32 TypeId = 2;
     VmhMessage VmhMessage = 3;
 }
 
 message VmhOutbound {
-    uint32 RefSeq = 1;
+    string uuid = 1;
     uint32 TypeId = 2;
     string Target = 3;
     VmhMessage VmhMessage = 4;
@@ -82,7 +82,7 @@ message VmhMessage {
 }
 
 message OutboundRequest {
-    uint32 RefSeq = 1;
+    string uuid = 1;
     string channel = 2;
     oneof msg {
         ProviderOperationRequest ProviderOperationRequest = 3;
@@ -92,7 +92,7 @@ message OutboundRequest {
 }
 
 message OutboundResponse {
-    uint32 RefSeq = 1;
+    string uuid = 1;
     string actor = 2;
     oneof msg {
         ProviderOperationResponse ProviderOperationResponse = 3;

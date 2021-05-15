@@ -38,10 +38,11 @@ message AdapterClientResponse {
 }
 
 message Layer1GeneralRequest {
+    string uuid = 1;
     oneof msg {
-        AddNewNodeRequest AddNewNodeRequest = 1;
-        TeaNodeUpdateProfileRequest UpdateNodeProfileRequest = 2;
-        CommitRaResultRequest CommitRaResultRequest = 3;
+        AddNewNodeRequest AddNewNodeRequest = 2;
+        TeaNodeUpdateProfileRequest UpdateNodeProfileRequest = 3;
+        CommitRaResultRequest CommitRaResultRequest = 4;
     }
 }
 

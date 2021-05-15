@@ -68,7 +68,7 @@ message AttachmentData {
 }
 
 message IpfsOperationRequest {
-  uint32 RefSeq = 1;
+  string uuid = 1;
   string actor = 2;
   string operation = 3;
   bytes msg = 4;
