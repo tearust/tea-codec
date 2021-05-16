@@ -45,7 +45,6 @@ enum FindingMode {
 
 message FindProvidersRequest {
   string deploymentId = 1;
-  string uuid = 2;
   FindProvidersContext context = 3;
   string sendToActor = 4;
   FindingMode findingMode = 5;
@@ -54,7 +53,6 @@ message FindProvidersRequest {
 message FindProvidersResponse {
   string deploymentId = 1;
   repeated FindProvidersResponseItem items = 2;
-  string uuid = 3;
   string sendToActor = 4;
   AttachmentData attachment = 5;
 }
