@@ -66,6 +66,8 @@ pub const OP_INTERCOM_MESSAGE: &str = "IntercomMessage";
 
 pub const OP_GET_ENV_VAR: &str = "GetEnvVar";
 pub const OP_GET_SYSTEM_TIME: &str = "GetSystemTime";
+pub const OP_TASK_START: &str = "TaskStart";
+pub const OP_TASK_END: &str = "TaskEnd";
 
 pub const OP_GET_TEA_ID: &str = "GetTeaId";
 pub const OP_EPHEMERAL_PUB_KEY: &str = "GetEphemeralPubKey";
@@ -97,6 +99,7 @@ pub const VMH_CAPABILITY_ID: &str = "tea:vmh-provider";
 pub const INTERCOM_CAPABILITY_ID: &str = "tea:intercom";
 pub const NITRO_CAPABILITY_ID: &str = "tea:nitro";
 pub const KVP_CAPABILITY_ID: &str = "tea:keyvalue";
+pub const ENV_CAPABILITY_ID: &str = "tea:env";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

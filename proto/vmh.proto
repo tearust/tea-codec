@@ -104,3 +104,19 @@ message OutboundResponse {
 message RegisterDispatcherRequest {
     repeated uint32 typeIds = 1;
 }
+
+message NetworkDataLenRequest {
+    string uuid = 1;
+}
+
+message NetworkDataLenResponse {
+   uint64 len = 1;
+   string error = 2;
+}
+
+message RegisteredActorsRequest {
+}
+
+message RegisteredActorsResponse {
+    repeated string actors = 1;
+}

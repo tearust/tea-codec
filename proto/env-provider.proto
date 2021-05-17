@@ -16,3 +16,19 @@ message GetClaimStackHashResponse{
   string manifest = 1;
   string actorsProvidersHashList = 2;
 }
+
+message StartTasksRequest{
+  string uuid = 1;
+}
+
+message StartTasksResponse{
+  bytes systemTime = 1;
+}
+
+message EndTasksRequest{
+  string uuid = 1;
+}
+
+message EndTasksResponse{
+  bytes milliseconds = 1;
+}

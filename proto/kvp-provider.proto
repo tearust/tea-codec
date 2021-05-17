@@ -156,3 +156,11 @@ message RestoreFromFileRequest{
 message RestoreFromFileResponse{
   repeated string keys = 1;
 }
+
+message TaskMemorySizeRequest{
+  string uuid = 1;
+}
+
+message TaskMemorySizeResponse{
+  uint64 size = 1;
+}
