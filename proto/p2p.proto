@@ -4,6 +4,7 @@ package p2p;
 import "nitro-provider.proto";
 
 message GeneralMsg{
+  string uuid = 99;
   oneof msg {
     ResponseError error = 1;
     PeerApprovePinnerRequest PeerApproveRequest = 2;

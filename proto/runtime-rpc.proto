@@ -4,13 +4,14 @@ package rpc;
 import "p2p.proto";
 
 message AdapterServerRequest {
+    string uuid = 1;
     oneof msg {
-        AdapterHttpRequest AdapterHttpRequest = 1;
-        CheckValidRsaPubKeyRequest CheckValidRsaPubKeyRequest = 2;
-        DataUploadCompletedRequest DataUploadCompletedRequest = 3;
-        IpfsInboundP2pForwardRequest IpfsInboundP2pForwardRequest = 4;
-        IpfsP2pForwardResponse IpfsP2pForwardResponse = 5;
-        IpfsBlockGetResponse IpfsBlockGetResponse = 6;
+        AdapterHttpRequest AdapterHttpRequest = 2;
+        CheckValidRsaPubKeyRequest CheckValidRsaPubKeyRequest = 3;
+        DataUploadCompletedRequest DataUploadCompletedRequest = 4;
+        IpfsInboundP2pForwardRequest IpfsInboundP2pForwardRequest = 5;
+        IpfsP2pForwardResponse IpfsP2pForwardResponse = 6;
+        IpfsBlockGetResponse IpfsBlockGetResponse = 7;
     }
 }
 
