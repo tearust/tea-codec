@@ -1,9 +1,6 @@
 syntax = "proto3";
 package actor_ra;
 
-import "tpm-provider.proto";
-import "nitro-provider.proto";
-
 message LibP2PInitInfo {
   bytes encodedBytes = 1;
   bytes tpmSignature = 2;//sign based on public key of keypair not the encoded bytes
