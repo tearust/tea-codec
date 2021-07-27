@@ -1,0 +1,11 @@
+syntax = "proto3";
+package raft;
+
+message SetValueRequest {
+	string key = 1;
+	bytes value = 2;
+}
+
+message SetValueResponse {
+	bool success = 1;
+}
