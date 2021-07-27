@@ -1,6 +1,12 @@
 syntax = "proto3";
 package raft;
 
+message ChannelOutboundMessage {
+	string providerName = 1;
+	uint64 peerId = 2;
+	bytes message = 3; // serialize from `Message` object in raft-rs
+}
+
 message SetValueRequest {
 	string key = 1;
 	bytes value = 2;
