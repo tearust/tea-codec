@@ -7,6 +7,11 @@ message ChannelOutboundMessage {
 	bytes message = 3; // serialize from `Message` object in raft-rs
 }
 
+message ChannelInboundMessage {
+	string providerName = 1;
+	bytes message = 2; // serialize from `Message` object in raft-rs
+}
+
 message SetValueRequest {
 	string key = 1;
 	bytes value = 2;
