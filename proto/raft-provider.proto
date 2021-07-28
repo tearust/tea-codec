@@ -5,19 +5,21 @@ message ChannelOutboundMessage {
 	string providerName = 1;
 	uint64 peerId = 2;
 	oneof msg {
-		NormalOutboundMessage NormalMessage = 3;
+		NormalMessage NormalMessage = 3;
 		ProposalMessage ProposalMessage = 4;
 	}
 }
 
 message ChannelInboundMessage {
 	string providerName = 1;
-	bytes message = 2; // serialize from `Message` object in raft-rs
+	oneof msg {
+		NormalMessage NormalMessage = 3;
+		ProposalMessage ProposalMessage = 4;
+	}
 }
 
 message TcpWrapperMessage {
-	string providerName = 1;
-	bytes message = 2; // serialize from `Message` object in raft-rs
+	ChannelInboundMessage inbound = 1;
 }
 
 message SetValueRequest {
@@ -35,7 +37,7 @@ message BecomeFollowerRequest {
 	string uuid = 2;
 }
 
-message NormalOutboundMessage {
+message NormalMessage {
 	bytes message = 1; // serialize from `Message` object in raft-rs
 }
 
