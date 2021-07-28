@@ -4,7 +4,10 @@ package raft;
 message ChannelOutboundMessage {
 	string providerName = 1;
 	uint64 peerId = 2;
-	bytes message = 3; // serialize from `Message` object in raft-rs
+	oneof msg {
+		NormalOutboundMessage NormalMessage = 3;
+		ProposalMessage ProposalMessage = 4;
+	}
 }
 
 message ChannelInboundMessage {
@@ -12,11 +15,46 @@ message ChannelInboundMessage {
 	bytes message = 2; // serialize from `Message` object in raft-rs
 }
 
+message TcpWrapperMessage {
+	string providerName = 1;
+	bytes message = 2; // serialize from `Message` object in raft-rs
+}
+
 message SetValueRequest {
 	string key = 1;
 	bytes value = 2;
+	string uuid = 3;
 }
 
 message SetValueResponse {
 	bool success = 1;
+}
+
+message BecomeFollowerRequest {
+	uint64 peerId = 1;
+	string uuid = 2;
+}
+
+message NormalOutboundMessage {
+	bytes message = 1; // serialize from `Message` object in raft-rs
+}
+
+message ProposalMessage {
+	string uuid = 1;
+	NormalProposal normal = 2;
+	ConfChangeProposal confChange = 3;
+	TransferLeaderProposal transferLeader = 4;
+}
+
+message NormalProposal {
+	string key = 1;
+	bytes value = 2;
+}
+
+message ConfChangeProposal {
+	bytes message = 1; // serialize from `ConfChange` object in raft-rs
+}
+
+message TransferLeaderProposal {
+	uint64 peerId = 1;
 }
