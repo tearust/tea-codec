@@ -70,3 +70,8 @@ message ConfChangeProposal {
 message TransferLeaderProposal {
 	uint64 peerId = 1;
 }
+
+message InnerChangeStorageMessage {
+	string key = 1;
+	bytes value = 2;
+}
