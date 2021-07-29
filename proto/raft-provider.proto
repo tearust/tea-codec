@@ -22,6 +22,16 @@ message TcpWrapperMessage {
 	ChannelInboundMessage inbound = 1;
 }
 
+message GetValueRequest {
+	string key = 1;
+	string uuid = 2;
+}
+
+message GetValueResponse {
+	bytes value = 1;
+	string error = 2;
+}
+
 message SetValueRequest {
 	string key = 1;
 	bytes value = 2;
