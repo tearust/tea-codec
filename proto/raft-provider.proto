@@ -4,22 +4,24 @@ package raft;
 message ChannelOutboundMessage {
 	string providerName = 1;
 	uint64 peerId = 2;
-	oneof msg {
-		NormalMessage NormalMessage = 3;
-		ProposalMessage ProposalMessage = 4;
-	}
+	ChannelMessages message = 3;
 }
 
 message ChannelInboundMessage {
 	string providerName = 1;
-	oneof msg {
-		NormalMessage NormalMessage = 3;
-		ProposalMessage ProposalMessage = 4;
-	}
+	ChannelMessages message = 2;
 }
 
 message TcpWrapperMessage {
-	ChannelInboundMessage inbound = 1;
+	string providerName = 1;
+	ChannelMessages message = 2;
+}
+
+message ChannelMessages {
+	oneof msg {
+		NormalMessage NormalMessage = 1;
+		ProposalMessage ProposalMessage = 2;
+	}
 }
 
 message GetValueRequest {
