@@ -21,6 +21,8 @@ message ChannelMessages {
 	oneof msg {
 		NormalMessage NormalMessage = 1;
 		ProposalMessage ProposalMessage = 2;
+		PeerNodesUpdate PeerNodesUpdate = 3;
+		PeerNodesBroadcast PeerNodesBroadcast = 4;
 	}
 }
 
@@ -76,4 +78,18 @@ message TransferLeaderProposal {
 message InnerChangeStorageMessage {
 	string key = 1;
 	bytes value = 2;
+}
+
+message PeerNodesUpdate {
+	repeated PeerNode nodes = 1;
+}
+
+message PeerNode {
+	uint64 peerId = 1;
+	string address = 2;
+	uint32 port = 3;
+}
+
+message PeerNodesBroadcast {
+
 }
