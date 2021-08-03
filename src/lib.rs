@@ -100,6 +100,7 @@ pub const INTERCOM_CAPABILITY_ID: &str = "tea:intercom";
 pub const NITRO_CAPABILITY_ID: &str = "tea:nitro";
 pub const KVP_CAPABILITY_ID: &str = "tea:keyvalue";
 pub const ENV_CAPABILITY_ID: &str = "tea:env";
+pub const RAFT_CAPABILITY_ID: &str = "tea:raft";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
