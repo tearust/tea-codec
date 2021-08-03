@@ -82,6 +82,7 @@ message InnerChangeStorageMessage {
 
 message PeerNodesUpdate {
 	repeated PeerNode nodes = 1;
+	bool isLeader = 2;
 }
 
 message PeerNode {
@@ -91,5 +92,5 @@ message PeerNode {
 }
 
 message PeerNodesBroadcast {
-
+	bool isLeader = 1;
 }
