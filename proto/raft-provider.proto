@@ -23,6 +23,7 @@ message ChannelMessages {
 		ProposalMessage ProposalMessage = 2;
 		PeerNodesUpdate PeerNodesUpdate = 3;
 		PeerNodesBroadcast PeerNodesBroadcast = 4;
+		DefaultPeerInit DefaultPeerInit = 5;
 	}
 }
 
@@ -44,11 +45,6 @@ message SetValueRequest {
 
 message SetValueResponse {
 	bool success = 1;
-}
-
-message BecomeFollowerRequest {
-	uint64 peerId = 1;
-	string uuid = 2;
 }
 
 message NormalMessage {
@@ -93,4 +89,9 @@ message PeerNode {
 
 message PeerNodesBroadcast {
 	bool isLeader = 1;
+}
+
+message DefaultPeerInit {
+	uint64 peerId = 1;
+	bool isLeader = 2;
 }
