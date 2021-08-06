@@ -24,6 +24,7 @@ message ChannelMessages {
 		PeerNodesUpdate PeerNodesUpdate = 3;
 		PeerNodesBroadcast PeerNodesBroadcast = 4;
 		DefaultPeerInit DefaultPeerInit = 5;
+		ProposalCallback ProposalCallback = 6;
 	}
 }
 
@@ -56,6 +57,12 @@ message ProposalMessage {
 	NormalProposal normal = 2;
 	ConfChangeProposal confChange = 3;
 	TransferLeaderProposal transferLeader = 4;
+	uint64 sourcePeerId = 5;
+}
+
+message ProposalCallback {
+	string uuid = 1;
+	bool success = 2;
 }
 
 message NormalProposal {
