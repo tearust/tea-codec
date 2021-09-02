@@ -88,6 +88,8 @@ pub const ACTOR_PUBKEY_SIMPLE: &'static str =
 // pub const ACTOR_NAME_RA: &'static str = "ra";
 pub const ACTOR_PUBKEY_RA: &'static str =
     "MDAELGEJDJPPMBHCVTXRCS6TYMEVOSEYLYHPDVWVBBRHNQ6KNIEBHNHQ";
+pub const ACTOR_PUBKEY_DELEGATE: &str =
+	"MAVB7LZ22BBLNW5SL3EZP7A6NTFGZFHFJVSFSPUINTLR5YQXR3LZVO7H";
 // pub const ACTOR_NAME_INTERCOM: &'static str = "intercom-actor";
 pub const HOST: &'static str = "host";
 pub const ACTOR_PUBKEY_INTERCOM: &'static str =
