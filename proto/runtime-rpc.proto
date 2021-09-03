@@ -43,12 +43,14 @@ message Layer1GeneralRequest {
         AddNewNodeRequest AddNewNodeRequest = 2;
         TeaNodeUpdateProfileRequest UpdateNodeProfileRequest = 3;
         CommitRaResultRequest CommitRaResultRequest = 4;
+        QueryTAppResourceRequest QueryTAppResourceRequest = 5;
     }
 }
 
 message Layer1GeneralResponse {
     oneof msg {
         AddNewNodeResponse AddNewNodeResponse = 1;
+        QueryTAppResourceResponse QueryTAppResourceResponse = 2;
     }
 }
 
@@ -58,6 +60,14 @@ message Layer1GeneralEvent {
         TeaNodeResponse UpdateNodeProfileEvent = 2;
         CommitRaResultResponse CommitRaResultEvent = 3;
     }
+}
+
+message QueryTAppResourceRequest {
+    uint64 tappId = 1;
+}
+
+message QueryTAppResourceResponse {
+    string cid = 1;
 }
 
 message AddNewNodeRequest {
