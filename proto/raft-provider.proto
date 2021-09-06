@@ -30,9 +30,10 @@ message ChannelMessages {
 
 message GetValueRequest {
 	string key = 1;
-	string uuid = 2;
-	bool getAll = 3;
-	bool getByPrefix = 4;
+	uint32 index = 2;
+	string uuid = 3;
+	bool getAll = 4;
+	bool getByPrefix = 5;
 }
 
 message GetValueResponse {
@@ -53,7 +54,8 @@ message GetMultipleValues {
 message SetValueRequest {
 	string key = 1;
 	bytes value = 2;
-	string uuid = 3;
+	uint32 index = 3;
+	string uuid = 4;
 }
 
 message SetValueResponse {
@@ -80,6 +82,7 @@ message ProposalCallback {
 message NormalProposal {
 	string key = 1;
 	bytes value = 2;
+	uint32 index = 3;
 }
 
 message ConfChangeProposal {
@@ -93,6 +96,7 @@ message TransferLeaderProposal {
 message InnerChangeStorageMessage {
 	string key = 1;
 	bytes value = 2;
+	uint32 index = 3;
 }
 
 message PeerNodesUpdate {
