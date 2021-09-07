@@ -62,6 +62,16 @@ message SetValueResponse {
 	bool success = 1;
 }
 
+message DeleteValueRequest {
+	string key = 1;
+	uint32 index = 2;
+	string uuid = 3;
+}
+
+message DeleteValueResponse {
+	bool success = 1;
+}
+
 message NormalMessage {
 	bytes message = 1; // serialize from `Message` object in raft-rs
 }
@@ -72,6 +82,7 @@ message ProposalMessage {
 	ConfChangeProposal confChange = 3;
 	TransferLeaderProposal transferLeader = 4;
 	uint64 sourcePeerId = 5;
+	DeleteProposal delete = 6;
 }
 
 message ProposalCallback {
@@ -85,6 +96,11 @@ message NormalProposal {
 	uint32 index = 3;
 }
 
+message DeleteProposal {
+	string key = 1;
+	uint32 index = 2;
+}
+
 message ConfChangeProposal {
 	bytes message = 1; // serialize from `ConfChange` object in raft-rs
 }
@@ -93,10 +109,23 @@ message TransferLeaderProposal {
 	uint64 peerId = 1;
 }
 
+// raft inner messages about proprosals
+message InnerMessages {
+	oneof msg {
+		InnerChangeStorageMessage InnerChangeStorageMessage = 1;
+		InnerDeleteStorageMessage InnerDeleteStorageMessage = 2;
+	}
+}
+
 message InnerChangeStorageMessage {
 	string key = 1;
 	bytes value = 2;
 	uint32 index = 3;
+}
+
+message InnerDeleteStorageMessage {
+	string key = 1;
+	uint32 index = 2;
 }
 
 message PeerNodesUpdate {
