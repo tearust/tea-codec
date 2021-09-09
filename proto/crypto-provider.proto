@@ -156,3 +156,11 @@ message RsaKeyPairPemPcsk1Response {
   string publicKey = 1;
   string privateKey = 2;
 }
+
+message FromSs58AddressRequest {
+  string address = 1;
+}
+
+message FromSs58AddressResponse {
+  bytes result = 1;
+}
