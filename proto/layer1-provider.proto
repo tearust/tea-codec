@@ -5,8 +5,15 @@ message ConstructExtrinsicRequest {
     bytes toPublicKey = 1;
     bytes amount = 2;
     bytes privateKey = 3;
+    SubstrateApiInfo substrateApiInfo = 4;
 }
 
 message ConstructExtrinsicResponse {
     bytes rawTransaction = 1;
+}
+
+message SubstrateApiInfo {
+    bytes header = 1;
+    uint64 period = 2;
+    uint32 nonce = 3;
 }
