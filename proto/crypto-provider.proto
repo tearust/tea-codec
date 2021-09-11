@@ -164,3 +164,11 @@ message FromSs58AddressRequest {
 message FromSs58AddressResponse {
   bytes result = 1;
 }
+
+message ToSs58AddressRequest {
+  bytes publicKey = 1;
+}
+
+message ToSs58AddressResponse {
+  string address = 1;
+}
