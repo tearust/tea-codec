@@ -3,6 +3,7 @@ package vmh;
 
 import "kvp-provider.proto";
 import "ipfs-provider.proto";
+import "layer1-provider.proto";
 import "runtime-rpc.proto";
 
 message CommandGeneralRequest {
@@ -14,6 +15,7 @@ message CommandGeneralRequest {
 message InitRuntimeRequest {
     string teaId = 1;
     bytes envSettings = 2;
+    layer1.Layer1Settings layer1Settings = 3;
 }
 
 message VmhInbound {

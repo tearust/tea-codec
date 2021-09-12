@@ -18,3 +18,9 @@ message SubstrateApiInfo {
     uint32 nonce = 3;
     bytes head = 4; // finalized block hash
 }
+
+message Layer1Settings {
+    uint32 runtimeSpecVersion = 1;
+    uint32 runtimeTransactionVersion = 2;
+    bytes genesisHash = 3;
+}
