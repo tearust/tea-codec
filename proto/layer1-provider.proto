@@ -1,6 +1,16 @@
 syntax = "proto3";
 package layer1;
 
+message Layer1Inbound {
+}
+
+message Layer1Outbound {
+    oneof msg {
+        ApiInfoRequest ApiInfoRequest = 1;
+        SendTxRequest SendTxRequest = 2;
+    }
+}
+
 message ConstructExtrinsicRequest {
     bytes toPublicKey = 1;
     bytes amount = 2;
@@ -10,6 +20,21 @@ message ConstructExtrinsicRequest {
 
 message ConstructExtrinsicResponse {
     bytes rawTransaction = 1;
+}
+
+message SendTxRequest {
+    bytes rawTransaction = 1;
+}
+
+message SendTxResponse {
+    bool success = 1;
+}
+
+message ApiInfoRequest {
+}
+
+message ApiInfoResponse {
+    SubstrateApiInfo substrateApiInfo = 1;
 }
 
 message SubstrateApiInfo {
