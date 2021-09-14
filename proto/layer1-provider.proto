@@ -40,8 +40,7 @@ message ApiInfoResponse {
 message SubstrateApiInfo {
     bytes header = 1; // finalized block header serialized with serde
     uint64 period = 2;
-    uint32 nonce = 3;
-    bytes head = 4; // finalized block hash
+    bytes head = 3; // finalized block hash
 }
 
 message Layer1Settings {
