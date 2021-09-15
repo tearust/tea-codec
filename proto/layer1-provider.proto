@@ -2,6 +2,9 @@ syntax = "proto3";
 package layer1;
 
 message Layer1Inbound {
+    oneof msg {
+        TappTopupEvent TappTopupEvent = 1;
+    }
 }
 
 message Layer1Outbound {
@@ -47,4 +50,11 @@ message Layer1Settings {
     uint32 runtimeSpecVersion = 1;
     uint32 runtimeTransactionVersion = 2;
     bytes genesisHash = 3;
+}
+
+message TappTopupEvent {
+    uint64 tappId = 1;
+    string fromAccount = 2;
+    string toAccount = 3;
+    bytes amount = 4;
 }
