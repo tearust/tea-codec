@@ -58,3 +58,5 @@ message TappTopupEvent {
     string toAccount = 3;
     bytes amount = 4;
 }
+
+message RegisterLayer1EventRequest {}
