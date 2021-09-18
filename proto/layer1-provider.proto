@@ -4,6 +4,8 @@ package layer1;
 message Layer1Inbound {
     oneof msg {
         TappTopupEvent TappTopupEvent = 1;
+        TappHostedEvent TappHostedEvent = 2;
+        TappUnhostedEvent TappUnhostedEvent = 3;
     }
 }
 
