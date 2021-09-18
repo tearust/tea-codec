@@ -59,4 +59,17 @@ message TappTopupEvent {
     bytes amount = 4;
 }
 
+message TappHostedEvent {
+    uint64 tappId = 1;
+    uint64 cmlId = 2;
+    bytes teaId = 3;
+    bool becomeActive = 4;
+}
+
+message TappUnhostedEvent {
+    uint64 tappId = 1;
+    uint64 cmlId = 2;
+    bool becomePending = 3;
+}
+
 message RegisterLayer1EventRequest {}
