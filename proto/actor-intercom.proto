@@ -1,0 +1,14 @@
+syntax = "proto3";
+package intercom;
+
+message ActivityCountRequest {
+	uint64 tappId = 1;
+	string vId = 2;
+	string tappType = 3;
+	string uuid = 4;
+}
+
+message ActivityCountResponse {
+	uint64 activityCount = 1;
+	string uuid = 2;
+}
