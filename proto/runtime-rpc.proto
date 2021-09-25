@@ -44,6 +44,7 @@ message Layer1GeneralRequest {
         TeaNodeUpdateProfileRequest UpdateNodeProfileRequest = 3;
         CommitRaResultRequest CommitRaResultRequest = 4;
         QueryTAppResourceRequest QueryTAppResourceRequest = 5;
+        HttpExecutionRequest HttpExecutionRequest = 6;
     }
 }
 
@@ -51,6 +52,7 @@ message Layer1GeneralResponse {
     oneof msg {
         AddNewNodeResponse AddNewNodeResponse = 1;
         QueryTAppResourceResponse QueryTAppResourceResponse = 2;
+        HttpExecutionResponse HttpExecutionResponse = 3;
     }
 }
 
@@ -68,6 +70,14 @@ message QueryTAppResourceRequest {
 
 message QueryTAppResourceResponse {
     string cid = 1;
+}
+
+message HttpExecutionRequest {
+    string requestUrl = 1;
+}
+
+message HttpExecutionResponse {
+    string responseJson = 1;
 }
 
 message AddNewNodeRequest {
