@@ -10,5 +10,6 @@ message ActivityCountRequest {
 
 message ActivityCountResponse {
 	uint64 activityCount = 1;
-	string uuid = 2;
+	uint32 blockNumber = 2;
+	string uuid = 3;
 }

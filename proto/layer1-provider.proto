@@ -6,6 +6,7 @@ message Layer1Inbound {
         TappTopupEvent TappTopupEvent = 1;
         TappHostedEvent TappHostedEvent = 2;
         TappUnhostedEvent TappUnhostedEvent = 3;
+        NewBlockEvent NewBlockEvent = 4;
     }
 }
 
@@ -72,6 +73,13 @@ message TappUnhostedEvent {
     uint64 tappId = 1;
     uint64 cmlId = 2;
     bool becomePending = 3;
+}
+
+message NewBlockEvent {
+    uint32 blockNumber = 1;
+    bytes parentHash = 2;
+    bytes stateRoot = 3;
+    bytes extrinsicRoot = 4;
 }
 
 message RegisterLayer1EventRequest {}
