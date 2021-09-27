@@ -3,9 +3,7 @@ package intercom;
 
 message ActivityCountRequest {
 	uint64 tappId = 1;
-	string vId = 2;
-	string tappType = 3;
-	string uuid = 4;
+	string uuid = 2;
 }
 
 message ActivityCountResponse {
