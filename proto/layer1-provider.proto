@@ -14,6 +14,8 @@ message Layer1Outbound {
     oneof msg {
         ApiInfoRequest ApiInfoRequest = 1;
         SendTxRequest SendTxRequest = 2;
+        TappInfoRequest TappInfoRequest = 3;
+        ListTappsRequest ListTappsRequest = 4;
     }
 }
 
@@ -41,6 +43,24 @@ message ApiInfoRequest {
 
 message ApiInfoResponse {
     SubstrateApiInfo substrateApiInfo = 1;
+}
+
+message TappInfoRequest {
+    uint64 tappId = 1;
+}
+
+message TappInfoResponse {
+    uint64 tappId = 1;
+    bytes name = 2;
+    bytes link = 3;
+}
+
+message ListTappsRequest {
+    bool activeOnly = 1;
+}
+
+message ListTappResponse {
+    repeated uint64 tappIds = 1;
 }
 
 message SubstrateApiInfo {
