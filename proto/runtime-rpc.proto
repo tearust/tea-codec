@@ -74,6 +74,12 @@ message QueryTAppResourceResponse {
 
 message HttpExecutionRequest {
     string requestUrl = 1;
+    repeated HttpExecutionHeader headers = 2;
+}
+
+message HttpExecutionHeader {
+    string key = 1;
+    string value = 2;
 }
 
 message HttpExecutionResponse {
