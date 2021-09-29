@@ -98,7 +98,6 @@ message TappUnhostedEvent {
 
 message TappBecomeActiveEvent {
     uint64 tappId = 1;
-    uint32 blockNumber = 2;
     uint32 hostCount = 3;
 }
 
