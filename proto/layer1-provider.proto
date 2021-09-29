@@ -7,6 +7,7 @@ message Layer1Inbound {
         TappHostedEvent TappHostedEvent = 2;
         TappUnhostedEvent TappUnhostedEvent = 3;
         NewBlockEvent NewBlockEvent = 4;
+        TappBecomeActiveEvent TappBecomeActiveEvent = 5;
     }
 }
 
@@ -93,6 +94,12 @@ message TappUnhostedEvent {
     uint64 tappId = 1;
     uint64 cmlId = 2;
     bool becomePending = 3;
+}
+
+message TappBecomeActiveEvent {
+    uint64 tappId = 1;
+    uint32 blockNumber = 2;
+    uint32 hostCount = 3;
 }
 
 message NewBlockEvent {
