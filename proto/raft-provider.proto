@@ -21,8 +21,6 @@ message ChannelMessages {
 	oneof msg {
 		NormalMessage NormalMessage = 1;
 		ProposalMessage ProposalMessage = 2;
-		PeerNodesUpdate PeerNodesUpdate = 3;
-		PeerNodesBroadcast PeerNodesBroadcast = 4;
 		DefaultPeerInit DefaultPeerInit = 5;
 		ProposalCallback ProposalCallback = 6;
 	}
@@ -128,19 +126,10 @@ message InnerDeleteStorageMessage {
 	uint32 index = 2;
 }
 
-message PeerNodesUpdate {
-	repeated PeerNode nodes = 1;
-	bool isLeader = 2;
-}
-
 message PeerNode {
 	uint64 peerId = 1;
 	string address = 2;
 	uint32 port = 3;
-}
-
-message PeerNodesBroadcast {
-	bool isLeader = 1;
 }
 
 message DefaultPeerInit {
