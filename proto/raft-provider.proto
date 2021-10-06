@@ -72,6 +72,7 @@ message DeleteValueResponse {
 
 message NormalMessage {
 	bytes message = 1; // serialize from `Message` object in raft-rs
+	int64 timestamp = 2;
 }
 
 message ProposalMessage {
