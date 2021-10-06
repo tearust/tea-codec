@@ -82,6 +82,7 @@ message ProposalMessage {
 	TransferLeaderProposal transferLeader = 4;
 	uint64 sourcePeerId = 5;
 	DeleteProposal delete = 6;
+	int64 timestamp = 7;
 }
 
 message ProposalCallback {
