@@ -1,0 +1,51 @@
+syntax = "proto3";
+package orbitdb;
+
+message OrbitGeneralRequest {
+	oneof msg {
+		IdentityRequest IdentityRequest = 1;
+		PutViewsRequest PutViewsRequest = 2;
+		GetViewsRequest GetViewsRequest = 3;
+	}
+}
+
+message GeneralResponse {
+	bool success = 1;
+	string error = 2;
+}
+
+message IdentityRequest {
+}
+
+message IdentityResponse {
+	GeneralResponse response = 1;
+	string id = 2;
+	string publicKey = 3;
+}
+
+message PutViewsRequest {
+	uint64 tappId = 1;
+	uint64 count = 2;
+	uint64 time = 3;
+	Block block = 4;
+}
+
+message PutViewsResponse {
+	GeneralResponse response = 1;
+	string data = 2;
+}
+
+message GetViewsRequest {
+	uint64 tappId = 1;
+}
+
+message GetViewsResponse {
+	GeneralResponse response = 1;
+	uint64 count = 2;
+	uint64 time = 3;
+	Block block = 4;
+}
+
+message Block {
+	uint32 height = 1;
+}

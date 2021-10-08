@@ -105,6 +105,7 @@ pub const KVP_CAPABILITY_ID: &str = "tea:keyvalue";
 pub const ENV_CAPABILITY_ID: &str = "tea:env";
 pub const RAFT_CAPABILITY_ID: &str = "tea:raft";
 pub const LAYER1_CAPABILITY_ID: &str = "tea:layer1";
+pub const ORBITDB_CAPABILITY_ID: &str = "tea:orbitdb";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
