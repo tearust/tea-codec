@@ -6,6 +6,7 @@ message OrbitGeneralRequest {
 		IdentityRequest IdentityRequest = 1;
 		PutViewsRequest PutViewsRequest = 2;
 		GetViewsRequest GetViewsRequest = 3;
+		SetOrbitIdRequest SetOrbitIdRequest = 4;
 	}
 }
 
@@ -44,6 +45,14 @@ message GetViewsResponse {
 	uint64 count = 2;
 	uint64 time = 3;
 	Block block = 4;
+}
+
+message SetOrbitIdRequest {
+	string id = 1;
+	string dbname = 2;
+}
+
+message SetOrbitIdResponse {
 }
 
 message Block {
