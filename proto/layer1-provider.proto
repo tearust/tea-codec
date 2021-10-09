@@ -23,6 +23,7 @@ message Layer1Outbound {
         QueryTAppResourceRequest QueryTAppResourceRequest = 5;
         TeaNodeUpdateProfileRequest TeaNodeUpdateProfileRequest = 6;
         CommitRaResultRequest CommitRaResultRequest = 7;
+        ListMiningCmlsRequest ListMiningCmlsRequest = 8;
     }
 }
 
@@ -76,6 +77,19 @@ message ListTappsRequest {
 
 message ListTappResponse {
     repeated uint64 tappIds = 1;
+}
+
+message ListMiningCmlsRequest {
+}
+
+message ListMiningCmlsResponse {
+    repeated MiningCmlInfo miningCmls = 1;
+}
+
+message MiningCmlInfo {
+    uint64 cmlId = 1;
+    string orbitId = 2;
+    string cmlType = 3;
 }
 
 message SubstrateApiInfo {
