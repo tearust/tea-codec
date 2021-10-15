@@ -12,6 +12,13 @@ message GetResponse{
 message GetSystemTimeRequest{
 }
 
+message GetCurrentTimestampRequest{
+}
+
+message GetCurrentTimestampResponse{
+  int64 timestamp = 1;
+}
+
 message GetClaimStackHashResponse{
   string manifest = 1;
   string actorsProvidersHashList = 2;
