@@ -65,40 +65,40 @@ message Block {
 }
 
 /********* BBS *********/
-message OrbitBBSResponse {
+message OrbitBbsResponse {
 	GeneralResponse response = 1;
 	string data = 2;
 }
 
 message AddMessageRequest {
-	required uint64 tappId = 1; 
-	required string dbname = 2;
+	uint64 tappId = 1; 
+	string dbname = 2;
 
-	required string sender = 3;
-	required string content = 4;
-	required uint64 utc = 5;
+	string sender = 3;
+	string content = 4;
+	uint64 utc = 5;
 	uint64 utcExpired = 6;
 }
 
 message GetMessageRequest {
-	required uint64 tappId = 1; 
-	required string dbname = 2;
+	uint64 tappId = 1; 
+	string dbname = 2;
 
 	uint64 utc = 3;
 	string sender = 4;
 }
 
 message DeleteMessageRequest {
-	required uint64 tappId = 1; 
-	required string dbname = 2;
+	uint64 tappId = 1; 
+	string dbname = 2;
 
-	required string msgId = 3;
+	string msgId = 3;
 }
 
 message ExtendMessageRequest {
-	required uint64 tappId = 1; 
-	required string dbname = 2;
+	uint64 tappId = 1; 
+	string dbname = 2;
 
-	required string msgId = 3;
-	required uint64 utcExpired = 4;
+	string msgId = 3;
+	uint64 utcExpired = 4;
 }
