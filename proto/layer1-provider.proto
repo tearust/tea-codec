@@ -140,6 +140,7 @@ message CommitRaResultEvent {
     bytes targetTeaId = 3;
     bool isPass = 4;
     string targetStatus = 5;
+    bool statusChanged = 6;
 }
 
 message UpdateNodeProfileEvent {
