@@ -24,6 +24,7 @@ message Layer1Outbound {
         TeaNodeUpdateProfileRequest TeaNodeUpdateProfileRequest = 6;
         CommitRaResultRequest CommitRaResultRequest = 7;
         ListMiningCmlsRequest ListMiningCmlsRequest = 8;
+        IsRaValidatorRequest IsRaValidatorRequest = 9;
     }
 }
 
@@ -84,6 +85,16 @@ message ListMiningCmlsRequest {
 
 message ListMiningCmlsResponse {
     repeated MiningCmlInfo miningCmls = 1;
+}
+
+message IsRaValidatorRequest {
+    bytes teaId = 1;
+    bytes targetTeaId = 2;
+    uint32 blockNumber = 3;
+}
+
+message IsRaValidatorResponse {
+    bool isValidator = 1;
 }
 
 message MiningCmlInfo {
