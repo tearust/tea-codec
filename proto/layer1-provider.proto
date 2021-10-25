@@ -163,6 +163,7 @@ message UpdateNodeProfileEvent {
     repeated RANode raNodes = 6;
     string status = 7;
     string accountId = 8;
+    uint32 updateHeight = 9;
 }
 
 message RANode {
