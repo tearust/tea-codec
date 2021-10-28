@@ -131,7 +131,7 @@ message ShaResponse {
 }
 
 message RsaDecryptRequest {
-  bytes privateKeyPkcs1 = 1;
+  string privateKeyPkcs1 = 1;
   bytes msg = 2;
 }
 
@@ -140,7 +140,7 @@ message RsaDecryptResponse {
 }
 
 message RsaEncryptRequest {
-  bytes publicKeyPkcs1 = 1;
+  string publicKeyPkcs1 = 1;
   bytes msg = 2;
 }
 
