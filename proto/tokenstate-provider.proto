@@ -1,0 +1,8 @@
+syntax = "proto3";
+package tokenstate;
+
+message GetRequest { string key = 1; }
+message GetResponse {
+  oneof value { bytes v = 1; }
+  bool exists = 2;
+}
