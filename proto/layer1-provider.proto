@@ -25,6 +25,7 @@ message Layer1Outbound {
         CommitRaResultRequest CommitRaResultRequest = 7;
         ListMiningCmlsRequest ListMiningCmlsRequest = 8;
         IsRaValidatorRequest IsRaValidatorRequest = 9;
+        GetMinerInfoRequest GetMinerInfoRequest = 10;
     }
 }
 
@@ -93,6 +94,15 @@ message IsRaValidatorRequest {
     uint32 blockNumber = 3;
 }
 
+message GetMinerInfoRequest {
+    bytes teaId = 1;
+}
+
+message GetMinerInfoResponse {
+    uint64 cmlId = 1;
+    string cmlClass = 2;
+}
+
 message IsRaValidatorResponse {
     bool isValidator = 1;
 }
@@ -101,6 +111,7 @@ message MiningCmlInfo {
     uint64 cmlId = 1;
     string orbitId = 2;
     string cmlType = 3;
+    bytes teaId = 4;
 }
 
 message SubstrateApiInfo {
