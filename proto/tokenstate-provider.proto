@@ -6,3 +6,5 @@ message GetResponse {
   oneof value { bytes v = 1; }
   bool exists = 2;
 }
+message QueryTeaBalanceRequest { uint32 acct = 1; }
+message QueryTeaBalanceResponse { bytes balance_bytes = 1; }
