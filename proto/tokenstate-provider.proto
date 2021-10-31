@@ -1,7 +1,7 @@
 syntax = "proto3";
 package tokenstate;
 
-message QueryStateTsidRequest { uint32 acct = 1; }
+message QueryStateTsidRequest {}
 message QueryStateTsidResponse { string stateTsid = 1; }
 message QueryTeaBalanceRequest { uint32 acct = 1; }
 message QueryTeaBalanceResponse {
