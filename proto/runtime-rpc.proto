@@ -53,6 +53,11 @@ message Layer1GeneralResponse {
 message HttpExecutionRequest {
     string requestUrl = 1;
     repeated HttpExecutionHeader headers = 2;
+    HttpExecutionTimeout timeout = 3;
+}
+
+message HttpExecutionTimeout {
+    uint64 milliseconds = 1;
 }
 
 message HttpExecutionHeader {
