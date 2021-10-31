@@ -1,0 +1,7 @@
+syntax = "proto3";
+package actor_report;
+
+message ReportEvidenceRequest {
+	bytes commitTeaId = 1;
+	bytes phishingTeaId = 2;
+}
