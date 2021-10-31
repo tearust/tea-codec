@@ -22,3 +22,15 @@ message TopupRequest {
   uint32 to = 2;
   bytes amt = 3;
 }
+message WithdrawRequest {
+  string ctx = 1;
+  uint32 from = 2;
+  bytes amt = 3;
+}
+
+message MoveRequest {
+  string ctx = 1;
+  uint32 from = 2;
+  uint32 to = 3;
+  bytes amt = 4;
+}
