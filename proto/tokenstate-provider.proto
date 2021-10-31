@@ -1,10 +1,40 @@
 syntax = "proto3";
 package tokenstate;
 
-message GetRequest { string key = 1; }
-message GetResponse {
-  oneof value { bytes v = 1; }
-  bool exists = 2;
-}
+message QueryStateTsidRequest { uint32 acct = 1; }
+message QueryStateTsidResponse { Tsid stateTsid = 1; }
 message QueryTeaBalanceRequest { uint32 acct = 1; }
-message QueryTeaBalanceResponse { bytes balance_bytes = 1; }
+message QueryTeaBalanceResponse {
+  bytes balance_bytes = 1;
+  Tsid stateTsid = 2;
+}
+message QueryTokenBalanceRequest {
+  uint32 acct = 1;
+  uint32 tokenId = 2;
+}
+message QueryTokenBalanceResponse {
+  bytes balance_bytes = 1;
+  Tsid stateTsid = 2;
+}
+message Tsid {
+  bytes ts = 1;
+  uint32 sender = 2;
+  bytes hash = 3;
+}
+message VecOfBalance { repeated uint32 balances = 1; }
+message TokenContext {
+  uint32 tid = 1;
+  Tsid tsid = 2;
+  Tsid base = 3;
+  repeated uint32 readsConfCredit = 4;
+  repeated uint32 readsConfDebit = 5;
+  map<uint32, VecOfBalance> debit = 6;
+  map<uint32, VecOfBalance> credit = 7;
+  Tsid mergedBy = 8;
+}
+message CommitRequest { TokenContext ctx = 1; }
+// message StartTxnRequest {
+//   Tsid tsid = 1;
+//   Tsid base = 2;
+//   uint32 tokenId = 3;
+// }
