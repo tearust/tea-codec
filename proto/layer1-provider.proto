@@ -26,6 +26,8 @@ message Layer1Outbound {
         ListMiningCmlsRequest ListMiningCmlsRequest = 8;
         IsRaValidatorRequest IsRaValidatorRequest = 9;
         GetMinerInfoRequest GetMinerInfoRequest = 10;
+        CommitReportEvidenceRequest CommitReportEvidenceRequest = 11;
+        CommitOfflineEvidenceRequest CommitOfflineEvidenceRequest = 12;
     }
 }
 
@@ -94,6 +96,10 @@ message IsRaValidatorRequest {
     uint32 blockNumber = 3;
 }
 
+message IsRaValidatorResponse {
+    bool isValidator = 1;
+}
+
 message GetMinerInfoRequest {
     bytes teaId = 1;
 }
@@ -103,8 +109,17 @@ message GetMinerInfoResponse {
     string cmlClass = 2;
 }
 
-message IsRaValidatorResponse {
-    bool isValidator = 1;
+message CommitReportEvidenceRequest {
+    bytes teaId = 1;
+    bytes reporterTeaId = 2;
+    bytes phisherTeaId = 3;
+    bytes signature = 4;
+}
+
+message CommitOfflineEvidenceRequest {
+    bytes teaId = 1;
+    bytes offlineTeaId = 2;
+    bytes signature = 3;
 }
 
 message MiningCmlInfo {
