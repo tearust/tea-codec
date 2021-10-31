@@ -107,6 +107,7 @@ message GetMinerInfoRequest {
 message GetMinerInfoResponse {
     uint64 cmlId = 1;
     string cmlClass = 2;
+    string ipAddress = 3;
 }
 
 message CommitReportEvidenceRequest {
