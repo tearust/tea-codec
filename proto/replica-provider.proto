@@ -6,3 +6,5 @@ message PeekReadyTsid {}
 message GetReplicaCount {}
 message ClearOutSyncReplica {}
 message GetReplicaCountResponse { uint32 count = 1; }
+message ReceiveTxn { bytes txnBytes = 1; }
+message ReceiveFollowup { string followup = 1; }
