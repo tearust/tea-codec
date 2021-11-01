@@ -108,6 +108,7 @@ message GetMinerInfoResponse {
     uint64 cmlId = 1;
     string cmlClass = 2;
     string ipAddress = 3;
+    bool isBootstrap = 4;
 }
 
 message CommitReportEvidenceRequest {
