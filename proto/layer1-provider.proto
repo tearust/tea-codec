@@ -28,6 +28,7 @@ message Layer1Outbound {
         GetMinerInfoRequest GetMinerInfoRequest = 10;
         CommitReportEvidenceRequest CommitReportEvidenceRequest = 11;
         CommitOfflineEvidenceRequest CommitOfflineEvidenceRequest = 12;
+        CommitTipsEvidenceRequest CommitTipsEvidenceRequest = 13;
     }
 }
 
@@ -112,6 +113,13 @@ message GetMinerInfoResponse {
 }
 
 message CommitReportEvidenceRequest {
+    bytes teaId = 1;
+    bytes reporterTeaId = 2;
+    bytes phisherTeaId = 3;
+    bytes signature = 4;
+}
+
+message CommitTipsEvidenceRequest {
     bytes teaId = 1;
     bytes reporterTeaId = 2;
     bytes phisherTeaId = 3;
