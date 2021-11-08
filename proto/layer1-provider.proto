@@ -29,6 +29,7 @@ message Layer1Outbound {
         CommitReportEvidenceRequest CommitReportEvidenceRequest = 11;
         CommitOfflineEvidenceRequest CommitOfflineEvidenceRequest = 12;
         CommitTipsEvidenceRequest CommitTipsEvidenceRequest = 13;
+        ListAllowedPcrsRequest ListAllowedPcrsRequest = 14;
     }
 }
 
@@ -227,4 +228,15 @@ message CommitRaResultRequest {
   bytes targetTeaId = 2;
   bool isPass = 3;
   bytes signature = 4;
+}
+
+message ListAllowedPcrsRequest {}
+
+message ListAllowedPcrsResponse {
+    repeated PcrSlots pcrSlots = 1;
+}
+
+message PcrSlots {
+    bytes hash = 1;
+    repeated bytes pcrs = 2;
 }
