@@ -2,7 +2,11 @@ syntax = "proto3";
 package replica;
 message GenerateSyncMsg { uint32 repId = 1; }
 message ReceiveSyncMsg { bytes syncMsg = 1; }
-message PeekReadyTsid {}
+message PopReadyTsidReq {}
+message PopReadyTsidResponse {
+  bytes tsid_bytes = 1;
+  bytes txn_bytes = 2;
+}
 message GetReplicaCount {}
 message ClearOutSyncReplica {}
 message GetReplicaCountResponse { uint32 count = 1; }
