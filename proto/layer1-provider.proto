@@ -30,6 +30,7 @@ message Layer1Outbound {
         CommitOfflineEvidenceRequest CommitOfflineEvidenceRequest = 12;
         CommitTipsEvidenceRequest CommitTipsEvidenceRequest = 13;
         ListAllowedPcrsRequest ListAllowedPcrsRequest = 14;
+        GetNodePcrsRequest GetNodePcrsRequest = 15;
     }
 }
 
@@ -248,4 +249,12 @@ message PcrToHashRequest {
 
 message PcrToHashResponse {
     bytes hash = 1;
+}
+
+message GetNodePcrsRequest {
+    bytes teaId = 1;
+}
+
+message GetNodePcrsResponse {
+    repeated bytes pcrs = 1;
 }
