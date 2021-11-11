@@ -1,0 +1,20 @@
+syntax = "proto3";
+package libp2p;
+
+message GeneralRequest {
+	bytes sourceConnId = 1;
+	bytes targetConnId = 2;
+	RuntimeAddress sourceAddress = 3;
+	RuntimeAddress targetAddress = 4;
+	bytes content = 5;
+}
+
+message RuntimeAddress {
+	string targetKey = 1;
+	TargetType targetType = 2;
+}
+
+enum TargetType {
+  Actor = 0;
+  Provider = 1;
+}
