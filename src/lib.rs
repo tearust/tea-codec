@@ -112,6 +112,7 @@ pub const RAFT_CAPABILITY_ID: &str = "tea:raft";
 pub const LAYER1_CAPABILITY_ID: &str = "tea:layer1";
 pub const ORBITDB_CAPABILITY_ID: &str = "tea:orbitdb";
 pub const REPLICAT_CAPABILITY_ID: &str = "tea:replica";
+pub const TOKENSTATE_CAPABILITY_ID: &str = "tea:tokenstate";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
