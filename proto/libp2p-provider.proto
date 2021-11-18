@@ -40,3 +40,12 @@ enum TargetType {
 
 message MyConnIdRequest {
 }
+
+message RegisterChannelRequest {
+	string name = 1;
+}
+
+message RegisterChannelResponse {
+	string toLibp2pFile = 1;
+	string fromLibp2pFile = 2;
+}
