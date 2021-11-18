@@ -90,12 +90,12 @@ pub const OP_ACTOR_EXEC_TXN: &str = "ActorExecuteTxn";
 /// by this replica. And, this txn is new to this replica. It will
 /// need to notify other replicas that I received a new txn.
 /// Although this txn may not be *new* to other replica.
-pub const OP_GEN_SYNC_MSG: &str = "GenerateSyncMessage";
+// pub const OP_GEN_SYNC_MSG: &str = "GenerateSyncMessage";
 /// Receive sync message from other replica.
-pub const OP_REV_SYNC_MSG: &str = "ReceiveSyncMessage";
+// pub const OP_REV_SYNC_MSG: &str = "ReceiveSyncMessage";
 /// Call this op to clean up dead or out-of-sync other replicas
 /// Those out-of-sync replicas will be remove after this call
-pub const OP_CLEAR_UP: &str = "CleanUpSyncReplica";
+// pub const OP_CLEAR_UP: &str = "CleanUpSyncReplica";
 /// How many replicas current connect to this replica
 pub const OP_GET_REPLICA_COUNT: &str = "GetReplicaCount";
 /// If return a empty vec, the replica is still waiting for the second 
