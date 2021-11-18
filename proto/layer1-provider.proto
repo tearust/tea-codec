@@ -110,6 +110,7 @@ message GetMinerInfoResponse {
     string cmlClass = 2;
     string ipAddress = 3;
     bool isBootstrap = 4;
+    string minerStatus = 5;
 }
 
 message CommitReportEvidenceRequest {
@@ -137,6 +138,7 @@ message MiningCmlInfo {
     string orbitId = 2;
     string cmlType = 3;
     bytes teaId = 4;
+    string minerStatus = 5;
 }
 
 message SubstrateApiInfo {
