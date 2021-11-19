@@ -112,6 +112,8 @@ pub const ORBITDB_CAPABILITY_ID: &str = "tea:orbitdb";
 pub const LIBP2P_CAPABILITY_ID: &str = "tea:libp2p";
 pub const CONSOLE_CAPABILITY_ID: &str = "tea:console";
 
+pub const LIBP2P_REGISTER_SOCKET_NAME: &str = "/tmp/libp2p-register.socket";
+
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelayMessage {
