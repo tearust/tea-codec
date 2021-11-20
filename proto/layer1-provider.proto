@@ -31,6 +31,8 @@ message Layer1Outbound {
         CommitTipsEvidenceRequest CommitTipsEvidenceRequest = 13;
         ListAllowedPcrsRequest ListAllowedPcrsRequest = 14;
         GetNodePcrsRequest GetNodePcrsRequest = 15;
+        GetConnIdRequest GetConnIdRequest = 16;
+        GetPeerIdRequest GetPeerIdRequest = 17;
     }
 }
 
@@ -225,6 +227,7 @@ message TeaNodeUpdateProfileRequest{
   bytes teaId = 3;//The node's TPM ID which generates ephemeralPublicKey and sign 
   bytes pcrHash = 4;
   string peerId = 5;//ipfs peer id used for peer 2 peer communication
+  bytes connId = 6;
 }
 
 message CommitRaResultRequest {
@@ -259,4 +262,20 @@ message GetNodePcrsRequest {
 
 message GetNodePcrsResponse {
     repeated bytes pcrs = 1;
+}
+
+message GetConnIdRequest {
+    bytes teaId = 1;
+}
+
+message GetConnIdResponse {
+    bytes connId = 1;
+}
+
+message GetPeerIdRequest {
+    bytes teaId = 1;
+}
+
+message GetPeerIdResponse {
+    string peerId = 1;
 }
