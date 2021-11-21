@@ -227,7 +227,7 @@ message TeaNodeUpdateProfileRequest{
   bytes teaId = 3;//The node's TPM ID which generates ephemeralPublicKey and sign 
   bytes pcrHash = 4;
   string peerId = 5;//ipfs peer id used for peer 2 peer communication
-  bytes connId = 6;
+  string connId = 6;
 }
 
 message CommitRaResultRequest {
@@ -269,7 +269,7 @@ message GetConnIdRequest {
 }
 
 message GetConnIdResponse {
-    bytes connId = 1;
+    string connId = 1;
 }
 
 message GetPeerIdRequest {

@@ -9,13 +9,13 @@ message Libp2pRequest {
 }
 
 message GeneralRequest {
-	bytes sourceConnId = 1;
-	bytes targetConnId = 2;
+	string sourceConnId = 1;
+	string targetConnId = 2;
 	RuntimeMessage runtimeMessage = 3;
 }
 
 message PubMessage {
-	bytes sourceConnId = 1;
+	string sourceConnId = 1;
 	RuntimeMessage runtimeMessage = 2;
 }
 
