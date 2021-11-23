@@ -33,6 +33,7 @@ message Layer1Outbound {
         GetNodePcrsRequest GetNodePcrsRequest = 15;
         GetConnIdRequest GetConnIdRequest = 16;
         GetPeerIdRequest GetPeerIdRequest = 17;
+        ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
     }
 }
 
@@ -278,4 +279,21 @@ message GetPeerIdRequest {
 
 message GetPeerIdResponse {
     string peerId = 1;
+}
+
+message ListAllowedVersionsRequest {
+}
+
+message ListAllowedVersionsResponse {
+    repeated VersionSet versionSetList = 1;   
+}
+
+message VersionSet {
+    bytes hash = 1;
+    repeated VersionItem versions = 2;
+}
+
+message VersionItem {
+    string key = 1;
+    string version = 2;
 }
