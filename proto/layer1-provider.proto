@@ -34,6 +34,7 @@ message Layer1Outbound {
         GetConnIdRequest GetConnIdRequest = 16;
         GetPeerIdRequest GetPeerIdRequest = 17;
         ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
+        ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
     }
 }
 
@@ -296,4 +297,8 @@ message VersionSet {
 message VersionItem {
     string key = 1;
     string version = 2;
+}
+
+message ReportNodeVersionExpiredRequest {
+    bytes teaId = 1;
 }
