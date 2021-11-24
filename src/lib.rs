@@ -41,23 +41,23 @@ use std::io::Cursor;
 /// serialize could result in breaking incompatibilities.
 pub fn serialize<T>(item: T) -> TeaResult<Vec<u8>>
 where
-    T: Serialize,
+	T: Serialize,
 {
-    let mut buf = Vec::new();
-    item.serialize(&mut Serializer::new(&mut buf).with_struct_map())
-        .map_err(|e| TeaError::SerializeError(format!("{}", e)))?;
-    Ok(buf)
+	let mut buf = Vec::new();
+	item.serialize(&mut Serializer::new(&mut buf).with_struct_map())
+		.map_err(|e| TeaError::SerializeError(format!("{}", e)))?;
+	Ok(buf)
 }
 
 /// The standard function for de-serializing codec structs from a format suitable
 /// for message exchange between actor and host. Use of any other function to
 /// deserialize could result in breaking incompatibilities.
 pub fn deserialize<'de, T: Deserialize<'de>>(buf: &[u8]) -> TeaResult<T> {
-    let mut de = Deserializer::new(Cursor::new(buf));
-    match Deserialize::deserialize(&mut de) {
-        Ok(t) => Ok(t),
-        Err(e) => Err(TeaError::DeserializeError(format!("{}", e))),
-    }
+	let mut de = Deserializer::new(Cursor::new(buf));
+	match Deserialize::deserialize(&mut de) {
+		Ok(t) => Ok(t),
+		Err(e) => Err(TeaError::DeserializeError(format!("{}", e))),
+	}
 }
 
 pub const OP_DELAY_PUBLISH: &'static str = "DelayPublish";
@@ -81,7 +81,7 @@ pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";
 pub const OP_NITRO_VERIFICATION_PRCS: &str = "VerificationPcrs";
 pub const OP_NITRO_GET_ATTESTATION_DOC_PARAMS: &str = "GetAttestationDocParams";
 
-/// This is used when replica provider call an app contract handler actor. 
+/// This is used when replica provider call an app contract handler actor.
 /// The app contract handler actor will be called by the long running thread
 /// of replciation when a txn is need to be executed
 pub const OP_ACTOR_EXEC_TXN: &str = "ActorExecuteTxn";
@@ -98,7 +98,7 @@ pub const OP_ACTOR_EXEC_TXN: &str = "ActorExecuteTxn";
 // pub const OP_CLEAR_UP: &str = "CleanUpSyncReplica";
 /// How many replicas current connect to this replica
 pub const OP_GET_REPLICA_COUNT: &str = "GetReplicaCount";
-/// If return a empty vec, the replica is still waiting for the second 
+/// If return a empty vec, the replica is still waiting for the second
 /// part of the txn - followup pair.
 /// If this is the second part, the pair is completed, it will return
 /// the tsid as bytes. In this case, please generate the sync message
@@ -112,13 +112,13 @@ pub const OP_REV_TXN: &str = "ReceiveTxn";
 /// It will check this replica conveyor to find if there is any
 /// txn TSID passed the global immutable checkpoint.
 /// Global immutable is a point-of-no-return that no other existing
-/// replica can insert new txn ahead. This means this txn can 
+/// replica can insert new txn ahead. This means this txn can
 /// be executed without convern of rebasing.
-/// After this op is called, the tsid should be sent (called) to 
-/// the txn handler(or executor). Once the executor returns, the state has 
+/// After this op is called, the tsid should be sent (called) to
+/// the txn handler(or executor). Once the executor returns, the state has
 /// been changed / updated by the executor. Then loop back again
 /// to call this function the second time to find out next ready
-/// txn. If there is no ready txn, then waiti a short period of time 
+/// txn. If there is no ready txn, then waiti a short period of time
 /// then try again
 pub const OP_POP_READY_TSID: &str = "PopReadyTsid";
 
@@ -126,23 +126,26 @@ pub const OP_POP_READY_TSID: &str = "PopReadyTsid";
 ///
 // pub const ACTOR_NAME_SIMPLE: &'static str = "simple-actor";
 pub const ACTOR_PUBKEY_SIMPLE: &'static str =
-    "MAPIZDLP2GN7QDSS3I74NCZEQOU2YXGZ4UROPRLDJI6ZZFT4TLJTOIGZ";
+	"MAPIZDLP2GN7QDSS3I74NCZEQOU2YXGZ4UROPRLDJI6ZZFT4TLJTOIGZ";
 // pub const ACTOR_NAME_RA: &'static str = "ra";
 pub const ACTOR_PUBKEY_RA: &'static str =
-    "MDAELGEJDJPPMBHCVTXRCS6TYMEVOSEYLYHPDVWVBBRHNQ6KNIEBHNHQ";
+	"MDAELGEJDJPPMBHCVTXRCS6TYMEVOSEYLYHPDVWVBBRHNQ6KNIEBHNHQ";
 pub const ACTOR_PUBKEY_DELEGATE: &str = "MAVB7LZ22BBLNW5SL3EZP7A6NTFGZFHFJVSFSPUINTLR5YQXR3LZVO7H";
 pub const ACTOR_PUBKEY_TAPP_BBS: &str = "MDDRF3P5VBJ3WRP7YZ7BPU63C33ABJ52ZHANJH6YB3ALM7Q6T63DHUUM";
 pub const ACTOR_PUBKEY_TAPP_FLUENCER: &str =
-    "MBXQX7LCZOJXLS5F2QR6R2R3SG3D3RN7LWEVRJ3IVB6B2I6ZSJRNSCJR";
+	"MBXQX7LCZOJXLS5F2QR6R2R3SG3D3RN7LWEVRJ3IVB6B2I6ZSJRNSCJR";
 // pub const ACTOR_NAME_INTERCOM: &'static str = "intercom-actor";
 pub const HOST: &'static str = "host";
 pub const ACTOR_PUBKEY_INTERCOM: &'static str =
-    "MAXJLKOWEXXNPMWYXJMBNTGZAURUCLPL7JYDA4L357IICGMSC4ATJUZM";
+	"MAXJLKOWEXXNPMWYXJMBNTGZAURUCLPL7JYDA4L357IICGMSC4ATJUZM";
 pub const ACTOR_PUBKEY_REPORT: &str = "MBIDQCFY3PQAVHYUD56LXBG7VGYVLZRBZD4B6IXRS4UTSVYREL42UMDD";
+pub const ACTOR_PUBKEY_VERSION: &str = "MBGSCA2SS6OZBTA4XAHCXZV45U67YC5FQVZYP5FRAMJFYUAFV3M6CRFR";
 
-pub const ACTOR_PUBKEY_PARTY_CONTRACT: &str = "MARZR5YX7J4YFJMVNNH4QUTKXUIAPN7FRU5TSYJPQCAHWLYQUBEETTJI";
+pub const ACTOR_PUBKEY_PARTY_CONTRACT: &str =
+	"MARZR5YX7J4YFJMVNNH4QUTKXUIAPN7FRU5TSYJPQCAHWLYQUBEETTJI";
 
-pub const ACTOR_PUBKEY_STATE_RECEIVER: &str = "MC737AMWEFY2IVC466Z2JW33J6NYOTHZPN4HGBXKLPEVO4PXEFKGYKI7";
+pub const ACTOR_PUBKEY_STATE_RECEIVER: &str =
+	"MC737AMWEFY2IVC466Z2JW33J6NYOTHZPN4HGBXKLPEVO4PXEFKGYKI7";
 
 ///List all providers names vs their capability ids
 ///
@@ -164,15 +167,15 @@ pub const LIBP2P_REGISTER_SOCKET_NAME: &str = "/tmp/libp2p-register.socket";
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelayMessage {
-    pub delay_seconds: u64,
-    /// The message subject or topic
-    pub subject: String,
-    /// The reply-to field of the subject. This will be empty if there is no reply subject
-    pub reply_to: String,
-    /// The raw bytes of the message. Encoding/contents is determined by applications out of band
-    #[serde(with = "serde_bytes")]
-    #[serde(default)]
-    pub body: Vec<u8>,
+	pub delay_seconds: u64,
+	/// The message subject or topic
+	pub subject: String,
+	/// The reply-to field of the subject. This will be empty if there is no reply subject
+	pub reply_to: String,
+	/// The raw bytes of the message. Encoding/contents is determined by applications out of band
+	#[serde(with = "serde_bytes")]
+	#[serde(default)]
+	pub body: Vec<u8>,
 }
 
 pub mod error;
@@ -184,20 +187,26 @@ pub mod task_in_block;
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LoadActorMessage {
-    pub manifest: String,
-    #[serde(with = "serde_bytes")]
-    #[serde(default)]
-    pub wasm_bytes: Vec<u8>,
+	pub manifest: String,
+	#[serde(with = "serde_bytes")]
+	#[serde(default)]
+	pub wasm_bytes: Vec<u8>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RunActorWithParams {
-    pub manifest: String,
-    #[serde(with = "serde_bytes")]
-    #[serde(default)]
-    pub actor_bytes: Vec<u8>,
-    #[serde(with = "serde_bytes")]
-    #[serde(default)]
-    pub params: Vec<u8>,
+	pub manifest: String,
+	#[serde(with = "serde_bytes")]
+	#[serde(default)]
+	pub actor_bytes: Vec<u8>,
+	#[serde(with = "serde_bytes")]
+	#[serde(default)]
+	pub params: Vec<u8>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ActorVersionMessage {
+	pub version: String,
 }
