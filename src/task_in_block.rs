@@ -1,4 +1,3 @@
-
 type TeaId = Vec<u8>;
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]

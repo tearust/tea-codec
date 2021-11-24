@@ -33,71 +33,71 @@ m1OTkJaaGhxL2NRSVJBTEwwUTVlYWpYaTFMMHQ4cUNXMmhJa0NFUUNMc1kzSg0KSThWTFAvT1NqT1pQV
 hWTWNXMnh6NGFqK25sU05CbQ0KLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0NCg==";
 
 pub const ED_PUBKEY: &'static str =
-    "df38cb4f12479041c8e8d238109ef2a150b017f382206e24fee932e637c2db7b";
+	"df38cb4f12479041c8e8d238109ef2a150b017f382206e24fee932e637c2db7b";
 pub const ED_PRIKEY: &'static str = "5579a3c220146f0caaab49b884de505098b89326970b929d781cf4a65445a917df38cb4f12479041c8e8d238109ef2a150b017f382206e24fee932e637c2db7b";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PubsubSubRequest {
-    pub topic: String,
-    pub discover: bool,
+	pub topic: String,
+	pub discover: bool,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActorCallBackRequest {
-    pub operation: String,
-    pub payload: Vec<u8>,
+	pub operation: String,
+	pub payload: Vec<u8>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BlockPutRequest {
-    pub data: Vec<u8>,
-    pub pin: bool,
+	pub data: Vec<u8>,
+	pub pin: bool,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BlockPutResponse {
-    pub key: String,
-    pub size: u64,
+	pub key: String,
+	pub size: u64,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum DhtProvideRequest {
-    DeploymentId(String),
-    PinnerPubKey(Vec<u8>),
+	DeploymentId(String),
+	PinnerPubKey(Vec<u8>),
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum FindProviderInvokeError {
-    ResponseCountLimitHit(u32),
-    ResponseCountLimitHitAndRetry,
-    Others(String),
+	ResponseCountLimitHit(u32),
+	ResponseCountLimitHitAndRetry,
+	Others(String),
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IsBlockLocalResponse {
-    pub result: bool,
-    pub error: String,
+	pub result: bool,
+	pub error: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ObjectGetResponse {
-    pub data: String,
-    pub links: Vec<IpfsHeader>,
+	pub data: String,
+	pub links: Vec<IpfsHeader>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IpfsHeader {
-    pub name: String,
-    pub hash: String,
-    pub size: u64,
-    pub typ: Option<String>,
+	pub name: String,
+	pub hash: String,
+	pub size: u64,
+	pub typ: Option<String>,
 }
