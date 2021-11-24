@@ -35,6 +35,7 @@ message Layer1Outbound {
         GetPeerIdRequest GetPeerIdRequest = 17;
         ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
         ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
+        ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
     }
 }
 
@@ -301,4 +302,11 @@ message VersionItem {
 
 message ReportNodeVersionExpiredRequest {
     bytes teaId = 1;
+}
+
+message ListVersionExpiredNodesRequest {
+}
+
+message ListVersionExpiredNodesResponse {
+    repeated bytes teaIds = 1;
 }
