@@ -107,6 +107,10 @@ message RegisterDispatcherRequest {
     repeated uint32 typeIds = 1;
 }
 
+message RegisterHttpDispatcherRequest {
+    repeated string actions = 1;
+}
+
 message NetworkDataLenRequest {
     string uuid = 1;
 }
