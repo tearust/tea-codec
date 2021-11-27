@@ -19,19 +19,19 @@ message QueryTokenBalanceResponse {
 message CommitRequest { bytes ctx = 1; }
 message TopupRequest {
   bytes ctx = 1;
-  uint32 to = 2;
+  bytes to = 2;
   bytes amt = 3;
 }
 message WithdrawRequest {
   bytes ctx = 1;
-  uint32 from = 2;
+  bytes from = 2;
   bytes amt = 3;
 }
 
 message MoveRequest {
   bytes ctx = 1;
-  uint32 from = 2;
-  uint32 to = 3;
+  bytes from = 2;
+  bytes to = 3;
   bytes amt = 4;
 }
 
