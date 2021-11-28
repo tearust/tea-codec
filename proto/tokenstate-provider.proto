@@ -53,3 +53,14 @@ message StateOperateResponse {
   bytes ctx = 1;
   bytes operateError = 2;
 }
+
+message ExportStateRequest {
+}
+
+message ExportStateResponse {
+  bytes data = 1;
+}
+
+message ImportStateRequest {
+  bytes data = 1;
+}
