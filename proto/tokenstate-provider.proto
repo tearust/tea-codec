@@ -10,11 +10,20 @@ message QueryTeaBalanceResponse {
 }
 message QueryTokenBalanceRequest {
   bytes acct = 1;
-  uint32 tokenId = 2;
+  uint64 tokenId = 2;
 }
 message QueryTokenBalanceResponse {
   bytes balance_bytes = 1;
   bytes stateTsid = 2;
+}
+message QueryAppAesRequest {
+  uint64 tokenId = 1;
+}
+message GenAppAesRequest {
+  uint64 tokenId = 1;
+}
+message QueryAppAesResponse {
+  bytes key = 1;
 }
 message CommitRequest { bytes ctx = 1; }
 message TopupRequest {
