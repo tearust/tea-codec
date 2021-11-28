@@ -146,6 +146,7 @@ message MiningCmlInfo {
     string cmlType = 3;
     bytes teaId = 4;
     string minerStatus = 5;
+    uint32 tappCount = 6;
 }
 
 message SubstrateApiInfo {
