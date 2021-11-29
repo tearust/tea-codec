@@ -49,3 +49,8 @@ message RegisterChannelResponse {
 	string toLibp2pFile = 1;
 	string fromLibp2pFile = 2;
 }
+
+message StateMessageRequest {
+	string action = 1;
+	string msgB64 = 2;
+}
