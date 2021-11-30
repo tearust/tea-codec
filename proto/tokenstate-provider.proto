@@ -64,3 +64,10 @@ message ExportStateResponse {
 message ImportStateRequest {
   bytes data = 1;
 }
+
+message SyncStateRequest {
+}
+
+message SyncStateResponse {
+  bytes data = 1;
+}
