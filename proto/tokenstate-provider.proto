@@ -21,6 +21,7 @@ message QueryAppAesRequest {
 }
 message GenAppAesRequest {
   uint64 tokenId = 1;
+  bytes tsidBytes = 2;
 }
 message QueryAppAesResponse {
   bytes key = 1;
