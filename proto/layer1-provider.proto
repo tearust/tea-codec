@@ -248,7 +248,7 @@ message ListAllowedPcrsResponse {
 }
 
 message PcrSlots {
-    bytes hash = 1;
+    string hash = 1;
     repeated bytes pcrs = 2;
 }
 
@@ -292,7 +292,7 @@ message ListAllowedVersionsResponse {
 }
 
 message VersionSet {
-    bytes hash = 1;
+    string hash = 1;
     repeated VersionItem versions = 2;
 }
 
