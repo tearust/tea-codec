@@ -166,6 +166,7 @@ message TappTopupEvent {
     string fromAccount = 2;
     string toAccount = 3;
     bytes amount = 4;
+    uint32 height = 5;
 }
 
 message TappHostedEvent {
