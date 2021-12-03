@@ -60,6 +60,7 @@ message HttpExecutionRequest {
     HttpExecutionTimeout timeout = 3;
     string method = 4;
     HttpExecutionPayload payload = 5;
+    bool isAsync = 6;
 }
 
 message HttpExecutionTimeout {
