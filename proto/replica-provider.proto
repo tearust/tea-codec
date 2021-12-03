@@ -12,3 +12,4 @@ message ClearOutSyncReplica {}
 message GetReplicaCountResponse { uint32 count = 1; }
 message ReceiveTxn { bytes txnBytes = 1; }
 message ReceiveFollowup { bytes followup = 1; }
+
