@@ -122,6 +122,26 @@ pub const OP_REV_TXN: &str = "ReceiveTxn";
 /// then try again
 pub const OP_POP_READY_TSID: &str = "PopReadyTsid";
 
+/// tokenstate state machine op codes
+pub const OP_QUERY_STATE_TSID: &str = "QueryStateTsid";
+pub const OP_QUERY_TEA_BALANCE: &str = "QueryTeaBalance";
+pub const OP_QUERY_TOKEN_BALANCE: &str = "QueryTokenBalance";
+pub const OP_COMMIT_TXN: &str = "CommitTxn";
+pub const OP_TOPUP: &str = "Topup";
+pub const OP_WITHDRAW: &str = "Withdraw";
+pub const OP_MOVE: &str = "Move";
+pub const OP_QUERY_APP_AES: &str = "QueryAppAes";
+pub const OP_GEN_APP_AES: &str = "GenAppAes";
+pub const OP_GET_APP_AES: &str = "GetAppAes";
+pub const OP_DEPOSIT: &str = "Deposit";
+pub const OP_REFUND: &str = "Refund";
+pub const OP_CONSUME_FROM_DEPOSIT: &str = "ConsumeFromDeposit";
+pub const OP_CONSUME_FROM_ACCOUNT: &str = "ConsumeFromAccount";
+pub const OP_PAYMENT_FROM_DEPOSIT: &str = "PaymentFromDeposit";
+pub const OP_EXPORT_STATE: &str = "ExportState";
+pub const OP_IMPORT_STATE: &str = "ImportState";
+pub const OP_SIGN_L1_TXN: &str = "SignLayerOneTxn";
+
 ///List all actor names vs their actor pubkeys
 ///
 // pub const ACTOR_NAME_SIMPLE: &'static str = "simple-actor";
