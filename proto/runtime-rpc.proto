@@ -38,13 +38,17 @@ message AdapterClientResponse {
     }
 }
 
-message Layer1GeneralRequest {
+message HttpGeneralRequest {
+    string uuid = 1;
+    string replyActor = 2;
     oneof msg {
         HttpExecutionRequest HttpExecutionRequest = 6;
     }
 }
 
-message Layer1GeneralResponse {
+message HttpGeneralResponse {
+    string uuid = 1;
+    string targetActor = 2;
     oneof msg {
         HttpExecutionResponse HttpExecutionResponse = 3;
     }
