@@ -51,6 +51,7 @@ message HttpGeneralResponse {
     string targetActor = 2;
     oneof msg {
         HttpExecutionResponse HttpExecutionResponse = 3;
+        HttpExecutionError HttpExecutionError = 4;
     }
 }
 
@@ -78,6 +79,10 @@ message HttpExecutionHeader {
 
 message HttpExecutionResponse {
     string responseJson = 1;
+}
+
+message HttpExecutionError {
+    string errorMessage = 1;
 }
 
 message IpfsInfoRequest {
