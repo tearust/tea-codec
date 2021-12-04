@@ -53,4 +53,5 @@ message RegisterChannelResponse {
 message StateMessageRequest {
 	string action = 1;
 	string msgB64 = 2;
+	string uuid = 3;
 }
