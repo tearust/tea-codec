@@ -27,7 +27,6 @@ message StartUseIpAddressRequest {
 }
 
 message StopUseIpAddressRequest {
-	string ipAddress = 1;
 }
 
 message CloseRequest {
