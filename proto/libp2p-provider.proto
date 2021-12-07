@@ -68,3 +68,6 @@ message StateMessageRequest {
 	string msgB64 = 2;
 	string uuid = 3;
 }
+
+message ConnectionStateRequest {
+}
