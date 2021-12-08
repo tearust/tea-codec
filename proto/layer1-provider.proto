@@ -11,6 +11,7 @@ message Layer1Inbound {
         NewNodeJoinedEvent NewNodeJoinedEvent = 6;
         CommitRaResultEvent CommitRaResultEvent = 7;
         UpdateNodeProfileEvent UpdateNodeProfileEvent = 8;
+        TAppCreatedEvent TAppCreatedEvent = 9;
     }
 }
 
@@ -210,6 +211,13 @@ message UpdateNodeProfileEvent {
     string status = 7;
     string accountId = 8;
     uint32 updateHeight = 9;
+}
+
+message TAppCreatedEvent {
+    uint64 tappId = 1;
+    string tappName = 2;
+    string tappOwner = 3;
+    uint32 createHeight = 4;
 }
 
 message RANode {
