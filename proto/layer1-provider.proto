@@ -37,14 +37,25 @@ message Layer1Outbound {
         ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
         ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
         ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
+        ConstructExtrinsicRequest ConstructExtrinsicRequest = 21;
     }
 }
 
 message ConstructExtrinsicRequest {
+    SubstrateApiInfo substrateApiInfo = 1;
+    bytes privateKey = 2;
+    oneof msg {
+        TransferFreeBalance TransferFreeBalance = 3;
+    }
+}
+
+message ConstructExtrinsicRelay {
+    bytes callEncode = 1;
+}
+
+message TransferFreeBalance {
     bytes toPublicKey = 1;
     bytes amount = 2;
-    bytes privateKey = 3;
-    SubstrateApiInfo substrateApiInfo = 4;
 }
 
 message ConstructExtrinsicResponse {
