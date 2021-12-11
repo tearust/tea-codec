@@ -5,6 +5,9 @@ message Libp2pRequest {
 	oneof msg {
 		GeneralRequest GeneralRequest = 1;
 		PubMessage PubMessage = 2;
+		StartUseIpAddressRequest StartUseIpAddressRequest = 3;
+		StopUseIpAddressRequest StopUseIpAddressRequest = 4;
+		CloseRequest CloseRequest = 5;
 	}
 }
 
@@ -17,6 +20,16 @@ message GeneralRequest {
 message PubMessage {
 	string sourceConnId = 1;
 	RuntimeMessage runtimeMessage = 2;
+}
+
+message StartUseIpAddressRequest {
+	string ipAddress = 1;
+}
+
+message StopUseIpAddressRequest {
+}
+
+message CloseRequest {
 }
 
 message RuntimeMessage {
@@ -54,4 +67,7 @@ message StateMessageRequest {
 	string action = 1;
 	string msgB64 = 2;
 	string uuid = 3;
+}
+
+message ConnectionStateRequest {
 }

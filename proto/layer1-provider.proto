@@ -11,6 +11,9 @@ message Layer1Inbound {
         NewNodeJoinedEvent NewNodeJoinedEvent = 6;
         CommitRaResultEvent CommitRaResultEvent = 7;
         UpdateNodeProfileEvent UpdateNodeProfileEvent = 8;
+        MiningStartedEvent MiningStartedEvent = 9;
+        MiningStoppedEvent MiningStoppedEvent = 10;
+        CmlMigratedEvent CmlMigratedEvent = 11;
     }
 }
 
@@ -211,6 +214,23 @@ message UpdateNodeProfileEvent {
     string status = 7;
     string accountId = 8;
     uint32 updateHeight = 9;
+}
+
+message MiningStartedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    string ipAddress = 3;
+}
+
+message MiningStoppedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+}
+
+message CmlMigratedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    string ipAddress = 3;
 }
 
 message RANode {
