@@ -37,19 +37,27 @@ message Layer1Outbound {
         ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
         ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
         ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
-        ConstructExtrinsicRequest ConstructExtrinsicRequest = 21;
+        ConstructExtrinsicCallRequest ConstructExtrinsicCallRequest = 21;
     }
 }
 
 message ConstructExtrinsicRequest {
     SubstrateApiInfo substrateApiInfo = 1;
     bytes privateKey = 2;
+    ExtrinsicCallParams callParams = 3;
+}
+
+message ExtrinsicCallParams {
     oneof msg {
         TransferFreeBalance TransferFreeBalance = 3;
     }
 }
 
-message ConstructExtrinsicRelay {
+message ConstructExtrinsicCallRequest {
+    ExtrinsicCallParams callParams = 1;
+}
+
+message ConstructExtrinsicCallResponse {
     bytes callEncode = 1;
 }
 
@@ -71,6 +79,7 @@ message SendTxResponse {
 }
 
 message ApiInfoRequest {
+    bytes accountPubKey = 1;
 }
 
 message ApiInfoResponse {
@@ -165,6 +174,7 @@ message SubstrateApiInfo {
     bytes header = 1; // finalized block header serialized with serde
     uint64 period = 2;
     bytes head = 3; // finalized block hash
+    uint32 nonce = 4;
 }
 
 message Layer1Settings {
