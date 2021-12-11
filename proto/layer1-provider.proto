@@ -11,7 +11,10 @@ message Layer1Inbound {
         NewNodeJoinedEvent NewNodeJoinedEvent = 6;
         CommitRaResultEvent CommitRaResultEvent = 7;
         UpdateNodeProfileEvent UpdateNodeProfileEvent = 8;
-        TAppCreatedEvent TAppCreatedEvent = 9;
+        MiningStartedEvent MiningStartedEvent = 9;
+        MiningStoppedEvent MiningStoppedEvent = 10;
+        CmlMigratedEvent CmlMigratedEvent = 11;
+        TAppCreatedEvent TAppCreatedEvent = 12;
     }
 }
 
@@ -38,6 +41,7 @@ message Layer1Outbound {
         ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
         ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
         ConstructExtrinsicCallRequest ConstructExtrinsicCallRequest = 21;
+        ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
     }
 }
 
@@ -241,6 +245,23 @@ message TAppCreatedEvent {
     uint32 createHeight = 4;
 }
 
+message MiningStartedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    string ipAddress = 3;
+}
+
+message MiningStoppedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+}
+
+message CmlMigratedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    string ipAddress = 3;
+}
+
 message RANode {
     bytes teaId = 1;
     bool isPass = 2;
@@ -324,6 +345,11 @@ message ListAllowedVersionsResponse {
 message VersionSet {
     string hash = 1;
     repeated VersionItem versions = 2;
+    VersionExpire versionExpire = 3;
+}
+
+message VersionExpire {
+    uint32 expireHeight = 1;
 }
 
 message VersionItem {
@@ -333,6 +359,11 @@ message VersionItem {
 
 message ReportNodeVersionExpiredRequest {
     bytes teaId = 1;
+}
+
+message ReportSelfOfflineRequest {
+    bytes teaId = 1;
+    bytes signature = 2;
 }
 
 message ListVersionExpiredNodesRequest {
