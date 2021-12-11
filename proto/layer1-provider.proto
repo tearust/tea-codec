@@ -36,6 +36,7 @@ message Layer1Outbound {
         ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
         ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
         ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
+        ReportSelfOfflineRequest ReportSelfOfflineRequest = 21;
     }
 }
 
@@ -295,6 +296,11 @@ message ListAllowedVersionsResponse {
 message VersionSet {
     string hash = 1;
     repeated VersionItem versions = 2;
+    VersionExpire versionExpire = 3;
+}
+
+message VersionExpire {
+    uint32 expireHeight = 1;
 }
 
 message VersionItem {
@@ -304,6 +310,11 @@ message VersionItem {
 
 message ReportNodeVersionExpiredRequest {
     bytes teaId = 1;
+}
+
+message ReportSelfOfflineRequest {
+    bytes teaId = 1;
+    bytes signature = 2;
 }
 
 message ListVersionExpiredNodesRequest {
