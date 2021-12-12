@@ -102,7 +102,7 @@ message SyncStateRequest {
 message SyncStateResponse {
   bytes data = 1;
 }
-message SignLayerOneTxnRequest{
-  uint32 tokenId = 1; 
-  bytes txn = 2;
+
+message GetConsumeAccountRequest{
+  uint64 tokenId = 1; 
 }

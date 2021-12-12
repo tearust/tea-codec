@@ -134,6 +134,7 @@ pub const OP_QUERY_APP_AES: &str = "QueryAppAes";
 pub const OP_GEN_APP_AES: &str = "GenAppAes";
 pub const OP_GET_APP_AES: &str = "GetAppAes";
 pub const OP_GEN_APP_CONSUME_ACCT: &str = "GenAppConsumeAcct";
+pub const OP_GET_APP_CONSUME_ACCT: &str = "GetAppConsumeAcct";
 pub const OP_DEPOSIT: &str = "Deposit";
 pub const OP_REFUND: &str = "Refund";
 pub const OP_CONSUME_FROM_DEPOSIT: &str = "ConsumeFromDeposit";
@@ -141,7 +142,6 @@ pub const OP_CONSUME_FROM_ACCOUNT: &str = "ConsumeFromAccount";
 pub const OP_PAYMENT_FROM_DEPOSIT: &str = "PaymentFromDeposit";
 pub const OP_EXPORT_STATE: &str = "ExportState";
 pub const OP_IMPORT_STATE: &str = "ImportState";
-pub const OP_SIGN_L1_TXN: &str = "SignLayerOneTxn";
 
 ///List all actor names vs their actor pubkeys
 ///
