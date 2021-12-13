@@ -10,6 +10,15 @@ message KeyGenerationResponse {
     bytes privateKey = 2;
 }
 
+message PublicFromPrivateKeyRequest {
+  string keyType = 1;
+  bytes privateKey = 2;
+}
+
+message PublicFromPrivateKeyResponse {
+  bytes publicKey = 1;
+}
+
 message SignRequest {
     string keyType = 1;
     bytes privateKey = 2;
