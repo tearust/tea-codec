@@ -48,7 +48,7 @@ message Layer1Outbound {
 message ConstructExtrinsicRequest {
     SubstrateApiInfo substrateApiInfo = 1;
     bytes privateKey = 2;
-    ExtrinsicCallParams callParams = 3;
+    bytes extrinsicCall = 3;
 }
 
 message ExtrinsicCallParams {
