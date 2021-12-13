@@ -210,6 +210,7 @@ pub struct DelayMessage {
 
 pub mod error;
 pub mod ipfs_codec;
+pub mod ops;
 pub mod ra;
 pub mod task;
 pub mod task_in_block;
