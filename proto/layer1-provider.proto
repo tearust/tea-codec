@@ -223,6 +223,7 @@ message NewBlockEvent {
     bytes parentHash = 2;
     bytes stateRoot = 3;
     bytes extrinsicRoot = 4;
+    bool isSync = 5;
 }
 
 message RegisterLayer1EventRequest {}
