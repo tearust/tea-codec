@@ -90,14 +90,19 @@ message SendTxDirectResponse {
 
 message SendTxAsyncResponse {
     TxResponse response = 1;
-    uint32 leftRetryCount = 2;
-    string uuid = 3;
-    string replyToActor = 4;
-    string errorMessage = 5;
+    TxErrorResponse error = 2;
+    uint32 leftRetryCount = 3;
+    string uuid = 4;
+    string replyToActor = 5;
 }
 
 message TxResponse {
    string blockHash = 1;
+}
+
+message TxErrorResponse {
+   bytes rawTransaction = 1;
+   string errorMessage = 2;
 }
 
 message ApiInfoRequest {
