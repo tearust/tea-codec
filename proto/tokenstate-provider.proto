@@ -31,6 +31,10 @@ message GenAppConsumeAcctRequest {
 message QueryAppAesResponse {
   bytes key = 1;
 }
+message QueryAuthOpsRequest{
+  bytes authKey = 1;
+}
+
 message DepositRequest{
   bytes ctx = 1;
   bytes acct = 2;
