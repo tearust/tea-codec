@@ -84,10 +84,6 @@ message SendTxRequest {
     string replyToActor = 4;
 }
 
-message SendTxDirectResponse {
-    bool success = 1;
-}
-
 message SendTxAsyncResponse {
     TxResponse response = 1;
     TxErrorResponse error = 2;
