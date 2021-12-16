@@ -115,6 +115,14 @@ message StateReceiverMessage {
   }
 }
 
+message StateReceiverResponse {
+  string uuid = 1;
+  oneof msg {
+    CommandFollowupResponse CommandFollowupResponse = 2;
+    TeaBalanceResponse TeaBalanceResponse = 3;
+  }
+}
+
 message StateCommand {
   bytes data = 1;
 }
@@ -136,12 +144,10 @@ message TeaBalanceRequest {
 message TeaBalanceResponse {
   bytes balance = 1;
   bytes ts = 2;
-  string uuid = 3;
 }
 
 message CommandFollowupResponse {
   bytes ts = 1;
   bytes hash = 2;
   bytes sender = 3;
-  string uuid = 4;
 }
