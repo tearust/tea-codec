@@ -8,8 +8,7 @@ message QueryTeaBalanceResponse {
   bytes balance_bytes = 1;
   bytes stateTsid = 2;
 }
-message QueryTokenBalanceRequest {
-  bytes acct = 1;
+message QueryTokenBalanceRequest { bytes acct = 1;
   uint64 tokenId = 2;
 }
 message QueryTokenBalanceResponse {
@@ -105,4 +104,44 @@ message SyncStateResponse {
 
 message GetConsumeAccountRequest{
   uint64 tokenId = 1; 
+}
+
+message StateReceiverMessage {
+  string uuid = 1;
+  oneof msg {
+    StateCommand StateCommand = 2;
+    StateFollowup StateFollowup = 3;
+    StateQuery StateQuery = 4;
+  }
+}
+
+message StateCommand {
+  bytes data = 1;
+}
+
+message StateFollowup {
+  bytes data = 1;
+}
+
+message StateQuery {
+  oneof msg {
+    TeaBalanceRequest TeaBalanceRequest = 1;
+  }
+}
+
+message TeaBalanceRequest {
+  string account = 1;
+}
+
+message TeaBalanceResponse {
+  bytes balance = 1;
+  bytes ts = 2;
+  string uuid = 3;
+}
+
+message CommandFollowupResponse {
+  bytes ts = 1;
+  bytes hash = 2;
+  bytes sender = 3;
+  string uuid = 4;
 }
