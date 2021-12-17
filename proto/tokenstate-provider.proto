@@ -1,6 +1,8 @@
 syntax = "proto3";
 package tokenstate;
 
+import "libp2p-provider.proto";
+
 message QueryStateTsidRequest {}
 message QueryStateTsidResponse { bytes stateTsid = 1; }
 message QueryTeaBalanceRequest { bytes acct = 1; }
@@ -119,11 +121,22 @@ message StateReceiverMessage {
   }
 }
 
+message StateReceiverRelayRequest {
+  string uuid = 1;
+  string targetConnId = 2;
+  string targetKey = 3;
+  libp2p.TargetType targetType = 4;
+  oneof msg {
+    SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 5;
+  }
+}
+
 message StateReceiverResponse {
   string uuid = 1;
   oneof msg {
-    CommandFollowupResponse CommandFollowupResponse = 2;
-    TeaBalanceResponse TeaBalanceResponse = 3;
+    DirectResponse DirectResponse = 2;
+    CommandFollowupResponse CommandFollowupResponse = 3;
+    TeaBalanceResponse TeaBalanceResponse = 4;
   }
 }
 
@@ -138,6 +151,7 @@ message StateFollowup {
 message StateQuery {
   oneof msg {
     TeaBalanceRequest TeaBalanceRequest = 1;
+    SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 2;
   }
 }
 
@@ -145,6 +159,16 @@ message TeaBalanceRequest {
   string account = 1;
   bytes auth = 2;
 }
+
+message SignAndSendExtrinsicRequest {
+  bytes extrinsicCall = 1;
+  uint64 tokenId = 2;
+}
+
+// Direct response do not return something meaningful, it just indicates that
+//  the request has been relayed successfully, and may return real result in
+//  another response
+message DirectResponse {}
 
 message TeaBalanceResponse {
   bytes balance = 1;
