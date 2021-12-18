@@ -1,6 +1,6 @@
 pub mod crypto;
 pub mod layer1;
-pub mod tappstore;
+pub mod state_receiver;
 pub mod token_state;
 
 pub const GENERAL_REPLY_PREFIX: &str = "reply";
