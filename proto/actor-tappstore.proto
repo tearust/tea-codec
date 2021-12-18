@@ -31,6 +31,5 @@ message SignAndSendExtrinsicRequest {
 }
 
 message SignAndSendExtrinsicResponse {
-  bool success = 1;
-  string errorMessage = 2;
+  string blockHash = 1;
 }
