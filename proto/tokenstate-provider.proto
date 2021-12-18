@@ -112,6 +112,7 @@ message GetConsumeAccountRequest{
   uint64 tokenId = 1; 
 }
 
+// Top level message send to state receiver
 message StateReceiverMessage {
   string uuid = 1;
   oneof msg {
@@ -121,23 +122,38 @@ message StateReceiverMessage {
   }
 }
 
-message StateReceiverRelayRequest {
-  string uuid = 1;
-  string targetConnId = 2;
-  string targetKey = 3;
-  libp2p.TargetType targetType = 4;
-  oneof msg {
-    SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 5;
-  }
-}
-
+// Top level message response from state receiver
 message StateReceiverResponse {
   string uuid = 1;
   oneof msg {
     DirectResponse DirectResponse = 2;
     CommandFollowupResponse CommandFollowupResponse = 3;
-    TeaBalanceResponse TeaBalanceResponse = 4;
+    GeneralQueryResponse GeneralQueryResponse = 4;
   }
+}
+
+// All query request should be added into the `msg` field
+message GeneralQueryRequest {
+  oneof msg {
+    TeaBalanceRequest TeaBalanceRequest = 2;
+    SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 3;
+  }
+}
+
+// All query response should be found in the `msg` field.
+// This response is the intercom reply result of other actors (send back to state receiver),
+//  and a choice of `StateReceiverResponse`.
+message GeneralQueryResponse {
+  oneof msg {
+    TeaBalanceResponse TeaBalanceResponse = 4;
+    SignAndSendExtrinsicResponse SignAndSendExtrinsicResponse = 5;
+  }
+}
+
+// State receiver received request and construct the relay request to other actors
+message StateReceiverRelayRequest {
+  string uuid = 1;
+  GeneralQueryRequest GeneralQueryRequest = 2;
 }
 
 message StateCommand {
@@ -149,10 +165,7 @@ message StateFollowup {
 }
 
 message StateQuery {
-  oneof msg {
-    TeaBalanceRequest TeaBalanceRequest = 1;
-    SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 2;
-  }
+  bytes data = 1;
 }
 
 message TeaBalanceRequest {
@@ -173,6 +186,11 @@ message DirectResponse {}
 message TeaBalanceResponse {
   bytes balance = 1;
   bytes ts = 2;
+}
+
+message SignAndSendExtrinsicResponse {
+  bool success = 1;
+  string errorMessage = 2;
 }
 
 message CommandFollowupResponse {
