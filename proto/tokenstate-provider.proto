@@ -125,35 +125,30 @@ message StateReceiverMessage {
 // Top level message response from state receiver
 message StateReceiverResponse {
   string uuid = 1;
+  bool success = 2;
+  string errorMessage = 3;
   oneof msg {
-    DirectResponse DirectResponse = 2;
-    CommandFollowupResponse CommandFollowupResponse = 3;
-    GeneralQueryResponse GeneralQueryResponse = 4;
+    DirectResponse DirectResponse = 4;
+    CommandFollowupResponse CommandFollowupResponse = 5;
+    GeneralQueryResponse GeneralQueryResponse = 6;
   }
 }
 
-// All query request should be added into the `msg` field
-message GeneralQueryRequest {
-  oneof msg {
-    TeaBalanceRequest TeaBalanceRequest = 2;
-    SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 3;
-  }
-}
-
-// All query response should be found in the `msg` field.
-// This response is the intercom reply result of other actors (send back to state receiver),
-//  and a choice of `StateReceiverResponse`.
 message GeneralQueryResponse {
-  oneof msg {
-    TeaBalanceResponse TeaBalanceResponse = 4;
-    SignAndSendExtrinsicResponse SignAndSendExtrinsicResponse = 5;
-  }
+  bytes data = 1;
 }
 
 // State receiver received request and construct the relay request to other actors
 message StateReceiverRelayRequest {
   string uuid = 1;
-  GeneralQueryRequest GeneralQueryRequest = 2;
+  bytes data = 2;
+}
+
+message StateReceiverRelayResponse {
+  string uuid = 1;
+  bool success = 2;
+  string errorMessage = 3;
+  bytes data = 4;
 }
 
 message StateCommand {
@@ -168,30 +163,10 @@ message StateQuery {
   bytes data = 1;
 }
 
-message TeaBalanceRequest {
-  string account = 1;
-  bytes auth = 2;
-}
-
-message SignAndSendExtrinsicRequest {
-  bytes extrinsicCall = 1;
-  uint64 tokenId = 2;
-}
-
 // Direct response do not return something meaningful, it just indicates that
 //  the request has been relayed successfully, and may return real result in
 //  another response
 message DirectResponse {}
-
-message TeaBalanceResponse {
-  bytes balance = 1;
-  bytes ts = 2;
-}
-
-message SignAndSendExtrinsicResponse {
-  bool success = 1;
-  string errorMessage = 2;
-}
 
 message CommandFollowupResponse {
   bytes ts = 1;
