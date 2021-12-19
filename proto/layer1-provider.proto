@@ -97,7 +97,6 @@ message TxResponse {
 }
 
 message TxErrorResponse {
-   bytes rawTransaction = 1;
    string errorMessage = 2;
 }
 
