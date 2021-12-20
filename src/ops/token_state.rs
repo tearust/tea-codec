@@ -19,3 +19,4 @@ pub const OP_CONSUME_FROM_ACCOUNT: &str = "ConsumeFromAccount";
 pub const OP_PAYMENT_FROM_DEPOSIT: &str = "PaymentFromDeposit";
 pub const OP_EXPORT_STATE: &str = "ExportState";
 pub const OP_IMPORT_STATE: &str = "ImportState";
+pub const OP_SET_AUTH_OPS_BYTES: &str = "SetAuthOpsBytes";
