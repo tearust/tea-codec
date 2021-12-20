@@ -35,6 +35,10 @@ message QueryAppAesResponse {
 message QueryAuthOpsRequest{
   bytes authKey = 1;
 }
+message SetAuthOpsRequest{
+  bytes authKey = 1;
+  bytes authOpsBytes = 2;
+}
 
 message DepositRequest{
   bytes ctx = 1;
