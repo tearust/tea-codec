@@ -21,12 +21,23 @@ message QueryAppAesRequest {
   uint64 tokenId = 1;
 }
 message GenAppAesRequest {
-  uint64 tokenId = 1;
+  bytes ctx = 1;
   bytes tsidBytes = 2;
 }
+
+message GenAppAesResponse {
+  bytes ctx = 1;
+  bytes newKey = 2;
+}
+
 message GenAppConsumeAcctRequest {
-  uint64 tokenId = 1;
+  bytes ctx = 1;
   bytes tsidBytes = 2;
+}
+
+message GenAppConsumeAcctResponse {
+  bytes ctx = 1;
+  bytes newKey = 2;
 }
 
 message QueryAppAesResponse {
