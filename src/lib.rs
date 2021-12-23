@@ -81,33 +81,6 @@ pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";
 pub const OP_NITRO_VERIFICATION_PRCS: &str = "VerificationPcrs";
 pub const OP_NITRO_GET_ATTESTATION_DOC_PARAMS: &str = "GetAttestationDocParams";
 
-/// This is used when replica provider call an app contract handler actor.
-/// The app contract handler actor will be called by the long running thread
-/// of replciation when a txn is need to be executed
-pub const OP_ACTOR_EXEC_TXN: &str = "ActorExecuteTxn";
-/// Generate a sync message and then send to other replicas
-/// This is called everytime when a new txn-followup pair is received
-/// by this replica. And, this txn is new to this replica. It will
-/// need to notify other replicas that I received a new txn.
-/// Although this txn may not be *new* to other replica.
-pub const OP_GEN_SYNC_MSG: &str = "GenerateSyncMessage";
-/// Receive sync message from other replica.
-pub const OP_REV_SYNC_MSG: &str = "ReceiveSyncMessage";
-/// Call this op to clean up dead or out-of-sync other replicas
-/// Those out-of-sync replicas will be remove after this call
-pub const OP_CLEAR_UP: &str = "CleanUpSyncReplica";
-/// How many replicas current connect to this replica
-pub const OP_GET_REPLICA_COUNT: &str = "GetReplicaCount";
-/// If return a empty vec, the replica is still waiting for the second
-/// part of the txn - followup pair.
-/// If this is the second part, the pair is completed, it will return
-/// the tsid as bytes. In this case, please generate the sync message
-/// to other replica, because this replica found a new txn that need
-/// to notify others
-pub const OP_REV_FOLLOWUP: &str = "ReceiveFollowup";
-/// Similar to OP_REV_FOLLOWUP, check return value to determin whether or
-/// not to continue call OP_GEN_SYNC_MSG
-pub const OP_REV_TXN: &str = "ReceiveTxn";
 /// This op is called frequently in a infinity loop
 /// It will check this replica conveyor to find if there is any
 /// txn TSID passed the global immutable checkpoint.
@@ -121,8 +94,6 @@ pub const OP_REV_TXN: &str = "ReceiveTxn";
 /// txn. If there is no ready txn, then waiti a short period of time
 /// then try again
 pub const OP_POP_READY_TSID: &str = "PopReadyTsid";
-
-
 
 ///List all actor names vs their actor pubkeys
 ///
