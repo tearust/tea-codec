@@ -124,6 +124,7 @@ message StateReceiverMessage {
     StateFollowup StateFollowup = 3;
     StateQuery StateQuery = 4;
     TappStoreCommand TappStoreCommand = 5;
+    TappStoreQuery TappStoreQuery = 6;
   }
 }
 
@@ -169,6 +170,9 @@ message StateQuery {
 }
 
 message TappStoreCommand {
+  bytes data = 1;
+}
+message TappStoreQuery {
   bytes data = 1;
 }
 

@@ -5,7 +5,7 @@ message TappQueryRequest {
   oneof msg {
     TeaBalanceRequest TeaBalanceRequest = 2;
     SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 3;
-    LoginRequest LoginRequest = 9;
+    CheckUserSessionRequest CheckUserSessionRequest = 4;
   }
 }
 
@@ -13,7 +13,7 @@ message TappQueryResponse {
   oneof msg {
     TeaBalanceResponse TeaBalanceResponse = 4;
     SignAndSendExtrinsicResponse SignAndSendExtrinsicResponse = 5;
-    LoginResponse LoginResponse = 10;
+    CheckUserSessionResponse CheckUserSessionResponse = 6;
   }
 }
 
@@ -36,14 +36,11 @@ message SignAndSendExtrinsicResponse {
   string blockHash = 1;
 }
 
-message LoginRequest {
-  uint64 tappId = 1;
-  string address = 2;
-  bytes data = 3;
-  bytes signature = 4;
+message CheckUserSessionRequest {
+  string account = 1;
+  uint64 tokenId = 2;
 }
-
-message LoginResponse {
-  bytes aesKey = 1;
-  bytes sessionKey = 2;
+message CheckUserSessionResponse {
+  bytes authKey = 1;
+  bytes aesKey = 2;
 }
