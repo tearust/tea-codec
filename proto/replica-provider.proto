@@ -47,3 +47,8 @@ message GetReplicaModeResponse {
 message SetReplicaModeRequest {
   bytes mode = 1;
 }
+
+message RoundTableMembersRequest {}
+message RoundTableMembersResponse {
+  repeated bytes replicaIds = 1;
+}

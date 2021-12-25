@@ -47,6 +47,7 @@ message RandomPeersRequest {
 }
 message RandomoPeersResponse {
 	repeated string peers = 1;
+	bool insufficientPeers = 2;
 }
 
 message RuntimeMessage {
