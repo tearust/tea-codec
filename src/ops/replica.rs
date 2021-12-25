@@ -2,6 +2,8 @@
 /// The app contract handler actor will be called by the long running thread
 /// of replciation when a txn is need to be executed
 pub const OP_ACTOR_EXEC_TXN: &str = "ActorExecuteTxn";
+/// Fired when replica members has removed by conveyor timeout mechanism.
+pub const OP_ACTOR_REPLICAS_REMOVED: &str = "ActorReplicasRemoved";
 /// Generate a sync message and then send to other replicas
 /// This is called everytime when a new txn-followup pair is received
 /// by this replica. And, this txn is new to this replica. It will
@@ -25,3 +27,9 @@ pub const OP_REV_FOLLOWUP: &str = "ReceiveFollowup";
 /// Similar to OP_REV_FOLLOWUP, check return value to determin whether or
 /// not to continue call OP_GEN_SYNC_MSG
 pub const OP_REV_TXN: &str = "ReceiveTxn";
+
+pub const OP_GET_ROUND_TABLE: &str = "GetRoundTable";
+pub const OP_SET_ROUND_TABLE: &str = "SetRoundTable";
+pub const OP_ADD_REPLICA_MEMBER: &str = "AddReplicaMember";
+pub const OP_RESET_REPLICA_MEMBERS: &str = "ResetReplicaMembers";
+pub const OP_RESET_DESIRED_COUNT: &str = "ResetDesiredCount";
