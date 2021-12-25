@@ -8,6 +8,7 @@ message Libp2pRequest {
 		StartUseIpAddressRequest StartUseIpAddressRequest = 3;
 		StopUseIpAddressRequest StopUseIpAddressRequest = 4;
 		CloseRequest CloseRequest = 5;
+		PeersChangedRequest PeersChangedRequest = 6;
 	}
 }
 
@@ -30,6 +31,22 @@ message StopUseIpAddressRequest {
 }
 
 message CloseRequest {
+}
+
+message PeersChangedRequest {
+	repeated string peers = 1;
+}
+
+message ListPeersRequest {}
+message ListPeersResponse {
+	repeated string peers = 1;
+}
+
+message RandomPeersRequest {
+	uint32 count = 1;
+}
+message RandomoPeersResponse {
+	repeated string peers = 1;
 }
 
 message RuntimeMessage {
