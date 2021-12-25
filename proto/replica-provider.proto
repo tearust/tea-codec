@@ -38,3 +38,12 @@ message ResetReplicaMembersRequest {
 message ResetDesiredCountRequest {
   uint32 desiredCount = 1;
 }
+
+message GetReplicaModeRequest {}
+message GetReplicaModeResponse {
+  bytes mode = 1;
+}
+
+message SetReplicaModeRequest {
+  bytes mode = 1;
+}

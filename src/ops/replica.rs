@@ -33,3 +33,5 @@ pub const OP_SET_ROUND_TABLE: &str = "SetRoundTable";
 pub const OP_ADD_REPLICA_MEMBER: &str = "AddReplicaMember";
 pub const OP_RESET_REPLICA_MEMBERS: &str = "ResetReplicaMembers";
 pub const OP_RESET_DESIRED_COUNT: &str = "ResetDesiredCount";
+pub const OP_GET_SYNC_MODE: &str = "GetSyncMode";
+pub const OP_SET_SYNC_MODE: &str = "SetSyncMode";
