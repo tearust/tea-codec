@@ -39,8 +39,12 @@ message SignAndSendExtrinsicResponse {
 message CheckUserSessionRequest {
   string account = 1;
   uint64 tokenId = 2;
+  bytes teaId = 3;
 }
+
 message CheckUserSessionResponse {
   bytes authKey = 1;
   bytes aesKey = 2;
+  uint64 tokenId = 3;
+  string account = 4;
 }
