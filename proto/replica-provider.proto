@@ -52,3 +52,7 @@ message RoundTableMembersRequest {}
 message RoundTableMembersResponse {
   repeated bytes replicaIds = 1;
 }
+
+message NotifyReplicaMembers { 
+  repeated bytes replicaIds = 1;
+}
