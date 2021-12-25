@@ -45,6 +45,7 @@ message Layer1Outbound {
         ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
         ConstructExtrinsicCallRequest ConstructExtrinsicCallRequest = 21;
         ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
+        GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
     }
 }
 
@@ -389,4 +390,9 @@ message ListVersionExpiredNodesRequest {
 
 message ListVersionExpiredNodesResponse {
     repeated bytes teaIds = 1;
+}
+
+message GetTappStoreDesiredCountRequest {}
+message GetTappStoreDesiredCountResponse {
+    uint32 count = 1;
 }
