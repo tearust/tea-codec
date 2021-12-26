@@ -396,3 +396,16 @@ message GetTappStoreDesiredCountRequest {}
 message GetTappStoreDesiredCountResponse {
     uint32 count = 1;
 }
+
+message GetCachedMinerInfoRequest {
+    bytes teaId = 1;
+}
+message GetCachedMinerInfoResponse {
+    bytes data = 1;
+    bool hit = 2;
+}
+
+message SetCachedMinerInfoRequest {
+    bytes teaId = 1;
+    bytes data = 2;
+}
