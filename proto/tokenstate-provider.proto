@@ -122,6 +122,7 @@ message SyncStateRequest {
 
 message SyncStateResponse {
   bytes data = 1;
+  bytes tsid = 2;
 }
 
 message GetConsumeAccountRequest{
