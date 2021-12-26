@@ -110,6 +110,7 @@ message ExportStateRequest {
 
 message ExportStateResponse {
   bytes data = 1;
+  bytes tsid = 2;
 }
 
 message ImportStateRequest {

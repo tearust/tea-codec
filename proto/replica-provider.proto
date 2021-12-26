@@ -56,3 +56,14 @@ message RoundTableMembersResponse {
 message NotifyReplicaMembers { 
   repeated bytes replicaIds = 1;
 }
+
+message FetchHistoryRequest {
+  bytes endTsid = 1;
+}
+message FetchHistoryResponse {
+  repeated HistoryItem historyItems = 1;
+}
+message HistoryItem {
+  bytes tsid = 1;
+  bytes txn = 2;
+}

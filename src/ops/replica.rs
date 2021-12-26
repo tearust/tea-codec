@@ -35,3 +35,4 @@ pub const OP_RESET_REPLICA_MEMBERS: &str = "ResetReplicaMembers";
 pub const OP_RESET_DESIRED_COUNT: &str = "ResetDesiredCount";
 pub const OP_GET_SYNC_MODE: &str = "GetSyncMode";
 pub const OP_SET_SYNC_MODE: &str = "SetSyncMode";
+pub const OP_FETCH_HISTORY: &str = "FetchHistory";
