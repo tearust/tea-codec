@@ -1,5 +1,6 @@
 syntax = "proto3";
 package replica;
+
 message GenerateSyncMsg { bytes repId = 1; }
 message ReceiveSyncMsg { bytes syncMsg = 1; }
 message PopReadyTsidReq {}
