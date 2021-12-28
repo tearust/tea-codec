@@ -1,6 +1,7 @@
 pub mod crypto;
 pub mod layer1;
 pub mod libp2p;
+pub mod persist;
 pub mod replica;
 pub mod state_receiver;
 pub mod token_state;

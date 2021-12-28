@@ -143,6 +143,7 @@ pub const TOKENSTATE_CAPABILITY_ID: &str = "tea:tokenstate";
 pub const LIBP2P_CAPABILITY_ID: &str = "tea:libp2p";
 pub const CONSOLE_CAPABILITY_ID: &str = "tea:console";
 pub const CRYPTO_CAPABILITY_ID: &str = "tea:crypto";
+pub const PERSIST_CAPABILITY_ID: &str = "tea:persist";
 
 pub const LIBP2P_REGISTER_SOCKET_NAME: &str = "/tmp/libp2p-register.socket";
 
