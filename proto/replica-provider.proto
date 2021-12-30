@@ -64,6 +64,11 @@ message FetchHistoryRequest {
 message FetchHistoryResponse {
   repeated HistoryItem historyItems = 1;
 }
+
+message RecoverHistoryRequest {
+  repeated HistoryItem historyItems = 1;
+}
+
 message HistoryItem {
   bytes tsid = 1;
   bytes txn = 2;

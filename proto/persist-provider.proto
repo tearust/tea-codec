@@ -12,6 +12,7 @@ message PersistRequest {
 		GetRequest GetRequest = 6;
 		FindRequest FindRequest = 7;
 		FindWithDirection FindWithDirection = 8;
+		GetLastRequest GetLastRequest = 9;
 	}
 }
 
@@ -21,11 +22,15 @@ message PersistResponse {
 	string subject = 3;
 
 	oneof msg {
-		ErrorMessage ErrorMessage = 4;
-		GetResponse GetResponse = 5;
-		FindResponse FindResponse = 6;
+		SuccessMessage SuccessMessage = 4;
+		ErrorMessage ErrorMessage = 5;
+		GetResponse GetResponse = 6;
+		FindResponse FindResponse = 7;
+		GetLastResponse GetLastResponse = 8;
 	}
 }
+
+message SuccessMessage {}
 
 message ErrorMessage {
 	string message = 1;
@@ -52,11 +57,17 @@ message SingleValue {
 	bytes value = 1;
 }
 
+message GetLastRequest {}
+message GetLastResponse {
+	KeyValuePair kvp = 1;
+}
+
 // find with prefix and return matched results
 // return result is `FindResponse`
 message FindRequest {
 	bytes prefix = 1;
 	IterOptions options = 2;
+	bool onlyKey = 3;
 }
 
 // If find the given key then return sequences before/after the key
@@ -65,6 +76,7 @@ message FindWithDirection {
 	bytes key = 1;
 	bool before = 2; // sequence before the specified key
 	IterOptions options = 3;
+	bool onlyKey = 4;
 }
 
 message FindResponse {
