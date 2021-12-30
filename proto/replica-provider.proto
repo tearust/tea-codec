@@ -69,6 +69,11 @@ message RecoverHistoryRequest {
   repeated HistoryItem historyItems = 1;
 }
 
+message GetLastHistoryRequest {}
+message GetLastHistoryResponse {
+  HistoryItem item = 1;
+}
+
 message HistoryItem {
   bytes tsid = 1;
   bytes txn = 2;
