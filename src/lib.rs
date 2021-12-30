@@ -64,12 +64,6 @@ pub const OP_DELAY_PUBLISH: &'static str = "DelayPublish";
 pub const OP_TEST_RELAY: &'static str = "OP_TEST_RELAY";
 pub const OP_INTERCOM_MESSAGE: &str = "IntercomMessage";
 
-pub const OP_GET_ENV_VAR: &str = "GetEnvVar";
-pub const OP_GET_SYSTEM_TIME: &str = "GetSystemTime";
-pub const OP_CURRENT_TIMESTAMP: &str = "CurrentTimestamp";
-pub const OP_TASK_START: &str = "TaskStart";
-pub const OP_TASK_END: &str = "TaskEnd";
-
 pub const OP_GET_TEA_ID: &str = "GetTeaId";
 pub const OP_EPHEMERAL_PUB_KEY: &str = "GetEphemeralPubKey";
 pub const OP_EPHEMERAL_PRI_KEY: &str = "GetEphemeralPriKey";
