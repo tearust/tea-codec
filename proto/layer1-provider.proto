@@ -46,6 +46,7 @@ message Layer1Outbound {
         ConstructExtrinsicCallRequest ConstructExtrinsicCallRequest = 21;
         ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
         GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
+        GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
     }
 }
 
@@ -408,4 +409,9 @@ message GetCachedMinerInfoResponse {
 message SetCachedMinerInfoRequest {
     bytes teaId = 1;
     bytes data = 2;
+}
+
+message GetTappStoreStartupNodesRequest {}
+message GetTappStoreStartupNodesResponse {
+    repeated bytes nodes = 1;
 }
