@@ -20,6 +20,11 @@ message QueryTokenBalanceResponse {
 message QueryAppAesRequest {
   uint64 tokenId = 1;
 }
+message QueryUserLoginSessionKeyRequest{
+  uint64 tokenId = 1;
+  bytes acct = 2;
+  bytes teaId = 3;
+}
 message GenAppAesRequest {
   bytes ctx = 1;
   bytes tsidBytes = 2;
@@ -49,6 +54,18 @@ message QueryAuthOpsRequest{
 message SetAuthOpsRequest{
   bytes authKey = 1;
   bytes authOpsBytes = 2;
+}
+
+message SetUserLoginSessionKey{
+  uint64 tokenId = 1;
+  bytes acct = 2;
+  bytes authKey = 3;
+  bytes ts = 4;
+}
+
+message GetUserLoginSessionKey{
+  uint64 tokenId = 1;
+  bytes acct = 2;
 }
 
 message DepositRequest{
