@@ -78,3 +78,7 @@ message HistoryItem {
   bytes tsid = 1;
   bytes txn = 2;
 }
+
+message JoinRoundTableRequest {
+  bytes replicaId = 1;
+}
