@@ -45,6 +45,8 @@ message Layer1Outbound {
         ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
         ConstructExtrinsicCallRequest ConstructExtrinsicCallRequest = 21;
         ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
+        GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
+        GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
     }
 }
 
@@ -389,4 +391,27 @@ message ListVersionExpiredNodesRequest {
 
 message ListVersionExpiredNodesResponse {
     repeated bytes teaIds = 1;
+}
+
+message GetTappStoreDesiredCountRequest {}
+message GetTappStoreDesiredCountResponse {
+    uint32 count = 1;
+}
+
+message GetCachedMinerInfoRequest {
+    bytes teaId = 1;
+}
+message GetCachedMinerInfoResponse {
+    bytes data = 1;
+    bool hit = 2;
+}
+
+message SetCachedMinerInfoRequest {
+    bytes teaId = 1;
+    bytes data = 2;
+}
+
+message GetTappStoreStartupNodesRequest {}
+message GetTappStoreStartupNodesResponse {
+    repeated bytes nodes = 1;
 }

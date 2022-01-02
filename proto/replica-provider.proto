@@ -1,5 +1,6 @@
 syntax = "proto3";
 package replica;
+
 message GenerateSyncMsg { bytes repId = 1; }
 message ReceiveSyncMsg { bytes syncMsg = 1; }
 message PopReadyTsidReq {}
@@ -13,3 +14,71 @@ message GetReplicaCountResponse { uint32 count = 1; }
 message ReceiveTxn { bytes txnBytes = 1; }
 message ReceiveFollowup { bytes followup = 1; }
 
+message RoundTable {
+  uint32 desiredCount = 1;
+  repeated bytes replicaIds = 2;
+}
+
+message GetRoundTableRequest {}
+message GetRoundTableResponse {
+  RoundTable roundTable = 1;
+}
+
+message SetRoundTableRequest {
+  RoundTable roundTable = 1;
+}
+
+message AddReplicaMemberRequest {
+  bytes replicaId = 1;
+}
+
+message ResetReplicaMembersRequest { 
+  repeated bytes replicaIds = 1;
+}
+
+message ResetDesiredCountRequest {
+  uint32 desiredCount = 1;
+}
+
+message GetReplicaModeRequest {}
+message GetReplicaModeResponse {
+  bytes mode = 1;
+}
+
+message SetReplicaModeRequest {
+  bytes mode = 1;
+}
+
+message RoundTableMembersRequest {}
+message RoundTableMembersResponse {
+  repeated bytes replicaIds = 1;
+}
+
+message NotifyReplicaMembers { 
+  repeated bytes replicaIds = 1;
+}
+
+message FetchHistoryRequest {
+  bytes endTsid = 1;
+}
+message FetchHistoryResponse {
+  repeated HistoryItem historyItems = 1;
+}
+
+message RecoverHistoryRequest {
+  repeated HistoryItem historyItems = 1;
+}
+
+message GetLastHistoryRequest {}
+message GetLastHistoryResponse {
+  HistoryItem item = 1;
+}
+
+message HistoryItem {
+  bytes tsid = 1;
+  bytes txn = 2;
+}
+
+message JoinRoundTableRequest {
+  bytes replicaId = 1;
+}

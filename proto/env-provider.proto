@@ -39,3 +39,9 @@ message EndTasksRequest{
 message EndTasksResponse{
   bytes milliseconds = 1;
 }
+
+message RegisterTickRequest{
+  string subject = 1;
+  uint64 rangeStart = 2;
+  uint64 rangeEnd = 3;
+}

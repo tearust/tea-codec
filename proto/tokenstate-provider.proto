@@ -127,17 +127,46 @@ message ExportStateRequest {
 
 message ExportStateResponse {
   bytes data = 1;
+  bytes tsid = 2;
 }
 
 message ImportStateRequest {
   bytes data = 1;
 }
 
+message StatePing {
+  Checkpoint checkpoint = 1;
+  HistoryTxn historyTxn = 2;
+}
+message StatePong {
+  Checkpoint checkpoint = 1;
+  HistoryTxn historyTxn = 2;
+}
+message Checkpoint {
+  uint32 blockNumber = 1;
+  bytes hash = 2;
+}
+message HistoryTxn {
+  bytes lastTsid = 1;
+}
+
 message SyncStateRequest {
+  Checkpoint checkpoint = 1;
+  HistoryTxn historyTxn = 2;
 }
 
 message SyncStateResponse {
+  uint32 lastCheckpointHeight = 1;
+  CheckpointData checkpoint = 2;
+  repeated HistoryItem historyItems = 3;
+  bytes tsid = 4;
+}
+message CheckpointData {
   bytes data = 1;
+}
+message HistoryItem {
+  bytes tsid = 1;
+  bytes txn = 2;
 }
 
 message GetConsumeAccountRequest{

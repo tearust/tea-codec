@@ -8,6 +8,9 @@ message Libp2pRequest {
 		StartUseIpAddressRequest StartUseIpAddressRequest = 3;
 		StopUseIpAddressRequest StopUseIpAddressRequest = 4;
 		CloseRequest CloseRequest = 5;
+		PeersChangedRequest PeersChangedRequest = 6;
+		SubscribeGossipTopicRequest SubscribeGossipTopicRequest = 7;
+		UnsubscribeGossipTopicRequest UnsubscribeGossipTopicRequest = 8;
 	}
 }
 
@@ -20,6 +23,11 @@ message GeneralRequest {
 message PubMessage {
 	string sourceConnId = 1;
 	RuntimeMessage runtimeMessage = 2;
+	Topic topic = 3;
+}
+
+message Topic {
+	string topicName = 1;
 }
 
 message StartUseIpAddressRequest {
@@ -30,6 +38,23 @@ message StopUseIpAddressRequest {
 }
 
 message CloseRequest {
+}
+
+message PeersChangedRequest {
+	repeated string peers = 1;
+}
+
+message ListPeersRequest {}
+message ListPeersResponse {
+	repeated string peers = 1;
+}
+
+message RandomPeersRequest {
+	uint32 count = 1;
+}
+message RandomoPeersResponse {
+	repeated string peers = 1;
+	bool insufficientPeers = 2;
 }
 
 message RuntimeMessage {
@@ -69,4 +94,12 @@ message StateMessageRequest {
 	string action = 1;
 	string msgB64 = 2;
 	string uuid = 3;
+}
+
+message SubscribeGossipTopicRequest {
+	string topicName = 1;
+}
+
+message UnsubscribeGossipTopicRequest {
+	string topicName = 2;
 }
