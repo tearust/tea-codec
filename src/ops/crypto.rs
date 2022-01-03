@@ -15,3 +15,8 @@ pub const OP_RSA_ENCRYPT: &str = "RsaEncrypt";
 pub const OP_FROM_SS58_ADDRESS: &str = "FromSS58";
 pub const OP_TO_SS58_ADDRESS: &str = "ToSS58";
 pub const OP_PUB_FROM_PRI_KEY: &str = "PubFromPrivateKey";
+
+pub const KEY_TYPE_BITCOIN_MAINNET: &str = "bitcoin_mainnet";
+pub const KEY_TYPE_BITCOIN_TESTNET: &str = "bitcoin_testnet";
+pub const KEY_TYPE_ED25519: &str = "ed25519";
+pub const KEY_TYPE_SR25519: &str = "sr25519";
