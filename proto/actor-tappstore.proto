@@ -6,6 +6,7 @@ message TappQueryRequest {
     TeaBalanceRequest TeaBalanceRequest = 2;
     SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 3;
     CheckUserSessionRequest CheckUserSessionRequest = 4;
+    GetConsumeAccountPubkeyRequest GetConsumeAccountPubkeyRequest = 5;
   }
 }
 
@@ -14,6 +15,7 @@ message TappQueryResponse {
     TeaBalanceResponse TeaBalanceResponse = 4;
     SignAndSendExtrinsicResponse SignAndSendExtrinsicResponse = 5;
     CheckUserSessionResponse CheckUserSessionResponse = 6;
+    GetConsumeAccountPubkeyResponse GetConsumeAccountPubkeyResponse = 7;
   }
 }
 
@@ -21,7 +23,6 @@ message TeaBalanceRequest {
   string account = 1;
   bytes auth = 2;
 }
-
 message TeaBalanceResponse {
   bytes balance = 1;
   bytes ts = 2;
@@ -31,7 +32,6 @@ message SignAndSendExtrinsicRequest {
   bytes extrinsicCall = 1;
   uint64 tokenId = 2;
 }
-
 message SignAndSendExtrinsicResponse {
   string blockHash = 1;
 }
@@ -41,10 +41,17 @@ message CheckUserSessionRequest {
   uint64 tokenId = 2;
   bytes teaId = 3;
 }
-
 message CheckUserSessionResponse {
   bytes authKey = 1;
   bytes aesKey = 2;
   uint64 tokenId = 3;
   string account = 4;
+}
+
+message GetConsumeAccountPubkeyRequest {
+  uint64 tokenId = 1;
+}
+message GetConsumeAccountPubkeyResponse {
+  bytes publicKey = 1;
+  string address = 2;
 }
