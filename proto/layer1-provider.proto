@@ -256,6 +256,7 @@ message UpdateNodeProfileEvent {
     string status = 7;
     string accountId = 8;
     uint32 updateHeight = 9;
+    string connId = 10;
 }
 
 message TAppCreatedEvent {
