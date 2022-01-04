@@ -21,7 +21,8 @@ message TappQueryResponse {
 
 message TeaBalanceRequest {
   string account = 1;
-  bytes auth = 2;
+  uint64 tokenId = 2;
+  bytes authKey = 3;
 }
 message TeaBalanceResponse {
   bytes balance = 1;
