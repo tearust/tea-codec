@@ -21,10 +21,12 @@ message ResetReplicasCountRequest {
 message RoundTableMembersRequest {}
 message RoundTableMembersResponse {
   repeated bytes replicaIds = 1;
+  bytes updateTs = 2;
 }
 
 message NotifyReplicaMembers { 
   repeated bytes replicaIds = 1;
+  bytes updateTs = 2;
 }
 
 message FetchHistoryRequest {
@@ -51,3 +53,16 @@ message HistoryItem {
 message JoinRoundTableRequest {
   bytes replicaId = 1;
 }
+
+message ValidatorsStateRequest {}
+message ValidatorsStateResponse {
+  ValidatorsState validatorsState = 1;
+}
+
+message ValidatorsState {
+  uint32 desiredCount = 1;
+  bytes replicasHash = 2;
+  bytes updateTs = 3;
+}
+
+message ValidatorsDataRequest {}
