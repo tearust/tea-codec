@@ -134,6 +134,14 @@ message ImportStateRequest {
   bytes data = 1;
 }
 
+message ExportGlueSqlRequest {
+  bytes data = 1;
+}
+
+message ImportGlueSqlRequest {
+  bytes data = 1;
+}
+
 message StatePing {
   Checkpoint checkpoint = 1;
   HistoryTxn historyTxn = 2;
