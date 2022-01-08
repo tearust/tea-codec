@@ -142,6 +142,10 @@ message ImportGlueSqlRequest {
   bytes data = 1;
 }
 
+message InitGlueSqlRequest {
+  uint64 tokenId = 1;
+}
+
 message StatePing {
   Checkpoint checkpoint = 1;
   HistoryTxn historyTxn = 2;
