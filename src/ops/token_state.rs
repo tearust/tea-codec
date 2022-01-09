@@ -23,6 +23,7 @@ pub const OP_EXPORT_GLUESQL: &str = "ExportGlueSql";
 pub const OP_IMPORT_GLUESQL: &str = "ImportGlueSql";
 pub const OP_INIT_GLUESQL: &str = "InitGlueSql";
 pub const OP_EXEC_GLUESQL: &str = "ExecGlueSql";
+pub const OP_EXEC_GLUEQUERY: &str = "ExecGlueQuery";
 pub const OP_SET_AUTH_OPS_BYTES: &str = "SetAuthOpsBytes";
 pub const OP_SET_USER_LOGIN_SESSION_KEY: &str = "SetUserLoginSessionKey";
 pub const OP_GET_USER_LOGIN_SESSION_KEY: &str = "GetUserLoginSessionKey";

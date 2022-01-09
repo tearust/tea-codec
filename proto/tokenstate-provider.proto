@@ -151,6 +151,11 @@ message ExecGlueSqlRequest {
   string sql = 2;
 }
 
+message ExecGlueQueryRequest {
+  uint64 tokenId = 1;
+  string sql = 2;
+}
+
 message StatePing {
   Checkpoint checkpoint = 1;
   HistoryTxn historyTxn = 2;
