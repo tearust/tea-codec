@@ -197,7 +197,14 @@ message StateReceiverResponse {
     DirectResponse DirectResponse = 4;
     CommandFollowupResponse CommandFollowupResponse = 5;
     GeneralQueryResponse GeneralQueryResponse = 6;
+    // this is a error response, means the requesting A node is not validator
+    InvalidValidatorResponse InvalidValidatorResponse = 7;
   }
+}
+
+message InvalidValidatorResponse {
+  // returns the current validators that the A node belives
+  repeated bytes validators = 1;
 }
 
 message GeneralQueryResponse {

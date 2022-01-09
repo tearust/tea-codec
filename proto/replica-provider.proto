@@ -66,3 +66,11 @@ message ValidatorsState {
 }
 
 message ValidatorsDataRequest {}
+
+message ValidatorMembersRequest {}
+message ValidatorMembersResponse {
+  ValidatorMembers validatorMembers = 1;
+}
+message ValidatorMembers {
+  repeated bytes members = 1;
+}
