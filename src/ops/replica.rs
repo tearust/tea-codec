@@ -27,12 +27,8 @@ pub const OP_REV_FOLLOWUP: &str = "ReceiveFollowup";
 /// Similar to OP_REV_FOLLOWUP, check return value to determin whether or
 /// not to continue call OP_GEN_SYNC_MSG
 pub const OP_REV_TXN: &str = "ReceiveTxn";
-
-pub const OP_GET_ROUND_TABLE: &str = "GetRoundTable";
-pub const OP_SET_ROUND_TABLE: &str = "SetRoundTable";
-pub const OP_ADD_REPLICA_MEMBER: &str = "AddReplicaMember";
-pub const OP_RESET_REPLICA_MEMBERS: &str = "ResetReplicaMembers";
-pub const OP_RESET_DESIRED_COUNT: &str = "ResetDesiredCount";
 pub const OP_FETCH_HISTORY: &str = "FetchHistory";
 pub const OP_RECOVER_HISTORY: &str = "RecoverHistory";
 pub const OP_GET_LAST_HISTORY: &str = "GetLastHistory";
+pub const OP_RESET_REPLICAS_COUNT: &str = "ResetReplicasCount";
+pub const OP_FIND_EXECUTED_TXN: &str = "FindExecutedTxn";

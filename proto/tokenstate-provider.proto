@@ -2,6 +2,7 @@ syntax = "proto3";
 package tokenstate;
 
 import "libp2p-provider.proto";
+import "replica-provider.proto";
 
 message QueryStateTsidRequest {}
 message QueryStateTsidResponse { bytes stateTsid = 1; }
@@ -159,10 +160,12 @@ message ExecGlueQueryRequest {
 message StatePing {
   Checkpoint checkpoint = 1;
   HistoryTxn historyTxn = 2;
+  replica.ValidatorsState validatorsState = 3;
 }
 message StatePong {
   Checkpoint checkpoint = 1;
   HistoryTxn historyTxn = 2;
+  replica.ValidatorsState validatorsState = 3;
 }
 message Checkpoint {
   uint32 blockNumber = 1;
@@ -216,7 +219,14 @@ message StateReceiverResponse {
     DirectResponse DirectResponse = 4;
     CommandFollowupResponse CommandFollowupResponse = 5;
     GeneralQueryResponse GeneralQueryResponse = 6;
+    // this is a error response, means the requesting A node is not validator
+    InvalidValidatorResponse InvalidValidatorResponse = 7;
   }
+}
+
+message InvalidValidatorResponse {
+  // returns the current validators that the A node belives
+  repeated bytes validators = 1;
 }
 
 message GeneralQueryResponse {

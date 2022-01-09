@@ -1,12 +1,15 @@
 syntax = "proto3";
 package tappstore;
 
+import "replica-provider.proto";
+
 message TappQueryRequest {
   oneof msg {
     TeaBalanceRequest TeaBalanceRequest = 2;
     SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 3;
     CheckUserSessionRequest CheckUserSessionRequest = 4;
     GetConsumeAccountPubkeyRequest GetConsumeAccountPubkeyRequest = 5;
+    replica.FindExecutedTxnRequest FindExecutedTxnRequest = 6;
   }
 }
 
@@ -16,6 +19,7 @@ message TappQueryResponse {
     SignAndSendExtrinsicResponse SignAndSendExtrinsicResponse = 5;
     CheckUserSessionResponse CheckUserSessionResponse = 6;
     GetConsumeAccountPubkeyResponse GetConsumeAccountPubkeyResponse = 7;
+    replica.FindExecutedTxnResponse FindExecutedTxnResponse = 8;
   }
 }
 
