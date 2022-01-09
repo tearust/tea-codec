@@ -74,3 +74,14 @@ message ValidatorMembersResponse {
 message ValidatorMembers {
   repeated bytes members = 1;
 }
+
+message FindExecutedTxnRequest {
+  bytes txnHash = 1;
+}
+message FindExecutedTxnResponse {
+  ExecutedTxn executedTxn = 1;
+}
+message ExecutedTxn {
+  bytes txnHash = 1;
+  bytes tsid = 2;
+}
