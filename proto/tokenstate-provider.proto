@@ -183,8 +183,6 @@ message StateReceiverMessage {
     StateCommand StateCommand = 2;
     StateFollowup StateFollowup = 3;
     StateQuery StateQuery = 4;
-    TappStoreCommand TappStoreCommand = 5;
-    TappStoreQuery TappStoreQuery = 6;
   }
 }
 
@@ -226,6 +224,7 @@ message StateReceiverRelayResponse {
 
 message StateCommand {
   bytes data = 1;
+  string target = 2;
 }
 
 message StateFollowup {
@@ -234,14 +233,9 @@ message StateFollowup {
 
 message StateQuery {
   bytes data = 1;
+  string target = 2;
 }
 
-message TappStoreCommand {
-  bytes data = 1;
-}
-message TappStoreQuery {
-  bytes data = 1;
-}
 
 // Direct response do not return something meaningful, it just indicates that
 //  the request has been relayed successfully, and may return real result in
