@@ -135,6 +135,28 @@ message ImportStateRequest {
   bytes data = 1;
 }
 
+message ExportGlueSqlRequest {
+  bytes data = 1;
+}
+
+message ImportGlueSqlRequest {
+  bytes data = 1;
+}
+
+message InitGlueSqlRequest {
+  uint64 tokenId = 1;
+}
+
+message ExecGlueSqlRequest {
+  uint64 tokenId = 1;
+  string sql = 2;
+}
+
+message ExecGlueQueryRequest {
+  uint64 tokenId = 1;
+  string sql = 2;
+}
+
 message StatePing {
   Checkpoint checkpoint = 1;
   HistoryTxn historyTxn = 2;
