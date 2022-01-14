@@ -15,6 +15,7 @@ message Layer1Inbound {
         MiningStoppedEvent MiningStoppedEvent = 10;
         CmlMigratedEvent CmlMigratedEvent = 11;
         TAppCreatedEvent TAppCreatedEvent = 12;
+        DesignedTappStoreCountChangedEvent DesignedTappStoreCountChangedEvent = 13;
 
         // different from events, async response will dispatch to specific actor
         SendTxAsyncResponse SendTxAsyncResponse = 99;
@@ -264,6 +265,10 @@ message TAppCreatedEvent {
     string tappName = 2;
     string tappOwner = 3;
     uint32 createHeight = 4;
+}
+
+message DesignedTappStoreCountChangedEvent {
+    uint32 count = 1;
 }
 
 message MiningStartedEvent {
