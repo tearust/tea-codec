@@ -143,6 +143,7 @@ message ImportGlueSqlRequest {
 
 message InitGlueSqlRequest {
   uint64 tokenId = 1;
+  bytes tsid = 2;
 }
 
 message ExecGlueSqlRequest {
