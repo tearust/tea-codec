@@ -135,9 +135,7 @@ message ImportStateRequest {
   bytes data = 1;
 }
 
-message ExportGlueSqlRequest {
-  bytes data = 1;
-}
+message ExportGlueSqlRequest {}
 
 message ImportGlueSqlRequest {
   bytes data = 1;
@@ -150,6 +148,7 @@ message InitGlueSqlRequest {
 message ExecGlueSqlRequest {
   uint64 tokenId = 1;
   string sql = 2;
+  bytes tsid = 3;
 }
 
 message ExecGlueQueryRequest {
@@ -185,6 +184,7 @@ message SyncStateResponse {
   CheckpointData checkpoint = 2;
   repeated HistoryItem historyItems = 3;
   bytes tsid = 4;
+  bytes gluedb = 5;
 }
 message CheckpointData {
   bytes data = 1;
