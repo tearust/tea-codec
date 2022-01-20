@@ -85,3 +85,8 @@ message ExecutedTxn {
   bytes txnHash = 1;
   bytes tsid = 2;
 }
+
+message GetConsensusReplicasRequest {}
+message GetConsensusReplicasResponse {
+  repeated bytes replicaIds = 1;
+}
