@@ -90,3 +90,7 @@ message GetConsensusReplicasRequest {}
 message GetConsensusReplicasResponse {
   repeated bytes replicaIds = 1;
 }
+
+message SetTestModeRequest {
+  bool testMode = 1;
+}
