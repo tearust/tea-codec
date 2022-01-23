@@ -95,7 +95,11 @@ message PaymentFromDepositRequest{
   bytes to = 3;
   bytes amt = 4;
 }
-message CommitRequest { bytes ctx = 1; }
+message CommitRequest { 
+  bytes ctx = 1;
+  bytes authKey = 2;// bincode serde AuthKey
+}
+
 message TopupRequest {
   bytes ctx = 1;
   bytes to = 2;
