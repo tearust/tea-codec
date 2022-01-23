@@ -65,8 +65,6 @@ message ValidatorsState {
   bytes updateTs = 3;
 }
 
-message ValidatorsDataRequest {}
-
 message ValidatorMembersRequest {}
 message ValidatorMembersResponse {
   ValidatorMembers validatorMembers = 1;
