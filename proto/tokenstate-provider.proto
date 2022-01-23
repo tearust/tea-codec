@@ -55,6 +55,11 @@ message QueryAuthOpsRequest{
 message SetAuthOpsRequest{
   bytes authKey = 1;
   bytes authOpsBytes = 2;
+  bytes ctx = 3;
+}
+
+message SetAuthOpsResponse{
+  bytes ctx = 1;
 }
 
 message SetUserLoginSessionKey{
@@ -62,6 +67,10 @@ message SetUserLoginSessionKey{
   bytes acct = 2;
   bytes authKey = 3;
   bytes ts = 4;
+  bytes ctx = 5;
+}
+message SetUserLoginSessionKeyResponse{
+  bytes ctx = 1;
 }
 
 message GetUserLoginSessionKey{
@@ -190,7 +199,7 @@ message SyncStateResponse {
   repeated HistoryItem historyItems = 3;
   bytes tsid = 4;
   bytes gluedb = 5;
-  bytes roundTable = 6;
+  //bytes roundTable = 6;
 }
 message CheckpointData {
   bytes data = 1;
