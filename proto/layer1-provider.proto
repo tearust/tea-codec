@@ -48,6 +48,8 @@ message Layer1Outbound {
         ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
         GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
         GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
+
+        WithdrawTxRequest WithdrawTxRequest = 25;
     }
 }
 
@@ -421,4 +423,11 @@ message SetCachedMinerInfoRequest {
 message GetTappStoreStartupNodesRequest {}
 message GetTappStoreStartupNodesResponse {
     repeated bytes nodes = 1;
+}
+
+message WithdrawTxRequest {
+    string toAccount = 1;
+    bytes amount = 2;
+    uint64 tappId = 3;
+    bytes tsId = 4;
 }
