@@ -56,6 +56,8 @@ message SetAuthOpsRequest{
   bytes authKey = 1;
   bytes authOpsBytes = 2;
   bytes ctx = 3;
+  uint64 tokenId = 4;
+  bytes acct = 5;
 }
 
 message SetAuthOpsResponse{
@@ -73,10 +75,10 @@ message SetUserLoginSessionKeyResponse{
   bytes ctx = 1;
 }
 
-message GetUserLoginSessionKey{
-  uint64 tokenId = 1;
-  bytes acct = 2;
-}
+//message GetUserLoginSessionKey{
+//  uint64 tokenId = 1;
+//  bytes acct = 2;
+//}
 
 message DepositRequest{
   bytes ctx = 1;

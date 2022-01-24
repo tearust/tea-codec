@@ -25,5 +25,5 @@ pub const OP_INIT_GLUESQL: &str = "InitGlueSql";
 pub const OP_EXEC_GLUECMD: &str = "ExecGlueCmd";
 pub const OP_EXEC_GLUEQUERY: &str = "ExecGlueQuery";
 pub const OP_SET_AUTH_OPS_BYTES: &str = "SetAuthOpsBytes";
-pub const OP_SET_USER_LOGIN_SESSION_KEY: &str = "SetUserLoginSessionKey";
-pub const OP_GET_USER_LOGIN_SESSION_KEY: &str = "GetUserLoginSessionKey";
+// pub const OP_SET_USER_LOGIN_SESSION_KEY: &str = "SetUserLoginSessionKey";
+pub const OP_QUERY_USER_LOGIN_SESSION_KEY: &str = "QueryUserLoginSessionKeyRequest";
