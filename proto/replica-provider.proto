@@ -64,7 +64,7 @@ message ValidatorsState {
   bytes replicasHash = 2;
   bytes updateTs = 3;
 }
-message ValidatorsDataRequest {}
+
 message ValidatorMembersRequest {}
 message ValidatorMembersResponse {
   ValidatorMembers validatorMembers = 1;
