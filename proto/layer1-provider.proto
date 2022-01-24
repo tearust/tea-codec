@@ -429,5 +429,5 @@ message WithdrawTxRequest {
     string toAccount = 1;
     bytes amount = 2;
     uint64 tappId = 3;
-    bytes tsId = 4;
+    bytes tsid = 4;
 }
