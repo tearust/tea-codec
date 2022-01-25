@@ -48,8 +48,8 @@ message Layer1Outbound {
         ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
         GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
         GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
-
         WithdrawTxRequest WithdrawTxRequest = 25;
+        GetConnIdListRequest GetConnIdListRequest = 26;
     }
 }
 
@@ -351,9 +351,15 @@ message GetNodePcrsResponse {
 message GetConnIdRequest {
     bytes teaId = 1;
 }
-
 message GetConnIdResponse {
     string connId = 1;
+}
+
+message GetConnIdListRequest {
+    repeated bytes teaIds = 1;
+}
+message GetConnIdListResponse {
+    repeated string connIds = 1;
 }
 
 message GetPeerIdRequest {
