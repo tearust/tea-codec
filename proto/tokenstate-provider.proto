@@ -202,6 +202,7 @@ message SyncStateResponse {
   bytes tsid = 4;
   bytes gluedb = 5;
   bytes roundTable = 6;
+  bool success = 7;
 }
 message CheckpointData {
   bytes data = 1;
