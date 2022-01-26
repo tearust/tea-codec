@@ -200,8 +200,8 @@ message SyncStateResponse {
   CheckpointData checkpoint = 2;
   repeated HistoryItem historyItems = 3;
   bytes tsid = 4;
-  bytes gluedb = 5;
-  bytes roundTable = 6;
+  GluedbData gluedb = 5;
+  RoundTableData roundTable = 6;
   bool success = 7;
 }
 message CheckpointData {
@@ -210,6 +210,12 @@ message CheckpointData {
 message HistoryItem {
   bytes tsid = 1;
   bytes txn = 2;
+}
+message GluedbData {
+  bytes gluedb = 1;
+}
+message RoundTableData {
+  bytes roundTable = 1;
 }
 
 message GetConsumeAccountRequest{
