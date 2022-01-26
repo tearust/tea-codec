@@ -36,6 +36,13 @@ message FetchHistoryResponse {
   repeated HistoryItem historyItems = 1;
 }
 
+message HistorySinceRequest {
+  bytes endTsid = 1;
+}
+message HistorySinceResponse {
+  repeated HistoryItem historyItems = 1;
+}
+
 message RecoverHistoryRequest {
   repeated HistoryItem historyItems = 1;
 }

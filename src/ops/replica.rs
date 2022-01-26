@@ -29,6 +29,8 @@ pub const OP_REV_FOLLOWUP: &str = "ReceiveFollowup";
 pub const OP_REV_TXN: &str = "ReceiveTxn";
 pub const OP_FETCH_HISTORY: &str = "FetchHistory";
 pub const OP_RECOVER_HISTORY: &str = "RecoverHistory";
+/// Different from `OP_FETCH_HISTORY` this will not clean outdated history txns
+pub const OP_GET_HISTORY_SINCE: &str = "GetHistorySince";
 pub const OP_GET_LAST_HISTORY: &str = "GetLastHistory";
 pub const OP_RESET_REPLICAS_COUNT: &str = "ResetReplicasCount";
 pub const OP_FIND_EXECUTED_TXN: &str = "FindExecutedTxn";
