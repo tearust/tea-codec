@@ -62,6 +62,8 @@ message ConstructExtrinsicRequest {
 message ExtrinsicCallParams {
     oneof msg {
         TransferFreeBalance TransferFreeBalance = 3;
+        PushNotificationsRequest PushNotificationsRequest = 4;
+        ReadNotificationRequest ReadNotificationRequest = 5;
     }
 }
 
@@ -360,6 +362,16 @@ message GetConnIdListRequest {
 }
 message GetConnIdListResponse {
     repeated string connIds = 1;
+}
+
+message PushNotificationsRequest {
+    repeated string accounts = 1;
+    repeated uint32 expired_heights = 2;
+}
+
+message ReadNotificationRequest {
+    string account = 1;
+    uint32 expired_height = 2;
 }
 
 message GetPeerIdRequest {
