@@ -6,7 +6,7 @@ import "replica-provider.proto";
 
 message QueryStateTsidRequest {}
 message QueryStateTsidResponse { bytes stateTsid = 1; }
-message QueryTeaBalanceRequest { bytes acct = 1; }
+message QueryTeaBalanceRequest { bytes acct = 1; uint64 tokenId = 2; }
 message QueryTeaBalanceResponse {
   bytes balance_bytes = 1;
   bytes stateTsid = 2;
