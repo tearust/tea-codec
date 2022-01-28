@@ -12,6 +12,9 @@ message OrbitGeneralRequest {
 		GetMessageRequest GetMessageRequest = 6;
 		DeleteMessageRequest DeleteMessageRequest = 7;
 		ExtendMessageRequest ExtendMessageRequest = 8;
+
+		NotificationAddMessageRequest NotificationAddMessageRequest = 9;
+		NotificationGetMessageRequest NotificationGetMessageRequest = 10;
 	}
 }
 
@@ -101,4 +104,18 @@ message ExtendMessageRequest {
 
 	string msgId = 3;
 	uint64 utcExpired = 4;
+}
+
+message NotificationAddMessageRequest {
+	uint64 tappId = 1; 
+	string sender = 2;
+	string to = 3;
+	string content = 4;
+	uint64 utc = 5;
+	uint64 utcExpired = 6;
+}
+message NotificationGetMessageRequest {
+	uint64 utc = 1;
+	string sender = 2;
+	string to = 3;
 }
