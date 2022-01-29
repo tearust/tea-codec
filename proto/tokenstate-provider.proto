@@ -40,8 +40,24 @@ message GenAppConsumeAcctRequest {
   bytes ctx = 1;
   bytes tsidBytes = 2;
 }
-
 message GenAppConsumeAcctResponse {
+  bytes ctx = 1;
+  bytes newKey = 2;
+}
+
+message GetTappstoreAccountRequest {
+  uint64 tokenId = 1;
+}
+message GetTappstoreAccountResponse {
+  bool hasKey = 1;
+  bytes key = 2;
+}
+
+message GenTappstoreAccountRequest {
+  bytes ctx = 1;
+  bytes tsidBytes = 2;
+}
+message GenTappstoreAccountResponse {
   bytes ctx = 1;
   bytes newKey = 2;
 }
