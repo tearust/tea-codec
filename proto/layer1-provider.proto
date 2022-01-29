@@ -48,8 +48,7 @@ message Layer1Outbound {
         ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
         GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
         GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
-        WithdrawTxRequest WithdrawTxRequest = 25;
-        GetConnIdListRequest GetConnIdListRequest = 26;
+        GetConnIdListRequest GetConnIdListRequest = 25;
     }
 }
 
@@ -64,6 +63,7 @@ message ExtrinsicCallParams {
         TransferFreeBalance TransferFreeBalance = 3;
         PushNotificationsRequest PushNotificationsRequest = 4;
         ReadNotificationRequest ReadNotificationRequest = 5;
+        WithdrawTxRequest WithdrawTxRequest = 25;
     }
 }
 
