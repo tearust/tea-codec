@@ -366,7 +366,7 @@ message GetConnIdListResponse {
 
 message PushNotificationsRequest {
     repeated string accounts = 1;
-    repeated uint64 expired_heights = 2;
+    repeated uint32 expired_heights = 2;
 }
 
 message ReadNotificationRequest {
