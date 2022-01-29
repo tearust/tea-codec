@@ -154,6 +154,12 @@ message StateOperateResponse {
   bytes operateError = 2;
 }
 
+message StateCommitResponse {
+  bytes operateError = 1;
+  bytes hidden_acct_credit = 2;
+  bytes hidden_acct_debit = 3;
+}
+
 message ExportStateRequest {
 }
 
