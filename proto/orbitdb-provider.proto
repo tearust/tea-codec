@@ -111,8 +111,8 @@ message NotificationAddMessageRequest {
 	string sender = 2;
 	string to = 3;
 	string content = 4;
-	uint32 heightSent= 5;
-	uint32 heightExpired = 6;
+	uint32 utc= 5;
+	uint32 utcExpired = 6;
 }
 message NotificationGetMessageRequest {
 	uint32 blockHeight = 1;
