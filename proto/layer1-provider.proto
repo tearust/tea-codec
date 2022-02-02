@@ -62,7 +62,7 @@ message ExtrinsicCallParams {
     oneof msg {
         TransferFreeBalance TransferFreeBalance = 3;
         PushNotificationsRequest PushNotificationsRequest = 4;
-        ReadNotificationRequest ReadNotificationRequest = 5;
+        ClearNotificationsRequest ClearNotificationsRequest = 5;
         WithdrawTxRequest WithdrawTxRequest = 25;
     }
 }
@@ -367,11 +367,13 @@ message GetConnIdListResponse {
 message PushNotificationsRequest {
     repeated string accounts = 1;
     repeated uint32 expired_heights = 2;
+    uint64 tokenId = 3;
+    bytes tsid = 4;
 }
 
-message ReadNotificationRequest {
-    string account = 1;
-    uint32 expired_height = 2;
+message ClearNotificationsRequest {
+    uint64 tokenId = 1;
+    bytes tsid = 2;
 }
 
 message GetPeerIdRequest {

@@ -66,11 +66,11 @@ message PushNotificationsInnerRequest {
   repeated string accounts = 2;
   repeated uint32 expired_heights = 3;
   string uuid = 4;
+  bytes tsid = 5;
 }
 
-message ReadNotificationInnerRequest {
+message ClearNotificationsInnerRequest {
   uint64 tokenId = 1;
-  string account = 2;
-  uint32 expired_height = 3;
+  bytes tsid = 2;
   string uuid = 4;
 }
