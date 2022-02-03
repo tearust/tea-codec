@@ -68,9 +68,3 @@ message PushNotificationsInnerRequest {
   string uuid = 4;
   bytes tsid = 5;
 }
-
-message ClearNotificationsInnerRequest {
-  uint64 tokenId = 1;
-  bytes tsid = 2;
-  string uuid = 4;
-}

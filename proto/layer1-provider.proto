@@ -49,6 +49,7 @@ message Layer1Outbound {
         GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
         GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
         GetConnIdListRequest GetConnIdListRequest = 25;
+        ListTappsNotificationsCount ListTappsNotificationsCount = 26;
     }
 }
 
@@ -364,6 +365,17 @@ message GetConnIdListResponse {
     repeated string connIds = 1;
 }
 
+message ListTappsNotificationsCount {
+    uint32 stopHeight = 1;
+}
+message ListTappsNotificationsResponse {
+    repeated TappCountItem countItems = 1;
+}
+message TappCountItem {
+    uint64 tappId = 1;
+    uint32 count = 2;
+}
+
 message PushNotificationsRequest {
     repeated string accounts = 1;
     repeated uint32 expired_heights = 2;
@@ -372,7 +384,7 @@ message PushNotificationsRequest {
 }
 
 message ClearNotificationsRequest {
-    uint64 tokenId = 1;
+    uint32 stopHeight = 1;
     bytes tsid = 2;
 }
 
