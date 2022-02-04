@@ -62,19 +62,19 @@ message GenTappstoreAccountResponse {
   bytes newKey = 2;
 }
 
-message GetFailedBillsRequest {
+message GetFailedPaymentsRequest {
   uint64 tokenId = 1;
 }
-message GetFailedBillsResponse {
-  bytes failedBillsBytes = 1;
+message GetFailedPaymentsResponse {
+  bytes failedPaymentsBytes = 1;
   bool isEmpty = 2;
 }
 
-message SetFailedBillsRequest {
+message SetFailedPaymentsRequest {
   bytes ctx = 1;
-  bytes failedBillsBytes = 2;
+  bytes failedPaymentsBytes = 2;
 }
-message SetFailedBillsResponse {
+message SetFailedPaymentsResponse {
   bytes ctx = 1;
 }
 

@@ -28,5 +28,5 @@ pub const OP_EXEC_GLUECMD: &str = "ExecGlueCmd";
 pub const OP_EXEC_GLUEQUERY: &str = "ExecGlueQuery";
 pub const OP_SET_AUTH_OPS_BYTES: &str = "SetAuthOpsBytes";
 pub const OP_QUERY_USER_LOGIN_SESSION_KEY: &str = "QueryUserLoginSessionKeyRequest";
-pub const OP_GET_FAILED_BILLS: &str = "GetFailedBills";
-pub const OP_SET_FAILED_BILLS: &str = "AppendFailedBills";
+pub const OP_GET_FILED_PAYMENTS: &str = "GetFailedPayments";
+pub const OP_SET_FILED_PAYMENTS: &str = "AppendFailedPayments";
