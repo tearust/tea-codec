@@ -62,6 +62,22 @@ message GenTappstoreAccountResponse {
   bytes newKey = 2;
 }
 
+message GetFailedBillsRequest {
+  uint64 tokenId = 1;
+}
+message GetFailedBillsResponse {
+  bytes failedBillsBytes = 1;
+  bool isEmpty = 2;
+}
+
+message SetFailedBillsRequest {
+  bytes ctx = 1;
+  bytes failedBillsBytes = 2;
+}
+message SetFailedBillsResponse {
+  bytes ctx = 1;
+}
+
 message QueryAppAesResponse {
   bytes key = 1;
 }
