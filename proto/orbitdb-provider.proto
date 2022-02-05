@@ -113,6 +113,8 @@ message NotificationAddMessageRequest {
 	string content = 4;
 	uint64 utc = 5;
 	uint64 utcExpired = 6;
+	uint64 fromTappId = 7;
+	string fromTappUrl = 8;
 }
 message NotificationGetMessageRequest {
 	uint64 utc = 1;
