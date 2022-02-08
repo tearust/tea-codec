@@ -10,6 +10,7 @@ message TappQueryRequest {
     CheckUserSessionRequest CheckUserSessionRequest = 4;
     GetConsumeAccountPubkeyRequest GetConsumeAccountPubkeyRequest = 5;
     replica.FindExecutedTxnRequest FindExecutedTxnRequest = 6;
+    GetTappstoreAccountPubkeyRequest GetTappstoreAccountPubkeyRequest = 7;
   }
 }
 
@@ -20,6 +21,7 @@ message TappQueryResponse {
     CheckUserSessionResponse CheckUserSessionResponse = 6;
     GetConsumeAccountPubkeyResponse GetConsumeAccountPubkeyResponse = 7;
     replica.FindExecutedTxnResponse FindExecutedTxnResponse = 8;
+    GetTappstoreAccountPubkeyResponse GetTappstoreAccountPubkeyResponse = 9;
   }
 }
 
@@ -57,6 +59,12 @@ message GetConsumeAccountPubkeyRequest {
   uint64 tokenId = 1;
 }
 message GetConsumeAccountPubkeyResponse {
+  bytes publicKey = 1;
+  string address = 2;
+}
+
+message GetTappstoreAccountPubkeyRequest {}
+message GetTappstoreAccountPubkeyResponse {
   bytes publicKey = 1;
   string address = 2;
 }
