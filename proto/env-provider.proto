@@ -45,3 +45,8 @@ message RegisterTickRequest{
   uint64 rangeStart = 2;
   uint64 rangeEnd = 3;
 }
+
+message GenerateProfileRequest{
+  uint64 profileSeconds = 1;
+  string replyTo = 2;
+}
