@@ -11,6 +11,7 @@ message TappQueryRequest {
     GetConsumeAccountPubkeyRequest GetConsumeAccountPubkeyRequest = 5;
     replica.FindExecutedTxnRequest FindExecutedTxnRequest = 6;
     GetTappstoreAccountPubkeyRequest GetTappstoreAccountPubkeyRequest = 7;
+    CommonSqlQueryRequest CommonSqlQueryRequest = 8;
   }
 }
 
@@ -22,6 +23,7 @@ message TappQueryResponse {
     GetConsumeAccountPubkeyResponse GetConsumeAccountPubkeyResponse = 7;
     replica.FindExecutedTxnResponse FindExecutedTxnResponse = 8;
     GetTappstoreAccountPubkeyResponse GetTappstoreAccountPubkeyResponse = 9;
+    CommonSqlQueryResponse CommonSqlQueryResponse = 10;
   }
 }
 
@@ -67,6 +69,14 @@ message GetTappstoreAccountPubkeyRequest {}
 message GetTappstoreAccountPubkeyResponse {
   bytes publicKey = 1;
   string address = 2;
+}
+
+message CommonSqlQueryRequest {
+  uint64 tokenId = 1;
+  string sql = 2;
+}
+message CommonSqlQueryResponse {
+  bytes data = 1;
 }
 
 message PushNotificationsInnerRequest {
