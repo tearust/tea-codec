@@ -2,7 +2,7 @@
 pub const OP_QUERY_STATE_TSID: &str = "QueryStateTsid";
 pub const OP_QUERY_TEA_BALANCE: &str = "QueryTeaBalance";
 pub const OP_QUERY_TOKEN_BALANCE: &str = "QueryTokenBalance";
-pub const OP_QUERY_AUTH_OPS_BYTES: &str = "QueryAuthOpsBytes";
+pub const OP_QUERY_AUTH_OPS_BYTES_AND_NEW_EXPIRE: &str = "QueryAuthOpsBytes";
 pub const OP_COMMIT_TXN: &str = "CommitTxn";
 pub const OP_TOPUP: &str = "Topup";
 pub const OP_WITHDRAW: &str = "Withdraw";
