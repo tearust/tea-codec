@@ -77,6 +77,7 @@ message CommonSqlQueryRequest {
 }
 message CommonSqlQueryResponse {
   bytes data = 1;
+  string err = 2;
 }
 
 message PushNotificationsInnerRequest {
