@@ -85,10 +85,17 @@ message FindExecutedTxnRequest {
 }
 message FindExecutedTxnResponse {
   ExecutedTxn executedTxn = 1;
+  string errorMsg = 2;
+  bool success = 3;
 }
 message ExecutedTxn {
   bytes txnHash = 1;
   bytes tsid = 2;
+}
+
+message ReportTxnExecErrRequest {
+  bytes txnHash = 1;
+  string errorMsg = 2;
 }
 
 message GetConsensusReplicasRequest {}
