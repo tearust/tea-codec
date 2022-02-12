@@ -309,6 +309,7 @@ message StateReceiverRelayResponse {
 message StateCommand {
   bytes data = 1;
   string target = 2;
+  uint64 nonce = 3;
 }
 
 message StateFollowup {
