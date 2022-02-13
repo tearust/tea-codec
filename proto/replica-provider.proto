@@ -103,6 +103,6 @@ message GetConsensusReplicasResponse {
   repeated bytes replicaIds = 1;
 }
 
-message SetTestModeRequest {
-  bool testMode = 1;
+message SetSingleModeRequest {
+  bool singleMode = 1;
 }
