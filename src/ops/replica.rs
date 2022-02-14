@@ -37,3 +37,4 @@ pub const OP_FIND_EXECUTED_TXN: &str = "FindExecutedTxn";
 pub const OP_GET_CONSENSUS_REPLICAS: &str = "GetConsensusReplicas";
 pub const OP_SET_SINGLE_MODE: &str = "SetSingleMode";
 pub const OP_REPORT_TXN_EXEC_ERR: &str = "ReportTxnExecError";
+pub const OP_GET_EXEC_CURSOR: &str = "GetExecCursor";
