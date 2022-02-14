@@ -50,6 +50,7 @@ message Layer1Outbound {
         GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
         GetConnIdListRequest GetConnIdListRequest = 25;
         ListTappsNotificationsCount ListTappsNotificationsCount = 26;
+        GetMinTappStoreNodeCountRequest GetMinTappStoreNodeCountRequest = 27;
     }
 }
 
