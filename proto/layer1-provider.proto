@@ -439,6 +439,11 @@ message GetTappStoreDesiredCountResponse {
     uint32 count = 1;
 }
 
+message GetMinTappStoreNodeCountRequest {}
+message GetMinTappStoreNodeCountResponse {
+    uint32 count = 1;
+}
+
 message GetCachedMinerInfoRequest {
     bytes teaId = 1;
 }
