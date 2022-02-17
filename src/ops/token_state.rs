@@ -30,3 +30,5 @@ pub const OP_SET_AUTH_OPS_BYTES: &str = "SetAuthOpsBytes";
 pub const OP_QUERY_USER_LOGIN_SESSION_KEY: &str = "QueryUserLoginSessionKeyRequest";
 pub const OP_GET_FILED_PAYMENTS: &str = "GetFailedPayments";
 pub const OP_SET_FILED_PAYMENTS: &str = "AppendFailedPayments";
+pub const OP_DUMP_GLOBAL_STATES: &str = "DumpGlobalsStates";
+pub const OP_DUMP_TAPP_STATES: &str = "DumpTappStates";
