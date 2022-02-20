@@ -212,25 +212,25 @@ message ExecGlueQueryRequest {
 
 message StatePing {
   Checkpoint checkpoint = 1;
-  HistoryTxn historyTxn = 2;
+  ExecCursor execCursor = 2;
   replica.ValidatorsState validatorsState = 3;
 }
 message StatePong {
   Checkpoint checkpoint = 1;
-  HistoryTxn historyTxn = 2;
+  ExecCursor execCursor = 2;
   replica.ValidatorsState validatorsState = 3;
 }
 message Checkpoint {
   uint32 blockNumber = 1;
   bytes hash = 2;
 }
-message HistoryTxn {
-  bytes lastTsid = 1;
+message ExecCursor {
+  bytes execCursor = 1;
 }
 
 message SyncStateRequest {
   Checkpoint checkpoint = 1;
-  HistoryTxn historyTxn = 2;
+  ExecCursor execCursor = 2;
 }
 
 message SyncStateResponse {
