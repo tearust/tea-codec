@@ -32,3 +32,4 @@ pub const OP_GET_FILED_PAYMENTS: &str = "GetFailedPayments";
 pub const OP_SET_FILED_PAYMENTS: &str = "AppendFailedPayments";
 pub const OP_DUMP_GLOBAL_STATES: &str = "DumpGlobalsStates";
 pub const OP_DUMP_TAPP_STATES: &str = "DumpTappStates";
+pub const OP_DUMP_GLUEDB_DATA: &str = "DumpGluedbData";
