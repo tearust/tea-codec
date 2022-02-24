@@ -51,6 +51,7 @@ message Layer1Outbound {
         GetConnIdListRequest GetConnIdListRequest = 25;
         ListTappsNotificationsCount ListTappsNotificationsCount = 26;
         GetMinTappStoreNodeCountRequest GetMinTappStoreNodeCountRequest = 27;
+        GetNodeProfileRequest GetNodeProfileRequest = 28;
     }
 }
 
@@ -443,6 +444,17 @@ message GetTappStoreDesiredCountResponse {
 message GetMinTappStoreNodeCountRequest {}
 message GetMinTappStoreNodeCountResponse {
     uint32 count = 1;
+}
+
+message GetNodeProfileRequest {
+    bytes teaId = 1;
+}
+message GetNodeProfileResponse {
+    bytes ephemeralId = 1;
+    string peerId = 2;
+    string connId = 3;
+    uint32 createHeight = 4;
+    uint32 updateHeight = 5;
 }
 
 message GetCachedMinerInfoRequest {
