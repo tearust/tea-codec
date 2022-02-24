@@ -67,6 +67,7 @@ message ExtrinsicCallParams {
         PushNotificationsRequest PushNotificationsRequest = 4;
         ClearNotificationsRequest ClearNotificationsRequest = 5;
         WithdrawTxRequest WithdrawTxRequest = 25;
+        ConsumeTxRequest ConsumeTxRequest = 26;
     }
 }
 
@@ -477,6 +478,13 @@ message GetTappStoreStartupNodesResponse {
 
 message WithdrawTxRequest {
     string toAccount = 1;
+    bytes amount = 2;
+    uint64 tappId = 3;
+    bytes tsid = 4;
+}
+
+message ConsumeTxRequest {
+    string fromAccount = 1;
     bytes amount = 2;
     uint64 tappId = 3;
     bytes tsid = 4;
