@@ -52,6 +52,7 @@ message Layer1Outbound {
         ListTappsNotificationsCount ListTappsNotificationsCount = 26;
         GetMinTappStoreNodeCountRequest GetMinTappStoreNodeCountRequest = 27;
         GetNodeProfileRequest GetNodeProfileRequest = 28;
+        GetAccountInfoRequest GetAccountInfoRequest = 29;
     }
 }
 
@@ -488,4 +489,24 @@ message ConsumeTxRequest {
     bytes amount = 2;
     uint64 tappId = 3;
     bytes tsid = 4;
+}
+
+message GetAccountInfoRequest {
+    oneof msg {
+        AccountPubKey AccountPubKey = 1;
+        AccountAddress AccountAddress = 2;
+    }
+}
+message GetAccountInfoResponse {
+    bytes free = 1;
+    bytes reserved = 2;
+    bytes misc_frozen = 3;
+    bytes fee_frozen = 4;
+}
+
+message AccountPubKey {
+    bytes pubkey = 1;
+}
+message AccountAddress {
+    string address = 1;
 }
