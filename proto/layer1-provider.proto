@@ -485,7 +485,6 @@ message WithdrawTxRequest {
 }
 
 message ConsumeTxRequest {
-    string fromAccount = 1;
     bytes amount = 2;
     uint64 tappId = 3;
     bytes tsid = 4;
