@@ -84,6 +84,12 @@ message QueryAppAesResponse {
 message QueryAuthOpsRequest{
   bytes authKey = 1;
 }
+message QueryAppConsumeBalanceRequest{
+  uint64 tokenId = 1;
+}
+message QueryAppConsumeBalanceResponse{
+  bytes balanceBytes = 1;
+}
 message SetAuthOpsRequest{
   bytes authKey = 1;
   bytes authOpsBytes = 2;
@@ -142,7 +148,10 @@ message PaymentFromDepositRequest{
 message BurnConsumeUnbalancedRequest{
   bytes ctx = 1;
   uint64 tokenId = 2;
-  bytes amt = 3;
+  bytes amtBytes = 3;
+}
+message BurnConsumeUnbalancedResponse{
+  bytes burntAmtBytes = 1;
 }
 message CommitRequest { 
   bytes ctx = 1;
