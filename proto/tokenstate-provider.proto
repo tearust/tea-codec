@@ -102,6 +102,11 @@ message SetAuthOpsResponse{
   bytes ctx = 1;
 }
 
+message ExtendAuthKeyRequest{
+  bytes authKey = 1;
+  bytes newExpire = 2;
+}
+
 message SetUserLoginSessionKey{
   uint64 tokenId = 1;
   bytes acct = 2;
