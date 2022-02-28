@@ -52,6 +52,7 @@ message Layer1Outbound {
         ListTappsNotificationsCount ListTappsNotificationsCount = 26;
         GetMinTappStoreNodeCountRequest GetMinTappStoreNodeCountRequest = 27;
         GetNodeProfileRequest GetNodeProfileRequest = 28;
+        GetCmlInfoRequest GetCmlInfoRequest = 29;
     }
 }
 
@@ -455,6 +456,37 @@ message GetNodeProfileResponse {
     string connId = 3;
     uint32 createHeight = 4;
     uint32 updateHeight = 5;
+}
+
+message GetCmlInfoRequest {
+    uint64 cmlId = 1;
+    uint32 blockHeight = 2;
+}
+message GetCmlInfoResponse {
+    CmlInfo cmlInfo = 1;
+}
+message CmlInfo {
+    SeedInfo seedInfo = 1;
+    CmlOwner owner = 2;
+    CmlMachineInfo machine = 3;
+    bool isDead = 4;
+}
+message SeedInfo {
+    uint64 id = 1;
+    string cmlType = 2;
+    uint32 lifespan = 3;
+    uint32 maxPerformance = 4;
+}
+message CmlOwner {
+    string account = 1;
+}
+message CmlMachineInfo {
+    /// Corresponds to machine id
+    bytes teaId = 1;
+    string ipAddress = 2;
+    string controllerAccount = 3;
+    string status = 4;
+    uint32 currentPerformance = 5;
 }
 
 message GetCachedMinerInfoRequest {
