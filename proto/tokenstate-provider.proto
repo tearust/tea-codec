@@ -207,6 +207,9 @@ message ExportStateResponse {
 message ImportStateRequest {
   bytes data = 1;
 }
+message ImportStateResponse {
+  bytes tsid = 1;
+}
 
 message ExportGlueSqlRequest {}
 

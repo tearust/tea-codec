@@ -114,3 +114,7 @@ message GetExecCursorResponse {
 message ExecCursor {
   bytes tsid = 1;
 }
+
+message ResetExecCursorRequest {
+  bytes tsid = 1;
+}
