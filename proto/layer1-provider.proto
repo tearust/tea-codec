@@ -509,3 +509,12 @@ message AccountPubKey {
 message AccountAddress {
     string address = 1;
 }
+
+message GetMyProfileRequest {}
+message GetMyProfileResponse {
+    UpdateNodeProfileEvent profile = 1;
+}
+
+message SetMyProfileRequest {
+    UpdateNodeProfileEvent profile = 1;
+}
