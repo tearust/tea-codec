@@ -53,6 +53,7 @@ message Layer1Outbound {
         GetMinTappStoreNodeCountRequest GetMinTappStoreNodeCountRequest = 27;
         GetNodeProfileRequest GetNodeProfileRequest = 28;
         GetAccountInfoRequest GetAccountInfoRequest = 29;
+        GetTeaIdsByConnIdsRequest GetTeaIdsByConnIdsRequest = 30;
     }
 }
 
@@ -501,6 +502,17 @@ message GetAccountInfoResponse {
     bytes reserved = 2;
     bytes misc_frozen = 3;
     bytes fee_frozen = 4;
+}
+
+message GetTeaIdsByConnIdsRequest {
+    repeated string connIds = 1;
+}
+message GetTeaIdsByConnIdsResponse {
+    repeated ConnTeaIdPair pairs = 1;
+}
+message ConnTeaIdPair {
+    string connId = 1;
+    bytes teaId = 2;
 }
 
 message AccountPubKey {
