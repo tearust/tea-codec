@@ -245,7 +245,8 @@ message StatePong {
 }
 message Checkpoint {
   uint32 blockNumber = 1;
-  bytes hash = 2;
+  bytes stateHash = 2;
+  bytes globalHash = 3;
 }
 message ExecCursor {
   bytes execCursor = 1;
