@@ -54,6 +54,7 @@ message Layer1Outbound {
         GetNodeProfileRequest GetNodeProfileRequest = 28;
         GetAccountInfoRequest GetAccountInfoRequest = 29;
         GetTeaIdsByConnIdsRequest GetTeaIdsByConnIdsRequest = 30;
+        TopUpTxRequest TopUpTxRequest = 31;
     }
 }
 
@@ -483,6 +484,12 @@ message WithdrawTxRequest {
     bytes amount = 2;
     uint64 tappId = 3;
     bytes tsid = 4;
+}
+
+message TopUpTxRequest {
+    string tappAccount = 1;
+    uint64 tappId = 2;
+    bytes amount = 3;
 }
 
 message ConsumeTxRequest {
