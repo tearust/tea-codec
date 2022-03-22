@@ -82,6 +82,7 @@ message ValidatorMembers {
 
 message FindExecutedTxnRequest {
   bytes txnHash = 1;
+  bytes ts = 2;
 }
 message FindExecutedTxnResponse {
   ExecutedTxn executedTxn = 1;
