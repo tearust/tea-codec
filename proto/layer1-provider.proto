@@ -11,6 +11,14 @@ message Layer1Inbound {
         NewNodeJoinedEvent NewNodeJoinedEvent = 6;
         CommitRaResultEvent CommitRaResultEvent = 7;
         UpdateNodeProfileEvent UpdateNodeProfileEvent = 8;
+        MiningStartedEvent MiningStartedEvent = 9;
+        MiningStoppedEvent MiningStoppedEvent = 10;
+        CmlMigratedEvent CmlMigratedEvent = 11;
+        TAppCreatedEvent TAppCreatedEvent = 12;
+        DesignedTappStoreCountChangedEvent DesignedTappStoreCountChangedEvent = 13;
+
+        // different from events, async response will dispatch to specific actor
+        SendTxAsyncResponse SendTxAsyncResponse = 99;
     }
 }
 
@@ -36,15 +44,47 @@ message Layer1Outbound {
         ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
         ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
         ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
-        ReportSelfOfflineRequest ReportSelfOfflineRequest = 21;
+        ConstructExtrinsicCallRequest ConstructExtrinsicCallRequest = 21;
+        ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
+        GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 23;
+        GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
+        GetConnIdListRequest GetConnIdListRequest = 25;
+        ListTappsNotificationsCount ListTappsNotificationsCount = 26;
+        GetMinTappStoreNodeCountRequest GetMinTappStoreNodeCountRequest = 27;
+        GetNodeProfileRequest GetNodeProfileRequest = 28;
+        GetAccountInfoRequest GetAccountInfoRequest = 29;
+        GetTeaIdsByConnIdsRequest GetTeaIdsByConnIdsRequest = 30;
+        TopUpTxRequest TopUpTxRequest = 31;
     }
 }
 
 message ConstructExtrinsicRequest {
+    SubstrateApiInfo substrateApiInfo = 1;
+    bytes privateKey = 2;
+    bytes extrinsicCall = 3;
+}
+
+message ExtrinsicCallParams {
+    oneof msg {
+        TransferFreeBalance TransferFreeBalance = 3;
+        PushNotificationsRequest PushNotificationsRequest = 4;
+        ClearNotificationsRequest ClearNotificationsRequest = 5;
+        WithdrawTxRequest WithdrawTxRequest = 25;
+        ConsumeTxRequest ConsumeTxRequest = 26;
+    }
+}
+
+message ConstructExtrinsicCallRequest {
+    ExtrinsicCallParams callParams = 1;
+}
+
+message ConstructExtrinsicCallResponse {
+    bytes callEncode = 1;
+}
+
+message TransferFreeBalance {
     bytes toPublicKey = 1;
     bytes amount = 2;
-    bytes privateKey = 3;
-    SubstrateApiInfo substrateApiInfo = 4;
 }
 
 message ConstructExtrinsicResponse {
@@ -53,13 +93,29 @@ message ConstructExtrinsicResponse {
 
 message SendTxRequest {
     bytes rawTransaction = 1;
+    uint32 retryCount = 2;
+    string uuid = 3;
+    string replyToActor = 4;
 }
 
-message SendTxResponse {
-    bool success = 1;
+message SendTxAsyncResponse {
+    TxResponse response = 1;
+    TxErrorResponse error = 2;
+    uint32 leftRetryCount = 3;
+    string uuid = 4;
+    string replyToActor = 5;
+}
+
+message TxResponse {
+   string blockHash = 1;
+}
+
+message TxErrorResponse {
+   string errorMessage = 2;
 }
 
 message ApiInfoRequest {
+    bytes accountPubKey = 1;
 }
 
 message ApiInfoResponse {
@@ -154,6 +210,7 @@ message SubstrateApiInfo {
     bytes header = 1; // finalized block header serialized with serde
     uint64 period = 2;
     bytes head = 3; // finalized block hash
+    uint32 nonce = 4;
 }
 
 message Layer1Settings {
@@ -211,6 +268,35 @@ message UpdateNodeProfileEvent {
     string status = 7;
     string accountId = 8;
     uint32 updateHeight = 9;
+    string connId = 10;
+}
+
+message TAppCreatedEvent {
+    uint64 tappId = 1;
+    string tappName = 2;
+    string tappOwner = 3;
+    uint32 createHeight = 4;
+}
+
+message DesignedTappStoreCountChangedEvent {
+    uint32 count = 1;
+}
+
+message MiningStartedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    string ipAddress = 3;
+}
+
+message MiningStoppedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+}
+
+message CmlMigratedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    string ipAddress = 3;
 }
 
 message RANode {
@@ -274,9 +360,38 @@ message GetNodePcrsResponse {
 message GetConnIdRequest {
     bytes teaId = 1;
 }
-
 message GetConnIdResponse {
     string connId = 1;
+}
+
+message GetConnIdListRequest {
+    repeated bytes teaIds = 1;
+}
+message GetConnIdListResponse {
+    repeated string connIds = 1;
+}
+
+message ListTappsNotificationsCount {
+    uint32 stopHeight = 1;
+}
+message ListTappsNotificationsResponse {
+    repeated TappCountItem countItems = 1;
+}
+message TappCountItem {
+    uint64 tappId = 1;
+    uint32 count = 2;
+}
+
+message PushNotificationsRequest {
+    repeated string accounts = 1;
+    repeated uint32 expired_heights = 2;
+    uint64 tokenId = 3;
+    bytes tsid = 4;
+}
+
+message ClearNotificationsRequest {
+    uint32 stopHeight = 1;
+    bytes tsid = 2;
 }
 
 message GetPeerIdRequest {
@@ -323,4 +438,102 @@ message ListVersionExpiredNodesRequest {
 
 message ListVersionExpiredNodesResponse {
     repeated bytes teaIds = 1;
+}
+
+message GetTappStoreDesiredCountRequest {}
+message GetTappStoreDesiredCountResponse {
+    uint32 count = 1;
+}
+
+message GetMinTappStoreNodeCountRequest {}
+message GetMinTappStoreNodeCountResponse {
+    uint32 count = 1;
+}
+
+message GetNodeProfileRequest {
+    bytes teaId = 1;
+}
+message GetNodeProfileResponse {
+    bytes ephemeralId = 1;
+    string peerId = 2;
+    string connId = 3;
+    uint32 createHeight = 4;
+    uint32 updateHeight = 5;
+}
+
+message GetCachedMinerInfoRequest {
+    bytes teaId = 1;
+}
+message GetCachedMinerInfoResponse {
+    bytes data = 1;
+    bool hit = 2;
+}
+
+message SetCachedMinerInfoRequest {
+    bytes teaId = 1;
+    bytes data = 2;
+}
+
+message GetTappStoreStartupNodesRequest {}
+message GetTappStoreStartupNodesResponse {
+    repeated bytes nodes = 1;
+}
+
+message WithdrawTxRequest {
+    string toAccount = 1;
+    bytes amount = 2;
+    uint64 tappId = 3;
+    bytes tsid = 4;
+}
+
+message TopUpTxRequest {
+    string tappAccount = 1;
+    uint64 tappId = 2;
+    bytes amount = 3;
+}
+
+message ConsumeTxRequest {
+    bytes amount = 2;
+    uint64 tappId = 3;
+    bytes tsid = 4;
+}
+
+message GetAccountInfoRequest {
+    oneof msg {
+        AccountPubKey AccountPubKey = 1;
+        AccountAddress AccountAddress = 2;
+    }
+}
+message GetAccountInfoResponse {
+    bytes free = 1;
+    bytes reserved = 2;
+    bytes misc_frozen = 3;
+    bytes fee_frozen = 4;
+}
+
+message GetTeaIdsByConnIdsRequest {
+    repeated string connIds = 1;
+}
+message GetTeaIdsByConnIdsResponse {
+    repeated ConnTeaIdPair pairs = 1;
+}
+message ConnTeaIdPair {
+    string connId = 1;
+    bytes teaId = 2;
+}
+
+message AccountPubKey {
+    bytes pubkey = 1;
+}
+message AccountAddress {
+    string address = 1;
+}
+
+message GetMyProfileRequest {}
+message GetMyProfileResponse {
+    UpdateNodeProfileEvent profile = 1;
+}
+
+message SetMyProfileRequest {
+    UpdateNodeProfileEvent profile = 1;
 }

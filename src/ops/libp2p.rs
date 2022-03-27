@@ -1,0 +1,11 @@
+pub const OP_SEND_MESSAGE: &str = "SendMessage";
+pub const OP_PUB_MESSAGE: &str = "PubMessage";
+pub const OP_MY_CONN_ID: &str = "MyConnId";
+pub const OP_HAS_CONNECTED: &str = "HasConnected";
+pub const OP_START_USE_IP: &str = "StartUseIp";
+pub const OP_STOP_USE_IP: &str = "StopUseIp";
+pub const OP_CLOSE_LIBP2P: &str = "CloseLibp2p";
+pub const OP_LIST_PEERS: &str = "ListPeers";
+pub const OP_RANDOM_PEERS: &str = "RandomPeers";
+pub const OP_SUBSCRIBE_GOSSIP_TOPIC: &str = "SubscribeGossipTopic";
+pub const OP_UNSUBSCRIBE_GOSSIP_TOPIC: &str = "UnsubscribeGossipTopic";

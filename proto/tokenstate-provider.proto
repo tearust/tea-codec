@@ -1,15 +1,17 @@
 syntax = "proto3";
 package tokenstate;
 
+import "libp2p-provider.proto";
+import "replica-provider.proto";
+
 message QueryStateTsidRequest {}
 message QueryStateTsidResponse { bytes stateTsid = 1; }
-message QueryTeaBalanceRequest { bytes acct = 1; }
+message QueryTeaBalanceRequest { bytes acct = 1; uint64 tokenId = 2; }
 message QueryTeaBalanceResponse {
   bytes balance_bytes = 1;
   bytes stateTsid = 2;
 }
-message QueryTokenBalanceRequest {
-  bytes acct = 1;
+message QueryTokenBalanceRequest { bytes acct = 1;
   uint64 tokenId = 2;
 }
 message QueryTokenBalanceResponse {
@@ -19,18 +21,108 @@ message QueryTokenBalanceResponse {
 message QueryAppAesRequest {
   uint64 tokenId = 1;
 }
-message GenAppAesRequest {
+message QueryUserLoginSessionKeyRequest{
   uint64 tokenId = 1;
+  bytes acct = 2;
+  bytes teaId = 3;
+}
+message GenAppAesRequest {
+  bytes ctx = 1;
   bytes tsidBytes = 2;
 }
+
+message GenAppAesResponse {
+  bytes ctx = 1;
+  bytes newKey = 2;
+}
+
 message GenAppConsumeAcctRequest {
-  uint64 tokenId = 1;
+  bytes ctx = 1;
   bytes tsidBytes = 2;
+}
+message GenAppConsumeAcctResponse {
+  bytes ctx = 1;
+  bytes newKey = 2;
+}
+
+message GetTappstoreAccountRequest {
+  uint64 tokenId = 1;
+}
+message GetTappstoreAccountResponse {
+  bool hasKey = 1;
+  bytes key = 2;
+}
+
+message GenTappstoreAccountRequest {
+  bytes ctx = 1;
+  bytes tsidBytes = 2;
+}
+message GenTappstoreAccountResponse {
+  bytes ctx = 1;
+  bytes newKey = 2;
+}
+
+message GetFailedPaymentsRequest {
+  uint64 tokenId = 1;
+}
+message GetFailedPaymentsResponse {
+  bytes failedPaymentsBytes = 1;
+  bool isEmpty = 2;
+}
+
+message SetFailedPaymentsRequest {
+  bytes ctx = 1;
+  bytes failedPaymentsBytes = 2;
+}
+message SetFailedPaymentsResponse {
+  bytes ctx = 1;
 }
 
 message QueryAppAesResponse {
   bytes key = 1;
 }
+message QueryAuthOpsRequest{
+  bytes authKey = 1;
+}
+message QueryAppConsumeBalanceRequest{
+  uint64 tokenId = 1;
+}
+message QueryAppConsumeBalanceResponse{
+  bytes balanceBytes = 1;
+}
+message SetAuthOpsRequest{
+  bytes authKey = 1;
+  bytes authOpsBytes = 2;
+  bytes ctx = 3;
+  uint64 tokenId = 4;
+  bytes acct = 5;
+}
+
+message SetAuthOpsResponse{
+  bytes ctx = 1;
+}
+
+message ExtendAuthKeyRequest{
+  bytes authKey = 1;
+  bytes newExpire = 2;
+}
+
+message SetUserLoginSessionKey{
+  uint64 tokenId = 1;
+  bytes acct = 2;
+  bytes authKey = 3;
+  bytes ts = 4;
+  bytes ctx = 5;
+}
+message SetUserLoginSessionKeyResponse{
+  bytes ctx = 1;
+}
+
+//message GetUserLoginSessionKey{
+//  uint64 tokenId = 1;
+//  bytes acct = 2;
+//}
+
 message DepositRequest{
   bytes ctx = 1;
   bytes acct = 2;
@@ -57,7 +149,20 @@ message PaymentFromDepositRequest{
   bytes to = 3;
   bytes amt = 4;
 }
-message CommitRequest { bytes ctx = 1; }
+
+message BurnConsumeUnbalancedRequest{
+  bytes ctx = 1;
+  uint64 tokenId = 2;
+  bytes amtBytes = 3;
+}
+message BurnConsumeUnbalancedResponse{
+  bytes burntAmtBytes = 1;
+}
+message CommitRequest { 
+  bytes ctx = 1;
+  bytes authKey = 2;// bincode serde AuthKey
+}
+
 message TopupRequest {
   bytes ctx = 1;
   bytes to = 2;
@@ -85,24 +190,169 @@ message StateOperateResponse {
   bytes operateError = 2;
 }
 
+message StateCommitResponse {
+  bytes operateError = 1;
+  bytes hidden_acct_credit = 2;
+  bytes hidden_acct_debit = 3;
+}
+
 message ExportStateRequest {
 }
 
 message ExportStateResponse {
   bytes data = 1;
+  bytes tsid = 2;
 }
 
 message ImportStateRequest {
   bytes data = 1;
 }
+message ImportStateResponse {
+  bytes tsid = 1;
+}
+
+message ExportGlueSqlRequest {}
+
+message ImportGlueSqlRequest {
+  bytes data = 1;
+}
+
+message InitGlueSqlRequest {
+  uint64 tokenId = 1;
+  bytes tsid = 2;
+}
+
+message ExecGlueSqlRequest {
+  uint64 tokenId = 1;
+  string sql = 2;
+  bytes tsid = 3;
+}
+
+message ExecGlueQueryRequest {
+  uint64 tokenId = 1;
+  string sql = 2;
+}
+
+message StatePing {
+  Checkpoint checkpoint = 1;
+  ExecCursor execCursor = 2;
+  replica.ValidatorsState validatorsState = 3;
+}
+message StatePong {
+  Checkpoint checkpoint = 1;
+  ExecCursor execCursor = 2;
+  replica.ValidatorsState validatorsState = 3;
+}
+message Checkpoint {
+  uint32 blockNumber = 1;
+  bytes stateHash = 2;
+  bytes globalHash = 3;
+}
+message ExecCursor {
+  bytes execCursor = 1;
+}
 
 message SyncStateRequest {
+  Checkpoint checkpoint = 1;
+  ExecCursor execCursor = 2;
 }
 
 message SyncStateResponse {
+  uint32 lastCheckpointHeight = 1;
+  CheckpointData checkpoint = 2;
+  repeated HistoryItem historyItems = 3;
+  bytes tsid = 4;
+  GluedbData gluedb = 5;
+  RoundTableData roundTable = 6;
+  bool success = 7;
+}
+message CheckpointData {
   bytes data = 1;
 }
-message SignLayerOneTxnRequest{
-  uint32 tokenId = 1; 
+message HistoryItem {
+  bytes tsid = 1;
   bytes txn = 2;
+}
+message GluedbData {
+  bytes gluedb = 1;
+}
+message RoundTableData {
+  bytes roundTable = 1;
+}
+
+message GetConsumeAccountRequest{
+  uint64 tokenId = 1; 
+}
+
+// Top level message send to state receiver
+message StateReceiverMessage {
+  string uuid = 1;
+  oneof msg {
+    StateCommand StateCommand = 2;
+    StateFollowup StateFollowup = 3;
+    StateQuery StateQuery = 4;
+  }
+}
+
+// Top level message response from state receiver
+message StateReceiverResponse {
+  string uuid = 1;
+  bool success = 2;
+  string errorMessage = 3;
+  oneof msg {
+    DirectResponse DirectResponse = 4;
+    CommandFollowupResponse CommandFollowupResponse = 5;
+    GeneralQueryResponse GeneralQueryResponse = 6;
+    // this is a error response, means the requesting A node is not validator
+    InvalidValidatorResponse InvalidValidatorResponse = 7;
+  }
+}
+
+message InvalidValidatorResponse {
+  // returns the current validators that the A node belives
+  repeated bytes validators = 1;
+}
+
+message GeneralQueryResponse {
+  bytes data = 1;
+}
+
+// State receiver received request and construct the relay request to other actors
+message StateReceiverRelayRequest {
+  string uuid = 1;
+  bytes data = 2;
+}
+
+message StateReceiverRelayResponse {
+  string uuid = 1;
+  bool success = 2;
+  string errorMessage = 3;
+  bytes data = 4;
+}
+
+message StateCommand {
+  bytes data = 1;
+  string target = 2;
+  uint64 nonce = 3;
+}
+
+message StateFollowup {
+  bytes data = 1;
+}
+
+message StateQuery {
+  bytes data = 1;
+  string target = 2;
+}
+
+
+// Direct response do not return something meaningful, it just indicates that
+//  the request has been relayed successfully, and may return real result in
+//  another response
+message DirectResponse {}
+
+message CommandFollowupResponse {
+  bytes ts = 1;
+  bytes hash = 2;
+  bytes sender = 3;
 }

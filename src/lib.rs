@@ -64,12 +64,6 @@ pub const OP_DELAY_PUBLISH: &'static str = "DelayPublish";
 pub const OP_TEST_RELAY: &'static str = "OP_TEST_RELAY";
 pub const OP_INTERCOM_MESSAGE: &str = "IntercomMessage";
 
-pub const OP_GET_ENV_VAR: &str = "GetEnvVar";
-pub const OP_GET_SYSTEM_TIME: &str = "GetSystemTime";
-pub const OP_CURRENT_TIMESTAMP: &str = "CurrentTimestamp";
-pub const OP_TASK_START: &str = "TaskStart";
-pub const OP_TASK_END: &str = "TaskEnd";
-
 pub const OP_GET_TEA_ID: &str = "GetTeaId";
 pub const OP_EPHEMERAL_PUB_KEY: &str = "GetEphemeralPubKey";
 pub const OP_EPHEMERAL_PRI_KEY: &str = "GetEphemeralPriKey";
@@ -81,33 +75,6 @@ pub const OP_NITRO_VERIFY_ATTESTATION: &str = "VerifyAttestation";
 pub const OP_NITRO_VERIFICATION_PRCS: &str = "VerificationPcrs";
 pub const OP_NITRO_GET_ATTESTATION_DOC_PARAMS: &str = "GetAttestationDocParams";
 
-/// This is used when replica provider call an app contract handler actor.
-/// The app contract handler actor will be called by the long running thread
-/// of replciation when a txn is need to be executed
-pub const OP_ACTOR_EXEC_TXN: &str = "ActorExecuteTxn";
-/// Generate a sync message and then send to other replicas
-/// This is called everytime when a new txn-followup pair is received
-/// by this replica. And, this txn is new to this replica. It will
-/// need to notify other replicas that I received a new txn.
-/// Although this txn may not be *new* to other replica.
-pub const OP_GEN_SYNC_MSG: &str = "GenerateSyncMessage";
-/// Receive sync message from other replica.
-pub const OP_REV_SYNC_MSG: &str = "ReceiveSyncMessage";
-/// Call this op to clean up dead or out-of-sync other replicas
-/// Those out-of-sync replicas will be remove after this call
-pub const OP_CLEAR_UP: &str = "CleanUpSyncReplica";
-/// How many replicas current connect to this replica
-pub const OP_GET_REPLICA_COUNT: &str = "GetReplicaCount";
-/// If return a empty vec, the replica is still waiting for the second
-/// part of the txn - followup pair.
-/// If this is the second part, the pair is completed, it will return
-/// the tsid as bytes. In this case, please generate the sync message
-/// to other replica, because this replica found a new txn that need
-/// to notify others
-pub const OP_REV_FOLLOWUP: &str = "ReceiveFollowup";
-/// Similar to OP_REV_FOLLOWUP, check return value to determin whether or
-/// not to continue call OP_GEN_SYNC_MSG
-pub const OP_REV_TXN: &str = "ReceiveTxn";
 /// This op is called frequently in a infinity loop
 /// It will check this replica conveyor to find if there is any
 /// txn TSID passed the global immutable checkpoint.
@@ -122,32 +89,12 @@ pub const OP_REV_TXN: &str = "ReceiveTxn";
 /// then try again
 pub const OP_POP_READY_TSID: &str = "PopReadyTsid";
 
-/// tokenstate state machine op codes
-pub const OP_QUERY_STATE_TSID: &str = "QueryStateTsid";
-pub const OP_QUERY_TEA_BALANCE: &str = "QueryTeaBalance";
-pub const OP_QUERY_TOKEN_BALANCE: &str = "QueryTokenBalance";
-pub const OP_COMMIT_TXN: &str = "CommitTxn";
-pub const OP_TOPUP: &str = "Topup";
-pub const OP_WITHDRAW: &str = "Withdraw";
-pub const OP_MOVE: &str = "Move";
-pub const OP_QUERY_APP_AES: &str = "QueryAppAes";
-pub const OP_GEN_APP_AES: &str = "GenAppAes";
-pub const OP_GET_APP_AES: &str = "GetAppAes";
-pub const OP_GEN_APP_CONSUME_ACCT: &str = "GenAppConsumeAcct";
-pub const OP_DEPOSIT: &str = "Deposit";
-pub const OP_REFUND: &str = "Refund";
-pub const OP_CONSUME_FROM_DEPOSIT: &str = "ConsumeFromDeposit";
-pub const OP_CONSUME_FROM_ACCOUNT: &str = "ConsumeFromAccount";
-pub const OP_PAYMENT_FROM_DEPOSIT: &str = "PaymentFromDeposit";
-pub const OP_EXPORT_STATE: &str = "ExportState";
-pub const OP_IMPORT_STATE: &str = "ImportState";
-pub const OP_SIGN_L1_TXN: &str = "SignLayerOneTxn";
-
 ///List all actor names vs their actor pubkeys
 ///
 // pub const ACTOR_NAME_SIMPLE: &'static str = "simple-actor";
 pub const ACTOR_PUBKEY_SIMPLE: &'static str =
 	"MAPIZDLP2GN7QDSS3I74NCZEQOU2YXGZ4UROPRLDJI6ZZFT4TLJTOIGZ";
+pub const ACTOR_PRESSURE_TEST: &str = "MD2OKD2POLPKG6HHPTCLIKIQSW6WP3EKTIE4KX66ESO4ZY2AXW5V3NTV";
 // pub const ACTOR_NAME_RA: &'static str = "ra";
 pub const ACTOR_PUBKEY_RA: &'static str =
 	"MDAELGEJDJPPMBHCVTXRCS6TYMEVOSEYLYHPDVWVBBRHNQ6KNIEBHNHQ";
@@ -163,8 +110,12 @@ pub const ACTOR_PUBKEY_INTERCOM: &'static str =
 	"MAXJLKOWEXXNPMWYXJMBNTGZAURUCLPL7JYDA4L357IICGMSC4ATJUZM";
 pub const ACTOR_PUBKEY_REPORT: &str = "MBIDQCFY3PQAVHYUD56LXBG7VGYVLZRBZD4B6IXRS4UTSVYREL42UMDD";
 pub const ACTOR_PUBKEY_VERSION: &str = "MBGSCA2SS6OZBTA4XAHCXZV45U67YC5FQVZYP5FRAMJFYUAFV3M6CRFR";
-pub const ACTOR_PUBKEY_REPLICA_SERVICE: &str = "MD22BZQPUTOOYD5ER4EHZJH5IMQ37II36S4GIULVUB752EJRCZ3PLB2K";
-pub const ACTOR_PUBKEY_TOKENSTATE_SERVICE: &str = "MBUOKG5KNAETVFYEOF7RODLJA7MDYWVZEBD2OOB57QAJBIQ4DOG3GJ3X";
+pub const ACTOR_PUBKEY_REPLICA_SERVICE: &str =
+	"MD22BZQPUTOOYD5ER4EHZJH5IMQ37II36S4GIULVUB752EJRCZ3PLB2K";
+pub const ACTOR_PUBKEY_TOKENSTATE_SERVICE: &str =
+	"MBUOKG5KNAETVFYEOF7RODLJA7MDYWVZEBD2OOB57QAJBIQ4DOG3GJ3X";
+pub const ACTOR_PUBKEY_LIBP2P_SERVICE: &str =
+	"MCVOJGYDKP4SLQUQU4IWV2SN6LPDA3F4INOYHVVVNX6OGQXKIHR7W23D";
 
 pub const ACTOR_PUBKEY_PARTY_CONTRACT: &str =
 	"MARZR5YX7J4YFJMVNNH4QUTKXUIAPN7FRU5TSYJPQCAHWLYQUBEETTJI";
@@ -187,6 +138,7 @@ pub const TOKENSTATE_CAPABILITY_ID: &str = "tea:tokenstate";
 pub const LIBP2P_CAPABILITY_ID: &str = "tea:libp2p";
 pub const CONSOLE_CAPABILITY_ID: &str = "tea:console";
 pub const CRYPTO_CAPABILITY_ID: &str = "tea:crypto";
+pub const PERSIST_CAPABILITY_ID: &str = "tea:persist";
 
 pub const LIBP2P_REGISTER_SOCKET_NAME: &str = "/tmp/libp2p-register.socket";
 
@@ -206,6 +158,7 @@ pub struct DelayMessage {
 
 pub mod error;
 pub mod ipfs_codec;
+pub mod ops;
 pub mod ra;
 pub mod task;
 pub mod task_in_block;
