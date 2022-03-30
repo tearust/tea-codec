@@ -126,6 +126,7 @@ message AdapterHttpRequest {
     string method = 1;
     string action = 2;
     bytes payload = 3;
+    string actor = 4;
 }
 
 message CheckValidRsaPubKeyRequest {
