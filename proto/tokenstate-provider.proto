@@ -161,6 +161,7 @@ message BurnConsumeUnbalancedResponse{
 message CommitRequest { 
   bytes ctx = 1;
   bytes authKey = 2;// bincode serde AuthKey
+  GluedbTransactionContext gluedbCtx = 3;
 }
 
 message TopupRequest {
@@ -355,4 +356,15 @@ message CommandFollowupResponse {
   bytes ts = 1;
   bytes hash = 2;
   bytes sender = 3;
+}
+
+message BeginTransactionRequest {
+  uint64 tokenId = 1;
+}
+message BeginTransactionResponse {
+  GluedbTransactionContext context = 1;
+}
+
+message GluedbTransactionContext {
+  bytes data = 1;
 }
