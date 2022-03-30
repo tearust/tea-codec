@@ -15,6 +15,11 @@ message OrbitGeneralRequest {
 
 		NotificationAddMessageRequest NotificationAddMessageRequest = 9;
 		NotificationGetMessageRequest NotificationGetMessageRequest = 10;
+
+		InsertEntityRequest InsertEntityRequest = 11;
+		ReadEntityRequest ReadEntityRequest = 12;
+		DeleteEntityRequest DeleteEntityRequest = 13;
+		UpdateEntityRequest UpdateEntityRequest = 14;
 	}
 }
 
@@ -120,4 +125,21 @@ message NotificationGetMessageRequest {
 	uint64 utc = 1;
 	string sender = 2;
 	string to = 3;
+}
+
+message InsertEntityRequest {
+	uint64 tappId = 1;
+	string bodyStr = 2;
+	uint64 block = 3;
+}
+message ReadEntityRequest {
+	uint64 tappId = 1;
+	repeated string idList = 2;
+}
+message DeleteEntityRequest {
+	uint64 tappId = 1;
+	repeated string idList = 2;
+}
+message UpdateEntityRequest {
+	// TODO
 }
