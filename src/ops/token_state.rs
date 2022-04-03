@@ -38,7 +38,6 @@ pub const OP_DUMP_TAPP_STATES: &str = "DumpTappStates";
 pub const OP_DUMP_GLUEDB_DATA: &str = "DumpGluedbData";
 pub const OP_EXTEND_AUTH_KEY: &str = "ExtendAuthKey";
 
-pub const OP_BONDING_CREATE: &str = "BondingCreate";
 pub const OP_BONDING_BUY: &str = "BondingBuy";
 pub const OP_BONDING_SELL: &str = "BondingSell";
 pub const OP_READ_BONDING_TOTAL_SUPPLY: &str = "ReadBondingTotalSupply";

@@ -369,14 +369,6 @@ message GluedbTransactionContext {
   bytes data = 1;
 }
 
-message CreateBondingRequest {
-  bytes ctx = 1;
-  bytes hostingAmount = 2;
-}
-message CreateBondingResponse {
-  bytes ctx = 1;
-}
-
 message BondingBuyRequest {
   bytes ctx = 1;
   bytes account = 2;
