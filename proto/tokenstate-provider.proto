@@ -368,3 +368,38 @@ message BeginTransactionResponse {
 message GluedbTransactionContext {
   bytes data = 1;
 }
+
+message CreateBondingRequest {
+  bytes ctx = 1;
+  bytes hostingAmount = 2;
+}
+message CreateBondingResponse {
+  bytes ctx = 1;
+}
+
+message BondingBuyRequest {
+  bytes ctx = 1;
+  bytes account = 2;
+  bytes amount = 3;
+}
+message BondingBuyResponse {
+  bytes ctx = 1;
+}
+
+message BondingSellRequest {
+  bytes ctx = 1;
+  bytes account = 2;
+  bytes amount = 3;
+}
+message BondingSellResponse {
+  bytes ctx = 1;
+}
+
+message ReadBondingTotalSupplyRequest {
+  bytes ctx = 1;
+  bytes account = 2;
+}
+message ReadBondingTotalSupplyResponse {
+  bytes ctx = 1;
+  bytes totalSupply = 2;
+}
