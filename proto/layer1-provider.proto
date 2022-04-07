@@ -56,6 +56,7 @@ message Layer1Outbound {
         GetTeaIdsByConnIdsRequest GetTeaIdsByConnIdsRequest = 30;
         TopUpTxRequest TopUpTxRequest = 31;
         GetCmlInfoRequest GetCmlInfoRequest = 32;
+        GetActiveCmlOwnersRequest GetActiveCmlOwnersRequest = 33;
     }
 }
 
@@ -568,4 +569,13 @@ message GetMyProfileResponse {
 
 message SetMyProfileRequest {
     UpdateNodeProfileEvent profile = 1;
+}
+
+message GetActiveCmlOwnersRequest {
+    repeated uint64 cmlIds = 1;
+    uint32 atHeight = 2;
+}
+message GetActiveCmlOwnersResponse {
+    bool findBlock = 1;
+    repeated string accounts = 2;
 }
