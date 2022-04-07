@@ -395,3 +395,40 @@ message ReadBondingTotalSupplyResponse {
   bytes ctx = 1;
   bytes totalSupply = 2;
 }
+
+message ReadAllBondingRequest {
+  bytes ctx = 1;
+}
+message ReadAllBondingResponse {
+  bytes ctx = 1;
+  repeated bytes accounts = 2;
+  repeated bytes amounts = 3;
+}
+
+message ReadBondingReserveRequest {
+  bytes ctx = 1;
+  repeated bytes accounts = 2;
+}
+message ReadBondingReserveResponse {
+  bytes ctx = 1;
+  repeated bytes accounts = 2;
+  repeated bytes amounts = 3;
+}
+
+message BondingReserveRequest {
+  bytes ctx = 1;
+  bytes account = 2;
+  bytes amount = 3;
+}
+message BondingReserveResponse {
+  bytes ctx = 1;
+}
+
+message BondingUnreserveRequest {
+  bytes ctx = 1;
+  bytes account = 2;
+  bytes amount = 3;
+}
+message BondingUnreserveResponse {
+  bytes ctx = 1;
+}
