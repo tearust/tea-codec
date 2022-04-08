@@ -42,7 +42,10 @@ pub const OP_BONDING_BUY: &str = "BondingBuy";
 pub const OP_BONDING_SELL: &str = "BondingSell";
 pub const OP_READ_BONDING_TOTAL_SUPPLY: &str = "ReadBondingTotalSupply";
 pub const OP_READ_ALL_BONDING: &str = "ReadAllBonding";
+pub const OP_GET_BONDING_TOTAL_SUPPLY: &str = "GetBondingTotalSupply";
+pub const OP_GET_TOKEN_BALANCE: &str = "GetTokenBalance";
 
+pub const OP_GET_TOKEN_RESERVED_BALANCE: &str = "GetTokenReservedBalance";
 pub const OP_BONDING_RESERVE: &str = "BondingReserve";
 pub const OP_BONDING_UNRESERVE: &str = "BondingUnreserve";
 pub const OP_READ_BONDING_RESERVE: &str = "ReadBondingReserve";

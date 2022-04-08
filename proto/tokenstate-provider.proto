@@ -192,7 +192,6 @@ message StateOperateResponse {
 }
 
 message StateCommitResponse {
-  bytes operateError = 1;
   bytes hidden_acct_credit = 2;
   bytes hidden_acct_debit = 3;
 }
@@ -431,4 +430,27 @@ message BondingUnreserveRequest {
 }
 message BondingUnreserveResponse {
   bytes ctx = 1;
+}
+
+message GetTokenTotalSupplyRequest {
+  uint64 tokenId = 1;
+}
+message GetTokenTotalSupplyResponse {
+  bytes amount = 1;
+}
+
+message GetTokenBalanceRequest {
+  uint64 tokenId = 1;
+  bytes account = 2;
+}
+message GetTokenBalanceResponse {
+  bytes amount = 1;
+}
+
+message GetTokenReservedBalanceRequest {
+  uint64 tokenId = 1;
+  bytes account = 2;
+}
+message GetTokenReservedBalanceResponse {
+  bytes amount = 1;
 }
