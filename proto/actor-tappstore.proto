@@ -12,6 +12,7 @@ message TappQueryRequest {
     replica.FindExecutedTxnRequest FindExecutedTxnRequest = 6;
     GetTappstoreAccountPubkeyRequest GetTappstoreAccountPubkeyRequest = 7;
     CommonSqlQueryRequest CommonSqlQueryRequest = 8;
+    AccountAssetRequest AccountAssetRequest = 9;
   }
 }
 
@@ -24,6 +25,7 @@ message TappQueryResponse {
     replica.FindExecutedTxnResponse FindExecutedTxnResponse = 8;
     GetTappstoreAccountPubkeyResponse GetTappstoreAccountPubkeyResponse = 9;
     CommonSqlQueryResponse CommonSqlQueryResponse = 10;
+    AccountAssetResponse AccountAssetResponse = 11;
   }
 }
 
@@ -35,6 +37,16 @@ message TeaBalanceRequest {
 message TeaBalanceResponse {
   bytes balance = 1;
   bytes ts = 2;
+}
+message AccountAssetRequest {
+  string account = 1;
+  uint64 tokenId = 2;
+  bytes authKey = 3;
+}
+message AccountAssetResponse {
+  bytes teaBalance = 1;
+  bytes tokenBalance = 2;
+  bytes reservedTokenBalance = 3;
 }
 
 message SignAndSendExtrinsicRequest {
