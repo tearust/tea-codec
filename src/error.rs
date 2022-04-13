@@ -11,6 +11,9 @@ pub enum TeaError {
 	#[error("Failed to de-serialize, details: `{0}`")]
 	DeserializeError(String),
 
+	#[error("Failed to find layer1 block at specified height")]
+	FailedToFindBlockError,
+
 	#[error(transparent)]
 	Other(#[from] anyhow::Error),
 }
