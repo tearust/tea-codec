@@ -57,6 +57,7 @@ message Layer1Outbound {
         TopUpTxRequest TopUpTxRequest = 31;
         GetCmlInfoRequest GetCmlInfoRequest = 32;
         GetActiveCmlOwnersRequest GetActiveCmlOwnersRequest = 33;
+        QueryCmlPerformancesRequest QueryCmlPerformancesRequest = 34;
     }
 }
 
@@ -469,6 +470,7 @@ message GetCmlInfoRequest {
 }
 message GetCmlInfoResponse {
     CmlInfo cmlInfo = 1;
+    bool findBlock = 2;
 }
 message CmlInfo {
     SeedInfo seedInfo = 1;
@@ -578,4 +580,19 @@ message GetActiveCmlOwnersRequest {
 message GetActiveCmlOwnersResponse {
     bool findBlock = 1;
     repeated string accounts = 2;
+    repeated uint64 cmlIds = 3;
+}
+
+message QueryCmlPerformancesRequest {
+    repeated uint64 cmlIds = 1;
+    uint32 atHeight = 2;
+}
+message QueryCmlPerformancesResponse {
+    bool findBlock = 1;
+    repeated PerformanceItem performances = 2;   
+}
+message PerformanceItem {
+    uint64 cmlId = 1;
+    uint32 performance = 2;
+    bool shouldSuspend = 3;
 }
