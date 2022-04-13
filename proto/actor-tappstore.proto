@@ -86,6 +86,7 @@ message GetTappstoreAccountPubkeyResponse {
 message CommonSqlQueryRequest {
   uint64 tokenId = 1;
   string sql = 2;
+  string from = 3;
 }
 message CommonSqlQueryResponse {
   bytes data = 1;
