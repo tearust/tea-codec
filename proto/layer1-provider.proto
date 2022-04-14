@@ -16,6 +16,8 @@ message Layer1Inbound {
         CmlMigratedEvent CmlMigratedEvent = 11;
         TAppCreatedEvent TAppCreatedEvent = 12;
         DesignedTappStoreCountChangedEvent DesignedTappStoreCountChangedEvent = 13;
+        MiningSuspendedEvent MiningSuspendedEvent = 14;
+        MiningResumedEvent MiningResumedEvent = 15;
 
         // different from events, async response will dispatch to specific actor
         SendTxAsyncResponse SendTxAsyncResponse = 99;
@@ -322,12 +324,25 @@ message MiningStartedEvent {
 message MiningStoppedEvent {
     uint64 cmlId = 1;
     bytes teaId = 2;
+    uint32 atHeight = 3;
 }
 
 message CmlMigratedEvent {
     uint64 cmlId = 1;
     bytes teaId = 2;
     string ipAddress = 3;
+}
+
+message MiningSuspendedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    uint32 atHeight = 3;
+}
+
+message MiningResumedEvent {
+    uint64 cmlId = 1;
+    bytes teaId = 2;
+    uint32 atHeight = 3;
 }
 
 message RANode {
