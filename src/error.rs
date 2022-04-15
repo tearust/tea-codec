@@ -1,6 +1,11 @@
+use crate::error::code::ErrorCode;
+use serde::{Deserialize, Serialize};
+use std::fmt::Debug;
 use thiserror::Error;
 
-#[derive(Error, Debug)]
+pub mod code;
+
+#[derive(Error, Debug, Clone, Deserialize, Serialize)]
 pub enum TeaError {
 	#[error("Tea common error, details: `{0}`")]
 	CommonError(String),
@@ -11,11 +16,8 @@ pub enum TeaError {
 	#[error("Failed to de-serialize, details: `{0}`")]
 	DeserializeError(String),
 
-	#[error("Failed to find layer1 block at specified height")]
-	FailedToFindBlockError,
-
 	#[error(transparent)]
-	Other(#[from] anyhow::Error),
+	EncodedError(#[from] ErrorCode),
 }
 
 pub type TeaResult<T> = std::result::Result<T, TeaError>;
