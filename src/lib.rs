@@ -31,6 +31,9 @@ extern crate serde_derive;
 extern crate log;
 
 extern crate rmp_serde as rmps;
+use crate::error::code::common::{
+	new_common_error_code, SERDE_DESERIALIZE_ERROR, SERDE_SERIALIZE_ERROR,
+};
 use crate::error::{TeaError, TeaResult};
 use rmps::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
@@ -45,7 +48,9 @@ where
 {
 	let mut buf = Vec::new();
 	item.serialize(&mut Serializer::new(&mut buf).with_struct_map())
-		.map_err(|e| TeaError::SerializeError(format!("{}", e)))?;
+		.map_err(|e| {
+			new_common_error_code(SERDE_SERIALIZE_ERROR).to_error_code(format!("{:?}", e))
+		})?;
 	Ok(buf)
 }
 
@@ -56,7 +61,9 @@ pub fn deserialize<'de, T: Deserialize<'de>>(buf: &[u8]) -> TeaResult<T> {
 	let mut de = Deserializer::new(Cursor::new(buf));
 	match Deserialize::deserialize(&mut de) {
 		Ok(t) => Ok(t),
-		Err(e) => Err(TeaError::DeserializeError(format!("{}", e))),
+		Err(e) => {
+			Err(new_common_error_code(SERDE_DESERIALIZE_ERROR).to_error_code(format!("{:?}", e)))
+		}
 	}
 }
 
