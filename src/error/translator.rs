@@ -23,8 +23,13 @@ where
 		ErrorCodeTranslator { code, translator }
 	}
 
-	pub fn to_error_code(&self, details: String) -> TeaError {
-		TeaError::EncodedError(ErrorCode::new(self.code, self.to_string(), details))
+	pub fn to_error_code(&self, details: Option<String>, inner: Option<ErrorCode>) -> TeaError {
+		TeaError::EncodedError(ErrorCode::new_nested(
+			self.code,
+			self.to_string(),
+			details,
+			inner,
+		))
 	}
 }
 

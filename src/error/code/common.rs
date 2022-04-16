@@ -6,6 +6,7 @@ pub const SERDE_SERIALIZE_ERROR: u16 = 1;
 pub const SERDE_DESERIALIZE_ERROR: u16 = 2;
 pub const UTF8_ENCODING_ERROR: u16 = 3;
 pub const UTF8_STR_ENCODING_ERROR: u16 = 4;
+pub const STD_IO_ERROR: u16 = 5;
 
 pub struct CommonTranslator {}
 impl Translate for CommonTranslator {
@@ -15,6 +16,7 @@ impl Translate for CommonTranslator {
 			SERDE_DESERIALIZE_ERROR => "serde deserialize failed",
 			UTF8_ENCODING_ERROR => "utf8 encoding failed",
 			UTF8_STR_ENCODING_ERROR => "utf8 string encoding failed",
+			STD_IO_ERROR => "standard I/O error",
 			_ => "unknown",
 		}
 	}
