@@ -13,8 +13,6 @@ where
 	translator: T,
 }
 
-pub const FAILED_TO_FIND_BLOCK: u16 = 30001;
-
 impl<T> ErrorCodeTranslator<T>
 where
 	T: Translate,
@@ -30,6 +28,14 @@ where
 			details,
 			inner,
 		))
+	}
+
+	pub fn error_from_nested(&self, e: TeaError) -> TeaError {
+		let error_code = match e.parse_error_code() {
+			Some(code) => ErrorCode::new_nested(self.code, self.to_string(), None, *code.inner),
+			None => ErrorCode::new(self.code, self.to_string(), Some(format!("{:?}", e))),
+		};
+		TeaError::EncodedError(error_code)
 	}
 }
 

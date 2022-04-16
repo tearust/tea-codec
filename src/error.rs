@@ -1,4 +1,5 @@
 use crate::error::code::ErrorCode;
+use crate::TeaError::EncodedError;
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 use thiserror::Error;
@@ -16,3 +17,12 @@ pub enum TeaError {
 }
 
 pub type TeaResult<T> = std::result::Result<T, TeaError>;
+
+impl TeaError {
+	pub fn parse_error_code(&self) -> Option<ErrorCode> {
+		match self {
+			EncodedError(e) => Some(e.clone()),
+			_ => None,
+		}
+	}
+}
