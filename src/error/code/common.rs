@@ -10,6 +10,8 @@ pub const STD_IO_ERROR: u16 = 5;
 pub const CHANNEL_RECEIVE_ERROR: u16 = 6;
 pub const CHANNEL_SEND_ERROR: u16 = 7;
 pub const JSON_MARSHALING_ERROR: u16 = 8;
+pub const PROST_ENCODE_ERROR: u16 = 9;
+pub const PROST_DECODE_ERROR: u16 = 10;
 
 pub struct CommonTranslator {}
 impl Translate for CommonTranslator {
@@ -27,6 +29,9 @@ impl Translate for CommonTranslator {
 			// channel (crossbeam etc.)
 			CHANNEL_RECEIVE_ERROR => "channel receive error",
 			CHANNEL_SEND_ERROR => "channel send error",
+			// prost encoding/decoding
+			PROST_ENCODE_ERROR => "prost encoding error",
+			PROST_DECODE_ERROR => "prost decoding error",
 			_ => "unknown",
 		}
 	}
