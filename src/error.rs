@@ -39,3 +39,15 @@ impl From<prost::DecodeError> for TeaError {
 		new_common_error_code(PROST_DECODE_ERROR).to_error_code(Some(format!("{:?}", e)), None)
 	}
 }
+
+impl From<String> for TeaError {
+	fn from(s: String) -> Self {
+		TeaError::CommonError(s)
+	}
+}
+
+impl From<&str> for TeaError {
+	fn from(s: &str) -> Self {
+		TeaError::CommonError(s.to_string())
+	}
+}
