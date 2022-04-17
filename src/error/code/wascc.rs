@@ -20,6 +20,7 @@ pub const INVOCATION_ERROR: u16 = 10015;
 pub const KEY_VALUE_ERROR: u16 = 10016;
 pub const MESSAGING_ERROR: u16 = 10017;
 pub const ENV_VAR_ERROR: u16 = 10018;
+pub const DISCARD_MESSAGE_ERROR: u16 = 10019;
 
 pub struct WasccTranslator {}
 impl Translate for WasccTranslator {
@@ -46,6 +47,7 @@ impl Translate for WasccTranslator {
 			KEY_VALUE_ERROR => "Key/value store error",
 			MESSAGING_ERROR => "Messaging error",
 			ENV_VAR_ERROR => "Environment variable error",
+			DISCARD_MESSAGE_ERROR => "discard message",
 			_ => "unknown",
 		}
 	}

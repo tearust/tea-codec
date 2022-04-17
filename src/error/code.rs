@@ -2,8 +2,11 @@ use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Display, Formatter};
 use thiserror::Error;
 
+pub mod client;
 pub mod common;
 pub mod layer1;
+pub mod service;
+pub mod vmh;
 pub mod wascc;
 
 #[derive(Error, Debug, Clone, Deserialize, Serialize)]
