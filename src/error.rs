@@ -43,6 +43,10 @@ pub fn discard_message_error<S: AsRef<str>>(msg: S) -> TeaError {
 		.to_error_code(Some(format!("{}", msg.as_ref())), None)
 }
 
+pub fn tea_err<T, E: Into<TeaError>>(e: Result<T, E>) -> TeaResult<T> {
+	e.map_err::<TeaError, _>(|e| e.into())
+}
+
 impl TeaError {
 	pub fn parse_error_code(&self) -> Option<ErrorCode> {
 		match self {
