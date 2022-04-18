@@ -1,50 +1,58 @@
 use crate::error::translator::{ErrorCodeTranslator, Translate};
 
-pub type VmhErrorCode = ErrorCodeTranslator<VmhTranslator>;
+pub type VmhErrorCode = ErrorCodeTranslator<VmhTranslator, VmhCode>;
 
-pub const GENERAL_VMH_ERROR: u16 = 20000;
-pub const SOCKET_SEND_U64_ERROR: u16 = 20001;
-pub const SOCKET_SEND_LOOP_ERROR: u16 = 20002;
-pub const SOCKET_RECV_U64_ERROR: u16 = 20003;
-pub const SOCKET_RECV_LOOP_ERROR: u16 = 20004;
-pub const SOCKET_CLIENT_DISCONNECTED: u16 = 20005;
-pub const SOCKET_SERVER_CLOSED: u16 = 20006;
-pub const SOCKET_RECV_SIZE_MISMATCHED: u16 = 20007;
-pub const SOCKET_SEND_SIZE_MISMATCHED: u16 = 20008;
-pub const SOCKET_NIX_ERROR: u16 = 20009;
-pub const QUIT_RECEIVER_LOOP: u16 = 20010;
-pub const OPERATION_INVALID: u16 = 20011;
-pub const SENDER_OPERATION_EXISTS: u16 = 20012;
-pub const INBOUND_NET_ERROR: u16 = 20013;
-pub const OUTBOUND_NET_ERROR: u16 = 20014;
+#[derive(Copy, Clone, FromPrimitive, ToPrimitive)]
+pub enum VmhCode {
+	GeneralVmhError = 20000,
+	SocketSendU64Error,
+	SocketSendLoopError,
+	SocketRecvU64Error,
+	SocketRecvLoopError,
+	SocketClientDisconnected,
+	SocketServerClosed,
+	SocketRecvSizeMismatched,
+	SocketSendSizeMismatched,
+	SocketNixError,
+	QuitReceiverLoop,
+	OperationInvalid,
+	SenderOperationExists,
+	InboundNetError,
+	OutboundNetError,
+}
+
+impl From<u16> for VmhCode {
+	fn from(v: u16) -> Self {
+		num_traits::FromPrimitive::from_u16(v).unwrap_or(VmhCode::GeneralVmhError)
+	}
+}
 
 pub struct VmhTranslator {}
-impl Translate for VmhTranslator {
-	fn translate(&self, code: u16) -> &'static str {
+impl Translate<VmhCode> for VmhTranslator {
+	fn translate(&self, code: VmhCode) -> &'static str {
 		match code {
-			GENERAL_VMH_ERROR => "general vmh error",
+			VmhCode::GeneralVmhError => "general vmh error",
 			// socket basic
-			SOCKET_SEND_U64_ERROR => "socket send u64 error",
-			SOCKET_RECV_U64_ERROR => "socket receive u64 error",
-			SOCKET_SEND_LOOP_ERROR => "socket send loop error",
-			SOCKET_RECV_LOOP_ERROR => "socket receive loop error",
-			SOCKET_CLIENT_DISCONNECTED => "client has disconnected",
-			SOCKET_SERVER_CLOSED => "server has closed",
-			SOCKET_RECV_SIZE_MISMATCHED => "received bytes not matched",
-			SOCKET_SEND_SIZE_MISMATCHED => "send bytes not matched",
-			SOCKET_NIX_ERROR => "socket nix error",
+			VmhCode::SocketSendU64Error => "socket send u64 error",
+			VmhCode::SocketRecvU64Error => "socket receive u64 error",
+			VmhCode::SocketSendLoopError => "socket send loop error",
+			VmhCode::SocketRecvLoopError => "socket receive loop error",
+			VmhCode::SocketClientDisconnected => "client has disconnected",
+			VmhCode::SocketServerClosed => "server has closed",
+			VmhCode::SocketRecvSizeMismatched => "received bytes not matched",
+			VmhCode::SocketSendSizeMismatched => "send bytes not matched",
+			VmhCode::SocketNixError => "socket nix error",
 			// socket server/client
-			QUIT_RECEIVER_LOOP => "receiver loop has terminated",
+			VmhCode::QuitReceiverLoop => "receiver loop has terminated",
 			// channel
-			OPERATION_INVALID => "operation is invalid",
-			SENDER_OPERATION_EXISTS => "sender operation already exists",
-			INBOUND_NET_ERROR => "inbound net error",
-			OUTBOUND_NET_ERROR => "outbound net error",
-			_ => "unknown",
+			VmhCode::OperationInvalid => "operation is invalid",
+			VmhCode::SenderOperationExists => "sender operation already exists",
+			VmhCode::InboundNetError => "inbound net error",
+			VmhCode::OutboundNetError => "outbound net error",
 		}
 	}
 }
 
-pub fn new_vmh_error_code(code: u16) -> VmhErrorCode {
-	ErrorCodeTranslator::new(code, VmhTranslator {})
+pub fn new_vmh_error_code(code: VmhCode) -> VmhErrorCode {
+	ErrorCodeTranslator::new(code as u16, VmhTranslator {})
 }

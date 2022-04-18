@@ -11,10 +11,10 @@ pub mod wascc;
 
 #[derive(Error, Debug, Clone, Deserialize, Serialize)]
 pub struct ErrorCode {
-	pub code: u16,
-	pub description: String,
-	pub details: Option<String>,
-	pub inner: Box<Option<ErrorCode>>,
+	code: u16,
+	description: String,
+	details: Option<String>,
+	inner: Box<Option<ErrorCode>>,
 }
 
 impl Display for ErrorCode {
@@ -60,6 +60,14 @@ impl ErrorCode {
 			details,
 			inner: Box::new(inner),
 		}
+	}
+
+	pub fn code(&self) -> u16 {
+		self.code
+	}
+
+	pub fn inner(&self) -> &Option<ErrorCode> {
+		self.inner.as_ref()
 	}
 
 	pub fn contains(&self, code: u16) -> bool {

@@ -1,24 +1,35 @@
 use crate::error::code::ErrorCode;
 use crate::TeaError;
+use std::marker::PhantomData;
 
-pub trait Translate {
-	fn translate(&self, code: u16) -> &'static str;
+pub trait Translate<C>
+where
+	C: From<u16>,
+{
+	fn translate(&self, code: C) -> &'static str;
 }
 
-pub struct ErrorCodeTranslator<T>
+pub struct ErrorCodeTranslator<T, C>
 where
-	T: Translate,
+	T: Translate<C>,
+	C: From<u16>,
 {
 	pub code: u16,
 	translator: T,
+	phantom_data: PhantomData<C>,
 }
 
-impl<T> ErrorCodeTranslator<T>
+impl<T, C> ErrorCodeTranslator<T, C>
 where
-	T: Translate,
+	T: Translate<C>,
+	C: From<u16>,
 {
 	pub fn new(code: u16, translator: T) -> Self {
-		ErrorCodeTranslator { code, translator }
+		ErrorCodeTranslator {
+			code,
+			translator,
+			phantom_data: PhantomData::default(),
+		}
 	}
 
 	pub fn to_error_code(&self, details: Option<String>, inner: Option<ErrorCode>) -> TeaError {
@@ -32,25 +43,29 @@ where
 
 	pub fn error_from_nested(&self, e: TeaError) -> TeaError {
 		let error_code = match e.parse_error_code() {
-			Some(code) => ErrorCode::new_nested(self.code, self.to_string(), None, *code.inner),
+			Some(code) => {
+				ErrorCode::new_nested(self.code, self.to_string(), None, code.inner().clone())
+			}
 			None => ErrorCode::new(self.code, self.to_string(), Some(format!("{:?}", e))),
 		};
 		TeaError::EncodedError(error_code)
 	}
 }
 
-impl<T> ToString for ErrorCodeTranslator<T>
+impl<T, C> ToString for ErrorCodeTranslator<T, C>
 where
-	T: Translate,
+	T: Translate<C>,
+	C: From<u16>,
 {
 	fn to_string(&self) -> String {
-		self.translator.translate(self.code).to_string()
+		self.translator.translate(C::from(self.code)).to_string()
 	}
 }
 
-impl<T> Into<ErrorCode> for ErrorCodeTranslator<T>
+impl<T, C> Into<ErrorCode> for ErrorCodeTranslator<T, C>
 where
-	T: Translate,
+	T: Translate<C>,
+	C: From<u16>,
 {
 	fn into(self) -> ErrorCode {
 		ErrorCode::new_slim(self.code, self.to_string())
