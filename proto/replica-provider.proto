@@ -119,3 +119,5 @@ message ExecCursor {
 message ResetExecCursorRequest {
   bytes tsid = 1;
 }
+
+message UnsetShouldLock {}
