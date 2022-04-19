@@ -364,6 +364,17 @@ message BeginTransactionResponse {
   GluedbTransactionContext context = 1;
 }
 
+message CancelTransactionRequest {
+  uint64 tokenId = 1;
+}
+
+message IsInTransactionRequest {
+  uint64 tokenId = 1;
+}
+message IsInTransactionResponse {
+  bool yes = 1;
+}
+
 message GluedbTransactionContext {
   bytes data = 1;
 }
