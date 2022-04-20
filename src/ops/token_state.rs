@@ -18,6 +18,7 @@ pub const OP_GEN_APP_CONSUME_ACCT: &str = "GenAppConsumeAcct";
 pub const OP_GET_APP_CONSUME_ACCT: &str = "GetAppConsumeAcct";
 pub const OP_DEPOSIT: &str = "Deposit";
 pub const OP_REFUND: &str = "Refund";
+pub const OP_SLASH: &str = "Slash";
 pub const OP_CONSUME_FROM_DEPOSIT: &str = "ConsumeFromDeposit";
 pub const OP_CONSUME_FROM_ACCOUNT: &str = "ConsumeFromAccount";
 pub const OP_PAYMENT_FROM_DEPOSIT: &str = "PaymentFromDeposit";

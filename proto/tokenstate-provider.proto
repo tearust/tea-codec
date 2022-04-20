@@ -465,3 +465,12 @@ message GetTokenReservedBalanceRequest {
 message GetTokenReservedBalanceResponse {
   bytes amount = 1;
 }
+
+message SlashRequest {
+  bytes ctx = 1;
+  bytes account = 2;
+  bytes amount = 3;
+}
+message SlashResponse {
+  bytes ctx = 1;
+}
