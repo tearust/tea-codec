@@ -3,10 +3,14 @@ package layer1;
 
 message Layer1Inbound {
     oneof msg {
-        TappTopupEvent TappTopupEvent = 1;
+        // different from events, async response will dispatch to specific actor
+        SendTxAsyncResponse SendTxAsyncResponse = 99;
+        NewBlockEvent NewBlockEvent = 100;
+        TappTopupEvent TappTopupEvent = 101;
+
+        // todo need remove
         TappHostedEvent TappHostedEvent = 2;
         TappUnhostedEvent TappUnhostedEvent = 3;
-        NewBlockEvent NewBlockEvent = 4;
         TappBecomeActiveEvent TappBecomeActiveEvent = 5;
         NewNodeJoinedEvent NewNodeJoinedEvent = 6;
         CommitRaResultEvent CommitRaResultEvent = 7;
@@ -18,14 +22,15 @@ message Layer1Inbound {
         DesignedTappStoreCountChangedEvent DesignedTappStoreCountChangedEvent = 13;
         MiningSuspendedEvent MiningSuspendedEvent = 14;
         MiningResumedEvent MiningResumedEvent = 15;
-
-        // different from events, async response will dispatch to specific actor
-        SendTxAsyncResponse SendTxAsyncResponse = 99;
     }
 }
 
 message Layer1Outbound {
     oneof msg {
+        TopUpTxRequest TopUpTxRequest = 31;
+
+
+        // todo need remove
         ApiInfoRequest ApiInfoRequest = 1;
         SendTxRequest SendTxRequest = 2;
         ListTappsRequest ListTappsRequest = 4;
@@ -46,7 +51,6 @@ message Layer1Outbound {
         ListTappsNotificationsCount ListTappsNotificationsCount = 26;
         GetAccountInfoRequest GetAccountInfoRequest = 29;
         GetTeaIdsByConnIdsRequest GetTeaIdsByConnIdsRequest = 30;
-        TopUpTxRequest TopUpTxRequest = 31;
         StorageRequest StorageRequest = 34;
     }
 }
@@ -54,10 +58,14 @@ message Layer1Outbound {
 message StorageRequest {
     StorageRequestParams params = 1;
     oneof msg {
+        GetCmlInfoRequest GetCmlInfoRequest = 5;
+        GetMachineInfoRequest GetMachineInfoRequest = 15;
+
+
+        // todo need remove
         QueryCmlPerformancesRequest QueryCmlPerformancesRequest = 2;
         GetActiveCmlOwnersRequest GetActiveCmlOwnersRequest = 3;
         GetMinerInfoRequest GetMinerInfoRequest = 4;
-        GetCmlInfoRequest GetCmlInfoRequest = 5;
         TappInfoRequest TappInfoRequest = 6;
         QueryTAppResourceRequest QueryTAppResourceRequest = 7;
         GetNodeProfileRequest GetNodeProfileRequest = 8;
@@ -77,10 +85,14 @@ message StorageRequestParams {
 message StorageResponse {
     oneof msg {
         FailedFindBlockResponse FailedFindBlockResponse = 1;
+        GetCmlInfoResponse GetCmlInfoResponse = 5;
+        GetMachineInfoResponse GetMachineInfoResponse = 15;
+
+    
+        // todo need remove
         QueryCmlPerformancesResponse QueryCmlPerformancesResponse = 2;
         GetActiveCmlOwnersResponse GetActiveCmlOwnersResponse = 3;
         GetMinerInfoResponse GetMinerInfoResponse = 4;
-        GetCmlInfoResponse GetCmlInfoResponse = 5;
         TappInfoResponse TappInfoResponse = 6;
         QueryTAppResourceResponse QueryTAppResourceResponse = 7;
         GetNodeProfileResponse GetNodeProfileResponse = 8;
@@ -103,9 +115,12 @@ message ConstructExtrinsicRequest {
 message ExtrinsicCallParams {
     oneof msg {
         TransferFreeBalance TransferFreeBalance = 3;
+        WithdrawTxRequest WithdrawTxRequest = 25;
+
+
+        // todo need remove
         PushNotificationsRequest PushNotificationsRequest = 4;
         ClearNotificationsRequest ClearNotificationsRequest = 5;
-        WithdrawTxRequest WithdrawTxRequest = 25;
         ConsumeTxRequest ConsumeTxRequest = 26;
     }
 }
@@ -253,7 +268,6 @@ message Layer1Settings {
 }
 
 message TappTopupEvent {
-    uint64 tappId = 1;
     string fromAccount = 2;
     string toAccount = 3;
     bytes amount = 4;
@@ -513,9 +527,7 @@ message GetCmlInfoResponse {
 }
 message CmlInfo {
     SeedInfo seedInfo = 1;
-    CmlOwner owner = 2;
-    CmlMachineInfo machine = 3;
-    bool isDead = 4;
+    string owner = 2;
 }
 message SeedInfo {
     uint64 id = 1;
@@ -523,16 +535,17 @@ message SeedInfo {
     uint32 lifespan = 3;
     uint32 maxPerformance = 4;
 }
-message CmlOwner {
-    string account = 1;
-}
-message CmlMachineInfo {
-    /// Corresponds to machine id
+
+message GetMachineInfoRequest {
     bytes teaId = 1;
-    string ipAddress = 2;
-    string controllerAccount = 3;
-    string status = 4;
-    uint32 currentPerformance = 5;
+}
+message GetMachineInfoResponse {
+    uint64 issuerId = 1;
+    string owner = 2;
+    CmlId cmlId = 3;
+}
+message CmlId {
+    uint64 id = 1;
 }
 
 message GetCachedMinerInfoRequest {
@@ -556,13 +569,11 @@ message GetTappStoreStartupNodesResponse {
 message WithdrawTxRequest {
     string toAccount = 1;
     bytes amount = 2;
-    uint64 tappId = 3;
     bytes tsid = 4;
 }
 
 message TopUpTxRequest {
     string tappAccount = 1;
-    uint64 tappId = 2;
     bytes amount = 3;
 }
 
