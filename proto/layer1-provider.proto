@@ -58,13 +58,13 @@ message Layer1Outbound {
 message StorageRequest {
     StorageRequestParams params = 1;
     oneof msg {
+        GetCmlsRequest GetCmlsRequest = 3;
         GetCmlInfoRequest GetCmlInfoRequest = 5;
         GetMachineInfoRequest GetMachineInfoRequest = 15;
 
 
         // todo need remove
         QueryCmlPerformancesRequest QueryCmlPerformancesRequest = 2;
-        GetActiveCmlOwnersRequest GetActiveCmlOwnersRequest = 3;
         GetMinerInfoRequest GetMinerInfoRequest = 4;
         TappInfoRequest TappInfoRequest = 6;
         QueryTAppResourceRequest QueryTAppResourceRequest = 7;
@@ -85,13 +85,13 @@ message StorageRequestParams {
 message StorageResponse {
     oneof msg {
         FailedFindBlockResponse FailedFindBlockResponse = 1;
+        GetCmlsResponse GetCmlsResponse = 3;
         GetCmlInfoResponse GetCmlInfoResponse = 5;
         GetMachineInfoResponse GetMachineInfoResponse = 15;
 
     
         // todo need remove
         QueryCmlPerformancesResponse QueryCmlPerformancesResponse = 2;
-        GetActiveCmlOwnersResponse GetActiveCmlOwnersResponse = 3;
         GetMinerInfoResponse GetMinerInfoResponse = 4;
         TappInfoResponse TappInfoResponse = 6;
         QueryTAppResourceResponse QueryTAppResourceResponse = 7;
@@ -536,6 +536,13 @@ message SeedInfo {
     uint32 maxPerformance = 4;
 }
 
+message GetCmlsRequest {
+    repeated uint64 cmlIds = 1;
+}
+message GetCmlsResponse {
+    repeated CmlInfo cmls = 1;
+}
+
 message GetMachineInfoRequest {
     bytes teaId = 1;
 }
@@ -621,14 +628,6 @@ message GetMyProfileResponse {
 
 message SetMyProfileRequest {
     UpdateNodeProfileEvent profile = 1;
-}
-
-message GetActiveCmlOwnersRequest {
-    repeated uint64 cmlIds = 1;
-}
-message GetActiveCmlOwnersResponse {
-    repeated string accounts = 2;
-    repeated uint64 cmlIds = 3;
 }
 
 message QueryCmlPerformancesRequest {
