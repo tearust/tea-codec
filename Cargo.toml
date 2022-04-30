@@ -23,7 +23,6 @@ serde_bytes = "0.11.3"
 prost = "0.6.1"
 base64 = "0.13.0"
 hex = "0.4.0"
-rmp-serde = { version = "0.15.5", features = ["serde128"] }
 log = { version="0.4", features = ["std","serde"] }
 thiserror = "1.0.22"
 

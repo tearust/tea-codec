@@ -32,11 +32,8 @@ extern crate log;
 #[macro_use]
 extern crate num_derive;
 
-extern crate rmp_serde as rmps;
 use crate::error::{new_common_error_code, CommonCode, TeaError, TeaResult};
-use rmps::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
-use std::io::Cursor;
 
 /// The standard function for serializing codec structs into a format that can be
 /// used for message exchange between actor and host. Use of any other function to
@@ -45,25 +42,21 @@ pub fn serialize<T>(item: &T) -> TeaResult<Vec<u8>>
 where
 	T: Serialize,
 {
-	let mut buf = Vec::new();
-	item.serialize(&mut Serializer::new(&mut buf).with_struct_map())
-		.map_err(|e| {
-			new_common_error_code(CommonCode::SerdeSerializeError)
-				.to_error_code(Some(format!("{:?}", e)), None)
-		})?;
+	let buf = bincode::serialize(item).map_err(|e| {
+		new_common_error_code(CommonCode::SerdeSerializeError)
+			.to_error_code(Some(format!("{:?}", e)), None)
+	})?;
 	Ok(buf)
 }
 
 /// The standard function for de-serializing codec structs from a format suitable
 /// for message exchange between actor and host. Use of any other function to
 /// deserialize could result in breaking incompatibilities.
-pub fn deserialize<'de, T: Deserialize<'de>>(buf: &[u8]) -> TeaResult<T> {
-	let mut de = Deserializer::new(Cursor::new(buf));
-	match Deserialize::deserialize(&mut de) {
-		Ok(t) => Ok(t),
-		Err(e) => Err(new_common_error_code(CommonCode::SerdeDeserializeError)
-			.to_error_code(Some(format!("{:?}", e)), None)),
-	}
+pub fn deserialize<'de, T: Deserialize<'de>>(buf: &'de [u8]) -> TeaResult<T> {
+	bincode::deserialize(buf).map_err(|e| {
+		new_common_error_code(CommonCode::SerdeDeserializeError)
+			.to_error_code(Some(format!("{:?}", e)), None)
+	})
 }
 
 pub const OP_DELAY_PUBLISH: &'static str = "DelayPublish";
