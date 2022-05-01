@@ -7,51 +7,17 @@ message Layer1Inbound {
         SendTxAsyncResponse SendTxAsyncResponse = 99;
         NewBlockEvent NewBlockEvent = 100;
         TappTopupEvent TappTopupEvent = 101;
-
-        // todo need remove
-        TappHostedEvent TappHostedEvent = 2;
-        TappUnhostedEvent TappUnhostedEvent = 3;
-        TappBecomeActiveEvent TappBecomeActiveEvent = 5;
-        NewNodeJoinedEvent NewNodeJoinedEvent = 6;
-        CommitRaResultEvent CommitRaResultEvent = 7;
-        UpdateNodeProfileEvent UpdateNodeProfileEvent = 8;
-        MiningStartedEvent MiningStartedEvent = 9;
-        MiningStoppedEvent MiningStoppedEvent = 10;
-        CmlMigratedEvent CmlMigratedEvent = 11;
-        TAppCreatedEvent TAppCreatedEvent = 12;
-        DesignedTappStoreCountChangedEvent DesignedTappStoreCountChangedEvent = 13;
-        MiningSuspendedEvent MiningSuspendedEvent = 14;
-        MiningResumedEvent MiningResumedEvent = 15;
     }
 }
 
 message Layer1Outbound {
     oneof msg {
-        TopUpTxRequest TopUpTxRequest = 31;
-
-
-        // todo need remove
         ApiInfoRequest ApiInfoRequest = 1;
         SendTxRequest SendTxRequest = 2;
-        ListTappsRequest ListTappsRequest = 4;
-        TeaNodeUpdateProfileRequest TeaNodeUpdateProfileRequest = 6;
-        CommitRaResultRequest CommitRaResultRequest = 7;
-        ListMiningCmlsRequest ListMiningCmlsRequest = 8;
-        IsRaValidatorRequest IsRaValidatorRequest = 9;
-        CommitReportEvidenceRequest CommitReportEvidenceRequest = 11;
-        CommitOfflineEvidenceRequest CommitOfflineEvidenceRequest = 12;
-        CommitTipsEvidenceRequest CommitTipsEvidenceRequest = 13;
-        ListAllowedPcrsRequest ListAllowedPcrsRequest = 14;
-        ListAllowedVersionsRequest ListAllowedVersionsRequest = 18;
-        ReportNodeVersionExpiredRequest ReportNodeVersionExpiredRequest = 19;
-        ListVersionExpiredNodesRequest ListVersionExpiredNodesRequest = 20;
         ConstructExtrinsicCallRequest ConstructExtrinsicCallRequest = 21;
-        ReportSelfOfflineRequest ReportSelfOfflineRequest = 22;
-        GetTappStoreStartupNodesRequest GetTappStoreStartupNodesRequest = 24;
-        ListTappsNotificationsCount ListTappsNotificationsCount = 26;
-        GetAccountInfoRequest GetAccountInfoRequest = 29;
-        GetTeaIdsByConnIdsRequest GetTeaIdsByConnIdsRequest = 30;
+        TopUpTxRequest TopUpTxRequest = 31;
         StorageRequest StorageRequest = 34;
+        GetAccountInfoRequest GetAccountInfoRequest = 29;
     }
 }
 
@@ -61,20 +27,6 @@ message StorageRequest {
         GetCmlsRequest GetCmlsRequest = 3;
         GetCmlInfoRequest GetCmlInfoRequest = 5;
         GetMachineInfoRequest GetMachineInfoRequest = 15;
-
-
-        // todo need remove
-        QueryCmlPerformancesRequest QueryCmlPerformancesRequest = 2;
-        GetMinerInfoRequest GetMinerInfoRequest = 4;
-        TappInfoRequest TappInfoRequest = 6;
-        QueryTAppResourceRequest QueryTAppResourceRequest = 7;
-        GetNodeProfileRequest GetNodeProfileRequest = 8;
-        GetNodePcrsRequest GetNodePcrsRequest = 9;
-        GetTappStoreDesiredCountRequest GetTappStoreDesiredCountRequest = 10;
-        GetMinTappStoreNodeCountRequest GetMinTappStoreNodeCountRequest = 11;
-        GetConnIdRequest GetConnIdRequest = 12;
-        GetConnIdListRequest GetConnIdListRequest = 13;
-        GetPeerIdRequest GetPeerIdRequest = 14;
     }
 }
 message StorageRequestParams {
@@ -88,20 +40,6 @@ message StorageResponse {
         GetCmlsResponse GetCmlsResponse = 3;
         GetCmlInfoResponse GetCmlInfoResponse = 5;
         GetMachineInfoResponse GetMachineInfoResponse = 15;
-
-    
-        // todo need remove
-        QueryCmlPerformancesResponse QueryCmlPerformancesResponse = 2;
-        GetMinerInfoResponse GetMinerInfoResponse = 4;
-        TappInfoResponse TappInfoResponse = 6;
-        QueryTAppResourceResponse QueryTAppResourceResponse = 7;
-        GetNodeProfileResponse GetNodeProfileResponse = 8;
-        GetNodePcrsResponse GetNodePcrsResponse = 9;
-        GetTappStoreDesiredCountResponse GetTappStoreDesiredCountResponse = 10;
-        GetMinTappStoreNodeCountResponse GetMinTappStoreNodeCountResponse = 11;
-        GetConnIdResponse GetConnIdResponse = 12;
-        GetConnIdListResponse GetConnIdListResponse = 13;
-        GetPeerIdResponse GetPeerIdResponse = 14;
     }
 }
 message FailedFindBlockResponse {}
@@ -116,19 +54,12 @@ message ExtrinsicCallParams {
     oneof msg {
         TransferFreeBalance TransferFreeBalance = 3;
         WithdrawTxRequest WithdrawTxRequest = 25;
-
-
-        // todo need remove
-        PushNotificationsRequest PushNotificationsRequest = 4;
-        ClearNotificationsRequest ClearNotificationsRequest = 5;
-        ConsumeTxRequest ConsumeTxRequest = 26;
     }
 }
 
 message ConstructExtrinsicCallRequest {
     ExtrinsicCallParams callParams = 1;
 }
-
 message ConstructExtrinsicCallResponse {
     bytes callEncode = 1;
 }
@@ -168,90 +99,8 @@ message TxErrorResponse {
 message ApiInfoRequest {
     bytes accountPubKey = 1;
 }
-
 message ApiInfoResponse {
     SubstrateApiInfo substrateApiInfo = 1;
-}
-
-message TappInfoRequest {
-    uint64 tappId = 1;
-}
-message TappInfoResponse {
-    uint64 tappId = 1;
-    bytes name = 2;
-    bytes link = 3;
-}
-
-message QueryTAppResourceRequest {
-    uint64 tappId = 1;
-}
-message QueryTAppResourceResponse {
-    string cid = 1;
-}
-
-message ListTappsRequest {
-    bool activeOnly = 1;
-}
-
-message ListTappResponse {
-    repeated uint64 tappIds = 1;
-}
-
-message ListMiningCmlsRequest {
-}
-
-message ListMiningCmlsResponse {
-    repeated MiningCmlInfo miningCmls = 1;
-}
-
-message IsRaValidatorRequest {
-    bytes teaId = 1;
-    bytes targetTeaId = 2;
-    uint32 blockNumber = 3;
-}
-
-message IsRaValidatorResponse {
-    bool isValidator = 1;
-}
-
-message GetMinerInfoRequest {
-    bytes teaId = 1;
-}
-message GetMinerInfoResponse {
-    uint64 cmlId = 1;
-    string cmlClass = 2;
-    string ipAddress = 3;
-    bool isBootstrap = 4;
-    string minerStatus = 5;
-}
-
-message CommitReportEvidenceRequest {
-    bytes teaId = 1;
-    bytes reporterTeaId = 2;
-    bytes phisherTeaId = 3;
-    bytes signature = 4;
-}
-
-message CommitTipsEvidenceRequest {
-    bytes teaId = 1;
-    bytes reporterTeaId = 2;
-    bytes phisherTeaId = 3;
-    bytes signature = 4;
-}
-
-message CommitOfflineEvidenceRequest {
-    bytes teaId = 1;
-    bytes offlineTeaId = 2;
-    bytes signature = 3;
-}
-
-message MiningCmlInfo {
-    uint64 cmlId = 1;
-    string orbitId = 2;
-    string cmlType = 3;
-    bytes teaId = 4;
-    string minerStatus = 5;
-    uint32 tappCount = 6;
 }
 
 message SubstrateApiInfo {
@@ -274,96 +123,6 @@ message TappTopupEvent {
     uint32 height = 5;
 }
 
-message TappHostedEvent {
-    uint64 tappId = 1;
-    uint64 cmlId = 2;
-    bytes teaId = 3;
-    bool becomeActive = 4;
-}
-
-message TappUnhostedEvent {
-    uint64 tappId = 1;
-    uint64 cmlId = 2;
-    bool becomePending = 3;
-}
-
-message TappBecomeActiveEvent {
-    uint64 tappId = 1;
-    uint32 hostCount = 3;
-}
-
-message NewNodeJoinedEvent {
-    string account = 1;
-    bytes teaId = 2;
-}
-
-message CommitRaResultEvent {
-    string accountId = 1;
-    bytes teaId = 2;
-    bytes targetTeaId = 3;
-    bool isPass = 4;
-    string targetStatus = 5;
-    bool statusChanged = 6;
-}
-
-message UpdateNodeProfileEvent {
-    bytes ephemeralPublicKey = 1;//Generated by TPM everytime when tea node starts. It is expired when shutdown.
-    string profileCid = 2;//IPFS Cid to store profile object->TeaNodeProfile
-    bytes teaId = 3;//The node's TPM ID which generates ephemeralPublicKey and sign 
-    string peerId = 5;//ipfs peer id used for peer 2 peer communication
-    repeated RANode raNodes = 6;
-    string status = 7;
-    string accountId = 8;
-    uint32 updateHeight = 9;
-    string connId = 10;
-}
-
-message TAppCreatedEvent {
-    uint64 tappId = 1;
-    string tappName = 2;
-    string tappOwner = 3;
-    uint32 createHeight = 4;
-}
-
-message DesignedTappStoreCountChangedEvent {
-    uint32 count = 1;
-}
-
-message MiningStartedEvent {
-    uint64 cmlId = 1;
-    bytes teaId = 2;
-    string ipAddress = 3;
-}
-
-message MiningStoppedEvent {
-    uint64 cmlId = 1;
-    bytes teaId = 2;
-    uint32 atHeight = 3;
-}
-
-message CmlMigratedEvent {
-    uint64 cmlId = 1;
-    bytes teaId = 2;
-    string ipAddress = 3;
-}
-
-message MiningSuspendedEvent {
-    uint64 cmlId = 1;
-    bytes teaId = 2;
-    uint32 atHeight = 3;
-}
-
-message MiningResumedEvent {
-    uint64 cmlId = 1;
-    bytes teaId = 2;
-    uint32 atHeight = 3;
-}
-
-message RANode {
-    bytes teaId = 1;
-    bool isPass = 2;
-}
-
 message NewBlockEvent {
     uint32 blockNumber = 1;
     bytes parentHash = 2;
@@ -373,151 +132,6 @@ message NewBlockEvent {
 }
 
 message RegisterLayer1EventRequest {}
-
-message TeaNodeUpdateProfileRequest{
-  bytes ephemeralPublicKey = 1;//Generated by TPM everytime when tea node starts. It is expired when shutdown.
-  string profileCid = 2;//IPFS Cid to store profile object->TeaNodeProfile
-  bytes teaId = 3;//The node's TPM ID which generates ephemeralPublicKey and sign 
-  bytes pcrHash = 4;
-  string peerId = 5;//ipfs peer id used for peer 2 peer communication
-  string connId = 6;
-}
-
-message CommitRaResultRequest {
-  bytes teaId = 1;
-  bytes targetTeaId = 2;
-  bool isPass = 3;
-  bytes signature = 4;
-}
-
-message ListAllowedPcrsRequest {}
-
-message ListAllowedPcrsResponse {
-    repeated PcrSlots pcrSlots = 1;
-}
-
-message PcrSlots {
-    string hash = 1;
-    repeated bytes pcrs = 2;
-}
-
-message PcrToHashRequest {
-    repeated bytes pcrs = 2;
-}
-
-message PcrToHashResponse {
-    bytes hash = 1;
-}
-
-message GetNodePcrsRequest {
-    bytes teaId = 1;
-}
-message GetNodePcrsResponse {
-    repeated bytes pcrs = 1;
-}
-
-message GetConnIdRequest {
-    bytes teaId = 1;
-}
-message GetConnIdResponse {
-    string connId = 1;
-}
-
-message GetConnIdListRequest {
-    repeated bytes teaIds = 1;
-}
-message GetConnIdListResponse {
-    repeated string connIds = 1;
-}
-
-message ListTappsNotificationsCount {
-    uint32 stopHeight = 1;
-}
-message ListTappsNotificationsResponse {
-    repeated TappCountItem countItems = 1;
-}
-message TappCountItem {
-    uint64 tappId = 1;
-    uint32 count = 2;
-}
-
-message PushNotificationsRequest {
-    repeated string accounts = 1;
-    repeated uint32 expired_heights = 2;
-    uint64 tokenId = 3;
-    bytes tsid = 4;
-}
-
-message ClearNotificationsRequest {
-    uint32 stopHeight = 1;
-    bytes tsid = 2;
-}
-
-message GetPeerIdRequest {
-    bytes teaId = 1;
-}
-message GetPeerIdResponse {
-    string peerId = 1;
-}
-
-message ListAllowedVersionsRequest {
-}
-
-message ListAllowedVersionsResponse {
-    repeated VersionSet versionSetList = 1;   
-}
-
-message VersionSet {
-    string hash = 1;
-    repeated VersionItem versions = 2;
-    VersionExpire versionExpire = 3;
-}
-
-message VersionExpire {
-    uint32 expireHeight = 1;
-}
-
-message VersionItem {
-    string key = 1;
-    string version = 2;
-}
-
-message ReportNodeVersionExpiredRequest {
-    bytes teaId = 1;
-}
-
-message ReportSelfOfflineRequest {
-    bytes teaId = 1;
-    bytes signature = 2;
-}
-
-message ListVersionExpiredNodesRequest {
-}
-
-message ListVersionExpiredNodesResponse {
-    repeated bytes teaIds = 1;
-}
-
-message GetTappStoreDesiredCountRequest {}
-message GetTappStoreDesiredCountResponse {
-    uint32 count = 1;
-}
-
-message GetMinTappStoreNodeCountRequest {}
-message GetMinTappStoreNodeCountResponse {
-    uint32 count = 1;
-}
-
-message GetNodeProfileRequest {
-    bytes teaId = 1;
-}
-message GetNodeProfileResponse {
-    bytes ephemeralId = 1;
-    string peerId = 2;
-    string connId = 3;
-    uint32 createHeight = 4;
-    uint32 updateHeight = 5;
-}
 
 message GetCmlInfoRequest {
     uint64 cmlId = 1;
@@ -584,12 +198,6 @@ message TopUpTxRequest {
     bytes amount = 3;
 }
 
-message ConsumeTxRequest {
-    bytes amount = 2;
-    uint64 tappId = 3;
-    bytes tsid = 4;
-}
-
 message GetAccountInfoRequest {
     oneof msg {
         AccountPubKey AccountPubKey = 1;
@@ -603,41 +211,9 @@ message GetAccountInfoResponse {
     bytes fee_frozen = 4;
 }
 
-message GetTeaIdsByConnIdsRequest {
-    repeated string connIds = 1;
-}
-message GetTeaIdsByConnIdsResponse {
-    repeated ConnTeaIdPair pairs = 1;
-}
-message ConnTeaIdPair {
-    string connId = 1;
-    bytes teaId = 2;
-}
-
 message AccountPubKey {
     bytes pubkey = 1;
 }
 message AccountAddress {
     string address = 1;
-}
-
-message GetMyProfileRequest {}
-message GetMyProfileResponse {
-    UpdateNodeProfileEvent profile = 1;
-}
-
-message SetMyProfileRequest {
-    UpdateNodeProfileEvent profile = 1;
-}
-
-message QueryCmlPerformancesRequest {
-    repeated uint64 cmlIds = 1;
-}
-message QueryCmlPerformancesResponse {
-    repeated PerformanceItem performances = 1;
-}
-message PerformanceItem {
-    uint64 cmlId = 1;
-    uint32 performance = 2;
-    bool shouldSuspend = 3;
 }
