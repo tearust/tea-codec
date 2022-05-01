@@ -100,3 +100,25 @@ message PushNotificationsInnerRequest {
   string uuid = 4;
   bytes tsid = 5;
 }
+
+message QueryMinerInfoRequest {
+  bytes teaId = 1;
+  uint32 atHeight = 2;
+  bool findAtHeight = 3;
+}
+
+message QueryMiningVariableRequest {
+  bytes teaId = 1;
+}
+
+message QueryNodeProfileByConnId {
+  string connId = 1;
+}
+
+message QueryNodeProfileByTeaId {
+  bytes teaId = 1;
+}
+
+message QueryNodeProfilesByTeaIds {
+  repeated bytes teaIds = 1;
+}
