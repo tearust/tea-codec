@@ -33,6 +33,7 @@ extern crate log;
 extern crate num_derive;
 
 use crate::error::{new_common_error_code, CommonCode, TeaError, TeaResult};
+use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 
 /// The standard function for serializing codec structs into a format that can be
@@ -52,8 +53,12 @@ where
 /// The standard function for de-serializing codec structs from a format suitable
 /// for message exchange between actor and host. Use of any other function to
 /// deserialize could result in breaking incompatibilities.
-pub fn deserialize<'de, T: Deserialize<'de>>(buf: &'de [u8]) -> TeaResult<T> {
-	bincode::deserialize(buf).map_err(|e| {
+pub fn deserialize<T, B>(buf: B) -> TeaResult<T>
+where
+	T: DeserializeOwned,
+	B: AsRef<[u8]>,
+{
+	bincode::deserialize_from(buf.as_ref()).map_err(|e| {
 		new_common_error_code(CommonCode::SerdeDeserializeError)
 			.to_error_code(Some(format!("{:?}", e)), None)
 	})
