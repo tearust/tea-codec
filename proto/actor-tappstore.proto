@@ -122,3 +122,13 @@ message QueryNodeProfileByTeaId {
 message QueryNodeProfilesByTeaIds {
   repeated bytes teaIds = 1;
 }
+
+message QueryNodeProfilesByConnIds {
+  repeated string connIds = 1;
+}
+
+message QueryActiveNodes {
+  string cmlType = 1;
+  bool hasExclude = 2;
+  bytes excludeTeaId = 3;
+}
