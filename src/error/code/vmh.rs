@@ -19,6 +19,8 @@ pub enum VmhCode {
 	SenderOperationExists,
 	InboundNetError,
 	OutboundNetError,
+	IntercomActorNotSupported,
+	IntercomRequestRejected,
 }
 
 impl From<u16> for VmhCode {
@@ -49,6 +51,9 @@ impl Translate<VmhCode> for VmhTranslator {
 			VmhCode::SenderOperationExists => "sender operation already exists",
 			VmhCode::InboundNetError => "inbound net error",
 			VmhCode::OutboundNetError => "outbound net error",
+			// intercom
+			VmhCode::IntercomActorNotSupported => "intercom actor not supported",
+			VmhCode::IntercomRequestRejected => "intercom request rejected",
 		}
 	}
 }
