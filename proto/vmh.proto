@@ -85,7 +85,7 @@ message VmhMessage {
 }
 
 message OutboundRequest {
-    string uuid = 1;
+    uint64 seqNumber = 1;
     string channel = 2;
     oneof msg {
         ProviderOperationRequest ProviderOperationRequest = 3;
@@ -95,7 +95,7 @@ message OutboundRequest {
 }
 
 message OutboundResponse {
-    string uuid = 1;
+    uint64 seqNumber = 1;
     string actor = 2;
     oneof msg {
         ProviderOperationResponse ProviderOperationResponse = 3;

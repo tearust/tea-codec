@@ -311,23 +311,11 @@ message StateReceiverResponse {
 message InvalidValidatorResponse {
   // returns the current validators that the A node belives
   repeated bytes validators = 1;
+  repeated string connIds = 2;
 }
 
 message GeneralQueryResponse {
   bytes data = 1;
-}
-
-// State receiver received request and construct the relay request to other actors
-message StateReceiverRelayRequest {
-  string uuid = 1;
-  bytes data = 2;
-}
-
-message StateReceiverRelayResponse {
-  string uuid = 1;
-  bool success = 2;
-  string errorMessage = 3;
-  bytes data = 4;
 }
 
 message StateCommand {
@@ -342,7 +330,6 @@ message StateFollowup {
 
 message StateQuery {
   bytes data = 1;
-  string target = 2;
 }
 
 

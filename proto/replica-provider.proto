@@ -21,12 +21,14 @@ message ResetReplicasCountRequest {
 message RoundTableMembersRequest {}
 message RoundTableMembersResponse {
   repeated bytes replicaIds = 1;
-  bytes updateTsid = 2;
+  repeated string connIds = 2;
+  bytes updateTsid = 3;
 }
 
 message NotifyReplicaMembers { 
   repeated bytes replicaIds = 1;
-  bytes updateTsid = 2;
+  repeated string connIds = 2;
+  bytes updateTsid = 3;
 }
 
 message FetchHistoryRequest {
@@ -78,6 +80,7 @@ message ValidatorMembersResponse {
 }
 message ValidatorMembers {
   repeated bytes members = 1;
+  repeated string connIds = 2;
 }
 
 message FindExecutedTxnRequest {

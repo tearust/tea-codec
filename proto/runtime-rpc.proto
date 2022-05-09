@@ -39,7 +39,7 @@ message AdapterClientResponse {
 }
 
 message HttpGeneralRequest {
-    string uuid = 1;
+    uint64 seqNumber = 1;
     string replyActor = 2;
     oneof msg {
         HttpExecutionRequest HttpExecutionRequest = 6;
@@ -47,7 +47,7 @@ message HttpGeneralRequest {
 }
 
 message HttpGeneralResponse {
-    string uuid = 1;
+    uint64 seqNumber = 1;
     string targetActor = 2;
     oneof msg {
         HttpExecutionResponse HttpExecutionResponse = 3;

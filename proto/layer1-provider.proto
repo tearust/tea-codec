@@ -24,9 +24,11 @@ message Layer1Outbound {
 message StorageRequest {
     StorageRequestParams params = 1;
     oneof msg {
-        GetCmlsRequest GetCmlsRequest = 3;
-        GetCmlInfoRequest GetCmlInfoRequest = 5;
-        GetMachineInfoRequest GetMachineInfoRequest = 15;
+        GetCmlsRequest GetCmlsRequest = 2;
+        GetCmlInfoRequest GetCmlInfoRequest = 3;
+        GetMachineInfoRequest GetMachineInfoRequest = 4;
+        GetMiningStartupRequest GetMiningStartupRequest = 5;
+        GetTappStartupRequest GetTappStartupRequest = 6;
     }
 }
 message StorageRequestParams {
@@ -37,9 +39,11 @@ message StorageRequestParams {
 message StorageResponse {
     oneof msg {
         FailedFindBlockResponse FailedFindBlockResponse = 1;
-        GetCmlsResponse GetCmlsResponse = 3;
-        GetCmlInfoResponse GetCmlInfoResponse = 5;
-        GetMachineInfoResponse GetMachineInfoResponse = 15;
+        GetCmlsResponse GetCmlsResponse = 2;
+        GetCmlInfoResponse GetCmlInfoResponse = 3;
+        GetMachineInfoResponse GetMachineInfoResponse = 4;
+        GetMiningStartupResponse GetMiningStartupResponse = 5;
+        GetTappStartupResponse GetTappStartupResponse = 6;
     }
 }
 message FailedFindBlockResponse {}
@@ -76,7 +80,7 @@ message ConstructExtrinsicResponse {
 message SendTxRequest {
     bytes rawTransaction = 1;
     uint32 retryCount = 2;
-    string uuid = 3;
+    uint64 seqNumber = 3;
     string replyToActor = 4;
 }
 
@@ -84,7 +88,7 @@ message SendTxAsyncResponse {
     TxResponse response = 1;
     TxErrorResponse error = 2;
     uint32 leftRetryCount = 3;
-    string uuid = 4;
+    uint64 seqNumber = 4;
     string replyToActor = 5;
 }
 
@@ -167,6 +171,20 @@ message GetMachineInfoResponse {
 }
 message CmlId {
     uint64 id = 1;
+}
+
+message GetMiningStartupRequest {}
+message GetMiningStartupResponse {
+    repeated bytes teaIds = 1;
+    repeated uint64 cmlIds = 2;
+    repeated string connIds = 3;
+}
+
+message GetTappStartupRequest {}
+message GetTappStartupResponse {
+    repeated bytes teaIds = 1;
+    repeated uint64 cmlIds = 2;
+    repeated string ips = 3;
 }
 
 message GetCachedMinerInfoRequest {

@@ -18,6 +18,7 @@ message GeneralRequest {
 	string sourceConnId = 1;
 	string targetConnId = 2;
 	RuntimeMessage runtimeMessage = 3;
+  uint64 seqNumber = 4;
 }
 
 message PubMessage {
