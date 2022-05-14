@@ -1,34 +1,6 @@
 syntax = "proto3";
 package tappstore;
 
-import "replica-provider.proto";
-
-message TappQueryRequest {
-  oneof msg {
-    TeaBalanceRequest TeaBalanceRequest = 2;
-    SignAndSendExtrinsicRequest SignAndSendExtrinsicRequest = 3;
-    CheckUserSessionRequest CheckUserSessionRequest = 4;
-    GetConsumeAccountPubkeyRequest GetConsumeAccountPubkeyRequest = 5;
-    replica.FindExecutedTxnRequest FindExecutedTxnRequest = 6;
-    GetTappstoreAccountPubkeyRequest GetTappstoreAccountPubkeyRequest = 7;
-    CommonSqlQueryRequest CommonSqlQueryRequest = 8;
-    AccountAssetRequest AccountAssetRequest = 9;
-  }
-}
-
-message TappQueryResponse {
-  oneof msg {
-    TeaBalanceResponse TeaBalanceResponse = 4;
-    SignAndSendExtrinsicResponse SignAndSendExtrinsicResponse = 5;
-    CheckUserSessionResponse CheckUserSessionResponse = 6;
-    GetConsumeAccountPubkeyResponse GetConsumeAccountPubkeyResponse = 7;
-    replica.FindExecutedTxnResponse FindExecutedTxnResponse = 8;
-    GetTappstoreAccountPubkeyResponse GetTappstoreAccountPubkeyResponse = 9;
-    CommonSqlQueryResponse CommonSqlQueryResponse = 10;
-    AccountAssetResponse AccountAssetResponse = 11;
-  }
-}
-
 message TeaBalanceRequest {
   string account = 1;
   uint64 tokenId = 2;
