@@ -7,6 +7,8 @@ message Layer1Inbound {
         SendTxAsyncResponse SendTxAsyncResponse = 99;
         NewBlockEvent NewBlockEvent = 100;
         TappTopupEvent TappTopupEvent = 101;
+        MachineStartupResetEvent MachineStartupResetEvent = 102;
+        TappStartupResetEvent TappStartupResetEvent = 103;
     }
 }
 
@@ -135,6 +137,21 @@ message NewBlockEvent {
     bool isSync = 5;
 }
 
+message MachineStartupResetEvent {
+    repeated bytes teaIds = 1;
+    repeated uint64 cmlIds = 2;
+    repeated string connIds = 3;
+    repeated string ipList = 4;
+    uint32 height = 5;
+}
+
+message TappStartupResetEvent {
+    repeated bytes teaIds = 1;
+    repeated uint64 cmlIds = 2;
+    repeated string ipList = 4;
+    uint32 height = 5;
+}
+
 message RegisterLayer1EventRequest {}
 
 message GetCmlInfoRequest {
@@ -178,6 +195,7 @@ message GetMiningStartupResponse {
     repeated bytes teaIds = 1;
     repeated uint64 cmlIds = 2;
     repeated string connIds = 3;
+    repeated string ips = 4;
 }
 
 message GetTappStartupRequest {}
