@@ -9,18 +9,12 @@ pub mod service;
 pub mod vmh;
 pub mod wascc;
 
-#[derive(Error, Debug, Clone, Deserialize, Serialize)]
+#[derive(Error, Clone, Deserialize, Serialize)]
 pub struct ErrorCode {
 	code: u16,
 	description: String,
 	details: Option<String>,
 	inner: Box<Option<ErrorCode>>,
-}
-
-impl Display for ErrorCode {
-	fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-		write!(f, "{}", self.error_chain_message())
-	}
 }
 
 impl PartialEq for ErrorCode {
@@ -111,5 +105,17 @@ impl ErrorCode {
 			cursor = (*e.inner).as_ref();
 		}
 		chain
+	}
+}
+
+impl Debug for ErrorCode {
+	fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+		write!(f, "{}", self.error_chain_message())
+	}
+}
+
+impl Display for ErrorCode {
+	fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+		write!(f, "{}", self.error_chain_message())
 	}
 }

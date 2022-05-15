@@ -2,7 +2,7 @@ use log::{warn, ParseLevelError};
 use serde::{Deserialize, Serialize};
 use serde_json::Error;
 use std::array::TryFromSliceError;
-use std::fmt::Debug;
+use std::fmt::{Debug, Formatter};
 use std::num::{ParseIntError, TryFromIntError};
 use std::str::Utf8Error;
 use std::string::FromUtf8Error;
@@ -22,7 +22,7 @@ pub use code::{
 	ErrorCode,
 };
 
-#[derive(Error, Debug, Clone, Deserialize, Serialize)]
+#[derive(Error, Clone, Deserialize, Serialize)]
 pub enum TeaError {
 	#[error("Tea common error, details: `{0}`")]
 	CommonError(String),
@@ -172,5 +172,14 @@ impl From<hex::FromHexError> for TeaError {
 	fn from(e: hex::FromHexError) -> Self {
 		new_common_error_code(CommonCode::HexDecodeError)
 			.to_error_code(Some(format!("{:?}", e)), None)
+	}
+}
+
+impl Debug for TeaError {
+	fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+		match self {
+			TeaError::EncodedError(code) => write!(f, "{:?}", code),
+			TeaError::CommonError(msg) => write!(f, "Unknown error: {}", msg),
+		}
 	}
 }
