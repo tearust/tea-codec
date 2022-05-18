@@ -1,4 +1,5 @@
 pub const OP_SEND_MESSAGE: &str = "SendMessage";
+pub const OP_REPLY_MESSAGE: &str = "ReplyMessage";
 pub const OP_PUB_MESSAGE: &str = "PubMessage";
 pub const OP_MY_CONN_ID: &str = "MyConnId";
 pub const OP_HAS_CONNECTED: &str = "HasConnected";
