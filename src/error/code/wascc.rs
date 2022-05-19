@@ -24,6 +24,7 @@ pub enum WasccCode {
 	MessagingError,
 	EnvVarError,
 	DiscardMessageError,
+	ProviderOperationRejected,
 }
 
 impl From<u16> for WasccCode {
@@ -61,6 +62,7 @@ impl Translate<WasccCode> for WasccTranslator {
 			WasccCode::MessagingError => "Messaging error",
 			WasccCode::EnvVarError => "Environment variable error",
 			WasccCode::DiscardMessageError => "discard message",
+			WasccCode::ProviderOperationRejected => "provider operation rejected",
 		}
 	}
 }
