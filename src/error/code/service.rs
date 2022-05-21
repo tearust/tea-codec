@@ -11,6 +11,7 @@ pub enum ServiceCode {
 	BondingGeneralError,
 	DbNotFoundError,
 	InvalidTransactionContext,
+	InvalidValidator,
 }
 
 impl From<u16> for ServiceCode {
@@ -32,6 +33,8 @@ impl Translate<ServiceCode> for ServiceTranslator {
 			ServiceCode::StateGeneralError => "state machine error",
 			ServiceCode::BondingGeneralError => "bonding curve error",
 			ServiceCode::InvalidTransactionContext => "invalid transaction context",
+			// state receiver
+			ServiceCode::InvalidValidator => "i'm not a validator",
 			// utility
 			ServiceCode::HttpExecutionError => "http execution error",
 		}
