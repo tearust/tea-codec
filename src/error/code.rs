@@ -64,6 +64,10 @@ impl ErrorCode {
 		self.inner.as_ref()
 	}
 
+	pub fn details(&self) -> Option<&String> {
+		self.details.as_ref()
+	}
+
 	pub fn contains(&self, code: u16) -> bool {
 		if self.code == code {
 			true
