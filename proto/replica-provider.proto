@@ -124,3 +124,8 @@ message ResetExecCursorRequest {
 }
 
 message UnsetShouldLock {}
+
+message ResetReplicaMembersRequest {
+  repeated bytes validators = 1;
+  repeated string connIds = 2;
+}
