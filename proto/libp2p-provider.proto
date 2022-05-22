@@ -12,6 +12,7 @@ message Libp2pRequest {
 		SubscribeGossipTopicRequest SubscribeGossipTopicRequest = 7;
 		UnsubscribeGossipTopicRequest UnsubscribeGossipTopicRequest = 8;
 		GeneralRequest ReplyRequest = 9;
+		Libp2pInitedRequest Libp2pInitedRequest = 10;
 	}
 }
 
@@ -41,6 +42,8 @@ message StopUseIpAddressRequest {
 
 message CloseRequest {
 }
+
+message Libp2pInitedRequest {}
 
 message PeersChangedRequest {
 	repeated string peers = 1;
