@@ -141,7 +141,6 @@ message MachineStartupResetEvent {
     repeated bytes teaIds = 1;
     repeated uint64 cmlIds = 2;
     repeated string connIds = 3;
-    repeated string ipList = 4;
     repeated bytes oldTeaIds = 5;
     repeated uint64 oldCmlIds = 6;
     uint32 height = 7;
@@ -199,7 +198,6 @@ message GetMiningStartupResponse {
     repeated bytes teaIds = 1;
     repeated uint64 cmlIds = 2;
     repeated string connIds = 3;
-    repeated string ips = 4;
 }
 
 message GetTappStartupRequest {}
