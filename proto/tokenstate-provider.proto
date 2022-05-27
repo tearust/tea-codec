@@ -6,23 +6,26 @@ import "replica-provider.proto";
 
 message QueryStateTsidRequest {}
 message QueryStateTsidResponse { bytes stateTsid = 1; }
-message QueryTeaBalanceRequest { bytes acct = 1; uint64 tokenId = 2; }
+message QueryTeaBalanceRequest { 
+  bytes acct = 1; 
+  bytes tokenId = 2; 
+}
 message QueryTeaBalanceResponse {
   bytes balance_bytes = 1;
   bytes stateTsid = 2;
 }
 message QueryTokenBalanceRequest { bytes acct = 1;
-  uint64 tokenId = 2;
+  bytes tokenId = 2;
 }
 message QueryTokenBalanceResponse {
   bytes balance_bytes = 1;
   bytes stateTsid = 2;
 }
 message QueryAppAesRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message QueryUserLoginSessionKeyRequest{
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   bytes acct = 2;
   bytes teaId = 3;
 }
@@ -46,7 +49,7 @@ message GenAppConsumeAcctResponse {
 }
 
 message GetTappstoreAccountRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message GetTappstoreAccountResponse {
   bool hasKey = 1;
@@ -63,7 +66,7 @@ message GenTappstoreAccountResponse {
 }
 
 message GetFailedPaymentsRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message GetFailedPaymentsResponse {
   bytes failedPaymentsBytes = 1;
@@ -85,7 +88,7 @@ message QueryAuthOpsRequest{
   bytes authKey = 1;
 }
 message QueryAppConsumeBalanceRequest{
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message QueryAppConsumeBalanceResponse{
   bytes balanceBytes = 1;
@@ -94,7 +97,7 @@ message SetAuthOpsRequest{
   bytes authKey = 1;
   bytes authOpsBytes = 2;
   bytes ctx = 3;
-  uint64 tokenId = 4;
+  bytes tokenId = 4;
   bytes acct = 5;
 }
 
@@ -108,7 +111,7 @@ message ExtendAuthKeyRequest{
 }
 
 message SetUserLoginSessionKey{
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   bytes acct = 2;
   bytes authKey = 3;
   bytes ts = 4;
@@ -119,7 +122,7 @@ message SetUserLoginSessionKeyResponse{
 }
 
 //message GetUserLoginSessionKey{
-//  uint64 tokenId = 1;
+//  bytes tokenId = 1;
 //  bytes acct = 2;
 //}
 
@@ -152,7 +155,7 @@ message PaymentFromDepositRequest{
 
 message BurnConsumeUnbalancedRequest{
   bytes ctx = 1;
-  uint64 tokenId = 2;
+  bytes tokenId = 2;
   bytes amtBytes = 3;
 }
 message BurnConsumeUnbalancedResponse{
@@ -218,18 +221,18 @@ message ImportGlueSqlRequest {
 }
 
 message InitGlueSqlRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   bytes tsid = 2;
 }
 
 message ExecGlueSqlRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   string sql = 2;
   bytes tsid = 3;
 }
 
 message ExecGlueQueryRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   string sql = 2;
 }
 
@@ -281,7 +284,7 @@ message RoundTableData {
 }
 
 message GetConsumeAccountRequest{
-  uint64 tokenId = 1; 
+  bytes tokenId = 1; 
 }
 
 // Top level message send to state receiver
@@ -346,18 +349,18 @@ message CommandFollowupResponse {
 }
 
 message BeginTransactionRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message BeginTransactionResponse {
   GluedbTransactionContext context = 1;
 }
 
 message CancelTransactionRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 
 message IsInTransactionRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message IsInTransactionResponse {
   bool yes = 1;
@@ -432,14 +435,14 @@ message BondingUnreserveResponse {
 }
 
 message GetTokenTotalSupplyRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message GetTokenTotalSupplyResponse {
   bytes amount = 1;
 }
 
 message GetTokenBalanceRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   bytes account = 2;
 }
 message GetTokenBalanceResponse {
@@ -447,7 +450,7 @@ message GetTokenBalanceResponse {
 }
 
 message GetTokenReservedBalanceRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   bytes account = 2;
 }
 message GetTokenReservedBalanceResponse {

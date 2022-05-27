@@ -3,7 +3,7 @@ package tappstore;
 
 message TeaBalanceRequest {
   string account = 1;
-  uint64 tokenId = 2;
+  bytes tokenId = 2;
   bytes authKey = 3;
 }
 message TeaBalanceResponse {
@@ -12,7 +12,7 @@ message TeaBalanceResponse {
 }
 message AccountAssetRequest {
   string account = 1;
-  uint64 tokenId = 2;
+  bytes tokenId = 2;
   bytes authKey = 3;
 }
 message AccountAssetResponse {
@@ -23,7 +23,7 @@ message AccountAssetResponse {
 
 message SignAndSendExtrinsicRequest {
   bytes extrinsicCall = 1;
-  uint64 tokenId = 2;
+  bytes tokenId = 2;
 }
 message SignAndSendExtrinsicResponse {
   string blockHash = 1;
@@ -31,18 +31,18 @@ message SignAndSendExtrinsicResponse {
 
 message CheckUserSessionRequest {
   string account = 1;
-  uint64 tokenId = 2;
+  bytes tokenId = 2;
   bytes teaId = 3;
 }
 message CheckUserSessionResponse {
   bytes authKey = 1;
   bytes aesKey = 2;
-  uint64 tokenId = 3;
+  bytes tokenId = 3;
   string account = 4;
 }
 
 message GetConsumeAccountPubkeyRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
 }
 message GetConsumeAccountPubkeyResponse {
   bytes publicKey = 1;
@@ -56,7 +56,7 @@ message GetTappstoreAccountPubkeyResponse {
 }
 
 message CommonSqlQueryRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   string sql = 2;
   string from = 3;
 }
@@ -66,7 +66,7 @@ message CommonSqlQueryResponse {
 }
 
 message PushNotificationsInnerRequest {
-  uint64 tokenId = 1;
+  bytes tokenId = 1;
   repeated string accounts = 2;
   repeated uint32 expired_heights = 3;
   string uuid = 4;
