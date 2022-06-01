@@ -12,6 +12,7 @@ pub enum ServiceCode {
 	DbNotFoundError,
 	InvalidTransactionContext,
 	InvalidValidator,
+	InvalidTxnRequest,
 }
 
 impl From<u16> for ServiceCode {
@@ -35,6 +36,7 @@ impl Translate<ServiceCode> for ServiceTranslator {
 			ServiceCode::InvalidTransactionContext => "invalid transaction context",
 			// state receiver
 			ServiceCode::InvalidValidator => "i'm not a validator",
+			ServiceCode::InvalidTxnRequest => "txn request send from other node is invalid",
 			// utility
 			ServiceCode::HttpExecutionError => "http execution error",
 		}
