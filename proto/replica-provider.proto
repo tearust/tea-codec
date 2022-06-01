@@ -59,10 +59,6 @@ message HistoryItem {
   bytes txn = 2;
 }
 
-message JoinRoundTableRequest {
-  bytes replicaId = 1;
-}
-
 message ValidatorsStateRequest {}
 message ValidatorsStateResponse {
   ValidatorsState validatorsState = 1;
