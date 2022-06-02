@@ -27,6 +27,7 @@ pub const OP_IMPORT_STATE: &str = "ImportState";
 pub const OP_EXPORT_GLUESQL: &str = "ExportGlueSql";
 pub const OP_IMPORT_GLUESQL: &str = "ImportGlueSql";
 pub const OP_INIT_GLUESQL: &str = "InitGlueSql";
+pub const OP_HAS_DB_INIT: &str = "HasDbInit";
 pub const OP_EXEC_GLUECMD: &str = "ExecGlueCmd";
 pub const OP_EXEC_GLUEQUERY: &str = "ExecGlueQuery";
 pub const OP_SQL_BEGIN_TRANSACTION: &str = "SqlBeginTransaction";

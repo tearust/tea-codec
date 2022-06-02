@@ -465,3 +465,10 @@ message SlashRequest {
 message SlashResponse {
   bytes ctx = 1;
 }
+
+message HasGlueDbInitRequest {
+  bytes tokenId = 1;
+}
+message HasGlueDbInitResponse {
+  bool hasInit = 1;
+}
