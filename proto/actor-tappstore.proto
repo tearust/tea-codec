@@ -56,10 +56,17 @@ message GetTappstoreAccountPubkeyResponse {
 }
 
 message CommonSqlQueryRequest {
-  bytes tokenId = 1;
-  string sql = 2;
-  string from = 3;
+  oneof msg {
+    QueryEntityListRequest QueryEntityListRequest = 1;
+  }
 }
+
+message QueryEntityListRequest {
+  bool onlyTapp = 1;
+  string from = 2;
+  bytes tokenId = 3;
+}
+
 message CommonSqlQueryResponse {
   bytes data = 1;
   string err = 2;
