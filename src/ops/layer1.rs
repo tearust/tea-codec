@@ -4,3 +4,7 @@ pub const OP_LAYER1_API_INFO: &str = "Layer1ApiInfo";
 pub const OP_SEND_TX: &str = "SendTx";
 pub const OP_GENERAL_REQUEST: &str = "GeneralRequest";
 pub const OP_REG_LAYER1_EVENT_MESSAGE: &str = "RegLayer1EventMessage";
+pub const OP_UPDATE_TAPP_STARTUP_CACHE: &str = "UpdateTappStartupCache";
+pub const OP_UPDATE_MINING_STARTUP_CACHE: &str = "UpdateMiningStartupCache";
+pub const OP_UPDATE_CML_INFO_CACHE: &str = "UpdateCmlInfoCache";
+pub const OP_UPDATE_MACHINE_INFO_CACHE: &str = "UpdateMachineInfoCache";
