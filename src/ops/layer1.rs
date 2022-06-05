@@ -8,3 +8,7 @@ pub const OP_UPDATE_TAPP_STARTUP_CACHE: &str = "UpdateTappStartupCache";
 pub const OP_UPDATE_MINING_STARTUP_CACHE: &str = "UpdateMiningStartupCache";
 pub const OP_UPDATE_CML_INFO_CACHE: &str = "UpdateCmlInfoCache";
 pub const OP_UPDATE_MACHINE_INFO_CACHE: &str = "UpdateMachineInfoCache";
+pub const OP_GET_TAPP_STARTUP_FROM_CACHE: &str = "GetTappStartupFromCache";
+pub const OP_GET_MINING_STARTUP_FROM_CACHE: &str = "GetMiningStartupFromCache";
+pub const OP_GET_CML_INFO_FROM_CACHE: &str = "GetCmlInfoFromCache";
+pub const OP_GET_MACHINE_INFO_FROM_CACHE: &str = "GetMachineInfoFromCache";
