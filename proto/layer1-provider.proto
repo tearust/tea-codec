@@ -9,6 +9,8 @@ message Layer1Inbound {
         TappTopupEvent TappTopupEvent = 101;
         MachineStartupResetEvent MachineStartupResetEvent = 102;
         TappStartupResetEvent TappStartupResetEvent = 103;
+        CmlTransfered CmlTransfered = 104;
+        MachineTransfered MachineTransfered = 105;
     }
 }
 
@@ -153,6 +155,18 @@ message TappStartupResetEvent {
     repeated bytes oldTeaIds = 4;
     repeated uint64 oldCmlIds = 5;
     uint32 height = 6;
+}
+
+message CmlTransfered {
+    uint64 cmlId = 1;
+    string from = 2;
+    string to = 3;
+}
+
+message MachineTransfered {
+    bytes teaId = 1;
+    string from = 2;
+    string to = 3;
 }
 
 message RegisterLayer1EventRequest {}
