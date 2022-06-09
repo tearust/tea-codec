@@ -42,13 +42,10 @@ where
 	}
 
 	pub fn error_from_nested(&self, e: TeaError) -> TeaError {
-		let error_code = match e.parse_error_code() {
-			Some(code) => {
-				ErrorCode::new_nested(self.code, self.to_string(), None, code.inner().clone())
-			}
-			None => ErrorCode::new(self.code, self.to_string(), Some(format!("{:?}", e))),
-		};
-		TeaError::EncodedError(error_code)
+		match e.parse_error_code() {
+			Some(code) => self.to_error_code(None, Some(code)),
+			None => self.to_error_code(Some(format!("{:?}", e)), None),
+		}
 	}
 }
 
