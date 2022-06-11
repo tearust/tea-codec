@@ -18,6 +18,7 @@ message InitRuntimeRequest {
     layer1.Layer1Settings layer1Settings = 3;
     string connId = 4;
     bytes loadedChannels = 5;
+    bytes manifestBuf = 6;
 }
 
 message VmhInbound {
