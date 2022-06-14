@@ -215,6 +215,10 @@ message ImportStateResponse {
 }
 
 message ExportGlueSqlRequest {}
+message ExportGlueSqlResponse {
+  bytes data = 1;
+  repeated uint32 checksums = 2;
+}
 
 message ImportGlueSqlRequest {
   bytes data = 1;
@@ -250,6 +254,9 @@ message Checkpoint {
   uint32 blockNumber = 1;
   bytes stateHash = 2;
   bytes globalHash = 3;
+  bytes gluedbHash = 4;
+  bytes RoundTableHash = 5;
+  repeated uint32 gluedbChecksums = 6;
 }
 message ExecCursor {
   bytes execCursor = 1;
@@ -278,6 +285,7 @@ message HistoryItem {
 }
 message GluedbData {
   bytes gluedb = 1;
+  repeated uint32 checksums = 2;
 }
 message RoundTableData {
   bytes roundTable = 1;
