@@ -1,5 +1,6 @@
 pub mod crypto;
 pub mod env;
+pub mod kvp;
 pub mod layer1;
 pub mod libp2p;
 pub mod persist;
