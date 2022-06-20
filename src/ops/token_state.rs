@@ -5,6 +5,7 @@ pub const OP_QUERY_TOKEN_BALANCE: &str = "QueryTokenBalance";
 pub const OP_QUERY_AUTH_OPS_BYTES_AND_NEW_EXPIRE: &str = "QueryAuthOpsBytes";
 pub const OP_QUERY_APP_CONSUME_BALANCE: &str = "QueryAppConsumeBalance";
 pub const OP_BURN_CONSUME_BACK_TO_SYSTEM_ACCT: &str = "BurnConsumeUnbalanced";
+pub const OP_CHECK_TXN: &str = "CheckTxn";
 pub const OP_COMMIT_TXN: &str = "CommitTxn";
 pub const OP_TOPUP: &str = "Topup";
 pub const OP_WITHDRAW: &str = "Withdraw";
