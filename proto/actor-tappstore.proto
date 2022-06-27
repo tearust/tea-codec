@@ -58,6 +58,7 @@ message GetTappstoreAccountPubkeyResponse {
 message CommonSqlQueryRequest {
   oneof msg {
     QueryEntityListRequest QueryEntityListRequest = 1;
+    QueryFavTappsRequest QueryFavTappsRequest = 2;
   }
 }
 
@@ -65,6 +66,10 @@ message QueryEntityListRequest {
   bool onlyTapp = 1;
   string from = 2;
   bytes tokenId = 3;
+}
+
+message QueryFavTappsRequest {
+  string user = 1;
 }
 
 message CommonSqlQueryResponse {
