@@ -13,6 +13,8 @@ pub enum ServiceCode {
 	InvalidTransactionContext,
 	InvalidValidator,
 	InvalidTxnRequest,
+	AsyncCanceled,
+	AsyncNotFinished,
 }
 
 impl From<u16> for ServiceCode {
@@ -39,6 +41,9 @@ impl Translate<ServiceCode> for ServiceTranslator {
 			ServiceCode::InvalidTxnRequest => "txn request send from other node is invalid",
 			// utility
 			ServiceCode::HttpExecutionError => "http execution error",
+			// async
+			ServiceCode::AsyncCanceled => "async canceled",
+			ServiceCode::AsyncNotFinished => "async not finished",
 		}
 	}
 }
