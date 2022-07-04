@@ -59,6 +59,7 @@ message CommonSqlQueryRequest {
   oneof msg {
     QueryEntityListRequest QueryEntityListRequest = 1;
     QueryFavTappsRequest QueryFavTappsRequest = 2;
+    QuerySeatListRequest QuerySeatListRequest = 3;
   }
 }
 
@@ -70,6 +71,10 @@ message QueryEntityListRequest {
 
 message QueryFavTappsRequest {
   string user = 1;
+}
+message QuerySeatListRequest {
+  string maintainer = 1;
+  string dealUser = 2;
 }
 
 message CommonSqlQueryResponse {
