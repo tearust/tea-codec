@@ -119,8 +119,8 @@ message SubstrateApiInfo {
 }
 
 message Layer1Settings {
-    uint32 runtimeSpecVersion = 1;
-    uint32 runtimeTransactionVersion = 2;
+    bytes metadata = 1;
+    bytes runtimeVersion = 2;
     bytes genesisHash = 3;
 }
 
