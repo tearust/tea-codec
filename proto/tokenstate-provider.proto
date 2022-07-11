@@ -239,6 +239,9 @@ message ExecGlueQueryRequest {
   bytes tokenId = 1;
   string sql = 2;
 }
+message ExecGlueQueryResponse {
+  repeated bytes payloads = 1;
+}
 
 message StatePing {
   Checkpoint checkpoint = 1;
