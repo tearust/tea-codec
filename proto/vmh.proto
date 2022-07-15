@@ -19,6 +19,7 @@ message InitRuntimeRequest {
     string connId = 4;
     bytes loadedChannels = 5;
     bytes manifestBuf = 6;
+    bytes miningStartupCsvBuffer = 7;
 }
 
 message VmhInbound {
