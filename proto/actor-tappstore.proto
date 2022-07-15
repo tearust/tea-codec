@@ -120,3 +120,8 @@ message QueryActiveNodes {
   bool hasExclude = 2;
   bytes excludeTeaId = 3;
 }
+
+message QueryActiveSeats {
+  bool hasExclude = 2;
+  bytes excludeTeaId = 1;
+}
