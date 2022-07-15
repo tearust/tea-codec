@@ -117,7 +117,6 @@ message QueryNodeProfilesByConnIds {
 }
 
 message QueryActiveNodes {
-  string cmlType = 1;
   bool hasExclude = 2;
   bytes excludeTeaId = 3;
 }
