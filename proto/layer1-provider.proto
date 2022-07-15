@@ -31,7 +31,6 @@ message StorageRequest {
         GetCmlsRequest GetCmlsRequest = 2;
         GetCmlInfoRequest GetCmlInfoRequest = 3;
         GetMachineInfoRequest GetMachineInfoRequest = 4;
-        GetMiningStartupRequest GetMiningStartupRequest = 5;
         GetTappStartupRequest GetTappStartupRequest = 6;
     }
 }
@@ -46,7 +45,6 @@ message StorageResponse {
         GetCmlsResponse GetCmlsResponse = 2;
         GetCmlInfoResponse GetCmlInfoResponse = 3;
         GetMachineInfoResponse GetMachineInfoResponse = 4;
-        GetMiningStartupResponse GetMiningStartupResponse = 5;
         GetTappStartupResponse GetTappStartupResponse = 6;
     }
 }
@@ -205,13 +203,6 @@ message GetMachineInfoResponse {
 }
 message CmlId {
     uint64 id = 1;
-}
-
-message GetMiningStartupRequest {}
-message GetMiningStartupResponse {
-    repeated bytes teaIds = 1;
-    repeated uint64 cmlIds = 2;
-    repeated string connIds = 3;
 }
 
 message GetTappStartupRequest {}
