@@ -47,6 +47,16 @@ where
 			None => self.to_error_code(Some(format!("{:?}", e)), None),
 		}
 	}
+
+	pub fn error_from_nested_and_details(&self, e: TeaError, details: String) -> TeaError {
+		match e.parse_error_code() {
+			Some(code) => self.to_error_code(Some(details), Some(code)),
+			None => self.to_error_code(
+				Some(format!("error is {:?}, details: {}", e, details)),
+				None,
+			),
+		}
+	}
 }
 
 impl<T, C> ToString for ErrorCodeTranslator<T, C>
