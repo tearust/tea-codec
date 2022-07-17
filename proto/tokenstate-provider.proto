@@ -14,6 +14,10 @@ message QueryTeaBalanceResponse {
   bytes balance_bytes = 1;
   bytes stateTsid = 2;
 }
+message ReadTeaBalanceRequest {
+  bytes ctx = 1;
+  bytes acct = 2;
+}
 message QueryTokenBalanceRequest { bytes acct = 1;
   bytes tokenId = 2;
 }
