@@ -18,7 +18,8 @@ message ReadTeaBalanceRequest {
   bytes ctx = 1;
   bytes acct = 2;
 }
-message QueryTokenBalanceRequest { bytes acct = 1;
+message QueryTokenBalanceRequest { 
+  bytes acct = 1;
   bytes tokenId = 2;
 }
 message QueryTokenBalanceResponse {
