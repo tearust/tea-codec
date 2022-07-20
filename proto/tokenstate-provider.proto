@@ -210,6 +210,9 @@ message ExportStateRequest {
 message ExportStateResponse {
   bytes data = 1;
   bytes tsid = 2;
+  bytes teaHash = 3;
+  bytes tokenHash = 4;
+  bytes keysHash = 5;
 }
 
 message ImportStateRequest {
@@ -285,6 +288,7 @@ message SyncStateResponse {
 }
 message CheckpointData {
   bytes data = 1;
+  bytes hash = 2;
 }
 message HistoryItem {
   bytes tsid = 1;
