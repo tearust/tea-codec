@@ -11,7 +11,7 @@ message QueryTeaBalanceRequest {
   bytes tokenId = 2; 
 }
 message QueryTeaBalanceResponse {
-  bytes balance_bytes = 1;
+  bytes balanceBytes = 1;
   bytes stateTsid = 2;
 }
 message ReadTeaBalanceRequest {
@@ -20,7 +20,7 @@ message ReadTeaBalanceRequest {
   bytes conflictMode = 3;
 }
 message ReadTeaBalanceResponse {
-  bytes balance_bytes = 1;
+  bytes balanceBytes = 1;
   bytes ctx = 2;
 }
 message QueryTokenBalanceRequest { 
@@ -28,7 +28,7 @@ message QueryTokenBalanceRequest {
   bytes tokenId = 2;
 }
 message QueryTokenBalanceResponse {
-  bytes balance_bytes = 1;
+  bytes balanceBytes = 1;
   bytes stateTsid = 2;
 }
 message QueryAppAesRequest {
