@@ -17,6 +17,11 @@ message QueryTeaBalanceResponse {
 message ReadTeaBalanceRequest {
   bytes ctx = 1;
   bytes acct = 2;
+  bytes conflictMode = 3;
+}
+message ReadTeaBalanceResponse {
+  bytes balance_bytes = 1;
+  bytes ctx = 2;
 }
 message QueryTokenBalanceRequest { 
   bytes acct = 1;
@@ -460,12 +465,14 @@ message GetTokenTotalSupplyResponse {
   bytes amount = 1;
 }
 
-message GetTokenBalanceRequest {
-  bytes tokenId = 1;
+message ReadTokenBalanceRequest {
+  bytes ctx = 1;
   bytes account = 2;
+  bytes conflictMode = 3;
 }
-message GetTokenBalanceResponse {
+message ReadTokenBalanceResponse {
   bytes amount = 1;
+  bytes ctx = 2;
 }
 
 message GetTokenReservedBalanceRequest {

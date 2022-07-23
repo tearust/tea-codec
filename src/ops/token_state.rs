@@ -2,7 +2,6 @@
 pub const OP_QUERY_STATE_TSID: &str = "QueryStateTsid";
 pub const OP_QUERY_TEA_BALANCE: &str = "QueryTeaBalance";
 pub const OP_READ_TEA_BALANCE: &str = "ReadTeaBalance";
-pub const OP_QUERY_TOKEN_BALANCE: &str = "QueryTokenBalance";
 pub const OP_QUERY_AUTH_OPS_BYTES_AND_NEW_EXPIRE: &str = "QueryAuthOpsBytes";
 pub const OP_QUERY_APP_CONSUME_BALANCE: &str = "QueryAppConsumeBalance";
 pub const OP_BURN_CONSUME_BACK_TO_SYSTEM_ACCT: &str = "BurnConsumeUnbalanced";
@@ -50,7 +49,8 @@ pub const OP_BONDING_SELL: &str = "BondingSell";
 pub const OP_READ_BONDING_TOTAL_SUPPLY: &str = "ReadBondingTotalSupply";
 pub const OP_READ_ALL_BONDING: &str = "ReadAllBonding";
 pub const OP_GET_BONDING_TOTAL_SUPPLY: &str = "GetBondingTotalSupply";
-pub const OP_GET_TOKEN_BALANCE: &str = "GetTokenBalance";
+pub const OP_QUERY_TOKEN_BALANCE: &str = "QueryTokenBalance";
+pub const OP_READ_TOKEN_BALANCE: &str = "ReadTokenBalance";
 
 pub const OP_GET_TOKEN_RESERVED_BALANCE: &str = "GetTokenReservedBalance";
 pub const OP_BONDING_RESERVE: &str = "BondingReserve";
