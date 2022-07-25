@@ -7,7 +7,6 @@ message Layer1Inbound {
         SendTxAsyncResponse SendTxAsyncResponse = 99;
         NewBlockEvent NewBlockEvent = 100;
         TappTopupEvent TappTopupEvent = 101;
-        MachineStartupResetEvent MachineStartupResetEvent = 102;
         TappStartupResetEvent TappStartupResetEvent = 103;
         CmlTransfered CmlTransfered = 104;
         MachineTransfered MachineTransfered = 105;
@@ -135,15 +134,6 @@ message NewBlockEvent {
     bytes stateRoot = 3;
     bytes extrinsicRoot = 4;
     bool isSync = 5;
-}
-
-message MachineStartupResetEvent {
-    repeated bytes teaIds = 1;
-    repeated uint64 cmlIds = 2;
-    repeated string connIds = 3;
-    repeated bytes oldTeaIds = 5;
-    repeated uint64 oldCmlIds = 6;
-    uint32 height = 7;
 }
 
 message TappStartupResetEvent {
