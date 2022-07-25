@@ -268,10 +268,11 @@ message StatePong {
 }
 message Checkpoint {
   uint32 blockNumber = 1;
-  bytes stateHash = 2;
   bytes globalHash = 3;
   bytes gluedbHash = 4;
   bytes RoundTableHash = 5;
+  bytes stateBalancesHash = 6;
+  bytes stateKeysHash = 7;
 }
 message ExecCursor {
   bytes execCursor = 1;
@@ -293,7 +294,8 @@ message SyncStateResponse {
 }
 message CheckpointData {
   bytes data = 1;
-  bytes hash = 2;
+  bytes balancesHash = 2;
+  bytes keysHash = 3;
 }
 message HistoryItem {
   bytes tsid = 1;
