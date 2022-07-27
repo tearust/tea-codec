@@ -41,3 +41,4 @@ pub const OP_RESET_EXEC_CURSOR: &str = "ResetExecCursor";
 pub const OP_DUMP_TXN_SEQUENCE: &str = "DumpTxnSeq";
 pub const OP_UNSET_SHOULD_LOCK: &str = "UnsetShouldLock";
 pub const OP_GET_MINING_STARTUP: &str = "GetMiningStartup";
+pub const OP_RESET_MAGIC_NUMBER: &str = "ResetMagicNumber";
