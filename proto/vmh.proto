@@ -20,6 +20,7 @@ message InitRuntimeRequest {
     bytes loadedChannels = 5;
     bytes manifestBuf = 6;
     bytes miningStartupCsvBuffer = 7;
+    uint64 stateMagicNumber = 8;
 }
 
 message VmhInbound {

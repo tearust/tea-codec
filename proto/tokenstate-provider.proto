@@ -218,6 +218,7 @@ message ExportStateResponse {
   bytes teaHash = 3;
   bytes tokenHash = 4;
   bytes keysHash = 5;
+  uint64 magicNumber = 6;
 }
 
 message ImportStateRequest {
@@ -225,6 +226,7 @@ message ImportStateRequest {
 }
 message ImportStateResponse {
   bytes tsid = 1;
+  uint64 stateMagicNumber = 2;
 }
 
 message ExportGlueSqlRequest {}
@@ -273,6 +275,7 @@ message Checkpoint {
   bytes RoundTableHash = 5;
   bytes stateBalancesHash = 6;
   bytes stateKeysHash = 7;
+  uint64 stateMagicNumber = 8;
 }
 message ExecCursor {
   bytes execCursor = 1;
@@ -291,6 +294,7 @@ message SyncStateResponse {
   GluedbData gluedb = 5;
   RoundTableData roundTable = 6;
   bool success = 7;
+  uint64 stateMagicNumber = 8;
 }
 message CheckpointData {
   bytes data = 1;
