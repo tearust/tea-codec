@@ -15,6 +15,7 @@ message PersistRequest {
 		GetLastRequest GetLastRequest = 9;
 		AppendDigest AppendDigest = 10;
 		AppendStatements AppendStatements = 11;
+		GetStatements GetStatements = 12;
 	}
 }
 
@@ -29,6 +30,7 @@ message PersistResponse {
 		GetResponse GetResponse = 6;
 		FindResponse FindResponse = 7;
 		GetLastResponse GetLastResponse = 8;
+		GetStatementsResponse GetStatementsResponse = 9;
 	}
 }
 
@@ -70,6 +72,21 @@ message AppendDigest {
 
 message AppendStatements {
 	bytes statementsSerial = 1;
+}
+
+message GetStatements {
+	GetStatementsAccount accountFilter = 1;
+	uint64 maxSize = 2;
+}
+message GetStatementsAccount {
+	bytes account = 1;
+}
+message GetStatementsDatatime {
+
+}
+message GetStatementsResponse {
+	bytes statementsSerial = 1;
+	bool readToEnd = 2;
 }
 
 // find with prefix and return matched results
