@@ -77,12 +77,15 @@ message AppendStatements {
 message GetStatements {
 	GetStatementsAccount accountFilter = 1;
 	uint64 maxSize = 2;
+	GetStatementsDatetime date = 3;
 }
 message GetStatementsAccount {
 	bytes account = 1;
 }
-message GetStatementsDatatime {
-
+message GetStatementsDatetime {
+	int32 year = 1;
+	uint32 month = 2;
+	uint32 day = 3;
 }
 message GetStatementsResponse {
 	bytes statementsSerial = 1;
