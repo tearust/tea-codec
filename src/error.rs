@@ -35,12 +35,12 @@ pub type TeaResult<T> = std::result::Result<T, TeaError>;
 
 pub fn option_none_error<S: AsRef<str>>(msg: S) -> TeaError {
 	code::common::new_common_error_code(CommonCode::OptionIsNone)
-		.to_error_code(Some(format!("{}", msg.as_ref())), None)
+		.to_error_code(Some(msg.as_ref().to_string()), None)
 }
 
 pub fn discard_message_error<S: AsRef<str>>(msg: S) -> TeaError {
 	code::wascc::new_wascc_error_code(WasccCode::DiscardMessageError)
-		.to_error_code(Some(format!("{}", msg.as_ref())), None)
+		.to_error_code(Some(msg.as_ref().to_string()), None)
 }
 
 pub fn tea_err<T, E: Into<TeaError>>(e: Result<T, E>) -> TeaResult<T> {

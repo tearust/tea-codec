@@ -1,4 +1,4 @@
-pub const OP_INIT: &'static str = "opt_ra_init";
+pub const OP_INIT: &str = "opt_ra_init";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

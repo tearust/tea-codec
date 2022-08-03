@@ -69,12 +69,12 @@ where
 	}
 }
 
-impl<T, C> Into<ErrorCode> for ErrorCodeTranslator<T, C>
+impl<T, C> From<ErrorCodeTranslator<T, C>> for ErrorCode
 where
 	T: Translate<C>,
 	C: From<u16>,
 {
-	fn into(self) -> ErrorCode {
-		ErrorCode::new_slim(self.code, self.to_string())
+	fn from(val: ErrorCodeTranslator<T, C>) -> Self {
+		ErrorCode::new_slim(val.code, val.to_string())
 	}
 }
