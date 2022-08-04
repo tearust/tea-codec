@@ -325,6 +325,7 @@ message StateReceiverMessage {
     StateCommand StateCommand = 2;
     StateFollowup StateFollowup = 3;
     StateQuery StateQuery = 4;
+    TxnFollowupPair TxnFollowupPair = 5;
   }
 }
 
@@ -350,6 +351,11 @@ message InvalidValidatorResponse {
 
 message GeneralQueryResponse {
   bytes data = 1;
+}
+
+message TxnFollowupPair {
+  StateCommand txn = 1;
+  StateFollowup followup = 2;
 }
 
 message StateCommand {
