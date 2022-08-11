@@ -7,9 +7,9 @@ description = "Encoding and decoding primitives for TeaRust Project"
 license = "Apache-2.0"
 readme = "README.md"
 keywords = ["webassembly", "wasm", "codec", "tea", "wascc"]
-categories = ["wasm", "data-structures","encoding"]
+categories = ["wasm", "data-structures", "encoding"]
 [badges]
-maintenance = { status = "actively-developed"}
+maintenance = { status = "actively-developed" }
 
 
 [dependencies]
@@ -23,7 +23,7 @@ serde_bytes = "0.11.3"
 prost = "0.6.1"
 base64 = "0.13.0"
 hex = "0.4.0"
-log = { version="0.4", features = ["std","serde"] }
+log = { version = "0.4", features = ["std", "serde"] }
 thiserror = "1.0.22"
 
 [dev-dependencies]
