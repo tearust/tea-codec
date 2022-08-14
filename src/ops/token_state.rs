@@ -1,6 +1,7 @@
 /// tokenstate state machine op codes
 pub const OP_QUERY_STATE_TSID: &str = "QueryStateTsid";
 pub const OP_QUERY_TEA_BALANCE: &str = "QueryTeaBalance";
+pub const OP_QUERY_TEA_DEPOSIT_BALANCE: &str = "QueryTeaDepositBalance";
 pub const OP_READ_TEA_BALANCE: &str = "ReadTeaBalance";
 pub const OP_QUERY_AUTH_OPS_BYTES_AND_NEW_EXPIRE: &str = "QueryAuthOpsBytes";
 pub const OP_QUERY_APP_CONSUME_BALANCE: &str = "QueryAppConsumeBalance";
