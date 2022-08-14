@@ -60,6 +60,7 @@ message CommonSqlQueryRequest {
     QueryEntityListRequest QueryEntityListRequest = 1;
     QueryFavTappsRequest QueryFavTappsRequest = 2;
     QuerySeatListRequest QuerySeatListRequest = 3;
+    QueryLeaderboardRequest QueryLeaderboardRequest = 4;
   }
 }
 
@@ -76,6 +77,7 @@ message QuerySeatListRequest {
   string maintainer = 1;
   string dealUser = 2;
 }
+message QueryLeaderboardRequest {}
 
 message CommonSqlQueryResponse {
   bytes data = 1;
