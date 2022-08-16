@@ -1,34 +1,33 @@
-use std::borrow::Cow;
+use crate::errorx::{Catch, Result};
 
-use serde::Serialize;
+fn fail1() -> Result<()> {
+	Err("error message")?;
+	Ok(())
+}
 
-use crate::errorx::{Error, ErrorIdentity, ErrorInfo};
+fn fail2() -> Result<()> {
+	let _: i32 = "abc".parse()?;
+	Ok(())
+}
 
-#[derive(Debug, PartialEq, Eq, Serialize)]
-struct Foo(u16, u16, String);
+fn fail3() -> Result<()> {
+	let _: (i32, i32) = serde_json::from_str("aaa")?;
+	Ok(())
+}
 
-impl ErrorInfo for Foo {
-	fn identity(&self) -> Option<ErrorIdentity> {
-		Some(ErrorIdentity {
-			scope: self.0,
-			code: self.1,
-		})
-	}
-
-	fn summary(&self) -> Option<Cow<str>> {
-		Some(self.2.as_str().into())
-	}
-
-	fn detail(&self) -> Option<Cow<str>> {
-		None
-	}
+fn catch_json_error() -> Result<bool> {
+	let x: serde_json::Error = fail3().catch()?.unwrap_err();
+	Ok(x.to_string() == "expected value at line 1 column 1")
 }
 
 #[test]
 fn test_error() {
-	let foo = Foo(1, 2, "abc".to_string());
-	let error: Error = foo.into();
-	let bar: Result<Foo, _> = error.into();
-	let bar = bar.unwrap();
-	assert_eq!(bar, Foo(1, 2, "abc".to_string()));
+	assert_eq!(
+		fail1().unwrap_err().summary().as_deref(),
+		Some("error message")
+	);
+
+	assert_eq!(format!("{:?}", fail2().unwrap_err()), "Error { scope: 0, code: 8, summary: \"invalid digit found in string\", detail: \"ParseIntError { kind: InvalidDigit }\", inner: None }");
+
+	assert!(catch_json_error().unwrap());
 }

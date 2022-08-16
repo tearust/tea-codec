@@ -32,7 +32,7 @@ pub struct Error {
 unsafe impl Send for Error where Error: Send {}
 unsafe impl Sync for Error where Error: Sync {}
 
-#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Serialize, Deserialize)]
 pub struct ErrorIdentity {
 	pub scope: u16,
 	pub code: u16,
@@ -224,7 +224,7 @@ impl Display for Error {
 }
 
 #[derive(Debug)]
-struct SerializedError {
+pub struct SerializedError {
 	identity: Option<ErrorIdentity>,
 	summary: Option<String>,
 	detail: Option<String>,
@@ -332,4 +332,53 @@ pub enum ErrorScope {
 	Service,
 	Vmh,
 	Wascc,
+}
+
+pub trait Catch {
+	type T;
+	fn catch<E>(self) -> Result<Result<Self::T, E>>
+	where
+		E: ErrorInfo;
+	fn catch_by_id<E>(
+		self,
+		id: Option<ErrorIdentity>,
+	) -> Result<Result<Self::T, Result<E, SerializedError>>>
+	where
+		E: ErrorInfo;
+}
+
+impl<T> Catch for Result<T> {
+	type T = T;
+	fn catch<E>(self) -> Result<Result<Self::T, E>>
+	where
+		E: ErrorInfo,
+	{
+		match self {
+			Ok(r) => Ok(Ok(r)),
+			Err(e) => match e.into() {
+				Ok(e) => Ok(Err(e)),
+				Err(e) => Err(e),
+			},
+		}
+	}
+
+	fn catch_by_id<E>(
+		self,
+		id: Option<ErrorIdentity>,
+	) -> Result<Result<Self::T, Result<E, SerializedError>>>
+	where
+		E: ErrorInfo,
+	{
+		Ok(match self {
+			Ok(r) => Ok(r),
+			Err(e) if e.identity() == id => Err(match e.into() {
+				Ok(e) => Ok(e),
+				Err(e) => match e.into() {
+					Ok(e) => Err(e),
+					Err(e) => return Err(e),
+				},
+			}),
+			Err(e) => return Err(e),
+		})
+	}
 }
