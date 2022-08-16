@@ -141,22 +141,22 @@ where
 	}
 }
 
-impl<T> Into<Result<T, Error>> for Error
+impl<T> From<Error> for Result<T, Error>
 where
 	T: ErrorInfo,
 {
-	fn into(self) -> Result<T, Self> {
+	fn from(error: Error) -> Result<T, Error> {
 		unsafe {
-			let ptr = self.get_fat_ptr();
+			let ptr = error.get_fat_ptr();
 			if (*ptr).type_id() == TypeId::of::<T>() {
 				let result = (ptr as *mut T).read();
 				mem::drop(Box::from_raw(
-					self.ptr.as_ptr() as *mut ManuallyDrop<(usize, T)>
+					error.ptr.as_ptr() as *mut ManuallyDrop<(usize, T)>
 				));
-				mem::forget(self);
+				mem::forget(error);
 				Ok(result)
 			} else {
-				Err(self)
+				Err(error)
 			}
 		}
 	}
