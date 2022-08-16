@@ -22,6 +22,8 @@ pub use common::*;
 
 use crate::impl_deref;
 
+pub type Result<T, E = Error> = std::result::Result<T, E>;
+
 pub struct Error {
 	ptr: NonNull<usize>,
 	_p: PhantomData<dyn ErrorInfo>,
@@ -311,7 +313,6 @@ impl<'a> Deserialize<'a> for Error {
 		deserializer.deserialize_map(ErrorVisitor)
 	}
 }
-
 
 impl_deref!(T: &'static T, Box<T>, Rc<T>, Arc<T>);
 
