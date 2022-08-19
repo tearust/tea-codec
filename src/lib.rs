@@ -24,6 +24,11 @@
 //! We are just started, all kinds of help are welcome!
 //!
 
+#![feature(thin_box)]
+#![feature(auto_traits, negative_impls, never_type)]
+#![feature(min_specialization)]
+#![feature(generic_associated_types)]
+
 /// The version of the codec as seen on crates.io
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 #[macro_use]
@@ -62,6 +67,7 @@ where
 }
 
 pub mod error;
+pub mod errorn;
 pub mod errorx;
 #[cfg(test)]
 mod tests;
