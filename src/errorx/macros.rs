@@ -1,69 +1,108 @@
+#[doc(hidden)]
 #[macro_export]
-macro_rules! impl_error {
-	($sc:ident, $c:expr, $t:ty, $sf:ident, $s:expr, $d:expr) => {
-		impl $crate::errorx::ErrorInfo for $t {
-			fn identity(&self) -> Option<$crate::errorx::ErrorIdentity> {
-				Some($crate::errorx::ErrorIdentity {
-					scope: $crate::errorx::ErrorScope::$sc as _,
-					code: $c as _,
-				})
-			}
-
-			fn summary(&self) -> Option<std::borrow::Cow<str>> {
-				let $sf = self;
-				Some($s.into())
-			}
-
-			fn detail(&self) -> Option<std::borrow::Cow<str>> {
-				let $sf = self;
-				Some($d.into())
-			}
-		}
+macro_rules! __private_parent_scope {
+	($parent:ty) => {
+		$parent
 	};
-
-	($sc:ident, $c:ident, $t:ty, $sf:ident, $s:expr) => {
-		impl_error!($sc, $c, $t, $sf, $s, format!("{:?}", $sf));
+	() => {
+		$crate::errorx::Global
 	};
+}
 
-	($sc:ident, $c:ident, $t:ty) => {
-		impl_error!($sc, $c, $t, x, x.to_string());
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __private_define_scope_string {
+	($v:expr, Serde) => {
+		serde_json::to_string($v).ok().map(Into::into)
 	};
+	($v:expr, Debug) => {
+		Some(format!("{:?}", $v).into())
+	};
+	($v:expr, Display) => {
+		Some(format!("{}", $v).into())
+	};
+	($v:expr, $e:expr) => {
+		Some($e.into())
+	};
+	($v:expr, _) => {
+		None
+	};
+}
 
-    {
-		$(scope $sc:ident {
-        	$($c:ident: $t:ty $(, $sf:ident, $s:expr $(, $d:expr)?)?;)*
-		})*
-    } => {
-        $($(impl_error!($sc, $c, $t $(, $sf, $s $(, $d)?)?);)*)*
-    }
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __private_define_scope_impl {
+	($scope:ident, $t:ty as $v:ident => $name:expr $(,$(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)?)?)?) => {
+        #[allow(unused_variables)]
+        #[allow(unused_parens)]
+        impl $crate::errorx::Descriptor<$t> for $scope {
+            fn name<'a>(_: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
+                Some(stringify!($name).into())
+            }
+
+            $(fn summary<'a>($v: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
+                $crate::__private_define_scope_string!($v, $($summary_k)?$($summary)?)
+            }
+
+            $(fn detail<'a>($v: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
+                $crate::__private_define_scope_string!($v, $($detail_k)?$($detail)?)
+            })?)?
+        }
+    };
+
+	($scope:ident, $t:ty => $name:expr $(,$(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)?)?)?) => {
+        #[allow(unused_variables)]
+        #[allow(unused_parens)]
+        impl $crate::errorx::Descriptor<$t> for $scope {
+            fn name<'a>(_: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
+                Some(stringify!($name).into())
+            }
+
+            $(fn summary<'a>(v: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
+                $crate::__private_define_scope_string!(v, $($summary_k)?$($summary)?)
+            }
+
+            $(fn detail<'a>(v: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
+                $crate::__private_define_scope_string!(v, $($detail_k)?$($detail)?)
+            })?)?
+        }
+    };
 }
 
 #[macro_export]
-macro_rules! impl_deref {
-	() => {
-		fn identity(&self) -> Option<ErrorIdentity> {
-			(**self).identity()
-		}
+macro_rules! define_scope {
+    {$(
+        $scope:ident $(: $parent:ty)? {$(
+            $t:ty $(as $v:ident)? => $name:ident $(, $(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)?)?)?;
+        )*}
+    )*} => {$(
+        pub struct $scope;
 
-		fn summary(&self) -> Option<Cow<str>> {
-			(**self).summary()
-		}
+        impl $crate::errorx::Scope for $scope {
+            type Parent = $crate::__private_parent_scope!($($parent)?);
+            type Descriptor<T> = Self;
+            const NAME: &'static str = stringify!($scope);
+        }
 
-		fn detail(&self) -> Option<Cow<str>> {
-			(**self).detail()
-		}
+        impl<T> $crate::errorx::Descriptor<T> for $scope {
+            default fn name(_: &T) -> Option<std::borrow::Cow<str>> {
+                None
+            }
 
-		fn inner(&self) -> Box<dyn Iterator<Item = &Error> + '_> {
-			(**self).inner()
-		}
-	};
+            default fn summary(_: &T) -> Option<std::borrow::Cow<str>> {
+                None
+            }
 
-	($t:ident: $($c:ty),*) => {$(
-		impl<$t> ErrorInfo for $c
-		where
-			$t: ErrorInfo,
-		{
-			impl_deref!();
-		}
-	)*};
+            default fn detail(_: &T) -> Option<std::borrow::Cow<str>> {
+                None
+            }
+        }
+
+        $($crate::__private_define_scope_impl!($scope, $t $(as $v)? => $name $(,$(@$summary_k)?$($summary)? $(,$(@$detail_k)?$($detail)?)?)?);)*
+
+		#[allow(dead_code)]
+		pub type Error = $crate::errorx::Error<$scope>;
+		#[allow(dead_code)]
+		pub type Result<T, E = $crate::errorx::Error<$scope>> = std::result::Result<T, E>;
+    )*};
 }

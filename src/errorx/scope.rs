@@ -111,8 +111,11 @@ where
 {
 	default fn name(&self) -> Option<Cow<str>> {
 		<<S as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
-			.or(<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data))
 			.map(|x| S::error_full_name(x.as_ref()).into())
+			.or(
+				<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
+					.map(|x| <S as Scope>::Parent::error_full_name(x.as_ref()).into()),
+			)
 	}
 
 	default fn summary(&self) -> Option<Cow<str>> {

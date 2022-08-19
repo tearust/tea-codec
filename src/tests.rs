@@ -1,21 +1,21 @@
-use crate::{
-	define_scope,
-	errorn::{Descriptor, InnerError, Scope},
-};
+use crate::define_scope;
+use crate::errorx::InnerError;
 
 define_scope! {
-	scope TestScope {
-		String: Test, "string error", serde;
+	Test {
+		i32 as v => I32, @Debug, v.to_string();
+		bool => Bool, @Serde;
 	}
 }
 
 #[test]
 fn test() {
 	let e = foo().unwrap_err();
-	assert_eq!(e.name(), Some("TestScope.Test".into()));
-	assert_eq!(e.summary(), Some("string error".into()));
-	assert_eq!(e.detail(), Some("\"bbbbb\"".into()));
-	assert_eq!(e.inner_error()[0].detail(), Some("\"aaaa\"".into()));
+	assert_eq!(e.name(), Some("Unknown".into()));
+	assert_eq!(e.summary(), Some("A string is thrown: \"456\"".into()));
+	assert_eq!(e.detail(), Some("456".into()));
+	assert_eq!(e.inner_error()[0].name(), Some("Test.I32".into()));
+	assert_eq!(e.inner_error()[0].detail(), Some("123".into()));
 }
 
 fn foo() -> Result<()> {
@@ -23,10 +23,10 @@ fn foo() -> Result<()> {
 	Ok(())
 }
 
-fn bar() -> Result<(), String> {
-	Err("aaaa".to_string())
+fn bar() -> Result<(), i32> {
+	Err(123)
 }
 
 fn baz() -> Result<()> {
-	Err("bbbbb".to_string().with_inner_error(bar().unwrap_err()))
+	Err("456".with_inner_error(bar().unwrap_err()))
 }

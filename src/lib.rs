@@ -67,7 +67,6 @@ where
 }
 
 pub mod error;
-pub mod errorn;
 pub mod errorx;
 #[cfg(test)]
 mod tests;
