@@ -4,7 +4,9 @@ use std::{
 	marker::PhantomData,
 };
 
-use super::Global;
+use smallvec::SmallVec;
+
+use super::{Error, Global};
 
 pub trait Scope: Send + Sync + 'static {
 	type Parent: Scope;
@@ -79,12 +81,14 @@ pub trait Descriptor<T> {
 	fn name(v: &T) -> Option<Cow<str>>;
 	fn summary(v: &T) -> Option<Cow<str>>;
 	fn detail(v: &T) -> Option<Cow<str>>;
+	fn inner(v: &T) -> Option<SmallVec<[&Error; 1]>>;
 }
 
 pub(crate) trait Descriptee: Send + Sync {
 	fn name(&self) -> Option<Cow<str>>;
 	fn summary(&self) -> Option<Cow<str>>;
 	fn detail(&self) -> Option<Cow<str>>;
+	fn inner(&self) -> Option<SmallVec<[&Error; 1]>>;
 }
 
 #[repr(transparent)]
@@ -113,26 +117,32 @@ where
 	default fn name(&self) -> Option<Cow<str>> {
 		<<S as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
 			.map(|x| S::error_full_name(x.as_ref()).into())
-			.or(
+			.or_else(|| {
 				<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
-					.map(|x| <S as Scope>::Parent::error_full_name(x.as_ref()).into()),
-			)
+					.map(|x| <S as Scope>::Parent::error_full_name(x.as_ref()).into())
+			})
 	}
 
 	default fn summary(&self) -> Option<Cow<str>> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::summary(&self.data).or(
-			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::summary(&self.data),
-		)
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::summary(&self.data).or_else(|| {
+			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::summary(&self.data)
+		})
 	}
 
 	default fn detail(&self) -> Option<Cow<str>> {
 		<<S as Scope>::Descriptor<T> as Descriptor<T>>::detail(&self.data)
-			.or(
+			.or_else(|| {
 				<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::detail(
 					&self.data,
-				),
-			)
+				)
+			})
 			.map(Cow::into)
+	}
+
+	default fn inner(&self) -> Option<SmallVec<[&Error; 1]>> {
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::inner(&self.data).or_else(|| {
+			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::inner(&self.data)
+		})
 	}
 }
 

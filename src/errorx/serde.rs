@@ -1,6 +1,7 @@
 use std::borrow::Cow;
 
 use serde::{de::Visitor, ser::SerializeMap, Deserialize, Serialize};
+use smallvec::SmallVec;
 
 use super::{Descriptor, Error, Global};
 
@@ -8,6 +9,7 @@ struct SerializedData {
 	name: Option<String>,
 	summary: Option<String>,
 	detail: Option<String>,
+	inner: Option<SmallVec<[Error; 1]>>,
 }
 
 impl Descriptor<SerializedData> for Global {
@@ -21,6 +23,10 @@ impl Descriptor<SerializedData> for Global {
 
 	fn detail(v: &SerializedData) -> Option<Cow<str>> {
 		v.detail.as_deref().map(Cow::Borrowed)
+	}
+
+	fn inner(v: &SerializedData) -> Option<smallvec::SmallVec<[&Error; 1]>> {
+		v.inner.as_ref().map(|x| x.iter().collect())
 	}
 }
 
@@ -38,6 +44,10 @@ impl<X> Serialize for Error<X> {
 		}
 		if let Some(detail) = self.detail() {
 			map.serialize_entry("detail", detail.as_ref())?;
+		}
+		let inner = self.inner();
+		if !inner.is_empty() {
+			map.serialize_entry("inner", inner.as_ref())?;
 		}
 		map.end()
 	}
@@ -80,15 +90,13 @@ impl<'a, X> Deserialize<'a> for Error<X> {
 					}
 				}
 
-				let mut data: Error<Global> = SerializedData {
-					name: name,
+				let data: Error<Global> = SerializedData {
+					name,
 					summary,
 					detail,
+					inner,
 				}
 				.into();
-				if let Some(inner) = inner {
-					data.data.inner = inner;
-				}
 				Ok(data)
 			}
 		}

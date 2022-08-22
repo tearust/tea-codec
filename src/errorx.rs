@@ -4,6 +4,7 @@ mod scope;
 mod serde;
 
 pub use global::Global;
+pub use macros::*;
 pub use scope::*;
 
 use smallvec::SmallVec;
@@ -35,7 +36,6 @@ struct ErrorData<T>
 where
 	T: ?Sized,
 {
-	inner: SmallVec<[Error; 1]>,
 	source: T,
 }
 
@@ -54,7 +54,6 @@ where
 	fn from(data: T) -> Self {
 		Self {
 			data: ThinBox::new_unsize(ErrorData {
-				inner: SmallVec::new(),
 				source: Dispatcher::<_, S>::new(data),
 			}),
 			_p: PhantomData,
@@ -78,6 +77,15 @@ where
 	}
 }
 
+impl<'a, X, Y> From<&'a Error<X>> for &'a Error<Y>
+where
+	Equality<X, Y>: NotEqual,
+{
+	fn from(scope: &'a Error<X>) -> Self {
+		scope.as_scope()
+	}
+}
+
 impl<S> Error<S> {
 	pub fn name(&self) -> Option<Cow<str>> {
 		self.data.source.name()
@@ -91,8 +99,8 @@ impl<S> Error<S> {
 		self.data.source.detail()
 	}
 
-	pub fn inner_error(&self) -> &[Error] {
-		self.data.inner.as_slice()
+	pub fn inner(&self) -> SmallVec<[&Error; 1]> {
+		self.data.source.inner().unwrap_or_default()
 	}
 
 	pub fn into_scope<T>(self) -> Error<T> {
@@ -102,38 +110,8 @@ impl<S> Error<S> {
 		}
 	}
 
-	pub fn with_inner_error<T>(mut self, inner: T) -> Self
-	where
-		T: Into<Self>,
-	{
-		self.data.inner.push(inner.into().into());
-		self
-	}
-
 	pub fn as_scope<T>(&self) -> &Error<T> {
 		unsafe { mem::transmute(self) }
-	}
-}
-
-pub trait InnerError {
-	fn with_inner_error<I, O>(self, e: I) -> Error<O>
-	where
-		I: Into<Error<O>>,
-		O: Scope;
-}
-
-impl<T> InnerError for T
-where
-	T: NotError + Send + Sync + 'static,
-{
-	fn with_inner_error<I, O>(self, e: I) -> Error<O>
-	where
-		I: Into<Error<O>>,
-		O: Scope,
-	{
-		let mut result: Error<O> = self.into();
-		result.data.inner.push(e.into().into());
-		result
 	}
 }
 
@@ -158,8 +136,9 @@ impl<S> Debug for Error<S> {
 		if let Some(value) = self.detail() {
 			dbg.field("detail", &value.as_ref());
 		}
-		if !self.data.inner.is_empty() {
-			dbg.field("inner_error", &self.data.inner.as_slice());
+		let inner = self.inner();
+		if !inner.is_empty() {
+			dbg.field("inner", &inner.as_slice());
 		}
 		dbg.finish()
 	}
