@@ -6,7 +6,7 @@ use std::{
 
 use super::Global;
 
-pub trait Scope: Send + 'static {
+pub trait Scope: Send + Sync + 'static {
 	type Parent: Scope;
 	type Descriptor<T>: Descriptor<T>;
 	const NAME: &'static str;
@@ -81,7 +81,7 @@ pub trait Descriptor<T> {
 	fn detail(v: &T) -> Option<Cow<str>>;
 }
 
-pub(crate) trait Descriptee: Send {
+pub(crate) trait Descriptee: Send + Sync {
 	fn name(&self) -> Option<Cow<str>>;
 	fn summary(&self) -> Option<Cow<str>>;
 	fn detail(&self) -> Option<Cow<str>>;
@@ -107,7 +107,7 @@ where
 
 impl<T, S> Descriptee for Dispatcher<T, S>
 where
-	T: Send,
+	T: Send + Sync,
 	S: Scope,
 {
 	default fn name(&self) -> Option<Cow<str>> {
@@ -138,7 +138,7 @@ where
 
 impl<T> Descriptee for Dispatcher<T, Global>
 where
-	T: Send,
+	T: Send + Sync,
 {
 	fn name(&self) -> Option<Cow<str>> {
 		<Global as Descriptor<T>>::name(&self.data)
