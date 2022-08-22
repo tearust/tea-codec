@@ -48,7 +48,7 @@ impl<T> NotError for T where NotErrorWrapper<T>: NotWrappedError {}
 
 impl<T, S> From<T> for Error<S>
 where
-	T: NotError + 'static,
+	T: NotError + Send + 'static,
 	S: Scope,
 {
 	fn from(data: T) -> Self {
@@ -124,7 +124,7 @@ pub trait InnerError {
 
 impl<T> InnerError for T
 where
-	T: NotError + 'static,
+	T: NotError + Send + 'static,
 {
 	fn with_inner_error<I, O>(self, e: I) -> Error<O>
 	where
