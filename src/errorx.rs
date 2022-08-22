@@ -7,7 +7,7 @@ pub use global::Global;
 pub use macros::*;
 pub use scope::*;
 
-use smallvec::SmallVec;
+pub use smallvec::SmallVec;
 use std::{
 	borrow::Cow,
 	boxed::ThinBox,

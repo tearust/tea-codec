@@ -1,6 +1,6 @@
-use smallvec::{smallvec_inline, SmallVec};
+use smallvec::smallvec_inline;
 
-use super::Error;
+use super::{Error, SmallVec};
 
 #[doc(hidden)]
 #[macro_export]
@@ -52,7 +52,7 @@ macro_rules! __private_define_scope_impl {
                 $crate::__private_define_scope_string!($v, $($detail_k)?$($detail)?)
             }
 
-            $(fn inner<'a>($v: &'a $t) -> Option<smallvec::SmallVec<[&'a $crate::errorx::Error; 1]>> {
+            $(fn inner<'a>($v: &'a $t) -> Option<$crate::errorx::SmallVec<[&'a $crate::errorx::Error; 1]>> {
                 Some($inner.into())
             })?)?)?
         }
@@ -74,7 +74,7 @@ macro_rules! __private_define_scope_impl {
                 $crate::__private_define_scope_string!(v, $($detail_k)?$($detail)?)
             }
 
-            $(fn inner<'a>(v: &'a $t) -> Option<smallvec::SmallVec<[&'a $crate::errorx::Error; 1]>> {
+            $(fn inner<'a>(v: &'a $t) -> Option<$crate::errorx::SmallVec<[&'a $crate::errorx::Error; 1]>> {
                 Some($inner.into())
             })?)?)?
         }
@@ -109,7 +109,7 @@ macro_rules! define_scope {
                 None
             }
 
-            default fn inner(_: &T) -> Option<smallvec::SmallVec<[&$crate::errorx::Error; 1]>> {
+            default fn inner(_: &T) -> Option<$crate::errorx::SmallVec<[&$crate::errorx::Error; 1]>> {
                 None
             }
         }

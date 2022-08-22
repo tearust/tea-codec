@@ -4,9 +4,7 @@ use std::{
 	marker::PhantomData,
 };
 
-use smallvec::SmallVec;
-
-use super::{Error, Global};
+use super::{Error, Global, SmallVec};
 
 pub trait Scope: Send + Sync + 'static {
 	type Parent: Scope;
