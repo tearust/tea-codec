@@ -105,3 +105,20 @@ impl<'a, X> Deserialize<'a> for Error<X> {
 			.map(|x| x.into_scope())
 	}
 }
+
+impl<S> Clone for Error<S> {
+	fn clone(&self) -> Self {
+		let result: Error<Global> = SerializedData {
+			name: self.name().map(Into::<_>::into),
+			summary: self.summary().map(Into::<_>::into),
+			detail: self.detail().map(Into::<_>::into),
+			inner: self
+				.data
+				.source
+				.inner()
+				.map(|inner| inner.iter().map(|x| (*x).clone()).collect()),
+		}
+		.into();
+		result.into_scope()
+	}
+}

@@ -13,7 +13,7 @@ struct HasInner(Error<()>);
 
 #[test]
 fn test() {
-	let e = foo().unwrap_err();
+	let e = foo().unwrap_err().clone();
 	let s = serde_json::to_string(&e).unwrap();
 	let e: Error = serde_json::from_str(&s).unwrap();
 	assert_eq!(e.name(), Some("Test.HasInner".into()));
