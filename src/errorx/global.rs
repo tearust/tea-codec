@@ -6,7 +6,7 @@ use std::{
 	rc::Rc,
 	str::{ParseBoolError, Utf8Error},
 	string::FromUtf8Error,
-	sync::Arc,
+	sync::{mpsc::RecvError, Arc},
 	time::SystemTimeError,
 };
 
@@ -44,5 +44,6 @@ crate::define_scope! {
 		SetLoggerError => Log, @Display, @Debug;
 		base64::DecodeError => Base64Decode, @Display, @Debug;
 		FromHexError => HexDecode, @Display, @Debug;
+		RecvError => ChannelReceive, @Display, @Debug;
 	}
 }
