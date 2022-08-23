@@ -1,5 +1,5 @@
 use crate::error::code::ErrorCode;
-use crate::TeaError;
+use crate::error::TeaError;
 use std::marker::PhantomData;
 
 pub trait Translate<C>
