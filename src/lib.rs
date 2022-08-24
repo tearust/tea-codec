@@ -60,6 +60,25 @@ where
 	Ok(bincode::deserialize_from(buf.as_ref())?)
 }
 
+pub trait ResultExt {
+	type Value;
+	type Error;
+	fn err_into<E>(self) -> Result<Self::Value, E>
+	where
+		E: From<Self::Error>;
+}
+
+impl<T, E> ResultExt for std::result::Result<T, E> {
+	type Value = T;
+	type Error = E;
+	fn err_into<E2>(self) -> Result<Self::Value, E2>
+	where
+		E2: From<E>,
+	{
+		self.map_err(From::from)
+	}
+}
+
 pub mod error;
 pub mod errorx;
 #[cfg(test)]
