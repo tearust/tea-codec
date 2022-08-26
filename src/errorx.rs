@@ -9,11 +9,12 @@ pub use scope::*;
 
 pub use smallvec::SmallVec;
 use std::{
+	any::TypeId,
 	borrow::Cow,
 	boxed::ThinBox,
 	fmt::{Debug, Display, Formatter},
 	marker::PhantomData,
-	mem,
+	mem::{self, ManuallyDrop},
 };
 
 trait Irrelative {
@@ -112,6 +113,24 @@ impl<S> Error<S> {
 
 	pub fn as_scope<T>(&self) -> &Error<T> {
 		unsafe { mem::transmute(self) }
+	}
+
+	pub fn back_cast<T>(self) -> Result<T, Self>
+	where
+		T: Send + Sync + 'static,
+	{
+		if self.data.source.type_id() == Some(TypeId::of::<T>()) {
+			let mut data = self.data;
+			unsafe {
+				let result = (&mut (*(&mut data.source as *mut _ as *mut Dispatcher<T, S>)).data
+					as *mut T)
+					.read();
+				mem::transmute::<_, ThinBox<ErrorData<ManuallyDrop<dyn Descriptee>>>>(data);
+				Ok(result)
+			}
+		} else {
+			Err(self)
+		}
 	}
 }
 

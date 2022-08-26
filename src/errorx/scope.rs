@@ -1,4 +1,5 @@
 use std::{
+	any::TypeId,
 	borrow::Cow,
 	fmt::{Display, Formatter, Write},
 	marker::PhantomData,
@@ -80,6 +81,7 @@ pub trait Descriptor<T> {
 	fn summary(v: &T) -> Option<Cow<str>>;
 	fn detail(v: &T) -> Option<Cow<str>>;
 	fn inner(v: &T) -> Option<SmallVec<[&Error; 1]>>;
+	fn type_id(v: &T) -> Option<TypeId>;
 }
 
 pub(crate) trait Descriptee: Send + Sync {
@@ -87,11 +89,12 @@ pub(crate) trait Descriptee: Send + Sync {
 	fn summary(&self) -> Option<Cow<str>>;
 	fn detail(&self) -> Option<Cow<str>>;
 	fn inner(&self) -> Option<SmallVec<[&Error; 1]>>;
+	fn type_id(&self) -> Option<TypeId>;
 }
 
 #[repr(transparent)]
 pub(crate) struct Dispatcher<T, S> {
-	data: T,
+	pub(crate) data: T,
 	_p: PhantomData<S>,
 }
 
@@ -128,18 +131,20 @@ where
 	}
 
 	default fn detail(&self) -> Option<Cow<str>> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::detail(&self.data)
-			.or_else(|| {
-				<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::detail(
-					&self.data,
-				)
-			})
-			.map(Cow::into)
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::detail(&self.data).or_else(|| {
+			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::detail(&self.data)
+		})
 	}
 
 	default fn inner(&self) -> Option<SmallVec<[&Error; 1]>> {
 		<<S as Scope>::Descriptor<T> as Descriptor<T>>::inner(&self.data).or_else(|| {
 			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::inner(&self.data)
+		})
+	}
+
+	default fn type_id(&self) -> Option<TypeId> {
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::type_id(&self.data).or_else(|| {
+			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::type_id(&self.data)
 		})
 	}
 }
@@ -158,5 +163,9 @@ where
 
 	fn detail(&self) -> Option<Cow<str>> {
 		<Global as Descriptor<T>>::detail(&self.data)
+	}
+
+	fn type_id(&self) -> Option<TypeId> {
+		<Global as Descriptor<T>>::type_id(&self.data)
 	}
 }

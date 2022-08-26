@@ -15,6 +15,17 @@ macro_rules! __private_parent_scope {
 
 #[doc(hidden)]
 #[macro_export]
+macro_rules! __private_descriptor_attr {
+	($t:ty, NoBackcast) => {};
+	($t:ty, ) => {
+		fn type_id<'a>(_: &'a $t) -> Option<std::any::TypeId> {
+			Some(std::any::TypeId::of::<$t>())
+		}
+	};
+}
+
+#[doc(hidden)]
+#[macro_export]
 macro_rules! __private_define_scope_string {
 	($v:expr, Serde) => {
 		serde_json::to_string($v).ok().map(Into::into)
@@ -36,13 +47,15 @@ macro_rules! __private_define_scope_string {
 #[doc(hidden)]
 #[macro_export]
 macro_rules! __private_define_scope_impl {
-	($scope:ident, $t:ty as $v:ident => $name:expr $(,$(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)? $(,$inner: expr)?)?)?) => {
+	($scope:ident, $t:ty as $v:ident => $(@$attr: ident,)? $name:expr $(,$(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)? $(,$inner: expr)?)?)?) => {
         #[allow(unused_variables)]
         #[allow(unused_parens)]
         impl $crate::errorx::Descriptor<$t> for $scope {
             fn name<'a>(_: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
                 Some(stringify!($name).into())
             }
+
+            $crate::__private_descriptor_attr!($t, $($attr)?);
 
             $(fn summary<'a>($v: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
                 $crate::__private_define_scope_string!($v, $($summary_k)?$($summary)?)
@@ -58,13 +71,15 @@ macro_rules! __private_define_scope_impl {
         }
     };
 
-	($scope:ident, $t:ty => $name:expr $(,$(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)? $(,$inner: expr)?)?)?) => {
+	($scope:ident, $t:ty => $(@$attr: ident,)? $name:expr $(,$(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)? $(,$inner: expr)?)?)?) => {
         #[allow(unused_variables)]
         #[allow(unused_parens)]
         impl $crate::errorx::Descriptor<$t> for $scope {
             fn name<'a>(_: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
                 Some(stringify!($name).into())
             }
+
+            $crate::__private_descriptor_attr!($t, $($attr)?);
 
             $(fn summary<'a>(v: &'a $t) -> Option<std::borrow::Cow<'a, str>> {
                 $crate::__private_define_scope_string!(v, $($summary_k)?$($summary)?)
@@ -85,7 +100,7 @@ macro_rules! __private_define_scope_impl {
 macro_rules! define_scope {
     {$(
         $scope:ident $(: $parent:ty)? {$(
-            $t:ty $(as $v:ident)? => $name:ident $(, $(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)? $(,$inner: expr)?)?)?;
+            $t:ty $(as $v:ident)? => $(@$attr: ident,)? $name:ident $(, $(@$summary_k:ident)?$($summary:expr)? $(,$(@$detail_k:ident)?$($detail:expr)? $(,$inner: expr)?)?)?;
         )*}
     )*} => {$(
         pub struct $scope;
@@ -112,9 +127,13 @@ macro_rules! define_scope {
             default fn inner(_: &T) -> Option<$crate::errorx::SmallVec<[&$crate::errorx::Error; 1]>> {
                 None
             }
+
+            default fn type_id(_: &T) -> Option<std::any::TypeId> {
+                None
+            }
         }
 
-        $($crate::__private_define_scope_impl!($scope, $t $(as $v)? => $name $(,$(@$summary_k)?$($summary)? $(,$(@$detail_k)?$($detail)? $(,$inner)?)?)?);)*
+        $($crate::__private_define_scope_impl!($scope, $t $(as $v)? => $(@$attr,)? $name $(,$(@$summary_k)?$($summary)? $(,$(@$detail_k)?$($detail)? $(,$inner)?)?)?);)*
 
 		#[allow(dead_code)]
 		pub type Error<S = $scope> = $crate::errorx::Error<S>;
