@@ -164,3 +164,23 @@ impl<S> Debug for Error<S> {
 }
 
 impl<S> std::error::Error for Error<S> {}
+
+pub trait ResultXExt {
+	fn assume_error_into_backcast<E>(self) -> Option<E>
+	where
+		E: Send + Sync + 'static;
+}
+
+impl<T, S> ResultXExt for Result<T, Error<S>> {
+	fn assume_error_into_backcast<E>(self) -> Option<E>
+	where
+		E: Send + Sync + 'static,
+	{
+		if let Err(e) = self {
+			if let Ok(e) = e.back_cast() {
+				return Some(e);
+			}
+		}
+		None
+	}
+}
