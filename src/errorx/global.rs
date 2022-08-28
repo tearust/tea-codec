@@ -6,7 +6,7 @@ use std::{
 	rc::Rc,
 	str::{ParseBoolError, Utf8Error},
 	string::FromUtf8Error,
-	sync::{mpsc::RecvError, Arc, PoisonError},
+	sync::{Arc, PoisonError},
 	time::SystemTimeError,
 };
 
@@ -48,7 +48,8 @@ crate::define_scope! {
 		SetLoggerError => Log, @Display, @Debug;
 		base64::DecodeError => Base64Decode, @Display, @Debug;
 		FromHexError => HexDecode, @Display, @Debug;
-		RecvError => ChannelReceive, @Display, @Debug;
+		std::sync::mpsc::RecvError => ChannelReceive, @Display, @Debug;
+		crossbeam_channel::RecvError => ChannelReceive, @Display, @Debug;
 	}
 }
 
@@ -62,6 +63,34 @@ impl<T> Descriptor<PoisonError<T>> for Global {
 	}
 
 	fn detail(v: &PoisonError<T>) -> Option<Cow<str>> {
+		Some(format!("{:?}", v).into())
+	}
+}
+
+impl<T> Descriptor<std::sync::mpsc::SendError<T>> for Global {
+	fn name(_: &std::sync::mpsc::SendError<T>) -> Option<Cow<str>> {
+		Some("ChannelSend".into())
+	}
+
+	fn summary(v: &std::sync::mpsc::SendError<T>) -> Option<Cow<str>> {
+		Some(v.to_string().into())
+	}
+
+	fn detail(v: &std::sync::mpsc::SendError<T>) -> Option<Cow<str>> {
+		Some(format!("{:?}", v).into())
+	}
+}
+
+impl<T> Descriptor<crossbeam_channel::SendError<T>> for Global {
+	fn name(_: &crossbeam_channel::SendError<T>) -> Option<Cow<str>> {
+		Some("ChannelSend".into())
+	}
+
+	fn summary(v: &crossbeam_channel::SendError<T>) -> Option<Cow<str>> {
+		Some(v.to_string().into())
+	}
+
+	fn detail(v: &crossbeam_channel::SendError<T>) -> Option<Cow<str>> {
 		Some(format!("{:?}", v).into())
 	}
 }
