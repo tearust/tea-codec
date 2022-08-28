@@ -133,6 +133,24 @@ impl<S> Error<S> {
 			Err(self)
 		}
 	}
+
+	pub fn is_name_of<T>(&self) -> bool
+	where
+		T: Send + Sync + Default + 'static,
+		S: Scope,
+	{
+		Dispatcher::<T, S>::new(Default::default()).name() == self.name()
+	}
+
+	pub fn name_of<T>() -> Option<String>
+	where
+		T: Send + Sync + Default + 'static,
+		S: Scope,
+	{
+		Dispatcher::<T, S>::new(Default::default())
+			.name()
+			.map(Into::into)
+	}
 }
 
 impl<S> Display for Error<S> {
