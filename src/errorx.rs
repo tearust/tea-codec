@@ -4,7 +4,7 @@ mod macros;
 mod scope;
 mod serde;
 
-pub use global::Global;
+pub use global::{CannotBeNone, Global};
 pub use macros::*;
 pub use scope::*;
 

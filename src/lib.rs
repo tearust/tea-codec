@@ -34,6 +34,7 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 #[macro_use]
 extern crate num_derive;
 
+use errorx::{CannotBeNone, Error, Scope};
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 pub type Result<T, E = errorx::Error<errorx::Global>> = std::result::Result<T, E>;
@@ -76,6 +77,23 @@ impl<T, E> ResultExt for std::result::Result<T, E> {
 		E2: From<E>,
 	{
 		self.map_err(From::from)
+	}
+}
+
+pub trait OptionExt {
+	type Value;
+	fn ok_or_err<S>(self, name: impl Into<String>) -> Result<Self::Value, Error<S>>
+	where
+		S: Scope;
+}
+
+impl<T> OptionExt for Option<T> {
+	type Value = T;
+	fn ok_or_err<S>(self, name: impl Into<String>) -> Result<Self::Value, Error<S>>
+	where
+		S: Scope,
+	{
+		self.ok_or_else(move || CannotBeNone(name.into()).into())
 	}
 }
 

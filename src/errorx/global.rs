@@ -13,12 +13,14 @@ use std::{
 use hex::FromHexError;
 use log::{ParseLevelError, SetLoggerError};
 use smallvec::SmallVec;
+use thiserror::Error;
 
 use super::{aggregate::Aggregate, Descriptor};
 
 crate::define_scope! {
 	Global {
 		Aggregate as v => Aggregate, "Multiple errors occurred", format!("{:?}", v), v.0.iter().collect::<SmallVec<_>>();
+		CannotBeNone => CannotBeNone, @Display, @Debug;
 		String as s => Unknown, format!("A string is thrown: \"{s}\""), s;
 		&str as s => Unknown, format!("A string is thrown: \"{s}\""), *s;
 		Box<str> as s => Unknown, format!("A string is thrown: \"{s}\""), **s;
@@ -94,3 +96,7 @@ impl<T> Descriptor<crossbeam_channel::SendError<T>> for Global {
 		Some(format!("{:?}", v).into())
 	}
 }
+
+#[derive(Error, Debug, Default, PartialEq, Eq, Clone)]
+#[error("Value \"{0}\" cannot be none")]
+pub struct CannotBeNone(pub String);
