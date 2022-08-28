@@ -21,6 +21,16 @@ fn test() {
 	assert_eq!(e.inner()[0].detail(), Some("123".into()));
 	let e = ex.back_cast::<HasInner>().unwrap();
 	assert_eq!(e.0.back_cast::<i32>().unwrap(), 123);
+	let sum = bar().unwrap_err() + bar().unwrap_err() + bar().unwrap_err();
+	assert_eq!(sum.inner().len(), 3);
+	let sum = serde_json::from_str::<Error>(
+		serde_json::to_string(&(bar().unwrap_err() + bar().unwrap_err()))
+			.unwrap()
+			.as_str(),
+	)
+	.unwrap()
+		+ bar().unwrap_err();
+	assert_eq!(sum.inner().len(), 3);
 }
 
 fn foo() -> Result<()> {

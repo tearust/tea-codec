@@ -1,3 +1,4 @@
+mod aggregate;
 mod global;
 mod macros;
 mod scope;
@@ -184,3 +185,14 @@ impl<T, S> ResultXExt for Result<T, Error<S>> {
 		None
 	}
 }
+
+impl<S> PartialEq for Error<S> {
+	fn eq(&self, other: &Self) -> bool {
+		self.name() == other.name()
+			&& self.summary() == other.summary()
+			&& self.detail() == other.detail()
+			&& self.inner() == other.inner()
+	}
+}
+
+impl<S> Eq for Error<S> {}

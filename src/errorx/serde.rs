@@ -1,15 +1,15 @@
-use std::borrow::Cow;
+use std::{any::TypeId, borrow::Cow};
 
 use serde::{de::Visitor, ser::SerializeMap, Deserialize, Serialize};
 use smallvec::SmallVec;
 
 use super::{Descriptor, Error, Global};
 
-struct SerializedData {
+pub(crate) struct SerializedData {
 	name: Option<String>,
 	summary: Option<String>,
 	detail: Option<String>,
-	inner: Option<SmallVec<[Error; 1]>>,
+	pub(crate) inner: Option<SmallVec<[Error; 1]>>,
 }
 
 impl Descriptor<SerializedData> for Global {
@@ -27,6 +27,10 @@ impl Descriptor<SerializedData> for Global {
 
 	fn inner(v: &SerializedData) -> Option<smallvec::SmallVec<[&Error; 1]>> {
 		v.inner.as_ref().map(|x| x.iter().collect())
+	}
+
+	fn type_id(_: &SerializedData) -> Option<std::any::TypeId> {
+		Some(TypeId::of::<SerializedData>())
 	}
 }
 
