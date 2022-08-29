@@ -31,7 +31,7 @@ where
 
 impl<T> std::error::Error for SyncError<T> where T: ?Sized + std::error::Error + Send + 'static {}
 
-trait SyncErrorExt {
+pub trait SyncErrorExt {
 	fn sync_into<S>(self) -> Error<S>
 	where
 		S: Scope;
@@ -49,7 +49,7 @@ where
 	}
 }
 
-trait SyncResultExt {
+pub trait SyncResultExt {
 	type Value;
 	fn sync_err_into<S>(self) -> Result<Self::Value, Error<S>>
 	where
