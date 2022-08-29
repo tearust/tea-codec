@@ -3,10 +3,12 @@ mod global;
 mod macros;
 mod scope;
 mod serde;
+mod sync_error;
 
 pub use global::{CannotBeNone, Global};
 pub use macros::*;
 pub use scope::*;
+pub use sync_error::*;
 
 pub use smallvec::SmallVec;
 use std::{
