@@ -6,7 +6,7 @@ use std::{
 	rc::Rc,
 	str::{ParseBoolError, Utf8Error},
 	string::FromUtf8Error,
-	sync::{Arc, PoisonError},
+	sync::Arc,
 	time::SystemTimeError,
 };
 
@@ -52,20 +52,9 @@ crate::define_scope! {
 		FromHexError => HexDecode, @Display, @Debug;
 		std::sync::mpsc::RecvError => ChannelReceive, @Display, @Debug;
 		crossbeam_channel::RecvError => ChannelReceive, @Display, @Debug;
-	}
-}
-
-impl<T> Descriptor<PoisonError<T>> for Global {
-	fn name(_: &PoisonError<T>) -> Option<Cow<str>> {
-		Some("Poisoned".into())
-	}
-
-	fn summary(v: &PoisonError<T>) -> Option<Cow<str>> {
-		Some(v.to_string().into())
-	}
-
-	fn detail(v: &PoisonError<T>) -> Option<Cow<str>> {
-		Some(format!("{:?}", v).into())
+		futures::channel::mpsc::TryRecvError => ChannelReceive, @Display, @Debug;
+		futures::channel::oneshot::Canceled => ChannelReceive, @Display, @Debug;
+		futures::channel::mpsc::SendError => ChannelSend, @Display, @Debug;
 	}
 }
 
@@ -93,6 +82,20 @@ impl<T> Descriptor<crossbeam_channel::SendError<T>> for Global {
 	}
 
 	fn detail(v: &crossbeam_channel::SendError<T>) -> Option<Cow<str>> {
+		Some(format!("{:?}", v).into())
+	}
+}
+
+impl<T> Descriptor<futures::channel::mpsc::TrySendError<T>> for Global {
+	fn name(_: &futures::channel::mpsc::TrySendError<T>) -> Option<Cow<str>> {
+		Some("ChannelSend".into())
+	}
+
+	fn summary(v: &futures::channel::mpsc::TrySendError<T>) -> Option<Cow<str>> {
+		Some(v.to_string().into())
+	}
+
+	fn detail(v: &futures::channel::mpsc::TrySendError<T>) -> Option<Cow<str>> {
 		Some(format!("{:?}", v).into())
 	}
 }
