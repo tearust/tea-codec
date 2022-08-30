@@ -3,9 +3,19 @@ use crate::errorx::define_scope;
 define_scope! {
 	Test {
 		I32;
-		i32 as v => @test::I32, @Debug, v.to_string();
+		i32 as v => @Test::I32, @Debug, v.to_string();
 		bool => Bool, @Serde;
 		HasInner as x => HasInner, @Debug, @Debug, [&x.0];
+	}
+}
+
+mod x {
+	use tea_error_macros::define_scope;
+
+	define_scope! {
+		Test: super::Test {
+			Foo;
+		}
 	}
 }
 
@@ -14,7 +24,7 @@ struct HasInner(Error<()>);
 
 #[test]
 fn test() {
-	assert_eq!(test::I32, "Test.I32");
+	assert_eq!(x::Test::Foo.name_const(), "Test.Test.Foo");
 	let ex = foo().unwrap_err();
 	let s = serde_json::to_string(&ex.clone()).unwrap();
 	let e: Error = serde_json::from_str(&s).unwrap();

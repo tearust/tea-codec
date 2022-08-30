@@ -1,12 +1,10 @@
 mod aggregate;
 mod global;
-mod name_lookup;
 mod scope;
 mod serde;
 mod sync_error;
 
 pub use global::{CannotBeNone, Global};
-pub use name_lookup::*;
 pub use scope::*;
 pub use sync_error::*;
 pub use tea_error_macros::define_scope;

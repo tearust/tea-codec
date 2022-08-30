@@ -17,7 +17,7 @@ use thiserror::Error;
 
 use super::{aggregate::Aggregate, Descriptor};
 
-crate::define_scope! {
+tea_error_macros::define_scope_internal! {
 	Global {
 		Aggregate as v => Aggregate, "Multiple errors occurred", format!("{:?}", v), v.0.iter().collect::<SmallVec<_>>();
 		CannotBeNone => CannotBeNone, @Display, @Debug;

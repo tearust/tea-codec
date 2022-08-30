@@ -1,3 +1,5 @@
+mod impls;
+
 use convert_case::{Case, Casing};
 use itertools::Itertools;
 use proc_macro2::{Ident, TokenStream};
@@ -20,7 +22,7 @@ pub fn emit(source: &DefineScope) -> TokenStream {
 
 	let name_string = name.to_string();
 
-	let names = emit_names(name, definitions);
+	let r#enum = emit_enum(name, definitions);
 
 	let definitions = definitions
 		.iter()
@@ -30,16 +32,28 @@ pub fn emit(source: &DefineScope) -> TokenStream {
 		})
 		.map(|def| emit_definition(name, def));
 
+	let fullname = if name_string == "Global" {
+		quote! {#name_string}
+	} else {
+		emit_const_concat_dot(
+			quote! {<#parent as ::tea_codec::errorx::Scope>::NAME},
+			quote! {<#name as ::tea_codec::errorx::Scope>::NAME},
+		)
+	};
+
+	let impls = impls::impls(name);
+
 	quote! {
-		pub struct #name;
+		#r#enum
+
+		#impls
 
 		impl ::tea_codec::errorx::Scope for #name {
 			type Parent = #parent;
 			type Descriptor<T> = Self;
 			const NAME: &'static str = #name_string;
+			const FULLNAME: &'static str = #fullname;
 		}
-
-		#names
 
 		impl<T> ::tea_codec::errorx::Descriptor<T> for #name {
 			default fn name(_: &T) -> Option<::std::borrow::Cow<str>> {
@@ -70,11 +84,40 @@ pub fn emit(source: &DefineScope) -> TokenStream {
 	}
 }
 
-fn emit_names<'a>(
+fn emit_const_concat_dot(op1: TokenStream, op2: TokenStream) -> TokenStream {
+	quote! {{
+		const N1: &[u8] = #op1.as_bytes();
+		const N2: &[u8] = #op2.as_bytes();
+		if let b"Global" = N1 {
+			#op2
+		} else {
+			const LEN: usize = N1.len() + N2.len() + 1;
+			const LEN1: usize = N1.len();
+			const fn combine() -> [u8; LEN] {
+				let mut result = [0u8; LEN];
+				let mut i = 0;
+				while i < N1.len() {
+					result[i] = N1[i];
+					i += 1;
+				}
+				result[i] = b'.';
+				i = 0;
+				while i < N2.len() {
+					result[LEN1 + 1 + i] = N2[i];
+					i += 1;
+				}
+				result
+			}
+			unsafe { ::std::str::from_utf8_unchecked(&combine()) }
+		}
+	}}
+}
+
+fn emit_enum<'a>(
 	scope: &'a Ident,
 	def: impl IntoIterator<Item = &'a Definition> + 'a,
 ) -> TokenStream {
-	let names = def
+	let names: Vec<_> = def
 		.into_iter()
 		.filter_map(|def| match def {
 			Definition::Abstract(def) => Some(&def.0),
@@ -84,27 +127,48 @@ fn emit_names<'a>(
 			},
 		})
 		.unique()
-		.map(|id| {
-			let value = id.to_string();
-			let back_id = Ident::new(format!("_{id}").as_str() ,id.span());
-			quote! {
-				static #back_id: ::tea_codec::errorx::ErrorName<super::#scope> = ::tea_codec::errorx::ErrorName::new(#value);
-				pub static #id: &'static ::tea_codec::errorx::ErrorName<super::#scope> = &#back_id;
-			}
-		});
+		.collect();
 
-	let mod_name = convert_scope_mod_case(scope);
+	let name_const = names.iter().map(|name| {
+		let name_string = name.to_string();
+		let value = emit_const_concat_dot(
+			quote! { <#scope as ::tea_codec::errorx::Scope>::FULLNAME },
+			quote! { #name_string },
+		);
+		let const_name = convert_const_name_case(name);
+
+		quote! {
+			const #const_name: &'static str = #value;
+		}
+	});
+
+	let name_match = names.iter().map(|name| {
+		let const_name = convert_const_name_case(name);
+		quote! {
+			#scope::#name => #const_name,
+		}
+	});
 
 	quote! {
-		#[allow(non_upper_case_globals)]
-		pub mod #mod_name {
-			#(#names)*
+		#[derive(PartialEq, Eq, Clone, Copy)]
+		pub enum #scope {
+			#(#names,)*
+		}
+
+		impl #scope {
+			pub const fn name_const(&self) -> &'static str {
+				#(#name_const)*
+				match self {
+					#(#name_match)*
+					_ => panic!("Bad scope value"),
+				}
+			}
 		}
 	}
 }
 
-fn convert_scope_mod_case(id: &Ident) -> Ident {
-	Ident::new(id.to_string().to_case(Case::Snake).as_str(), id.span())
+fn convert_const_name_case(id: &Ident) -> Ident {
+	Ident::new(id.to_string().to_case(Case::UpperSnake).as_str(), id.span())
 }
 
 fn emit_definition(scope: &Ident, def: &TypedDefinition) -> TokenStream {
@@ -124,7 +188,6 @@ fn emit_definition(scope: &Ident, def: &TypedDefinition) -> TokenStream {
 
 	let name = match name {
 		Name::Define(name) => {
-			let scope = convert_scope_mod_case(scope);
 			quote! { (&*#scope::#name).into() }
 		}
 		Name::Use(s) => quote! { (#s).into() },

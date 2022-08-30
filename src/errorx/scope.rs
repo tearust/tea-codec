@@ -1,9 +1,4 @@
-use std::{
-	any::TypeId,
-	borrow::Cow,
-	fmt::{Display, Formatter, Write},
-	marker::PhantomData,
-};
+use std::{any::TypeId, borrow::Cow, marker::PhantomData};
 
 use super::{Error, Global, SmallVec};
 
@@ -11,73 +6,7 @@ pub trait Scope: Send + Sync + 'static {
 	type Parent: Scope;
 	type Descriptor<T>: Descriptor<T>;
 	const NAME: &'static str;
-}
-
-pub trait ScopeExt {
-	fn full_name_fmt(f: &mut Formatter) -> Result<bool, std::fmt::Error>;
-	fn full_name() -> String;
-	fn error_full_name(name: &str, is_raw: bool) -> String;
-}
-
-impl<T> ScopeExt for T
-where
-	T: Scope,
-{
-	default fn full_name_fmt(f: &mut Formatter) -> Result<bool, std::fmt::Error> {
-		if <T::Parent as ScopeExt>::full_name_fmt(f)? {
-			f.write_char('.')?;
-		}
-		f.write_str(T::NAME)?;
-		Ok(true)
-	}
-	fn full_name() -> String {
-		struct Format<T>(PhantomData<T>)
-		where
-			T: ?Sized;
-
-		impl<T> Display for Format<T>
-		where
-			T: Scope + ScopeExt + ?Sized,
-		{
-			fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
-				if !T::full_name_fmt(f)? {
-					f.write_str(T::NAME)?;
-				}
-				Ok(())
-			}
-		}
-
-		Format::<Self>(PhantomData).to_string()
-	}
-	fn error_full_name(name: &str, is_raw: bool) -> String {
-		struct Format<'a, T>(&'a str, PhantomData<T>)
-		where
-			T: ?Sized;
-
-		impl<T> Display for Format<'_, T>
-		where
-			T: ScopeExt + ?Sized,
-		{
-			fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
-				if T::full_name_fmt(f)? {
-					f.write_char('.')?;
-				}
-				f.write_str(self.0)
-			}
-		}
-
-		if is_raw {
-			name.to_string()
-		} else {
-			Format::<Self>(name, PhantomData).to_string()
-		}
-	}
-}
-
-impl ScopeExt for Global {
-	fn full_name_fmt(_: &mut Formatter) -> Result<bool, std::fmt::Error> {
-		Ok(false)
-	}
+	const FULLNAME: &'static str;
 }
 
 pub trait Descriptor<T> {

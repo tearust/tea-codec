@@ -28,7 +28,6 @@
 #![feature(auto_traits, negative_impls, never_type)]
 #![feature(min_specialization)]
 #![feature(generic_associated_types)]
-
 extern crate self as tea_codec;
 
 /// The version of the codec as seen on crates.io
