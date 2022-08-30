@@ -96,12 +96,165 @@ where
 	}
 }
 
+impl<S> PartialEq<&str> for ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &&str) -> bool {
+		self.as_ref() == *other
+	}
+}
+
 impl<S> PartialEq<str> for ErrorName<S>
 where
 	S: Scope,
 {
 	fn eq(&self, other: &str) -> bool {
 		self.as_ref() == other
+	}
+}
+
+impl<S> PartialEq<str> for &ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &str) -> bool {
+		self.as_ref() == other
+	}
+}
+
+impl<S> PartialEq<&String> for ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &&String) -> bool {
+		self.as_ref() == other.as_str()
+	}
+}
+
+impl<S> PartialEq<String> for ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &String) -> bool {
+		self.as_ref() == other
+	}
+}
+
+impl<S> PartialEq<String> for &ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &String) -> bool {
+		self.as_ref() == other
+	}
+}
+
+impl<S> PartialEq<&Cow<'_, str>> for ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &&Cow<'_, str>) -> bool {
+		self.as_ref() == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<Cow<'_, str>> for ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &Cow<'_, str>) -> bool {
+		self.as_ref() == other
+	}
+}
+
+impl<S> PartialEq<Cow<'_, str>> for &ErrorName<S>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &Cow<'_, str>) -> bool {
+		self.as_ref() == other
+	}
+}
+
+impl<S> PartialEq<ErrorName<S>> for &str
+where
+	S: Scope,
+{
+	fn eq(&self, other: &ErrorName<S>) -> bool {
+		*self == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<ErrorName<S>> for str
+where
+	S: Scope,
+{
+	fn eq(&self, other: &ErrorName<S>) -> bool {
+		self == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<&ErrorName<S>> for str
+where
+	S: Scope,
+{
+	fn eq(&self, other: &&ErrorName<S>) -> bool {
+		self == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<ErrorName<S>> for &String
+where
+	S: Scope,
+{
+	fn eq(&self, other: &ErrorName<S>) -> bool {
+		self.as_str() == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<ErrorName<S>> for String
+where
+	S: Scope,
+{
+	fn eq(&self, other: &ErrorName<S>) -> bool {
+		self == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<&ErrorName<S>> for String
+where
+	S: Scope,
+{
+	fn eq(&self, other: &&ErrorName<S>) -> bool {
+		self == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<ErrorName<S>> for &Cow<'_, str>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &ErrorName<S>) -> bool {
+		self.as_ref() == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<ErrorName<S>> for Cow<'_, str>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &ErrorName<S>) -> bool {
+		self == other.as_ref()
+	}
+}
+
+impl<S> PartialEq<&ErrorName<S>> for Cow<'_, str>
+where
+	S: Scope,
+{
+	fn eq(&self, other: &&ErrorName<S>) -> bool {
+		self == other.as_ref()
 	}
 }
 
