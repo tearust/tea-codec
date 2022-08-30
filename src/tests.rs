@@ -1,10 +1,11 @@
-use crate::{define_scope, errorx::single};
+use crate::errorx::define_scope;
 
 define_scope! {
 	Test {
-		i32 as v => I32, @Debug, v.to_string();
+		I32;
+		i32 as v => @test::I32, @Debug, v.to_string();
 		bool => Bool, @Serde;
-		HasInner as x => HasInner, @Debug, @Debug, single(&x.0);
+		HasInner as x => HasInner, @Debug, @Debug, [&x.0];
 	}
 }
 
@@ -13,6 +14,7 @@ struct HasInner(Error<()>);
 
 #[test]
 fn test() {
+	assert_eq!(test::I32, "Test.I32");
 	let ex = foo().unwrap_err();
 	let s = serde_json::to_string(&ex.clone()).unwrap();
 	let e: Error = serde_json::from_str(&s).unwrap();

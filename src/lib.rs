@@ -29,11 +29,14 @@
 #![feature(min_specialization)]
 #![feature(generic_associated_types)]
 
+extern crate self as tea_codec;
+
 /// The version of the codec as seen on crates.io
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 #[macro_use]
 extern crate num_derive;
 
+pub use errorx::define_scope;
 use errorx::{CannotBeNone, Error, Scope};
 use serde::de::DeserializeOwned;
 use serde::Serialize;

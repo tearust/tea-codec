@@ -1,16 +1,18 @@
 mod aggregate;
 mod global;
-mod macros;
+mod name_lookup;
 mod scope;
 mod serde;
 mod sync_error;
 
 pub use global::{CannotBeNone, Global};
-pub use macros::*;
+pub use name_lookup::*;
 pub use scope::*;
 pub use sync_error::*;
+pub use tea_error_macros::define_scope;
 
 pub use smallvec::SmallVec;
+
 use std::{
 	any::TypeId,
 	borrow::Cow,

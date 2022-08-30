@@ -16,7 +16,7 @@ pub trait Scope: Send + Sync + 'static {
 pub trait ScopeExt {
 	fn full_name_fmt(f: &mut Formatter) -> Result<bool, std::fmt::Error>;
 	fn full_name() -> String;
-	fn error_full_name(name: &str) -> String;
+	fn error_full_name(name: &str, is_raw: bool) -> String;
 }
 
 impl<T> ScopeExt for T
@@ -49,7 +49,7 @@ where
 
 		Format::<Self>(PhantomData).to_string()
 	}
-	fn error_full_name(name: &str) -> String {
+	fn error_full_name(name: &str, is_raw: bool) -> String {
 		struct Format<'a, T>(&'a str, PhantomData<T>)
 		where
 			T: ?Sized;
@@ -66,7 +66,11 @@ where
 			}
 		}
 
-		Format::<Self>(name, PhantomData).to_string()
+		if is_raw {
+			name.to_string()
+		} else {
+			Format::<Self>(name, PhantomData).to_string()
+		}
 	}
 }
 
@@ -116,12 +120,9 @@ where
 	S: Scope,
 {
 	default fn name(&self) -> Option<Cow<str>> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
-			.map(|x| S::error_full_name(x.as_ref()).into())
-			.or_else(|| {
-				<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
-					.map(|x| <S as Scope>::Parent::error_full_name(x.as_ref()).into())
-			})
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data).or_else(|| {
+			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
+		})
 	}
 
 	default fn summary(&self) -> Option<Cow<str>> {
