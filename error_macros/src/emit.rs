@@ -65,8 +65,8 @@ pub fn emit(source: &DefineScope) -> TokenStream {
 
 		#(#definitions)*
 
-		type Error<S = #name> = ::tea_codec::errorx::Error<S>;
-		type Result<T, E = Error> = std::result::Result<T, E>;
+		pub type Error<S = #name> = ::tea_codec::errorx::Error<S>;
+		pub type Result<T, E = Error> = std::result::Result<T, E>;
 	}
 }
 
