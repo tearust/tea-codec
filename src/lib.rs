@@ -35,6 +35,7 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 #[macro_use]
 extern crate num_derive;
 
+use error::{new_common_error_code, CommonCode, TeaResult};
 pub use errorx::define_scope;
 use errorx::{CannotBeNone, Error, Scope};
 use serde::de::DeserializeOwned;
@@ -44,23 +45,29 @@ pub type Result<T, E = errorx::Error<errorx::Global>> = std::result::Result<T, E
 /// The standard function for serializing codec structs into a format that can be
 /// used for message exchange between actor and host. Use of any other function to
 /// serialize could result in breaking incompatibilities.
-pub fn serialize<T>(item: &T) -> Result<Vec<u8>>
+pub fn serialize<T>(item: &T) -> TeaResult<Vec<u8>>
 where
 	T: Serialize,
 {
-	let buf = bincode::serialize(item)?;
+	let buf = bincode::serialize(item).map_err(|e| {
+		new_common_error_code(CommonCode::SerdeSerializeError)
+			.to_error_code(Some(format!("{:?}", e)), None)
+	})?;
 	Ok(buf)
 }
 
 /// The standard function for de-serializing codec structs from a format suitable
 /// for message exchange between actor and host. Use of any other function to
 /// deserialize could result in breaking incompatibilities.
-pub fn deserialize<T, B>(buf: B) -> Result<T>
+pub fn deserialize<T, B>(buf: B) -> TeaResult<T>
 where
 	T: DeserializeOwned,
 	B: AsRef<[u8]>,
 {
-	Ok(bincode::deserialize_from(buf.as_ref())?)
+	bincode::deserialize_from(buf.as_ref()).map_err(|e| {
+		new_common_error_code(CommonCode::SerdeDeserializeError)
+			.to_error_code(Some(format!("{:?}", e)), None)
+	})
 }
 
 pub trait ResultExt {

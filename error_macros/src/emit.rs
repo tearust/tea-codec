@@ -92,7 +92,6 @@ fn emit_const_concat_dot(op1: TokenStream, op2: TokenStream) -> TokenStream {
 			#op2
 		} else {
 			const LEN: usize = N1.len() + N2.len() + 1;
-			const LEN1: usize = N1.len();
 			const fn combine() -> [u8; LEN] {
 				let mut result = [0u8; LEN];
 				let mut i = 0;
@@ -103,7 +102,7 @@ fn emit_const_concat_dot(op1: TokenStream, op2: TokenStream) -> TokenStream {
 				result[i] = b'.';
 				i = 0;
 				while i < N2.len() {
-					result[LEN1 + 1 + i] = N2[i];
+					result[N1.len() + 1 + i] = N2[i];
 					i += 1;
 				}
 				result
