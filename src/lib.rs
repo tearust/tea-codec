@@ -86,6 +86,12 @@ pub trait OptionExt {
 	fn ok_or_err<S>(self, name: impl Into<String>) -> Result<Self::Value, Error<S>>
 	where
 		S: Scope;
+
+	fn ok_or_err_else<S, N, F>(self, name_factory: F) -> Result<Self::Value, Error<S>>
+	where
+		S: Scope,
+		N: Into<String>,
+		F: FnOnce() -> N;
 }
 
 impl<T> OptionExt for Option<T> {
@@ -95,6 +101,15 @@ impl<T> OptionExt for Option<T> {
 		S: Scope,
 	{
 		self.ok_or_else(move || CannotBeNone(name.into()).into())
+	}
+
+	fn ok_or_err_else<S, N, F>(self, name_factory: F) -> Result<Self::Value, Error<S>>
+	where
+		S: Scope,
+		N: Into<String>,
+		F: FnOnce() -> N,
+	{
+		self.ok_or_else(move || CannotBeNone(name_factory().into()).into())
 	}
 }
 
