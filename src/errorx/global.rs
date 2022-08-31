@@ -55,6 +55,14 @@ tea_error_macros::define_scope_internal! {
 		futures::channel::mpsc::TryRecvError => ChannelReceive, @Display, @Debug;
 		futures::channel::oneshot::Canceled => ChannelReceive, @Display, @Debug;
 		futures::channel::mpsc::SendError => ChannelSend, @Display, @Debug;
+		crate::error::TeaError as v => TeaError, @Display, @Debug, temp_get_tea_error_inner(v);
+	}
+}
+
+fn temp_get_tea_error_inner(v: &crate::error::TeaError) -> SmallVec<[&Error<()>; 1]> {
+	match v {
+		crate::error::TeaError::NewError(e) => e.inner(),
+		_ => Default::default(),
 	}
 }
 

@@ -29,9 +29,13 @@ pub enum TeaError {
 
 	#[error(transparent)]
 	EncodedError(#[from] ErrorCode),
+
+	#[error(transparent)]
+	NewError(crate::errorx::Error<()>),
 }
 
 pub type TeaResult<T> = std::result::Result<T, TeaError>;
+pub type Result<T, E = TeaError> = std::result::Result<T, E>;
 
 pub fn option_none_error<S: AsRef<str>>(msg: S) -> TeaError {
 	code::common::new_common_error_code(CommonCode::OptionIsNone)
@@ -55,6 +59,19 @@ impl TeaError {
 				warn!("common error emit: {}", s);
 				Some(new_common_error_code(CommonCode::CommonError).into())
 			}
+			TeaError::NewError(x) => Some(ErrorCode::new_nested(
+				CommonCode::NewError as _,
+				x.summary().map(Into::into).unwrap_or_default(),
+				x.detail().map(Into::into),
+				x.inner()
+					.iter()
+					.filter_map(|x| {
+						let error: TeaError = (*x).clone().into();
+						error.parse_error_code()
+					})
+					.collect::<Vec<_>>()
+					.pop(),
+			)),
 		}
 	}
 }
@@ -175,11 +192,21 @@ impl From<hex::FromHexError> for TeaError {
 	}
 }
 
+impl<S> From<crate::errorx::Error<S>> for TeaError {
+	fn from(x: crate::errorx::Error<S>) -> Self {
+		match x.back_cast() {
+			Ok(e) => e,
+			Err(x) => TeaError::NewError(x.into_scope()),
+		}
+	}
+}
+
 impl Debug for TeaError {
 	fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
 		match self {
 			TeaError::EncodedError(code) => write!(f, "{:?}", code),
 			TeaError::CommonError(msg) => write!(f, "Unknown error: {}", msg),
+			TeaError::NewError(err) => Debug::fmt(err, f),
 		}
 	}
 }

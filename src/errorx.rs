@@ -55,12 +55,37 @@ where
 	T: NotError + Send + Sync + 'static,
 	S: Scope,
 {
-	fn from(data: T) -> Self {
+	default fn from(data: T) -> Self {
 		Self {
 			data: ThinBox::new_unsize(ErrorData {
 				source: Dispatcher::<_, S>::new(data),
 			}),
 			_p: PhantomData,
+		}
+	}
+}
+
+mod temp {
+	use crate::{
+		error::TeaError,
+		errorx::{Dispatcher, Error, ErrorData},
+	};
+	use std::{boxed::ThinBox, marker::PhantomData};
+
+	impl<S> From<TeaError> for Error<S>
+	where
+		S: crate::errorx::Scope,
+	{
+		fn from(e: TeaError) -> Self {
+			match e {
+				TeaError::NewError(n) => n.into_scope(),
+				data => Self {
+					data: ThinBox::new_unsize(ErrorData {
+						source: Dispatcher::<_, S>::new(data),
+					}),
+					_p: PhantomData,
+				},
+			}
 		}
 	}
 }

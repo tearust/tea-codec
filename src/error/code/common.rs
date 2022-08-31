@@ -5,6 +5,7 @@ pub type CommonErrorCode = ErrorCodeTranslator<CommonTranslator, CommonCode>;
 #[derive(Copy, Clone, FromPrimitive, ToPrimitive)]
 pub enum CommonCode {
 	CommonError = 0,
+	NewError,
 	SerdeSerializeError,
 	SerdeDeserializeError,
 	UTF8EncodingError,
@@ -35,6 +36,7 @@ impl Translate<CommonCode> for CommonTranslator {
 	fn translate(&self, code: CommonCode) -> &'static str {
 		match code {
 			CommonCode::CommonError => "common error",
+			CommonCode::NewError => "new error",
 			// basic
 			CommonCode::OptionIsNone => "option is none",
 			CommonCode::SystemTimeError => "system time error",
