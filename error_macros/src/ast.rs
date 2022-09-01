@@ -4,20 +4,41 @@ use syn::{
 	token, Expr, Ident, Result, Token, Type,
 };
 
+pub struct DefineScopes(pub Vec<DefineScope>);
+
+impl Parse for DefineScopes {
+	fn parse(input: ParseStream) -> Result<Self> {
+		let mut result = Vec::new();
+
+		while !input.is_empty() {
+			result.push(input.parse()?);
+		}
+
+		Ok(Self(result))
+	}
+}
+
 pub struct DefineScope {
 	pub name: Ident,
-	pub parent: Option<Type>,
+	pub parents: Vec<(Type, bool)>,
 	pub definitions: Vec<Definition>,
 }
 
 impl Parse for DefineScope {
 	fn parse(input: ParseStream) -> Result<Self> {
 		let name = input.parse()?;
-		let parent = if input.parse::<Option<Token![:]>>()?.is_some() {
-			Some(input.parse()?)
-		} else {
-			None
-		};
+		let mut parents = Vec::new();
+		if input.parse::<Option<Token![:]>>()?.is_some() {
+			loop {
+				let is_pub = input.parse::<Option<Token![pub]>>()?.is_some();
+				let r#type = input.parse()?;
+				parents.push((r#type, is_pub));
+
+				if input.parse::<Option<Token![,]>>()?.is_none() {
+					break;
+				}
+			}
+		}
 		let body;
 		braced!(body in input);
 		let mut definitions = Vec::new();
@@ -26,7 +47,7 @@ impl Parse for DefineScope {
 		}
 		Ok(Self {
 			name,
-			parent,
+			parents,
 			definitions,
 		})
 	}

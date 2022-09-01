@@ -1,6 +1,6 @@
 use std::{any::TypeId, borrow::Cow, marker::PhantomData};
 
-use super::{Error, Global, SmallVec};
+use super::{Error, SmallVec};
 
 pub trait Scope: Send + Sync + 'static {
 	type Parent: Scope;
@@ -49,53 +49,22 @@ where
 	S: Scope,
 {
 	default fn name(&self) -> Option<Cow<str>> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data).or_else(|| {
-			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
-		})
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::name(&self.data)
 	}
 
 	default fn summary(&self) -> Option<Cow<str>> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::summary(&self.data).or_else(|| {
-			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::summary(&self.data)
-		})
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::summary(&self.data)
 	}
 
 	default fn detail(&self) -> Option<Cow<str>> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::detail(&self.data).or_else(|| {
-			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::detail(&self.data)
-		})
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::detail(&self.data)
 	}
 
 	default fn inner(&self) -> Option<SmallVec<[&Error; 1]>> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::inner(&self.data).or_else(|| {
-			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::inner(&self.data)
-		})
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::inner(&self.data)
 	}
 
 	default fn type_id(&self) -> Option<TypeId> {
-		<<S as Scope>::Descriptor<T> as Descriptor<T>>::type_id(&self.data).or_else(|| {
-			<<<S as Scope>::Parent as Scope>::Descriptor<T> as Descriptor<T>>::type_id(&self.data)
-		})
-	}
-}
-
-impl<T> Descriptee for Dispatcher<T, Global>
-where
-	T: Send + Sync,
-{
-	fn name(&self) -> Option<Cow<str>> {
-		<Global as Descriptor<T>>::name(&self.data)
-	}
-
-	fn summary(&self) -> Option<Cow<str>> {
-		<Global as Descriptor<T>>::summary(&self.data)
-	}
-
-	fn detail(&self) -> Option<Cow<str>> {
-		<Global as Descriptor<T>>::detail(&self.data)
-	}
-
-	fn type_id(&self) -> Option<TypeId> {
-		<Global as Descriptor<T>>::type_id(&self.data)
+		<<S as Scope>::Descriptor<T> as Descriptor<T>>::type_id(&self.data)
 	}
 }

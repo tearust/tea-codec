@@ -7,20 +7,68 @@ use quote::quote;
 
 use crate::ast::{DefineScope, Definition, Name, StringAuto, StringExpr, TypedDefinition};
 
-pub fn emit(source: &DefineScope) -> TokenStream {
+pub fn emit_all(source: &[DefineScope]) -> TokenStream {
+	let source = source
+		.iter()
+		.inspect(|ast| {
+			if ast.name.to_string() == "Global" {
+				panic!("The scope's name cannot be \"Global\".");
+			}
+		})
+		.enumerate()
+		.map(|(i, ast)| {
+			if i == 0 {
+				emit::<true>(ast)
+			} else {
+				emit::<false>(ast)
+			}
+		});
+	quote! {#(#source)*}
+}
+
+pub fn emit<const WRAP_ERROR: bool>(source: &DefineScope) -> TokenStream {
 	let DefineScope {
 		name,
-		parent,
+		parents,
 		definitions,
 	} = source;
 
-	let parent = if let Some(parent) = parent {
+	let name_string = name.to_string();
+	let is_global = name_string == "Global";
+
+	let parent = if let Some(parent) = parents
+		.iter()
+		.fold(None, |r, (r#type, is_pub)| {
+			if *is_pub {
+				if r.is_some() {
+					panic!("There cannot be multiple pub parents.")
+				} else {
+					Some(r#type)
+				}
+			} else {
+				r
+			}
+		})
+		.or_else(|| match parents.len() {
+			0 | 1 => parents.first().map(|(r#type, _)| r#type),
+			_ => panic!("Must specify a unique pub parent."),
+		}) {
 		quote! { #parent }
 	} else {
 		quote! { ::tea_codec::errorx::Global }
 	};
 
-	let name_string = name.to_string();
+	let parents = {
+		let mut parents = parents
+			.iter()
+			.map(|(r#type, _)| quote! {#r#type})
+			.collect::<Vec<_>>();
+
+		if parents.is_empty() && !is_global {
+			parents.push(quote! {::tea_codec::errorx::Global});
+		}
+		parents
+	};
 
 	let r#enum = emit_enum(name, definitions);
 
@@ -32,7 +80,7 @@ pub fn emit(source: &DefineScope) -> TokenStream {
 		})
 		.map(|def| emit_definition(name, def));
 
-	let fullname = if name_string == "Global" {
+	let fullname = if is_global {
 		quote! {#name_string}
 	} else {
 		emit_const_concat_dot(
@@ -42,6 +90,36 @@ pub fn emit(source: &DefineScope) -> TokenStream {
 	};
 
 	let impls = impls::impls(name);
+
+	let defs = [
+		(quote! {name}, quote! {::std::borrow::Cow<str>}),
+		(quote! {summary}, quote! {::std::borrow::Cow<str>}),
+		(quote! {detail}, quote! {::std::borrow::Cow<str>}),
+		(
+			quote! {inner},
+			quote! {::tea_codec::errorx::SmallVec<[&::tea_codec::errorx::Error; 1]>},
+		),
+		(quote! {type_id}, quote! {::std::any::TypeId}),
+	]
+	.map(|(name, r#type)| {
+		quote! {
+			default fn #name(v: &T) -> Option<#r#type> {
+				#(if let Some(r) = <#parents as ::tea_codec::errorx::Descriptor<T>>::#name(v) {
+					return Some(r);
+				})*
+				None
+			}
+		}
+	});
+
+	let wrap_error = if WRAP_ERROR {
+		quote! {
+			pub type Error<S = #name> = ::tea_codec::errorx::Error<S>;
+			pub type Result<T, E = Error> = std::result::Result<T, E>;
+		}
+	} else {
+		Default::default()
+	};
 
 	quote! {
 		#r#enum
@@ -56,31 +134,12 @@ pub fn emit(source: &DefineScope) -> TokenStream {
 		}
 
 		impl<T> ::tea_codec::errorx::Descriptor<T> for #name {
-			default fn name(_: &T) -> Option<::std::borrow::Cow<str>> {
-				None
-			}
-
-			default fn summary(_: &T) -> Option<::std::borrow::Cow<str>> {
-				None
-			}
-
-			default fn detail(_: &T) -> Option<::std::borrow::Cow<str>> {
-				None
-			}
-
-			default fn inner(_: &T) -> Option<::tea_codec::errorx::SmallVec<[&::tea_codec::errorx::Error; 1]>> {
-				None
-			}
-
-			default fn type_id(_: &T) -> Option<::std::any::TypeId> {
-				None
-			}
+			#(#defs)*
 		}
 
 		#(#definitions)*
 
-		pub type Error<S = #name> = ::tea_codec::errorx::Error<S>;
-		pub type Result<T, E = Error> = std::result::Result<T, E>;
+		#wrap_error
 	}
 }
 
