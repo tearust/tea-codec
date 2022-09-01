@@ -35,6 +35,7 @@ fn test() {
 	assert_eq!(e.inner()[0].name(), Some("Test2.I32".into()));
 	assert_eq!(e.inner()[0].detail(), Some("123".into()));
 	let e = ex.back_cast::<HasInner>().unwrap();
+	assert_eq!(e.0.back_cast_ref::<i32>().unwrap(), &123);
 	assert_eq!(e.0.back_cast::<i32>().unwrap(), 123);
 	let sum = bar().unwrap_err() + bar().unwrap_err() + bar().unwrap_err();
 	assert_eq!(sum.inner().len(), 3);

@@ -161,6 +161,17 @@ impl<S> Error<S> {
 		}
 	}
 
+	pub fn back_cast_ref<T>(&self) -> Option<&T>
+	where
+		T: Send + Sync + 'static,
+	{
+		if self.data.source.type_id() == Some(TypeId::of::<T>()) {
+			unsafe { Some(&(*(&self.data.source as *const _ as *const Dispatcher<T, S>)).data) }
+		} else {
+			None
+		}
+	}
+
 	pub fn is_name_of<T>(&self) -> bool
 	where
 		T: Send + Sync + Default + 'static,
